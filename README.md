@@ -246,7 +246,8 @@ This repository provides a comprehensive cross-reference of all assemblies, orga
 | City | 100B | Technological | [/case_studies/cities/](https://github.com/owocki/assembly_theory/tree/master/case_studies/cities/) | 10 kyr ago |
 | Computer | 1T | Technological | [/domains/technological/computers/](https://github.com/owocki/assembly_theory/tree/master/domains/technological/computers/) | 70 yr ago |
 | Internet | 10T | Technological | [/case_studies/internet/](https://github.com/owocki/assembly_theory/tree/master/case_studies/internet/), [/domains/technological/networks/](https://github.com/owocki/assembly_theory/tree/master/domains/technological/networks/) | 50 yr ago |
-| AI System | 100T | Technological | [/domains/technological/networks/ai.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/networks/ai.md) | 10 yr ago |
+| AI System | 100T | Technological | [/domains/technological/networks/ai.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/networks/ai.md), [/domains/technological/modern/](https://github.com/owocki/assembly_theory/tree/master/domains/technological/modern/) | 10 yr ago |
+| mRNA Vaccine | 1B | Biological | [/domains/biological/modern/](https://github.com/owocki/assembly_theory/tree/master/domains/biological/modern/) | 2 yr ago |
 
 ### Cross-Domain Assemblies
 
