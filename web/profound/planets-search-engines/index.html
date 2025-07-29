@@ -16,144 +16,314 @@
         }
         
         .container {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
         }
         
         .header {
-            position: absolute;
-            top: 30px;
-            left: 50%;
-            transform: translateX(-50%);
             text-align: center;
-            z-index: 100;
+            margin-bottom: 40px;
         }
         
         .header h1 {
-            font-size: 2.5em;
+            font-size: 3em;
             margin: 0;
-            background: linear-gradient(45deg, #00f5ff, #ff006e);
+            background: linear-gradient(45deg, #00f5ff, #ff006e, #ffb347);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         
         .header p {
-            font-size: 1.2em;
+            font-size: 1.3em;
             margin: 10px 0;
-            opacity: 0.8;
+            opacity: 0.9;
         }
         
-        #visualization {
-            width: 100%;
-            height: 100%;
+        /* Main visualization area */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
         }
         
-        .planet {
-            cursor: pointer;
-            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+        /* Possibility Space Panel */
+        .possibility-space {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 15px;
+            padding: 20px;
         }
         
-        .planet:hover {
-            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8));
+        .possibility-space h3 {
+            color: #00f5ff;
+            margin-top: 0;
+            border-bottom: 1px solid rgba(0, 245, 255, 0.3);
+            padding-bottom: 10px;
         }
         
-        .search-particles {
-            opacity: 0.7;
+        .chemical-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin: 15px 0;
         }
         
-        .life-form {
-            opacity: 0;
-            transition: opacity 0.5s;
-        }
-        
-        .tooltip {
-            position: absolute;
-            background: rgba(0, 0, 0, 0.9);
-            border: 1px solid #00f5ff;
+        .chemical-node {
+            width: 40px;
+            height: 40px;
             border-radius: 5px;
-            padding: 10px;
-            pointer-events: none;
-            font-size: 14px;
-            max-width: 300px;
-            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
         }
         
-        .controls {
+        .chemical-possible {
+            background: rgba(0, 255, 100, 0.2);
+            border: 1px solid rgba(0, 255, 100, 0.5);
+        }
+        
+        .chemical-rare {
+            background: rgba(255, 255, 0, 0.2);
+            border: 1px solid rgba(255, 255, 0, 0.5);
+        }
+        
+        .chemical-impossible {
+            background: rgba(255, 0, 0, 0.2);
+            border: 1px solid rgba(255, 0, 0, 0.5);
+            opacity: 0.4;
+        }
+        
+        .chemical-node:hover {
+            transform: scale(1.2);
+            z-index: 10;
+        }
+        
+        /* Central visualization */
+        #planetVisualization {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            min-height: 600px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Search Progress Panel */
+        .search-progress {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+        }
+        
+        .search-progress h3 {
+            color: #00f5ff;
+            margin-top: 0;
+            border-bottom: 1px solid rgba(0, 245, 255, 0.3);
+            padding-bottom: 10px;
+        }
+        
+        .progress-bar {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 20px;
+            height: 20px;
+            margin: 10px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, #00f5ff, #ff006e);
+            height: 100%;
+            width: 0%;
+            border-radius: 20px;
+            transition: width 0.5s ease;
+            position: relative;
+        }
+        
+        .progress-fill::after {
+            content: '';
             position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s linear infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .stat-item {
             display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .stat-value {
+            color: #ffb347;
+            font-weight: bold;
+        }
+        
+        /* Combinatorial Space Visualization */
+        .combinatorial-space {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .combo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
             gap: 15px;
-            z-index: 100;
+            margin-top: 20px;
+        }
+        
+        .combo-node {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .combo-node:hover {
+            background: rgba(0, 245, 255, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 245, 255, 0.3);
+        }
+        
+        .combo-formula {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #00f5ff;
+            margin-bottom: 5px;
+        }
+        
+        .combo-result {
+            font-size: 12px;
+            color: #ffb347;
+        }
+        
+        /* Controls */
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
         }
         
         .control-btn {
-            padding: 10px 20px;
+            padding: 12px 25px;
             background: rgba(0, 245, 255, 0.2);
             border: 1px solid #00f5ff;
             color: white;
             border-radius: 25px;
             cursor: pointer;
             transition: all 0.3s;
+            font-size: 16px;
         }
         
         .control-btn:hover, .control-btn.active {
             background: rgba(0, 245, 255, 0.5);
-            box-shadow: 0 0 15px rgba(0, 245, 255, 0.7);
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.7);
+            transform: translateY(-2px);
         }
         
-        .info-panel {
-            position: absolute;
-            right: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 10px;
-            padding: 20px;
-            width: 300px;
-            font-size: 14px;
-            line-height: 1.6;
+        /* Planet styles */
+        .planet {
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5));
+            transition: filter 0.3s;
         }
         
-        .stats {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid rgba(255, 255, 255, 0.3);
+        .hover-area {
+            cursor: pointer;
         }
         
-        .stat-item {
-            display: flex;
-            justify-content: space-between;
-            margin: 5px 0;
+        .search-particle {
+            fill: #00f5ff;
+            opacity: 0.8;
         }
         
-        .assembly-trail {
-            stroke: #00f5ff;
+        .life-marker {
+            fill: #00ff00;
+            stroke: #00ff00;
             stroke-width: 2;
+            fill-opacity: 0.3;
+            animation: lifeGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes lifeGlow {
+            0%, 100% { stroke-opacity: 0.3; fill-opacity: 0.1; }
+            50% { stroke-opacity: 1; fill-opacity: 0.5; }
+        }
+        
+        .search-path {
+            stroke: rgba(0, 245, 255, 0.3);
+            stroke-width: 1;
             fill: none;
-            opacity: 0.6;
             stroke-dasharray: 5,5;
-            animation: dash 2s linear infinite;
+            animation: dash 20s linear infinite;
         }
         
         @keyframes dash {
-            to { stroke-dashoffset: -10; }
+            to { stroke-dashoffset: -1000; }
         }
         
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
+        /* Info tooltip */
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.95);
+            border: 1px solid #00f5ff;
+            border-radius: 8px;
+            padding: 12px;
+            pointer-events: none;
+            font-size: 14px;
+            max-width: 300px;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
         }
         
-        .search-wave {
-            fill: none;
-            stroke: rgba(0, 245, 255, 0.4);
-            stroke-width: 1;
-            animation: pulse 3s ease-in-out infinite;
+        /* Legend */
+        .legend {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            font-size: 12px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
         }
     </style>
 </head>
@@ -161,47 +331,179 @@
     <div class="container">
         <div class="header">
             <h1>Planets Are Search Engines for Life</h1>
-            <p>Billions of years of chemical experimentation exploring assembly space</p>
+            <p>Systematically exploring the vast combinatorial space of chemical possibilities</p>
         </div>
         
-        <svg id="visualization"></svg>
-        
-        <div class="controls">
-            <button class="control-btn" onclick="startSearching()">Start Search</button>
-            <button class="control-btn" onclick="showLifeForms()">Show Life Forms</button>
-            <button class="control-btn" onclick="resetSimulation()">Reset</button>
-            <button class="control-btn" onclick="toggleInfo()">Toggle Info</button>
-        </div>
-        
-        <div class="info-panel" id="infoPanel">
-            <h3>Assembly Space Search</h3>
-            <p>Each planet is a cosmic computer running billions of chemical experiments simultaneously, searching through assembly space for stable, replicating patterns we call life.</p>
+        <!-- Combinatorial Space Overview -->
+        <div class="combinatorial-space">
+            <h3 style="color: #00f5ff; margin-top: 0;">Combinatorial Design Space</h3>
+            <p style="opacity: 0.8;">With ~92 naturally occurring elements and countless environmental conditions, planets explore an astronomical number of chemical combinations:</p>
             
-            <div class="stats">
-                <div class="stat-item">
-                    <span>Chemical Experiments:</span>
-                    <span id="experiments">0</span>
+            <div class="combo-grid">
+                <div class="combo-node">
+                    <div class="combo-formula">C + H + O</div>
+                    <div class="combo-result">→ Organic molecules</div>
                 </div>
-                <div class="stat-item">
-                    <span>Assembly Pathways:</span>
-                    <span id="pathways">0</span>
+                <div class="combo-node">
+                    <div class="combo-formula">Si + O + Heat</div>
+                    <div class="combo-result">→ Silicate minerals</div>
                 </div>
-                <div class="stat-item">
-                    <span>Life Forms Found:</span>
-                    <span id="lifeforms">0</span>
+                <div class="combo-node">
+                    <div class="combo-formula">Fe + S + H₂O</div>
+                    <div class="combo-result">→ Iron sulfides</div>
                 </div>
-                <div class="stat-item">
-                    <span>Search Time:</span>
-                    <span id="searchtime">0 Gyr</span>
+                <div class="combo-node">
+                    <div class="combo-formula">N + H + Energy</div>
+                    <div class="combo-result">→ Ammonia</div>
+                </div>
+                <div class="combo-node">
+                    <div class="combo-formula">P + O + Ca</div>
+                    <div class="combo-result">→ Phosphates</div>
+                </div>
+                <div class="combo-node">
+                    <div class="combo-formula">C + N + H + O</div>
+                    <div class="combo-result">→ Amino acids</div>
                 </div>
             </div>
             
-            <p style="margin-top: 15px; font-size: 12px; opacity: 0.7;">
-                Click on planets to see their unique search strategies. Each world explores different regions of assembly space based on its chemical composition and energy sources.
+            <p style="text-align: center; margin-top: 20px; font-size: 24px; color: #ffb347;">
+                Total possible combinations: >10<sup>100</sup>
             </p>
+        </div>
+        
+        <!-- Main Content Grid -->
+        <div class="main-content">
+            <!-- Left Panel: Possibility Space -->
+            <div class="possibility-space">
+                <h3>Chemical Possibility Space</h3>
+                
+                <h4 style="color: #ffb347; margin-top: 20px;">Essential Elements</h4>
+                <div class="chemical-grid">
+                    <div class="chemical-node chemical-possible" title="Hydrogen - Most abundant">H</div>
+                    <div class="chemical-node chemical-possible" title="Carbon - Organic backbone">C</div>
+                    <div class="chemical-node chemical-possible" title="Nitrogen - Proteins & DNA">N</div>
+                    <div class="chemical-node chemical-possible" title="Oxygen - Energy & water">O</div>
+                    <div class="chemical-node chemical-possible" title="Phosphorus - DNA & ATP">P</div>
+                    <div class="chemical-node chemical-possible" title="Sulfur - Proteins">S</div>
+                    <div class="chemical-node chemical-rare" title="Iron - Catalysis">Fe</div>
+                    <div class="chemical-node chemical-rare" title="Magnesium - Chlorophyll">Mg</div>
+                </div>
+                
+                <h4 style="color: #ffb347; margin-top: 20px;">Environmental Factors</h4>
+                <div style="margin: 10px 0;">
+                    <div style="margin: 10px 0;">
+                        <label style="display: block; margin-bottom: 5px;">Temperature</label>
+                        <input type="range" min="-273" max="500" value="20" style="width: 100%;">
+                        <span style="font-size: 12px; opacity: 0.7;">-273°C to 500°C</span>
+                    </div>
+                    <div style="margin: 10px 0;">
+                        <label style="display: block; margin-bottom: 5px;">Pressure</label>
+                        <input type="range" min="0" max="1000" value="1" style="width: 100%;">
+                        <span style="font-size: 12px; opacity: 0.7;">0 to 1000 atm</span>
+                    </div>
+                    <div style="margin: 10px 0;">
+                        <label style="display: block; margin-bottom: 5px;">pH</label>
+                        <input type="range" min="0" max="14" value="7" style="width: 100%;">
+                        <span style="font-size: 12px; opacity: 0.7;">0 to 14</span>
+                    </div>
+                </div>
+                
+                <h4 style="color: #ffb347; margin-top: 20px;">Search Strategies</h4>
+                <ul style="font-size: 14px; opacity: 0.9;">
+                    <li>Random molecular collisions</li>
+                    <li>Energy gradient exploitation</li>
+                    <li>Catalytic surface reactions</li>
+                    <li>Hydrothermal cycling</li>
+                    <li>UV-driven chemistry</li>
+                    <li>Freeze-thaw concentration</li>
+                </ul>
+            </div>
+            
+            <!-- Center: Main Visualization -->
+            <div id="planetVisualization">
+                <svg id="mainViz" style="width: 100%; height: 600px;"></svg>
+                
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #00f5ff;"></div>
+                        <span>Active search particles</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #ff006e;"></div>
+                        <span>Failed experiments</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #00ff00;"></div>
+                        <span>Life discovered!</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Panel: Search Progress -->
+            <div class="search-progress">
+                <h3>Search Progress</h3>
+                
+                <h4 style="color: #ffb347; margin-top: 20px;">Earth</h4>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="earthProgress" style="width: 0%;"></div>
+                </div>
+                
+                <h4 style="color: #ffb347; margin-top: 20px;">Mars</h4>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="marsProgress" style="width: 0%;"></div>
+                </div>
+                
+                <h4 style="color: #ffb347; margin-top: 20px;">Europa</h4>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="europaProgress" style="width: 0%;"></div>
+                </div>
+                
+                <h4 style="color: #ffb347; margin-top: 20px;">Statistics</h4>
+                <div class="stat-item">
+                    <span>Total Experiments:</span>
+                    <span class="stat-value" id="totalExperiments">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Unique Molecules:</span>
+                    <span class="stat-value" id="uniqueMolecules">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Stable Patterns:</span>
+                    <span class="stat-value" id="stablePatterns">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Self-Replicators:</span>
+                    <span class="stat-value" id="replicators">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Life Forms:</span>
+                    <span class="stat-value" id="lifeForms">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Search Time:</span>
+                    <span class="stat-value" id="searchTime">0 Myr</span>
+                </div>
+                
+                <h4 style="color: #ffb347; margin-top: 20px;">Discovery Log</h4>
+                <div id="discoveryLog" style="font-size: 12px; opacity: 0.8; max-height: 150px; overflow-y: auto;">
+                    <p>Waiting for search to begin...</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Control Panel -->
+        <div class="controls">
+            <button class="control-btn" onclick="startSystematicSearch()">Start Systematic Search</button>
+            <button class="control-btn" onclick="showPossibilitySpace()">Show Full Space</button>
+            <button class="control-btn" onclick="focusOnPlanet('earth')">Focus Earth</button>
+            <button class="control-btn" onclick="focusOnPlanet('mars')">Focus Mars</button>
+            <button class="control-btn" onclick="focusOnPlanet('europa')">Focus Europa</button>
+            <button class="control-btn" onclick="resetVisualization()">Reset</button>
         </div>
     </div>
     
-    <script src="planets-search-engines.js"></script>
+    <div class="tooltip" id="tooltip" style="display: none;"></div>
+    
+    <script src="planets-search-engines-enhanced.js"></script>
 </body>
 </html>
