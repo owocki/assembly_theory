@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convergent Evolution of Vision - Interactive Sankey Diagram</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Convergent Evolution of Vision</h1>
+        <p class="subtitle">Interactive Sankey diagram showing how vision evolved independently 40+ times</p>
+        
+        <div class="controls">
+            <button onclick="resetView()">Reset View</button>
+            <button onclick="toggleLabels()">Toggle Labels</button>
+            <button onclick="highlightPath('compound')">Highlight Compound Eyes</button>
+            <button onclick="highlightPath('camera-vertebrate')">Highlight Vertebrate Eyes</button>
+            <button onclick="highlightPath('camera-cephalopod')">Highlight Cephalopod Eyes</button>
+            <button onclick="highlightPath('mirror')">Highlight Mirror Eyes</button>
+            <button onclick="highlightPath('technology')">Highlight Technology</button>
+        </div>
+        
+        <div id="sankey-diagram"></div>
+        
+        <div class="legend">
+            <h3>Legend</h3>
+            <div class="legend-item">
+                <span class="legend-color" style="background-color: #3498db;"></span>
+                <span>Optical Principles</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background-color: #2ecc71;"></span>
+                <span>Biological Origins</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background-color: #e74c3c;"></span>
+                <span>Eye Structures</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background-color: #f39c12;"></span>
+                <span>Specialized Features</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background-color: #9b59b6;"></span>
+                <span>Visual Capabilities</span>
+            </div>
+        </div>
+        
+        <div class="info-panel">
+            <h3>About Vision Evolution</h3>
+            <p>Vision has evolved independently at least 40 times throughout biological history. This diagram shows 
+            the major vision system types and how they converged on similar information processing capabilities 
+            through radically different assembly architectures.</p>
+            <ul>
+                <li><strong>Compound eyes</strong>: Multiple optical units (ommatidia)</li>
+                <li><strong>Camera eyes</strong>: Single lens systems in vertebrates and cephalopods</li>
+                <li><strong>Mirror eyes</strong>: Concave mirrors using crystalline platelets</li>
+                <li><strong>Digital vision</strong>: Electronic sensors and computer processing</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script src="vision-sankey.js"></script>
+</body>
+</html>

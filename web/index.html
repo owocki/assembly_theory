@@ -3,131 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assembly Theory Network Visualization</title>
-    
-    <!-- Favicon - Lego brick representing assembly -->
-    <link rel="icon" type="image/svg+xml" href="favicon-assembly.svg">
-    <link rel="alternate icon" href="favicon.svg">
-    <link rel="shortcut icon" href="favicon-assembly.svg">
-    <link rel="apple-touch-icon" href="favicon-assembly.svg">
-    
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <title>Assembly Theory Web Applications</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            color: #34495e;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .app-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .app-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .app-card h3 {
+            color: #2c3e50;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        
+        .app-card p {
+            color: #7f8c8d;
+            margin-bottom: 15px;
+        }
+        
+        .app-card a {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        
+        .app-card a:hover {
+            background-color: #2980b9;
+        }
+        
+        .file-list {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .file-list h3 {
+            color: #2c3e50;
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+        }
+        
+        .file-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 10px;
+        }
+        
+        .file-item {
+            padding: 8px 12px;
+            background: #ecf0f1;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .file-item a {
+            color: #2c3e50;
+            text-decoration: none;
+        }
+        
+        .file-item a:hover {
+            color: #3498db;
+            text-decoration: underline;
+        }
+        
+        .description {
+            background: #e8f4f8;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .tech-badge {
+            background: #34495e;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 14px;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        .status-active {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .status-development {
+            background: #f39c12;
+            color: white;
+        }
+        
+        .status-experimental {
+            background: #e74c3c;
+            color: white;
+        }
+    </style>
 </head>
 <body>
-    <div class="app-container">
-        <header class="header">
-            <h1>Assembly Theory Network Visualization</h1>
-            <p>Interactive exploration of assembly pathways across complexity scales.  <a href="https://github.com/owocki/assembly_theory">View Source Repo</a></p>
-        </header>
+    <h1>Assembly Theory Web Applications</h1>
+    
+    <div class="description">
+        <p>This directory contains web-based applications and visualizations for exploring Assembly Theory concepts. The applications demonstrate how complexity emerges from simpler components across different domains - from cosmic to biological to technological systems.</p>
+    </div>
+
+    <h2>Subdirectories</h2>
+    
+    <div class="app-grid">
+        <div class="app-card">
+            <h3>Convergence 3D <span class="status-badge status-experimental">Experimental</span></h3>
+            <p>Three-dimensional visualization of convergent evolution patterns and assembly pathways.</p>
+            <a href="convergence_3d/index.html">Open 3D Viewer</a>
+        </div>
         
-        <main class="main-content">
-            <aside class="control-panel">
-                <div class="section">
-                    <h3>Filters</h3>
-                    
-                    <div class="filter-group">
-                        <label for="ai-range">Assembly Index Range</label>
-                        <div class="range-inputs">
-                            <div class="range-input-group">
-                                <label class="range-label">Min:</label>
-                                <input type="range" id="ai-range-min" min="0" max="8" value="0" step="1">
-                                <span class="range-value" id="ai-min-value">Tier 1</span>
-                            </div>
-                            <div class="range-input-group">
-                                <label class="range-label">Max:</label>
-                                <input type="range" id="ai-range-max" min="0" max="8" value="8" step="1">
-                                <span class="range-value" id="ai-max-value">Tier 8</span>
-                            </div>
-                        </div>
-                        <div class="range-labels">
-                            <span>AI 1-10</span>
-                            <span>AI 10-100</span>
-                            <span>AI 100-1K</span>
-                            <span>AI 1K-10K</span>
-                            <span>AI 10K-100K</span>
-                            <span>AI 100K-1M</span>
-                            <span>AI 1M-1B</span>
-                            <span>AI 1B+</span>
-                        </div>
-                    </div>
-                    
-                    <div class="filter-group">
-                        <label>Domains</label>
-                        <div class="domain-checkboxes">
-                            <label><input type="checkbox" checked data-domain="cosmic"> <span class="domain-color cosmic"></span> Cosmic</label>
-                            <label><input type="checkbox" checked data-domain="geological"> <span class="domain-color geological"></span> Geological</label>
-                            <label><input type="checkbox" checked data-domain="biological"> <span class="domain-color biological"></span> Biological</label>
-                            <label><input type="checkbox" checked data-domain="cognitive"> <span class="domain-color cognitive"></span> Cognitive</label>
-                            <label><input type="checkbox" checked data-domain="technological"> <span class="domain-color technological"></span> Technological</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="section">
-                    <h3>Link Strategy</h3>
-                    <select id="link-strategy-select">
-                        <option value="none" selected>⚪ None</option>
-                        <option value="hierarchical">🏗️ Hierarchical Assembly</option>
-                        <option value="proximity">🔗 Complexity Proximity</option>
-                        <option value="domain_clusters">🎯 Domain Clusters</option>
-                    </select>
-                    <div id="link-strategy-description" class="strategy-description"></div>
-                </div>
-                
-                <div class="section">
-                    <h3>Layout</h3>
-                    <select id="layout-select">
-                        <option value="hierarchical">Hierarchical</option>
-                        <option value="timeline" selected>Timeline</option>
-                    </select>
-                    <div id="layout-description" class="layout-description"></div>
-                </div>
-                
-                <div class="section">
-                    <h3>Search</h3>
-                    <div class="filter-group">
-                        <input type="text" id="search" placeholder="Search by name...">
-                    </div>
-                </div>
-            </aside>
-            
-            <div class="visualization-area">
-                <div class="zoom-controls">
-                    <button id="zoom-in">+</button>
-                    <button id="zoom-out">-</button>
-                    <button id="fit-to-screen"></button>
-                </div>
-                <svg id="network-svg"></svg>
-                <div class="loading" id="loading">Loading network data...</div>
-            </div>
-        </main>
+        <div class="app-card">
+            <h3>Convergence Sankey <span class="status-badge status-experimental">Experimental</span></h3>
+            <p>Sankey diagram visualization showing flow and convergence of assembly pathways across domains.</p>
+            <a href="convergence_sankey/index.html">View Sankey Diagram</a>
+        </div>
         
-        <div class="info-panel" id="info-panel">
-            <div class="info-content">
-                <h3 id="info-title">Select a node to view details</h3>
-                <div id="info-details"></div>
-            </div>
+        <div class="app-card">
+            <h3>Explorer <span class="status-badge status-development">Development</span></h3>
+            <p>Advanced exploration tool for navigating the assembly theory knowledge base with enhanced search and filtering.</p>
+            <a href="explorer/index.html">Launch Explorer</a>
         </div>
     </div>
-    
-    <!-- Tooltip -->
-    <div class="tooltip" id="tooltip"></div>
-    
-    <script src="all-assemblies-data.js"></script>
-    <script src="data-ingestion.js"></script>
-    <script src="markdown-parser.js"></script>
-    <script src="comprehensive-data-ingestion.js"></script>
-    <script src="complete-markdown-ingestion.js"></script>
-    <script src="repository-data-loader.js"></script>
-    <script src="markdown-ingestion.js"></script>
-    <script src="biological-entities.js"></script>
-    <script src="organisms.js"></script>
-    <script src="technological-nodes.js"></script>
-    <script src="link-options.js"></script>
-    <script src="data-processor.js"></script>
-    <script src="network-visualization.js"></script>
-    <script src="test-ingestion.js"></script>
-    <script src="app.js"></script>
+
+
 </body>
 </html>

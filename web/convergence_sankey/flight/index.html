@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convergent Evolution of Flight - Interactive Sankey Diagram</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Convergent Evolution of Flight</h1>
+        <p class="subtitle">Interactive Sankey diagram showing how flight evolved independently across different lineages</p>
+        
+        <div class="controls">
+            <button onclick="resetView()">Reset View</button>
+            <button onclick="toggleLabels()">Toggle Labels</button>
+            <button onclick="highlightPath('insects')">Highlight Insects</button>
+            <button onclick="highlightPath('birds')">Highlight Birds</button>
+            <button onclick="highlightPath('bats')">Highlight Bats</button>
+            <button onclick="highlightPath('pterosaurs')">Highlight Pterosaurs</button>
+            <button onclick="highlightPath('technology')">Highlight Technology</button>
+        </div>
+        
+        <div id="sankey-diagram"></div>
+        
+        <div class="legend">
+            <h3>Legend</h3>
+            <div class="legend-item">
+                <span class="legend-color" style="background-color: #4a90e2;"></span>
+                <span>Physical Constraints</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background-color: #50e3c2;"></span>
+                <span>Biological Origins</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background-color: #f5a623;"></span>
+                <span>Key Innovations</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background-color: #bd10e0;"></span>
+                <span>Performance Features</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background-color: #e74c3c;"></span>
+                <span>Technological Solutions</span>
+            </div>
+        </div>
+        
+        <div class="info-panel">
+            <h3>About This Visualization</h3>
+            <p>This Sankey diagram illustrates the convergent evolution of flight across different lineages. 
+            Each path represents an independent evolution of flight, showing how similar physical constraints 
+            led to diverse solutions that achieve the same fundamental capability.</p>
+            <ul>
+                <li><strong>Node size</strong>: Represents relative assembly complexity</li>
+                <li><strong>Flow width</strong>: Indicates the strength of evolutionary pathway</li>
+                <li><strong>Colors</strong>: Differentiate between constraint types and domains</li>
+                <li><strong>Hover</strong>: View detailed information about each node and connection</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script src="flight-sankey.js"></script>
+</body>
+</html>

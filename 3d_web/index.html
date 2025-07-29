@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Assembly Space Visualization</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow: hidden;
+        }
+        
+        #container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+        
+        #info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(20, 20, 20, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            max-width: 300px;
+            z-index: 100;
+        }
+        
+        #info h1 {
+            margin-top: 0;
+            font-size: 1.5em;
+            color: #4a9eff;
+        }
+        
+        #info p {
+            margin: 10px 0;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+        
+        #legend {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            border-radius: 3px;
+        }
+        
+        #controls {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(20, 20, 20, 0.9);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            z-index: 100;
+        }
+        
+        button {
+            background: #4a9eff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background: #357ae8;
+        }
+        
+        #tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid #4a9eff;
+            padding: 10px;
+            border-radius: 4px;
+            pointer-events: none;
+            display: none;
+            z-index: 1000;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="info">
+            <h1>Assembly Space</h1>
+            <p>Explore how different systems converge in complexity-time-performance space.</p>
+            <p><strong>Axes:</strong><br>
+            X: Assembly Index (complexity)<br>
+            Y: Time (emergence)<br>
+            Z: Performance Metric</p>
+            <div id="legend">
+                <h3>Solution Types</h3>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #ff6b6b;"></div>
+                    <span>Biological Systems</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #4a9eff;"></div>
+                    <span>Technological Systems</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #51cf66;"></div>
+                    <span>Cognitive Systems</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #ffd93d;"></div>
+                    <span>Convergence Points</span>
+                </div>
+            </div>
+        </div>
+        
+        <div id="controls">
+            <button id="rotateToggle">Toggle Rotation</button>
+            <button id="resetView">Reset View</button>
+            <button id="showPaths">Show/Hide Paths</button>
+        </div>
+        
+        <div id="tooltip"></div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="visualization.js"></script>
+</body>
+</html>

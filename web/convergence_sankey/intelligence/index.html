@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convergent Evolution of Intelligence - Interactive Sankey Diagram</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Convergent Evolution of Intelligence</h1>
+        <p class="subtitle">Interactive Sankey diagram showing independent evolution of complex information processing</p>
+        
+        <div class="controls">
+            <button onclick="resetView()">Reset View</button>
+            <button onclick="toggleLabels()">Toggle Labels</button>
+            <button onclick="highlightPath('vertebrate')">Highlight Vertebrates</button>
+            <button onclick="highlightPath('cephalopod')">Highlight Cephalopods</button>
+            <button onclick="highlightPath('arthropod')">Highlight Arthropods</button>
+            <button onclick="highlightPath('collective')">Highlight Collective</button>
+            <button onclick="highlightPath('artificial')">Highlight AI</button>
+        </div>
+        
+        <div id="sankey-diagram"></div>
+        
+        <div class="legend">
+            <h3>Legend</h3>
+            <div class="legend-item">
+                <span class="legend-color" style="background-color: #3498db;"></span>
+                <span>Information Challenges</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background-color: #16a085;"></span>
+                <span>Evolutionary Origins</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background-color: #e67e22;"></span>
+                <span>Neural Architectures</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background-color: #8e44ad;"></span>
+                <span>Cognitive Features</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background-color: #27ae60;"></span>
+                <span>Intelligence Types</span>
+            </div>
+        </div>
+        
+        <div class="info-panel">
+            <h3>About Intelligence Evolution</h3>
+            <p>Intelligence—the ability to process information, learn, and adapt—has evolved multiple times 
+            through different mechanisms. This visualization shows how various lineages developed sophisticated 
+            information processing capabilities.</p>
+            <ul>
+                <li><strong>Vertebrate brains</strong>: Centralized neural processing</li>
+                <li><strong>Cephalopod intelligence</strong>: Distributed neural networks</li>
+                <li><strong>Arthropod cognition</strong>: Miniaturized efficiency</li>
+                <li><strong>Collective intelligence</strong>: Emergent from simple agents</li>
+                <li><strong>Artificial intelligence</strong>: Silicon-based computation</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script src="intelligence-sankey.js"></script>
+</body>
+</html>

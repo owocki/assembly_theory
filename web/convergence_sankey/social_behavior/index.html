@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convergent Evolution of Social Behavior - Interactive Sankey Diagram</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Convergent Evolution of Social Behavior</h1>
+        <p class="subtitle">Interactive Sankey diagram showing independent evolution of complex social structures</p>
+        
+        <div class="controls">
+            <button onclick="resetView()">Reset View</button>
+            <button onclick="toggleLabels()">Toggle Labels</button>
+            <button onclick="highlightPath('eusocial')">Highlight Eusocial</button>
+            <button onclick="highlightPath('pack')">Highlight Pack Hunters</button>
+            <button onclick="highlightPath('herd')">Highlight Herding/Flocking</button>
+            <button onclick="highlightPath('primate')">Highlight Primates</button>
+            <button onclick="highlightPath('human')">Highlight Human</button>
+        </div>
+        
+        <div id="sankey-diagram"></div>
+        
+        <div class="legend">
+            <h3>Legend</h3>
+            <div class="legend-item">
+                <span class="legend-color" style="background-color: #2ecc71;"></span>
+                <span>Survival Pressures</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background-color: #3498db;"></span>
+                <span>Social Origins</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background-color: #f39c12;"></span>
+                <span>Organization Types</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background-color: #e74c3c;"></span>
+                <span>Social Innovations</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background-color: #9b59b6;"></span>
+                <span>Emergent Behaviors</span>
+            </div>
+        </div>
+        
+        <div class="info-panel">
+            <h3>About Social Behavior Evolution</h3>
+            <p>Complex social structures have evolved independently across diverse lineages, from insect colonies 
+            to human civilizations. Each represents a unique solution to the challenges of group living.</p>
+            <ul>
+                <li><strong>Eusociality</strong>: Division of labor, reproductive castes (ants, bees, termites)</li>
+                <li><strong>Pack behavior</strong>: Cooperative hunting and defense (wolves, lions)</li>
+                <li><strong>Herding/Flocking</strong>: Safety in numbers, collective movement</li>
+                <li><strong>Primate societies</strong>: Complex hierarchies and alliances</li>
+                <li><strong>Human organizations</strong>: Cultural institutions and technology</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script src="social-behavior-sankey.js"></script>
+</body>
+</html>
