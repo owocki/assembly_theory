@@ -394,16 +394,28 @@ button:active {
     background: #555;
 }
 
+/* Link styling - all links white */
+a {
+    color: white;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+}
+
+a:hover {
+    border-bottom-color: white;
+}
+
 /* GitHub link styling */
 .github-link {
-    color: #58a6ff;
+    color: white;
     text-decoration: none;
     border-bottom: 1px solid transparent;
     transition: border-color 0.2s ease;
 }
 
 .github-link:hover {
-    border-bottom-color: #58a6ff;
+    border-bottom-color: white;
 }
 
 .click-instruction {
