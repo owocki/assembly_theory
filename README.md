@@ -1,8 +1,8 @@
-# Assembly Theory
+# Assembly Theory Knowledge Tree
 
 ## What is Assembly Theory?
 
-Assembly theory is a framework developed to quantify the complexity and evolution of objects by measuring how they are assembled from basic building blocks. It provides a mathematical approach to understanding how complex structures emerge from simpler components through a series of assembly steps.
+[Assembly theory](https://www.nature.com/articles/s41586-023-06600-9) is a framework developed to quantify the complexity and evolution of objects by measuring how they are assembled from basic building blocks. It provides a mathematical approach to understanding how complex structures emerge from simpler components through a series of assembly steps.
 
 ### Origins and Development
 
@@ -64,107 +64,107 @@ This repository provides a comprehensive cross-reference of all assemblies, orga
 
 | Assembly | AI | Domain | Locations | Time Origin |
 |----------|----|---------|-----------| ------------|
-| Photon | 1 | Cosmic | [/domains/cosmic/particles/photon.md] | Big Bang |
-| Electron | 1 | Cosmic | [/domains/cosmic/particles/electron.md] | 10⁻¹² s |
-| Quark | 1 | Cosmic | [/domains/cosmic/particles/quark.md] | 10⁻¹² s |
-| Proton | 3 | Cosmic | [/domains/cosmic/particles/proton.md] | 10⁻⁶ s |
-| Neutron | 3 | Cosmic | [/domains/cosmic/particles/neutron.md] | 10⁻⁶ s |
-| Hydrogen atom | 2 | Cosmic | [/domains/cosmic/atoms/hydrogen.md] | 380,000 yr |
-| Helium atom | 4 | Cosmic | [/domains/cosmic/atoms/helium.md] | 380,000 yr |
-| Water (H₂O) | 3 | Cosmic | [/domains/cosmic/molecules/water.md], [/case_studies/water/] | 13.4 Gyr ago |
+| Photon | 1 | Cosmic | [/domains/cosmic/particles/photon.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/particles/photon.md) | Big Bang |
+| Electron | 1 | Cosmic | [/domains/cosmic/particles/electron.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/particles/electron.md) | 10⁻¹² s |
+| Quark | 1 | Cosmic | [/domains/cosmic/particles/quark.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/particles/quark.md) | 10⁻¹² s |
+| Proton | 3 | Cosmic | [/domains/cosmic/particles/proton.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/particles/proton.md) | 10⁻⁶ s |
+| Neutron | 3 | Cosmic | [/domains/cosmic/particles/neutron.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/particles/neutron.md) | 10⁻⁶ s |
+| Hydrogen atom | 2 | Cosmic | [/domains/cosmic/atoms/hydrogen.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/atoms/hydrogen.md) | 380,000 yr |
+| Helium atom | 4 | Cosmic | [/domains/cosmic/atoms/helium.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/atoms/helium.md) | 380,000 yr |
+| Water (H₂O) | 3 | Cosmic | [/domains/cosmic/molecules/water.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/molecules/water.md), [/case_studies/water/](https://github.com/owocki/assembly_theory/tree/master/case_studies/water/) | 13.4 Gyr ago |
 
 ### AI: 10-100 (Simple Assemblies)
 
 | Assembly | AI | Domain | Locations | Time Origin |
 |----------|----|---------|-----------| ------------|
-| Methane (CH₄) | 12 | Cosmic | [/domains/cosmic/molecules/methane.md] | 13 Gyr ago |
-| Ammonia (NH₃) | 10 | Cosmic | [/domains/cosmic/molecules/ammonia.md] | 13 Gyr ago |
-| Carbon dioxide | 15 | Cosmic | [/domains/cosmic/molecules/co2.md] | 13 Gyr ago |
-| Quartz crystal | 25 | Geological | [/domains/geological/minerals/quartz.md] | 4.4 Gyr ago |
-| Salt (NaCl) | 18 | Geological | [/domains/geological/minerals/salt.md] | 4.4 Gyr ago |
-| Iron oxide | 30 | Geological | [/domains/geological/minerals/iron_oxide.md] | 4.3 Gyr ago |
-| Amino acid | 50-80 | Biological | [/domains/biological/prebiotic/amino_acids.md] | 4 Gyr ago |
-| Simple sugar | 40-60 | Biological | [/domains/biological/prebiotic/sugars.md] | 4 Gyr ago |
+| Methane (CH₄) | 12 | Cosmic | [/domains/cosmic/molecules/methane.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/molecules/methane.md) | 13 Gyr ago |
+| Ammonia (NH₃) | 10 | Cosmic | [/domains/cosmic/molecules/ammonia.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/molecules/ammonia.md) | 13 Gyr ago |
+| Carbon dioxide | 15 | Cosmic | [/domains/cosmic/molecules/co2.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/molecules/co2.md) | 13 Gyr ago |
+| Quartz crystal | 25 | Geological | [/domains/geological/minerals/quartz.md](https://github.com/owocki/assembly_theory/tree/master/domains/geological/minerals/quartz.md) | 4.4 Gyr ago |
+| Salt (NaCl) | 18 | Geological | [/domains/geological/minerals/salt.md](https://github.com/owocki/assembly_theory/tree/master/domains/geological/minerals/salt.md) | 4.4 Gyr ago |
+| Iron oxide | 30 | Geological | [/domains/geological/minerals/iron_oxide.md](https://github.com/owocki/assembly_theory/tree/master/domains/geological/minerals/iron_oxide.md) | 4.3 Gyr ago |
+| Amino acid | 50-80 | Biological | [/domains/biological/prebiotic/amino_acids.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/prebiotic/amino_acids.md) | 4 Gyr ago |
+| Simple sugar | 40-60 | Biological | [/domains/biological/prebiotic/sugars.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/prebiotic/sugars.md) | 4 Gyr ago |
 
 ### AI: 100-1,000 (Molecular Complexity)
 
 | Assembly | AI | Domain | Locations | Time Origin |
 |----------|----|---------|-----------| ------------|
-| Nucleotide | 150 | Biological | [/domains/biological/prebiotic/nucleotides.md] | 4 Gyr ago |
-| Short peptide | 200 | Biological | [/domains/biological/prebiotic/peptides.md] | 4 Gyr ago |
-| Lipid bilayer | 500 | Biological | [/domains/biological/prebiotic/membranes.md] | 3.8 Gyr ago |
-| tRNA | 800 | Biological | [/domains/biological/prokaryotic/trna.md] | 3.8 Gyr ago |
-| Clay mineral | 300 | Geological | [/domains/geological/minerals/clay.md] | 4.3 Gyr ago |
-| Volcanic glass | 400 | Geological | [/domains/geological/rocks/obsidian.md] | 4.4 Gyr ago |
+| Nucleotide | 150 | Biological | [/domains/biological/prebiotic/nucleotides.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/prebiotic/nucleotides.md) | 4 Gyr ago |
+| Short peptide | 200 | Biological | [/domains/biological/prebiotic/peptides.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/prebiotic/peptides.md) | 4 Gyr ago |
+| Lipid bilayer | 500 | Biological | [/domains/biological/prebiotic/membranes.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/prebiotic/membranes.md) | 3.8 Gyr ago |
+| tRNA | 800 | Biological | [/domains/biological/prokaryotic/trna.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/prokaryotic/trna.md) | 3.8 Gyr ago |
+| Clay mineral | 300 | Geological | [/domains/geological/minerals/clay.md](https://github.com/owocki/assembly_theory/tree/master/domains/geological/minerals/clay.md) | 4.3 Gyr ago |
+| Volcanic glass | 400 | Geological | [/domains/geological/rocks/obsidian.md](https://github.com/owocki/assembly_theory/tree/master/domains/geological/rocks/obsidian.md) | 4.4 Gyr ago |
 
 ### AI: 1,000-10,000 (Basic Life)
 
 | Assembly | AI | Domain | Locations | Time Origin |
 |----------|----|---------|-----------| ------------|
-| Ribosome | 5,000 | Biological | [/domains/biological/prokaryotic/ribosome.md] | 3.8 Gyr ago |
-| Basic virus | 3,000 | Biological | [/domains/biological/prokaryotic/virus.md] | 3.5 Gyr ago |
-| Bacterial cell | 8,000 | Biological | [/domains/biological/prokaryotic/bacteria.md] | 3.5 Gyr ago |
-| Photosystem | 6,000 | Biological | [/domains/biological/prokaryotic/photosystem.md] | 3.4 Gyr ago |
-| DNA polymerase | 4,000 | Biological | [/domains/biological/prokaryotic/dna_polymerase.md] | 3.8 Gyr ago |
+| Ribosome | 5,000 | Biological | [/domains/biological/prokaryotic/ribosome.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/prokaryotic/ribosome.md) | 3.8 Gyr ago |
+| Basic virus | 3,000 | Biological | [/domains/biological/prokaryotic/virus.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/prokaryotic/virus.md) | 3.5 Gyr ago |
+| Bacterial cell | 8,000 | Biological | [/domains/biological/prokaryotic/bacteria.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/prokaryotic/bacteria.md) | 3.5 Gyr ago |
+| Photosystem | 6,000 | Biological | [/domains/biological/prokaryotic/photosystem.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/prokaryotic/photosystem.md) | 3.4 Gyr ago |
+| DNA polymerase | 4,000 | Biological | [/domains/biological/prokaryotic/dna_polymerase.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/prokaryotic/dna_polymerase.md) | 3.8 Gyr ago |
 
 ### AI: 10,000-100,000 (Complex Cells)
 
 | Assembly | AI | Domain | Locations | Time Origin |
 |----------|----|---------|-----------| ------------|
-| Mitochondrion | 50,000 | Biological | [/domains/biological/eukaryotic/mitochondrion.md] | 2 Gyr ago |
-| Chloroplast | 60,000 | Biological | [/domains/biological/eukaryotic/chloroplast.md] | 1.5 Gyr ago |
-| Cell nucleus | 80,000 | Biological | [/domains/biological/eukaryotic/nucleus.md] | 2 Gyr ago |
-| Flagellum | 30,000 | Biological | [/domains/biological/eukaryotic/flagellum.md] | 2 Gyr ago |
-| Yeast cell | 90,000 | Biological | [/domains/biological/eukaryotic/yeast.md] | 1.5 Gyr ago |
+| Mitochondrion | 50,000 | Biological | [/domains/biological/eukaryotic/mitochondrion.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/eukaryotic/mitochondrion.md) | 2 Gyr ago |
+| Chloroplast | 60,000 | Biological | [/domains/biological/eukaryotic/chloroplast.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/eukaryotic/chloroplast.md) | 1.5 Gyr ago |
+| Cell nucleus | 80,000 | Biological | [/domains/biological/eukaryotic/nucleus.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/eukaryotic/nucleus.md) | 2 Gyr ago |
+| Flagellum | 30,000 | Biological | [/domains/biological/eukaryotic/flagellum.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/eukaryotic/flagellum.md) | 2 Gyr ago |
+| Yeast cell | 90,000 | Biological | [/domains/biological/eukaryotic/yeast.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/eukaryotic/yeast.md) | 1.5 Gyr ago |
 
 ### AI: 100,000-1M (Multicellular)
 
 | Assembly | AI | Domain | Locations | Time Origin |
 |----------|----|---------|-----------| ------------|
-| Sponge | 500,000 | Biological | [/domains/biological/multicellular/sponge.md] | 600 Myr ago |
-| Jellyfish | 800,000 | Biological | [/domains/biological/multicellular/jellyfish.md] | 550 Myr ago |
-| Simple worm | 900,000 | Biological | [/domains/biological/multicellular/worm.md] | 550 Myr ago |
-| Mushroom | 600,000 | Biological | [/domains/biological/multicellular/fungus.md] | 500 Myr ago |
-| Moss | 700,000 | Biological | [/domains/biological/multicellular/moss.md] | 450 Myr ago |
+| Sponge | 500,000 | Biological | [/domains/biological/multicellular/sponge.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/multicellular/sponge.md) | 600 Myr ago |
+| Jellyfish | 800,000 | Biological | [/domains/biological/multicellular/jellyfish.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/multicellular/jellyfish.md) | 550 Myr ago |
+| Simple worm | 900,000 | Biological | [/domains/biological/multicellular/worm.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/multicellular/worm.md) | 550 Myr ago |
+| Mushroom | 600,000 | Biological | [/domains/biological/multicellular/fungus.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/multicellular/fungus.md) | 500 Myr ago |
+| Moss | 700,000 | Biological | [/domains/biological/multicellular/moss.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/multicellular/moss.md) | 450 Myr ago |
 
 ### AI: 1M-1B (Complex Organisms)
 
 | Assembly | AI | Domain | Locations | Time Origin |
 |----------|----|---------|-----------| ------------|
-| Insect | 10M | Biological | [/domains/biological/multicellular/insect.md] | 400 Myr ago |
-| Fish | 50M | Biological | [/domains/biological/multicellular/fish.md] | 450 Myr ago |
-| Tree | 100M | Biological | [/domains/biological/multicellular/tree.md] | 380 Myr ago |
-| Mammal brain | 500M | Biological | [/domains/cognitive/neural_networks/mammal_brain.md] | 200 Myr ago |
-| Bird | 200M | Biological | [/domains/biological/multicellular/bird.md] | 150 Myr ago |
+| Insect | 10M | Biological | [/domains/biological/multicellular/insect.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/multicellular/insect.md) | 400 Myr ago |
+| Fish | 50M | Biological | [/domains/biological/multicellular/fish.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/multicellular/fish.md) | 450 Myr ago |
+| Tree | 100M | Biological | [/domains/biological/multicellular/tree.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/multicellular/tree.md) | 380 Myr ago |
+| Mammal brain | 500M | Biological | [/domains/cognitive/neural_networks/mammal_brain.md](https://github.com/owocki/assembly_theory/tree/master/domains/cognitive/neural_networks/mammal_brain.md) | 200 Myr ago |
+| Bird | 200M | Biological | [/domains/biological/multicellular/bird.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/multicellular/bird.md) | 150 Myr ago |
 
 ### AI: 1B+ (Advanced Systems)
 
 | Assembly | AI | Domain | Locations | Time Origin |
 |----------|----|---------|-----------| ------------|
-| Human brain | 10B | Cognitive | [/domains/cognitive/neural_networks/human_brain.md] | 300 kyr ago |
-| Language | 50B | Cognitive | [/domains/cognitive/language/], [/pathways/divergent/from_language/] | 100 kyr ago |
-| City | 100B | Technological | [/case_studies/cities/] | 10 kyr ago |
-| Computer | 1T | Technological | [/domains/technological/computers/] | 70 yr ago |
-| Internet | 10T | Technological | [/case_studies/internet/], [/domains/technological/networks/] | 50 yr ago |
-| AI System | 100T | Technological | [/domains/technological/networks/ai.md] | 10 yr ago |
+| Human brain | 10B | Cognitive | [/domains/cognitive/neural_networks/human_brain.md](https://github.com/owocki/assembly_theory/tree/master/domains/cognitive/neural_networks/human_brain.md) | 300 kyr ago |
+| Language | 50B | Cognitive | [/domains/cognitive/language/](https://github.com/owocki/assembly_theory/tree/master/domains/cognitive/language/), [/pathways/divergent/from_language/](https://github.com/owocki/assembly_theory/tree/master/pathways/divergent/from_language/) | 100 kyr ago |
+| City | 100B | Technological | [/case_studies/cities/](https://github.com/owocki/assembly_theory/tree/master/case_studies/cities/) | 10 kyr ago |
+| Computer | 1T | Technological | [/domains/technological/computers/](https://github.com/owocki/assembly_theory/tree/master/domains/technological/computers/) | 70 yr ago |
+| Internet | 10T | Technological | [/case_studies/internet/](https://github.com/owocki/assembly_theory/tree/master/case_studies/internet/), [/domains/technological/networks/](https://github.com/owocki/assembly_theory/tree/master/domains/technological/networks/) | 50 yr ago |
+| AI System | 100T | Technological | [/domains/technological/networks/ai.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/networks/ai.md) | 10 yr ago |
 
 ### Cross-Domain Assemblies
 
 | Assembly | AI | Domains | Type | Locations |
 |----------|----|---------| ----- |-----------|
-| Cyborg | 10B | Bio+Tech | Hybrid | [/pathways/hybrid/cyborgs/] |
-| GMO | 1B | Bio+Tech | Hybrid | [/pathways/hybrid/synthetic_biology/] |
-| Quantum Biology | 1M | Quantum+Bio | Hybrid | [/pathways/hybrid/quantum_biology/] |
-| Social Network | 100B | Cognitive+Tech | Hybrid | [/pathways/hybrid/collective_intelligence/] |
+| Cyborg | 10B | Bio+Tech | Hybrid | [/pathways/hybrid/cyborgs/](https://github.com/owocki/assembly_theory/tree/master/pathways/hybrid/cyborgs/) |
+| GMO | 1B | Bio+Tech | Hybrid | [/pathways/hybrid/synthetic_biology/](https://github.com/owocki/assembly_theory/tree/master/pathways/hybrid/synthetic_biology/) |
+| Quantum Biology | 1M | Quantum+Bio | Hybrid | [/pathways/hybrid/quantum_biology/](https://github.com/owocki/assembly_theory/tree/master/pathways/hybrid/quantum_biology/) |
+| Social Network | 100B | Cognitive+Tech | Hybrid | [/pathways/hybrid/collective_intelligence/](https://github.com/owocki/assembly_theory/tree/master/pathways/hybrid/collective_intelligence/) |
 
 ### Convergent Assemblies
 
 | Function | Independent Origins | Locations |
 |----------|-------------------|-----------|
-| Flight | Birds, Bats, Insects, Pterosaurs, Planes | [/pathways/convergent/flight/] |
-| Vision | 40+ independent origins | [/pathways/convergent/vision/] |
-| Intelligence | Cephalopods, Mammals, Birds, AI | [/pathways/convergent/intelligence/] |
-| Networks | Neural, Fungal, Social, Digital | [/pathways/convergent/networks/] |
+| Flight | Birds, Bats, Insects, Pterosaurs, Planes | [/pathways/convergent/flight/](https://github.com/owocki/assembly_theory/tree/master/pathways/convergent/flight/) |
+| Vision | 40+ independent origins | [/pathways/convergent/vision/](https://github.com/owocki/assembly_theory/tree/master/pathways/convergent/vision/) |
+| Intelligence | Cephalopods, Mammals, Birds, AI | [/pathways/convergent/intelligence/](https://github.com/owocki/assembly_theory/tree/master/pathways/convergent/intelligence/) |
+| Networks | Neural, Fungal, Social, Digital | [/pathways/convergent/networks/](https://github.com/owocki/assembly_theory/tree/master/pathways/convergent/networks/) |
 
 ## Applications
 
@@ -192,6 +192,65 @@ This repository provides a comprehensive cross-reference of all assemblies, orga
 - Quantifying evolutionary complexity
 - Understanding major evolutionary transitions
 - Measuring information accumulation in genomes
+
+### 6. Digital Networks and Computer Systems
+- Tracking the assembly evolution of software architectures from simple protocols to complex distributed systems
+- Quantifying the complexity of network topologies and their emergent properties
+- Understanding how digital ecosystems evolve through selection pressures (performance, security, scalability)
+- Analyzing the assembly pathways of successful technologies (TCP/IP, HTTP, blockchain protocols)
+- Detecting signatures of innovation vs. incremental development in software evolution
+- Measuring information propagation and replication patterns in distributed systems
+- Applying assembly theory to predict and optimize network resilience and adaptability
+
+### 7. Blockchain and Smart Contract Evolution
+- Measuring the assembly complexity of blockchain architectures from simple transactions to complex DeFi protocols
+- Analyzing the composability of smart contracts as reusable building blocks with increasing assembly indices
+- Tracking how DeFi protocols evolve through composition of primitive financial operations (swap, lend, stake, bridge)
+- Quantifying the emergence of complex financial instruments from basic smart contract components
+- Understanding selection pressures in blockchain ecosystems (gas efficiency, security, user adoption, profit/loss, sociality vs parasociality, liquidity)
+- Detecting innovation signatures in protocol forks and their evolutionary pathways
+- Applying assembly theory to predict protocol sustainability and identify over-engineered vs. elegantly composed systems
+- Measuring the assembly complexity of governance mechanisms and their emergence from simple voting primitives
+- Analyzing cross-chain composability as inter-domain assembly pathways in the broader crypto ecosystem
+
+## Profound Implications
+
+Assembly theory reveals mind-bending insights about the nature of reality, time, and existence:
+
+### **Planets Are Search Engines for Life**
+Planets don't just host life - they actively search assembly space for viable life forms through billions of years of chemical experimentation. Every world is a cosmic computer exploring what's possible.
+
+### **Objects Are Memories**
+Every complex object is literally a physical memory of its construction history. A protein "remembers" billions of years of evolutionary selection. Your iPhone "remembers" the entire history of human technological development. Matter itself becomes a storage medium for temporal information.
+
+### **The Universe Is Self-Selecting**
+The universe doesn't just evolve - it actively selects which parts of itself get to exist. High assembly index objects with high copy numbers are "chosen" by physics itself. We're living inside a cosmic selection algorithm.
+
+### **Life Is Physics Becoming Recursive**
+Life isn't separate from physics - it's what happens when physics starts building on its own outputs. The universe literally learns to construct itself more efficiently through living systems.
+
+### **Complexity Has Memory Loss**
+Simple objects can have many possible histories, but complex objects can only have existed through very specific pathways. The more complex something is, the more constrained its past becomes. Your existence is extremely improbable but also historically inevitable.
+
+### **Time Crystallizes Into Structure**
+Assembly theory suggests time doesn't just pass - it gets frozen into the structure of objects. Every molecule carries temporal information. We're surrounded by crystallized time.
+
+### **The Future Is Assembled From the Past**
+New possibilities don't emerge randomly - they're assembled from existing building blocks. Innovation is really just novel recombination of what already exists. Even breakthrough ideas follow assembly pathways.
+
+### **Consciousness Might Be Maximum Assembly**
+If consciousness is information integration, then assembly theory suggests consciousness emerges when the universe becomes complex enough to model its own assembly processes. We might be the universe examining its own construction history.
+
+### **Reality Has Compression Algorithms**
+The universe seems to favor objects that can be built efficiently from reusable components. This is why we see convergent evolution - reality has built-in compression that favors certain solutions.
+
+### **Death Is Deassembly**
+Death isn't the opposite of life - it's the return of high assembly index objects to lower assembly states. But the information patterns can persist and be reassembled elsewhere.
+
+### **Technology Is Life's Assembly Engine**
+Human technology isn't separate from biological evolution - it's life's way of exploring assembly space faster than genetic evolution allows. We're biology's way of rapid prototyping new assembly pathways.
+
+These implications suggest we're not just observers of the universe - we're active participants in its ongoing self-assembly process.
 
 ## Mathematical Framework
 
@@ -233,8 +292,8 @@ assembly/
 
 ## Key Files
 
-- `ASSEMBLY_INDEX.md` - Master index of all assemblies with cross-references
-- `VISUALIZATION_GUIDE.md` - Guide to understanding visual representations
+- [`ASSEMBLY_INDEX.md`](https://github.com/owocki/assembly_theory/tree/master/ASSEMBLY_INDEX.md) - Master index of all assemblies with cross-references
+- [`VISUALIZATION_GUIDE.md`](https://github.com/owocki/assembly_theory/tree/master/VISUALIZATION_GUIDE.md) - Guide to understanding visual representations
 - Domain `PATHWAYS.md` files - Connection maps within each domain
 
 ## Experimental Validation
@@ -322,3 +381,4 @@ For mathematical details, see `/theory/mathematics/`
 For philosophical implications, see `/theory/philosophy/`
 
 Assembly theory represents a significant attempt to quantify complexity and detect signatures of life and evolution through the lens of construction processes, offering new insights into how complex systems emerge and evolve from simpler components.
+

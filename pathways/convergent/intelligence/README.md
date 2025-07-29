@@ -82,6 +82,7 @@ Intelligence represents one of the most striking examples of convergent assembly
 - Emergent Properties: Swarm intelligence, collective decision-making
 - Assembly Architecture: Distributed processing across thousands of individuals
 - Convergent Features: Information sharing, optimization algorithms, adaptive problem solving
+- Social Organization: [Detailed in Social Behavior Pathways](/pathways/convergent/social_behavior/README.md)
 
 **Individual Insect Cognition**
 - Assembly Index: 100000-1000000
@@ -348,6 +349,7 @@ Theoretical limits: ~10^50 ops/watt (Landauer limit)
 ## Cross-References
 
 ### Related Pathways
+- [Social Behavior](/pathways/convergent/social_behavior/README.md) - Convergent social intelligence and collective behavior
 - [Cyborg Integration](/pathways/hybrid/cyborgs/README.md) - Bio-artificial intelligence merger
 - [Collective Intelligence](/pathways/hybrid/collective_intelligence/README.md) - Distributed intelligence
 - [Synthetic Biology](/pathways/hybrid/synthetic_biology/README.md) - Engineered biological systems
@@ -359,6 +361,9 @@ Theoretical limits: ~10^50 ops/watt (Landauer limit)
 - [Technological Domain](/domains/technological/PATHWAYS.md)
 
 ### Assembly Studies
+- [Wolf Packs](/case_studies/wolf_packs/README.md) - Pack intelligence and cooperative behavior
+- [Ant Colonies](/case_studies/ant_colonies/README.md) - Superorganism collective intelligence
+- [Dolphin Pods](/case_studies/dolphin_pods/README.md) - Marine social intelligence
 - [Neural Networks](/case_studies/neurons/README.md)
 - [High Complexity Systems](/dimensions/by_complexity/AI_10000+/README.md)
 - [Organism Scale](/dimensions/by_scale/organism/README.md)
