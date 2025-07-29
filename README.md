@@ -1,7 +1,6 @@
 # Assembly Theory Knowledge Tree
 
-View webapp at https://assemblytheory.vercel.app/i
-
+View webapp at https://assemblytheory.vercel.app/
 ## Table of Contents
 
 - [What is Assembly Theory?](#what-is-assembly-theory)
@@ -671,4 +670,4 @@ Key Files:
 - Domain `PATHWAYS.md` files - Connection maps within each domain
 
 
-You can also navigate this data via the companion webapp, hosted at https://assemblytheory.vercel.app/i
+You can also navigate this data via the companion webapp, hosted at https://assemblytheory.vercel.app/
