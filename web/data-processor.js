@@ -21,17 +21,34 @@ class DataProcessor {
         ];
     }
     
-    // Generate comprehensive network data from repository CSV files
+    // Generate comprehensive network data from all repository sources
     async generateRealData() {
-        const dataIngestion = new DataIngestion();
-        const realData = await dataIngestion.generateCompleteDataset();
-        
-        if (realData) {
-            return realData;
-        } else {
-            // Fallback to sample data if real data fails
-            return this.generateSampleData();
+        try {
+            // Try comprehensive data ingestion first
+            const comprehensiveIngestion = new ComprehensiveDataIngestion();
+            const comprehensiveData = await comprehensiveIngestion.generateComprehensiveDataset();
+            
+            if (comprehensiveData) {
+                return comprehensiveData;
+            }
+        } catch (error) {
+            console.warn('Comprehensive data ingestion failed, trying basic ingestion:', error);
         }
+        
+        try {
+            // Fallback to basic data ingestion
+            const dataIngestion = new DataIngestion();
+            const realData = await dataIngestion.generateCompleteDataset();
+            
+            if (realData) {
+                return realData;
+            }
+        } catch (error) {
+            console.warn('Basic data ingestion failed, using sample data:', error);
+        }
+        
+        // Final fallback to sample data
+        return this.generateSampleData();
     }
     
     // Generate sample network data based on the existing repository structure
