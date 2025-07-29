@@ -212,6 +212,7 @@ This repository provides a comprehensive cross-reference of all assemblies, orga
 - Applying assembly theory to predict protocol sustainability and identify over-engineered vs. elegantly composed systems
 - Measuring the assembly complexity of governance mechanisms and their emergence from simple voting primitives
 - Analyzing cross-chain composability as inter-domain assembly pathways in the broader crypto ecosystem
+- (owockis note - i wrote a bit about this [here](https://gov.gitcoin.co/t/assembly-theory-x-onchain-capital-allocation-a-powerful-approach-to-allo-design-space-exploration/19729))
 
 ## Profound Implications
 
