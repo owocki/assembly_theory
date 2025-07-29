@@ -531,7 +531,7 @@
                             <strong>${d.name}</strong><br/>
                             Lineage: ${lineage.name}<br/>
                             Assembly Index: ${d.ai}<br/>
-                            Time: ${d.time} million years<br/>
+                            Time: ${d.time === 0 ? 'Present' : `${Math.abs(d.time)} million years ago`}<br/>
                             Position: (${d.x}, ${d.y})
                         `)
                             .style("left", (event.pageX + 10) + "px")
@@ -581,24 +581,61 @@
             // Remove existing points
             g.selectAll(".data-point").remove();
             
-            // Animate each lineage
-            data.lineages.forEach((lineage, lineageIndex) => {
-                lineage.species.forEach((species, speciesIndex) => {
-                    setTimeout(() => {
-                        g.append("circle")
-                            .attr("class", "data-point")
-                            .attr("cx", xScale(species.x))
-                            .attr("cy", yScale(species.y))
-                            .attr("r", 0)
-                            .style("fill", lineage.color)
-                            .style("fill-opacity", 0.7)
-                            .style("stroke", lineage.color)
-                            .style("stroke-width", 2)
-                            .transition()
-                            .duration(500)
-                            .attr("r", sizeScale(species.ai));
-                    }, (lineageIndex * 1000) + (speciesIndex * 500));
+            // Collect all species with their lineage info and sort by time
+            const allSpecies = [];
+            data.lineages.forEach(lineage => {
+                lineage.species.forEach(species => {
+                    allSpecies.push({
+                        ...species,
+                        lineage: lineage
+                    });
                 });
+            });
+            
+            // Sort by time (oldest first)
+            allSpecies.sort((a, b) => a.time - b.time);
+            
+            // Animate species in chronological order
+            allSpecies.forEach((species, index) => {
+                setTimeout(() => {
+                    g.append("circle")
+                        .attr("class", "data-point")
+                        .attr("cx", xScale(species.x))
+                        .attr("cy", yScale(species.y))
+                        .attr("r", 0)
+                        .style("fill", species.lineage.color)
+                        .style("fill-opacity", 0.7)
+                        .style("stroke", species.lineage.color)
+                        .style("stroke-width", 2)
+                        .style("cursor", "pointer")
+                        .on("mouseover", function(event, d) {
+                            d3.select(this).classed("highlighted", true);
+                            
+                            tooltip.transition()
+                                .duration(200)
+                                .style("opacity", .9);
+                            
+                            tooltip.html(`
+                                <strong>${species.name}</strong><br/>
+                                Lineage: ${species.lineage.name}<br/>
+                                Assembly Index: ${species.ai}<br/>
+                                Time: ${species.time === 0 ? 'Present' : `${Math.abs(species.time)} million years ago`}<br/>
+                                Position: (${species.x}, ${species.y})
+                            `)
+                                .style("left", (event.pageX + 10) + "px")
+                                .style("top", (event.pageY - 28) + "px");
+                        })
+                        .on("mouseout", function(d) {
+                            d3.select(this).classed("highlighted", false);
+                            
+                            tooltip.transition()
+                                .duration(500)
+                                .style("opacity", 0);
+                        })
+                        .transition()
+                        .duration(500)
+                        .attr("r", sizeScale(species.ai));
+                }, index * 300); // 300ms between each species appearance
             });
         }
 
