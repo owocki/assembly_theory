@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Technological Nodes Loading</title>
+</head>
+<body>
+    <h1>Testing Technological Nodes Loading</h1>
+    <pre id="output"></pre>
+    
+    <script src="technological-nodes.js"></script>
+    <script>
+        const output = document.getElementById('output');
+        
+        try {
+            const techNodes = new TechnologicalNodes();
+            const technologies = techNodes.generateTechnologies();
+            
+            output.textContent = `Successfully loaded ${technologies.length} technological nodes!\n\n`;
+            
+            // Show category distribution
+            const categoryCounts = {};
+            technologies.forEach(tech => {
+                categoryCounts[tech.category] = (categoryCounts[tech.category] || 0) + 1;
+            });
+            
+            output.textContent += 'Category distribution:\n';
+            Object.entries(categoryCounts).sort((a, b) => b[1] - a[1]).forEach(([category, count]) => {
+                output.textContent += `  ${category}: ${count} technologies\n`;
+            });
+            
+            // Show some sample nodes
+            output.textContent += '\nSample technologies:\n';
+            technologies.slice(0, 10).forEach(tech => {
+                output.textContent += `  - ${tech.name} (AI: ${tech.assembly_index}, Category: ${tech.category})\n`;
+            });
+            
+            // Show assembly index range
+            const minAI = Math.min(...technologies.map(t => t.assembly_index));
+            const maxAI = Math.max(...technologies.map(t => t.assembly_index));
+            output.textContent += `\nAssembly Index Range: ${minAI} to ${maxAI.toExponential(2)}\n`;
+            
+            // Test link generation
+            const links = techNodes.generateTechnologyLinks(technologies);
+            output.textContent += `\nGenerated ${links.length} links between technologies\n`;
+            
+        } catch (error) {
+            output.textContent = 'ERROR: ' + error.message + '\n' + error.stack;
+        }
+    </script>
+</body>
+</html>

@@ -8,7 +8,7 @@ Assembly space is inherently high-dimensional. This guide helps you interpret va
 
 #### 1. Linear Progressions
 - **Format**: ASCII timelines showing assembly index growth
-- **Best for**: Understanding temporal evolution
+- **Best for**: Understanding time-based progression
 - **Example**: Big Bang → Atoms → Molecules → Life
 
 #### 2. Tree Diagrams

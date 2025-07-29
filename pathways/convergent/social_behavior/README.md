@@ -267,7 +267,7 @@ Degree distribution: Power law or exponential
 Modularity: 0.3-0.7 (subgroup structure)
 ```
 
-## Temporal Evolution of Social Behavior
+## Timeline of Social Behavior Development
 
 ### Evolutionary Timeline
 - **600 Mya**: First multicellular aggregations
