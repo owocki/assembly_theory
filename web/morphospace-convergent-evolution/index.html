@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convergent Evolution Morphospace - Assembly Theory</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        #morphospace {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            position: relative;
+        }
+        
+        .controls {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+        
+        .control-group {
+            display: inline-block;
+            margin-right: 30px;
+            margin-bottom: 10px;
+        }
+        
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+            color: #555;
+        }
+        
+        select, button {
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            background: white;
+            cursor: pointer;
+        }
+        
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            margin-left: 10px;
+        }
+        
+        button:hover {
+            background: #45a049;
+        }
+        
+        .tooltip {
+            position: absolute;
+            text-align: left;
+            padding: 10px;
+            font-size: 12px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            border-radius: 5px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .legend {
+            margin-top: 20px;
+        }
+        
+        .legend-item {
+            display: inline-block;
+            margin-right: 20px;
+        }
+        
+        .legend-color {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            vertical-align: middle;
+            border: 1px solid #999;
+        }
+        
+        .axis-label {
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .grid line {
+            stroke: #e0e0e0;
+            stroke-opacity: 0.7;
+            shape-rendering: crispEdges;
+        }
+        
+        .evolution-path {
+            fill: none;
+            stroke-width: 2;
+            opacity: 0.6;
+            stroke-dasharray: 5,5;
+        }
+        
+        .convergence-zone {
+            fill: #ffeb3b;
+            opacity: 0.2;
+            stroke: #fbc02d;
+            stroke-width: 2;
+            stroke-dasharray: 10,5;
+        }
+        
+        .info-box {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e3f2fd;
+            border-radius: 5px;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .data-point {
+            transition: stroke-width 0.2s ease, fill-opacity 0.2s ease;
+        }
+        
+        .highlighted {
+            stroke: #ff9800;
+            stroke-width: 4;
+            fill-opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Convergent Evolution Morphospace</h1>
+        <p class="subtitle">Visualizing independent evolutionary paths converging on similar solutions</p>
+        
+        <div id="morphospace"></div>
+        
+        <div class="controls">
+            <div class="control-group">
+                <label>Convergent Trait:</label>
+                <select id="traitSelect">
+                    <option value="flight">Flight</option>
+                    <option value="echolocation">Echolocation</option>
+                    <option value="eyes">Camera Eyes</option>
+                    <option value="venom">Venom Systems</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label>X-Axis:</label>
+                <select id="xAxisSelect">
+                    <option value="trait1">Primary Trait</option>
+                    <option value="efficiency">Efficiency</option>
+                    <option value="complexity">Complexity</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label>Y-Axis:</label>
+                <select id="yAxisSelect">
+                    <option value="trait2">Secondary Trait</option>
+                    <option value="performance">Performance</option>
+                    <option value="energyCost">Energy Cost</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <button id="animateBtn">Animate Evolution</button>
+                <button id="resetBtn">Reset View</button>
+            </div>
+        </div>
+        
+        <div class="legend" id="legend"></div>
+        
+        <div class="info-box">
+            <strong>About this visualization:</strong>
+            <p>This morphospace plot shows how different lineages independently evolved similar traits. Each point represents a species, with size indicating Assembly Index (complexity). Paths show evolutionary trajectories, and highlighted zones indicate convergent solutions. Hover over points for detailed information.</p>
+            <p><strong>Assembly Theory Insight:</strong> Despite different starting points and pathways, evolution repeatedly finds similar high-assembly solutions to environmental challenges.</p>
+        </div>
+    </div>
+    
+    <div class="tooltip"></div>
+
+    <script>
+        // Convergent evolution data
+        const convergentTraits = {
+            flight: {
+                name: "Flight",
+                lineages: [
+                    {
+                        name: "Birds",
+                        color: "#2196F3",
+                        species: [
+                            {name: "Archaeopteryx", x: 20, y: 15, ai: 1000, time: -150},
+                            {name: "Early Birds", x: 35, y: 25, ai: 2000, time: -100},
+                            {name: "Modern Birds", x: 75, y: 70, ai: 5000, time: 0}
+                        ]
+                    },
+                    {
+                        name: "Bats",
+                        color: "#9C27B0",
+                        species: [
+                            {name: "Early Bats", x: 25, y: 20, ai: 1500, time: -50},
+                            {name: "Microchiroptera", x: 60, y: 65, ai: 4000, time: -25},
+                            {name: "Modern Bats", x: 70, y: 75, ai: 4500, time: 0}
+                        ]
+                    },
+                    {
+                        name: "Insects",
+                        color: "#4CAF50",
+                        species: [
+                            {name: "Early Flying Insects", x: 15, y: 30, ai: 500, time: -300},
+                            {name: "Dragonflies", x: 40, y: 60, ai: 1200, time: -150},
+                            {name: "Modern Insects", x: 65, y: 80, ai: 2000, time: 0}
+                        ]
+                    },
+                    {
+                        name: "Pterosaurs",
+                        color: "#FF5722",
+                        species: [
+                            {name: "Early Pterosaurs", x: 30, y: 25, ai: 2000, time: -220},
+                            {name: "Pteranodon", x: 55, y: 50, ai: 3500, time: -85},
+                            {name: "Quetzalcoatlus", x: 80, y: 60, ai: 4000, time: -66}
+                        ]
+                    }
+                ],
+                convergenceZone: {x: 65, y: 70, radius: 20}
+            },
+            echolocation: {
+                name: "Echolocation",
+                lineages: [
+                    {
+                        name: "Dolphins",
+                        color: "#00BCD4",
+                        species: [
+                            {name: "Early Cetaceans", x: 20, y: 20, ai: 3000, time: -50},
+                            {name: "Proto-dolphins", x: 45, y: 40, ai: 4000, time: -25},
+                            {name: "Modern Dolphins", x: 80, y: 75, ai: 6000, time: 0}
+                        ]
+                    },
+                    {
+                        name: "Bats",
+                        color: "#9C27B0",
+                        species: [
+                            {name: "Early Echolocators", x: 25, y: 30, ai: 2000, time: -50},
+                            {name: "Refined Echo", x: 55, y: 60, ai: 4500, time: -25},
+                            {name: "Modern Echo Bats", x: 75, y: 80, ai: 5500, time: 0}
+                        ]
+                    },
+                    {
+                        name: "Shrews",
+                        color: "#795548",
+                        species: [
+                            {name: "Early Shrews", x: 15, y: 25, ai: 1000, time: -20},
+                            {name: "Echo Shrews", x: 40, y: 50, ai: 2000, time: -10},
+                            {name: "Modern Shrews", x: 65, y: 70, ai: 3000, time: 0}
+                        ]
+                    }
+                ],
+                convergenceZone: {x: 70, y: 75, radius: 15}
+            },
+            eyes: {
+                name: "Camera Eyes",
+                lineages: [
+                    {
+                        name: "Vertebrates",
+                        color: "#F44336",
+                        species: [
+                            {name: "Eye Spots", x: 10, y: 10, ai: 100, time: -550},
+                            {name: "Simple Eyes", x: 30, y: 35, ai: 1000, time: -500},
+                            {name: "Camera Eyes", x: 85, y: 85, ai: 5000, time: 0}
+                        ]
+                    },
+                    {
+                        name: "Cephalopods",
+                        color: "#3F51B5",
+                        species: [
+                            {name: "Eye Spots", x: 15, y: 15, ai: 100, time: -550},
+                            {name: "Cup Eyes", x: 40, y: 40, ai: 1500, time: -450},
+                            {name: "Camera Eyes", x: 80, y: 80, ai: 4500, time: 0}
+                        ]
+                    },
+                    {
+                        name: "Cnidarians",
+                        color: "#009688",
+                        species: [
+                            {name: "Photoreceptors", x: 12, y: 20, ai: 50, time: -600},
+                            {name: "Eye Spots", x: 35, y: 45, ai: 500, time: -400},
+                            {name: "Box Jelly Eyes", x: 75, y: 75, ai: 3000, time: 0}
+                        ]
+                    }
+                ],
+                convergenceZone: {x: 80, y: 80, radius: 15}
+            },
+            venom: {
+                name: "Venom Systems",
+                lineages: [
+                    {
+                        name: "Snakes",
+                        color: "#8BC34A",
+                        species: [
+                            {name: "Early Snakes", x: 20, y: 15, ai: 2000, time: -100},
+                            {name: "Rear-fanged", x: 45, y: 40, ai: 3000, time: -50},
+                            {name: "Front-fanged", x: 80, y: 85, ai: 5000, time: 0}
+                        ]
+                    },
+                    {
+                        name: "Spiders",
+                        color: "#FF9800",
+                        species: [
+                            {name: "Early Spiders", x: 15, y: 25, ai: 1500, time: -300},
+                            {name: "Web Spiders", x: 50, y: 55, ai: 3500, time: -150},
+                            {name: "Modern Spiders", x: 75, y: 80, ai: 4500, time: 0}
+                        ]
+                    },
+                    {
+                        name: "Cnidarians",
+                        color: "#E91E63",
+                        species: [
+                            {name: "Early Jellies", x: 10, y: 30, ai: 500, time: -600},
+                            {name: "Stinging Cells", x: 40, y: 60, ai: 2000, time: -400},
+                            {name: "Modern Jellies", x: 70, y: 75, ai: 3500, time: 0}
+                        ]
+                    }
+                ],
+                convergenceZone: {x: 75, y: 80, radius: 15}
+            }
+        };
+
+        // Set up dimensions
+        const margin = {top: 40, right: 40, bottom: 60, left: 60};
+        const width = document.getElementById('morphospace').clientWidth - margin.left - margin.right;
+        const height = 600 - margin.top - margin.bottom;
+
+        // Create SVG
+        const svg = d3.select("#morphospace")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom);
+
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // Create scales
+        const xScale = d3.scaleLinear()
+            .domain([0, 100])
+            .range([0, width]);
+
+        const yScale = d3.scaleLinear()
+            .domain([0, 100])
+            .range([height, 0]);
+
+        const sizeScale = d3.scaleSqrt()
+            .domain([0, 6000])
+            .range([3, 30]);
+
+        // Create grid
+        const xGrid = g.append("g")
+            .attr("class", "grid")
+            .attr("transform", `translate(0,${height})`)
+            .call(d3.axisBottom(xScale)
+                .tickSize(-height)
+                .tickFormat("")
+                .ticks(10));
+
+        const yGrid = g.append("g")
+            .attr("class", "grid")
+            .call(d3.axisLeft(yScale)
+                .tickSize(-width)
+                .tickFormat("")
+                .ticks(10));
+
+        // Create axes
+        const xAxis = g.append("g")
+            .attr("transform", `translate(0,${height})`)
+            .call(d3.axisBottom(xScale));
+
+        const yAxis = g.append("g")
+            .call(d3.axisLeft(yScale));
+
+        // Add axis labels
+        const xLabel = g.append("text")
+            .attr("class", "axis-label")
+            .attr("x", width / 2)
+            .attr("y", height + 45)
+            .style("text-anchor", "middle");
+
+        const yLabel = g.append("text")
+            .attr("class", "axis-label")
+            .attr("transform", "rotate(-90)")
+            .attr("y", -45)
+            .attr("x", -height / 2)
+            .style("text-anchor", "middle");
+
+        // Create tooltip
+        const tooltip = d3.select(".tooltip");
+
+        // Create line generator for paths
+        const line = d3.line()
+            .x(d => xScale(d.x))
+            .y(d => yScale(d.y))
+            .curve(d3.curveCatmullRom);
+
+        // Function to update visualization
+        function updateVisualization(traitKey) {
+            const data = convergentTraits[traitKey];
+            
+            // Update axis labels based on selection
+            const xAxisType = document.getElementById('xAxisSelect').value;
+            const yAxisType = document.getElementById('yAxisSelect').value;
+            
+            const axisLabels = {
+                trait1: "Primary Trait Optimization →",
+                trait2: "Secondary Trait Optimization →",
+                efficiency: "Efficiency →",
+                performance: "Performance →",
+                complexity: "Structural Complexity →",
+                energyCost: "Energy Cost →"
+            };
+            
+            xLabel.text(axisLabels[xAxisType]);
+            yLabel.text(axisLabels[yAxisType]);
+
+            // Clear previous visualization
+            g.selectAll(".evolution-path").remove();
+            g.selectAll(".data-point").remove();
+            g.selectAll(".convergence-zone").remove();
+
+            // Draw convergence zone
+            const convergenceZone = g.append("circle")
+                .attr("class", "convergence-zone")
+                .attr("cx", xScale(data.convergenceZone.x))
+                .attr("cy", yScale(data.convergenceZone.y))
+                .attr("r", xScale(data.convergenceZone.radius) - xScale(0));
+
+            // Draw evolution paths
+            data.lineages.forEach(lineage => {
+                // Sort species by time for proper path drawing
+                const sortedSpecies = [...lineage.species].sort((a, b) => a.time - b.time);
+                
+                g.append("path")
+                    .datum(sortedSpecies)
+                    .attr("class", "evolution-path")
+                    .attr("d", line)
+                    .style("stroke", lineage.color);
+            });
+
+            // Draw data points
+            data.lineages.forEach(lineage => {
+                const points = g.selectAll(`.data-point-${lineage.name}`)
+                    .data(lineage.species)
+                    .enter()
+                    .append("circle")
+                    .attr("class", "data-point")
+                    .attr("cx", d => xScale(d.x))
+                    .attr("cy", d => yScale(d.y))
+                    .attr("r", d => sizeScale(d.ai))
+                    .style("fill", lineage.color)
+                    .style("fill-opacity", 0.7)
+                    .style("stroke", lineage.color)
+                    .style("stroke-width", 2)
+                    .style("cursor", "pointer")
+                    .on("mouseover", function(event, d) {
+                        d3.select(this).classed("highlighted", true);
+                        
+                        tooltip.transition()
+                            .duration(200)
+                            .style("opacity", .9);
+                        
+                        tooltip.html(`
+                            <strong>${d.name}</strong><br/>
+                            Lineage: ${lineage.name}<br/>
+                            Assembly Index: ${d.ai}<br/>
+                            Time: ${d.time} million years<br/>
+                            Position: (${d.x}, ${d.y})
+                        `)
+                            .style("left", (event.pageX + 10) + "px")
+                            .style("top", (event.pageY - 28) + "px");
+                    })
+                    .on("mouseout", function(d) {
+                        d3.select(this).classed("highlighted", false);
+                        
+                        tooltip.transition()
+                            .duration(500)
+                            .style("opacity", 0);
+                    });
+            });
+
+            // Update legend
+            updateLegend(data.lineages);
+        }
+
+        // Function to update legend
+        function updateLegend(lineages) {
+            const legend = d3.select("#legend");
+            legend.html("<strong>Lineages:</strong> ");
+            
+            lineages.forEach(lineage => {
+                const item = legend.append("span")
+                    .attr("class", "legend-item");
+                
+                item.append("span")
+                    .attr("class", "legend-color")
+                    .style("background-color", lineage.color);
+                
+                item.append("span")
+                    .text(lineage.name);
+            });
+            
+            // Add size legend
+            legend.append("br");
+            legend.append("br");
+            legend.append("strong").text("Circle size = Assembly Index (complexity)");
+        }
+
+        // Animation function
+        function animateEvolution() {
+            const traitKey = document.getElementById('traitSelect').value;
+            const data = convergentTraits[traitKey];
+            
+            // Remove existing points
+            g.selectAll(".data-point").remove();
+            
+            // Animate each lineage
+            data.lineages.forEach((lineage, lineageIndex) => {
+                lineage.species.forEach((species, speciesIndex) => {
+                    setTimeout(() => {
+                        g.append("circle")
+                            .attr("class", "data-point")
+                            .attr("cx", xScale(species.x))
+                            .attr("cy", yScale(species.y))
+                            .attr("r", 0)
+                            .style("fill", lineage.color)
+                            .style("fill-opacity", 0.7)
+                            .style("stroke", lineage.color)
+                            .style("stroke-width", 2)
+                            .transition()
+                            .duration(500)
+                            .attr("r", sizeScale(species.ai));
+                    }, (lineageIndex * 1000) + (speciesIndex * 500));
+                });
+            });
+        }
+
+        // Event listeners
+        document.getElementById('traitSelect').addEventListener('change', (e) => {
+            updateVisualization(e.target.value);
+        });
+
+        document.getElementById('xAxisSelect').addEventListener('change', () => {
+            updateVisualization(document.getElementById('traitSelect').value);
+        });
+
+        document.getElementById('yAxisSelect').addEventListener('change', () => {
+            updateVisualization(document.getElementById('traitSelect').value);
+        });
+
+        document.getElementById('animateBtn').addEventListener('click', animateEvolution);
+
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            updateVisualization(document.getElementById('traitSelect').value);
+        });
+
+        // Initialize with flight
+        updateVisualization('flight');
+    </script>
+</body>
+</html>
