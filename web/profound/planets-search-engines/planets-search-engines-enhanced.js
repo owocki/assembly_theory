@@ -221,6 +221,8 @@ let searchStats = {
     stablePatterns: 0,
     replicators: 0,
     lifeForms: 0,
+    advancedLife: 0,
+    civilizations: 0,
     searchTime: 0
 };
 
@@ -263,6 +265,20 @@ function startSystematicSearch() {
                             searchStats.lifeForms++;
                             createLifeForm(particle.targetX, particle.targetY, planet);
                             addDiscoveryLog(`${planet.name}: Life discovered! Formula: ${particle.elements}`);
+                            
+                            // Check for advanced life evolution (requires 100+ basic life forms)
+                            if (searchStats.lifeForms > 100 && Math.random() > 0.85) {
+                                searchStats.advancedLife++;
+                                createAdvancedLifeForm(particle.targetX, particle.targetY, planet);
+                                addDiscoveryLog(`${planet.name}: ADVANCED LIFE emerged! Multicellular organism detected`, 'advanced');
+                                
+                                // Check for civilizational life (requires 20+ advanced life forms)
+                                if (searchStats.advancedLife > 20 && Math.random() > 0.95) {
+                                    searchStats.civilizations++;
+                                    createCivilization(particle.targetX, particle.targetY, planet);
+                                    addDiscoveryLog(`${planet.name}: CIVILIZATION DETECTED! Intelligent life has emerged!`, 'civilization');
+                                }
+                            }
                         }
                     }
                 }
@@ -328,6 +344,87 @@ function createLifeForm(x, y, planet) {
         .attr('opacity', 1);
 }
 
+// Create advanced life form visualization
+function createAdvancedLifeForm(x, y, planet) {
+    const advancedLife = lifeGroup.append('g')
+        .attr('transform', `translate(${x}, ${y})`);
+    
+    // Larger, more complex visualization
+    advancedLife.append('circle')
+        .attr('class', 'life-marker')
+        .attr('r', 0)
+        .attr('fill', '#00ffcc')
+        .attr('stroke', '#00ffcc')
+        .transition()
+        .duration(1500)
+        .attr('r', 30);
+    
+    // Multiple symbols for multicellular life
+    const symbols = ['🐠', '🦎', '🦋', '🌺', '🦕'];
+    const symbol = symbols[Math.floor(Math.random() * symbols.length)];
+    
+    advancedLife.append('text')
+        .attr('text-anchor', 'middle')
+        .attr('fill', '#00ffcc')
+        .attr('font-size', '24px')
+        .attr('dy', 5)
+        .text(symbol)
+        .attr('opacity', 0)
+        .transition()
+        .delay(750)
+        .duration(750)
+        .attr('opacity', 1);
+}
+
+// Create civilization visualization
+function createCivilization(x, y, planet) {
+    const civilization = lifeGroup.append('g')
+        .attr('transform', `translate(${x}, ${y})`);
+    
+    // Complex multi-layered visualization
+    civilization.append('circle')
+        .attr('class', 'life-marker')
+        .attr('r', 0)
+        .attr('fill', '#ffd700')
+        .attr('stroke', '#ffd700')
+        .attr('stroke-width', 3)
+        .transition()
+        .duration(2000)
+        .attr('r', 40);
+    
+    // Add pulsing ring effect
+    for (let i = 0; i < 3; i++) {
+        civilization.append('circle')
+            .attr('r', 40)
+            .attr('fill', 'none')
+            .attr('stroke', '#ffd700')
+            .attr('stroke-width', 2)
+            .attr('opacity', 0.8)
+            .transition()
+            .delay(i * 500)
+            .duration(3000)
+            .attr('r', 80)
+            .attr('opacity', 0)
+            .on('end', function() { d3.select(this).remove(); });
+    }
+    
+    // Civilization symbols
+    const civSymbols = ['🏛️', '🚀', '🌃', '🛸', '💡'];
+    const symbol = civSymbols[Math.floor(Math.random() * civSymbols.length)];
+    
+    civilization.append('text')
+        .attr('text-anchor', 'middle')
+        .attr('fill', '#ffd700')
+        .attr('font-size', '28px')
+        .attr('dy', 5)
+        .text(symbol)
+        .attr('opacity', 0)
+        .transition()
+        .delay(1000)
+        .duration(1000)
+        .attr('opacity', 1);
+}
+
 // Mark explored regions in possibility space
 function markExploredRegions(possibilitySpace, particles) {
     particles.forEach(particle => {
@@ -359,6 +456,10 @@ function updateStats() {
         searchStats.replicators.toLocaleString();
     document.getElementById('lifeForms').textContent = 
         searchStats.lifeForms.toLocaleString();
+    document.getElementById('advancedLife').textContent = 
+        searchStats.advancedLife.toLocaleString();
+    document.getElementById('civilizations').textContent = 
+        searchStats.civilizations.toLocaleString();
     document.getElementById('searchTime').textContent = 
         `${(searchStats.searchTime / 1000).toFixed(1)} Myr`;
 }
@@ -369,14 +470,33 @@ function updatePlanetProgress(planetId, percent) {
 }
 
 // Add to discovery log
-function addDiscoveryLog(message) {
+function addDiscoveryLog(message, type = 'basic') {
     const log = document.getElementById('discoveryLog');
     const entry = document.createElement('p');
     entry.textContent = `[${(searchStats.searchTime / 1000).toFixed(1)} Myr] ${message}`;
     entry.style.margin = '5px 0';
     entry.style.padding = '5px';
-    entry.style.background = 'rgba(0, 255, 0, 0.1)';
-    entry.style.borderLeft = '3px solid #00ff00';
+    
+    // Different styles for different discovery types
+    switch(type) {
+        case 'basic':
+            entry.style.background = 'rgba(0, 255, 0, 0.1)';
+            entry.style.borderLeft = '3px solid #00ff00';
+            break;
+        case 'advanced':
+            entry.style.background = 'rgba(0, 255, 204, 0.15)';
+            entry.style.borderLeft = '3px solid #00ffcc';
+            entry.style.fontWeight = 'bold';
+            break;
+        case 'civilization':
+            entry.style.background = 'rgba(255, 215, 0, 0.2)';
+            entry.style.borderLeft = '3px solid #ffd700';
+            entry.style.fontWeight = 'bold';
+            entry.style.fontSize = '14px';
+            entry.style.animation = 'pulse 2s ease-in-out';
+            break;
+    }
+    
     log.insertBefore(entry, log.firstChild);
 }
 
@@ -472,6 +592,8 @@ function resetVisualization() {
         stablePatterns: 0,
         replicators: 0,
         lifeForms: 0,
+        advancedLife: 0,
+        civilizations: 0,
         searchTime: 0
     };
     
@@ -523,3 +645,16 @@ window.startSystematicSearch = startSystematicSearch;
 window.showPossibilitySpace = showPossibilitySpace;
 window.focusOnPlanet = focusOnPlanet;
 window.resetVisualization = resetVisualization;
+
+// Debug check for stats elements
+console.log('Advanced Life element:', document.getElementById('advancedLife'));
+console.log('Civilizations element:', document.getElementById('civilizations'));
+
+// Test function to verify stats work
+window.testStats = function() {
+    searchStats.lifeForms = 150;
+    searchStats.advancedLife = 25;
+    searchStats.civilizations = 3;
+    updateStats();
+    console.log('Stats updated - check if Advanced Life and Civilizations show values');
+};
