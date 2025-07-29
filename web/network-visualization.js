@@ -528,7 +528,7 @@ class NetworkVisualization {
         if (timeStr.includes('paleogene')) return 0.74;
         if (timeStr.includes('neogene')) return 0.75;
         
-        // Recent geological/biological events (million years ago)
+        // Recent geological/biological events (Myr)
         if (timeStr.includes('500') && (timeStr.includes('myr') || timeStr.includes('million'))) return 0.64;
         if (timeStr.includes('400') && (timeStr.includes('myr') || timeStr.includes('million'))) return 0.68;
         if (timeStr.includes('300') && (timeStr.includes('myr') || timeStr.includes('million'))) return 0.7;

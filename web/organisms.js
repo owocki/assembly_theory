@@ -190,6 +190,7 @@ class Organisms {
             visual_complexity: tier.symbol,
             color: this.domainColors.biological,
             radius: this.getNodeRadius(tier.tier),
+            time_origin: this.getOrganismTimeOrigin(organism),
             copy_number: this.estimateCopyNumber(organism),
             github_url: this.generateGitHubUrl(organism)
         };
@@ -280,6 +281,59 @@ class Organisms {
         
         const subdir = subdirMap[organism.category] || 'multicellular';
         return `${baseUrl}/${subdir}/${filename}.md`;
+    }
+    
+    getOrganismTimeOrigin(organism) {
+        // Time origins for different organism categories based on scientific consensus
+        const timeOrigins = {
+            'bacteria': '3.8 billion years ago',
+            'archaea': '3.8 billion years ago',
+            'protist': '1.5 billion years ago',
+            'algae': '1.2 billion years ago',
+            'fungi': '1 billion years ago',
+            'bryophyte': '470 Myr',
+            'pteridophyte': '425 Myr',
+            'gymnosperm': '360 Myr',
+            'angiosperm': '140 Myr',
+            'porifera': '600 Myr',
+            'cnidaria': '580 Myr',
+            'flatworm': '550 Myr',
+            'annelid': '540 Myr',
+            'mollusk': '540 Myr',
+            'echinoderm': '540 Myr',
+            'arthropod': '540 Myr',
+            'insect': '400 Myr',
+            'arachnid': '430 Myr',
+            'crustacean': '511 Myr',
+            'fish': '530 Myr',
+            'amphibian': '365 Myr',
+            'reptile': '320 Myr',
+            'bird': '150 Myr',
+            'mammal': '210 Myr',
+            'symbiont': '1.5 billion years ago'
+        };
+        
+        // Some specific organism overrides
+        const specificOrigins = {
+            'Cyanobacteria': '2.5 billion years ago',
+            'Stromatolite': '3.5 billion years ago',
+            'Trilobite': '521 Myr',
+            'Dinosaur': '230 Myr',
+            'Human': '300,000 years ago',
+            'Homo sapiens': '300,000 years ago',
+            'Whale': '50 Myr',
+            'Elephant': '60 Myr',
+            'Flower': '140 Myr',
+            'Grass': '70 Myr',
+            'Oak Tree': '65 Myr',
+            'Redwood': '20 Myr',
+            'Shark': '450 Myr',
+            'Crocodile': '250 Myr',
+            'Turtle': '220 Myr'
+        };
+        
+        // Check for specific organism first, then fall back to category
+        return specificOrigins[organism.name] || timeOrigins[organism.category] || 'Unknown';
     }
     
     // Generate links between organisms

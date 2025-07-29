@@ -129,14 +129,14 @@ class ToolTimelineData {
             { name: 'Eukaryotic Cell', ai: 100000000, era: 'Proterozoic', time: '1.8 Gyr ago', environment: 'Complex cellular life', complexity_type: 'Cellular' },
             { name: 'Sexual Reproduction', ai: 200000000, era: 'Proterozoic', time: '1.2 Gyr ago', environment: 'Genetic recombination', complexity_type: 'Reproductive' },
             
-            // Multicellular Explosion (1.0 Billion - 500 Million years ago)
+            // Multicellular Explosion (1.0 Billion - 500 Myr)
             { name: 'Multicellular Organism', ai: 500000000, era: 'Proterozoic', time: '1.0 Gyr ago', environment: 'Cell cooperation', complexity_type: 'Multicellular' },
             { name: 'Nervous System', ai: 1000000000, era: 'Cambrian', time: '550 Myr ago', environment: 'Information processing', complexity_type: 'Neural' },
             { name: 'Complex Eye', ai: 2000000000, era: 'Cambrian', time: '540 Myr ago', environment: 'Visual processing', complexity_type: 'Sensory' },
             { name: 'Vertebrate Body Plan', ai: 5000000000, era: 'Cambrian', time: '520 Myr ago', environment: 'Bilateral symmetry', complexity_type: 'Anatomical' },
             { name: 'Brain', ai: 10000000000, era: 'Devonian', time: '400 Myr ago', environment: 'Centralized processing', complexity_type: 'Cognitive' },
             
-            // Cognitive Evolution (100 Million years ago - Present)
+            // Cognitive Evolution (100 Myr - Present)
             { name: 'Social Behavior', ai: 50000000000, era: 'Cenozoic', time: '100 Myr ago', environment: 'Group living', complexity_type: 'Behavioral' },
             { name: 'Tool Use', ai: 100000000000, era: 'Cenozoic', time: '10 Myr ago', environment: 'Problem solving', complexity_type: 'Technological' },
             { name: 'Language', ai: 500000000000, era: 'Pleistocene', time: '100 kyr ago', environment: 'Symbolic communication', complexity_type: 'Linguistic' },
@@ -204,6 +204,7 @@ class ToolTimelineData {
         if (timeStr.includes('Gyr')) {
             return parseFloat(timeStr) * 1e9;
         } else if (timeStr.includes('Myr')) {
+            debugger;
             return parseFloat(timeStr) * 1e6;
         } else if (timeStr.includes('kyr') || timeStr.includes('K years')) {
             return parseFloat(timeStr) * 1e3;

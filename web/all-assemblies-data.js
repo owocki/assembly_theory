@@ -594,7 +594,7 @@ const nodes = [
     "assembly_index": 25,
     "domain": "cognitive",
     "description": "Attention is a cognitive assembly with index 25, representing the selective focus of consciousness on specific stimuli while filtering out irrelevant information. It forms the foundation for higher-or",
-    "time_origin": "600 million years ago",
+    "time_origin": "600 Myr",
     "copy_number": "Universal in complex nervous systems"
   },
   {
@@ -684,7 +684,7 @@ const nodes = [
     "assembly_index": 30,
     "domain": "cognitive",
     "description": "Fear is an emotional assembly with index 30, representing an adaptive response to perceived threats that prepares organisms for danger.",
-    "time_origin": "400 million years ago",
+    "time_origin": "400 Myr",
     "copy_number": "Universal in vertebrates"
   },
   {
@@ -774,7 +774,7 @@ const nodes = [
     "assembly_index": 35,
     "domain": "cognitive",
     "description": "Associative learning is a cognitive assembly with index 35, representing the ability to learn relationships between stimuli, responses, and outcomes.",
-    "time_origin": "500 million years ago",
+    "time_origin": "500 Myr",
     "copy_number": "Universal in animals with nervous systems"
   },
   {
@@ -873,7 +873,7 @@ const nodes = [
     "assembly_index": 40,
     "domain": "cognitive",
     "description": "Pattern recognition is a perceptual assembly with index 40, representing the ability to identify regularities and structures in sensory information.",
-    "time_origin": "500 million years ago",
+    "time_origin": "500 Myr",
     "copy_number": "Universal in animals"
   },
   {
@@ -954,7 +954,7 @@ const nodes = [
     "assembly_index": 45,
     "domain": "cognitive",
     "description": "Working memory is a cognitive assembly with index 45, representing the temporary storage and manipulation of information needed for complex cognitive tasks. It serves as the mental workspace for think",
-    "time_origin": "200 million years ago",
+    "time_origin": "200 Myr",
     "copy_number": "Present in mammals and birds"
   },
   {
@@ -1089,7 +1089,7 @@ const nodes = [
     "assembly_index": 55,
     "domain": "cognitive",
     "description": "Habit formation is a learning assembly with index 55, representing the process by which behaviors become automatic through repetition and reinforcement.",
-    "time_origin": "400 million years ago",
+    "time_origin": "400 Myr",
     "copy_number": "Present in all vertebrates"
   },
   {
@@ -1170,7 +1170,7 @@ const nodes = [
     "assembly_index": 60,
     "domain": "cognitive",
     "description": "Nonverbal communication is a communication assembly with index 60, representing the transmission of information through channels other than spoken or written language.",
-    "time_origin": "30 million years ago",
+    "time_origin": "30 Myr",
     "copy_number": "Universal among primates"
   },
   {
@@ -1377,7 +1377,7 @@ const nodes = [
     "assembly_index": 75,
     "domain": "cognitive",
     "description": "Semantic memory is a cognitive assembly with index 75, representing general knowledge about the world independent of personal experience. It forms the factual knowledge base for cognition.",
-    "time_origin": "100 million years ago",
+    "time_origin": "100 Myr",
     "copy_number": "Present in many vertebrates"
   },
   {
@@ -1467,7 +1467,7 @@ const nodes = [
     "assembly_index": 80,
     "domain": "cognitive",
     "description": "Positive emotion is an emotional assembly with index 80, representing pleasant feeling states that signal beneficial conditions and promote approach behaviors.",
-    "time_origin": "200 million years ago",
+    "time_origin": "200 Myr",
     "copy_number": "Universal in vertebrates"
   },
   {
@@ -1476,7 +1476,7 @@ const nodes = [
     "assembly_index": 80,
     "domain": "cognitive",
     "description": "Sensory integration is a perceptual assembly with index 80, representing the process of combining information from multiple sensory modalities into coherent perception.",
-    "time_origin": "500 million years ago",
+    "time_origin": "500 Myr",
     "copy_number": "Universal in complex organisms"
   },
   {
@@ -1485,7 +1485,7 @@ const nodes = [
     "assembly_index": 80,
     "domain": "cognitive",
     "description": "Fairness is a social cognitive assembly with index 80, representing the cognitive ability to recognize and expect equitable treatment in social interactions.",
-    "time_origin": "10 million years ago",
+    "time_origin": "10 Myr",
     "copy_number": "Present in social primates"
   },
   {
@@ -1548,7 +1548,7 @@ const nodes = [
     "assembly_index": 85,
     "domain": "cognitive",
     "description": "Episodic memory is a cognitive assembly with index 85, representing the ability to recall specific personal experiences embedded in time and context. It enables mental time travel and autobiographical",
-    "time_origin": "50 million years ago",
+    "time_origin": "50 Myr",
     "copy_number": "Present in humans and some animals"
   },
   {
@@ -1638,7 +1638,7 @@ const nodes = [
     "assembly_index": 90,
     "domain": "cognitive",
     "description": "Rational choice is a cognitive assembly with index 90, representing the ability to make decisions by systematically evaluating options and selecting the one that maximizes expected utility.",
-    "time_origin": "5 million years ago",
+    "time_origin": "5 Myr",
     "copy_number": "Present in humans and some primates"
   },
   {
@@ -1701,7 +1701,7 @@ const nodes = [
     "assembly_index": 95,
     "domain": "cognitive",
     "description": "Executive function is a cognitive assembly with index 95, representing high-level cognitive control processes that manage and coordinate other cognitive abilities for goal-directed behavior.",
-    "time_origin": "50 million years ago",
+    "time_origin": "50 Myr",
     "copy_number": "Highly developed in primates"
   },
   {
@@ -1773,7 +1773,7 @@ const nodes = [
     "assembly_index": 100,
     "domain": "cognitive",
     "description": "Competition is a social cognitive assembly with index 100, representing rivalry for limited resources or status.",
-    "time_origin": "300 million years ago",
+    "time_origin": "300 Myr",
     "copy_number": "Universal in social species"
   },
   {
@@ -1782,7 +1782,7 @@ const nodes = [
     "assembly_index": 100,
     "domain": "cognitive",
     "description": "Gratitude is an emotional assembly with index 100, representing appreciation and thankfulness for benefits received from others.",
-    "time_origin": "50 million years ago",
+    "time_origin": "50 Myr",
     "copy_number": "Present in social mammals"
   },
   {
@@ -1791,7 +1791,7 @@ const nodes = [
     "assembly_index": 100,
     "domain": "cognitive",
     "description": "Imitation is a learning assembly with index 100, representing the ability to copy the actions or behaviors of others.",
-    "time_origin": "100 million years ago",
+    "time_origin": "100 Myr",
     "copy_number": "Present in many animals"
   },
   {
@@ -1800,7 +1800,7 @@ const nodes = [
     "assembly_index": 100,
     "domain": "cognitive",
     "description": "Heuristics are reasoning assemblies with index 100, representing mental shortcuts that enable quick decision-making and problem-solving.",
-    "time_origin": "100 million years ago",
+    "time_origin": "100 Myr",
     "copy_number": "Universal cognitive shortcuts"
   },
   {
@@ -1818,7 +1818,7 @@ const nodes = [
     "assembly_index": 100,
     "domain": "technological",
     "description": "Quality hierarchy:",
-    "time_origin": "~3.3 million years ago (Lomekwi, Kenya)",
+    "time_origin": "~3.3 Myr (Lomekwi, Kenya)",
     "copy_number": "- High-quality stone traded"
   },
   {
@@ -1854,7 +1854,7 @@ const nodes = [
     "assembly_index": 110,
     "domain": "cognitive",
     "description": "Empathy is a cognitive assembly with index 110, representing the ability to understand and share the feelings of others. It enables emotional connection and prosocial behavior.",
-    "time_origin": "50 million years ago",
+    "time_origin": "50 Myr",
     "copy_number": "Present in mammals and birds"
   },
   {
@@ -1863,7 +1863,7 @@ const nodes = [
     "assembly_index": 120,
     "domain": "cognitive",
     "description": "Cooperative behavior is a cooperation assembly with index 120, representing actions that benefit both the actor and others through mutual assistance.",
-    "time_origin": "500 million years ago",
+    "time_origin": "500 Myr",
     "copy_number": "Universal in social species"
   },
   {
@@ -1872,7 +1872,7 @@ const nodes = [
     "assembly_index": 120,
     "domain": "cognitive",
     "description": "Self-control is a decision making assembly with index 120, representing the ability to override impulses and delay gratification in pursuit of long-term goals.",
-    "time_origin": "50 million years ago",
+    "time_origin": "50 Myr",
     "copy_number": "Present in mammals"
   },
   {
@@ -1881,7 +1881,7 @@ const nodes = [
     "assembly_index": 120,
     "domain": "cognitive",
     "description": "Skill acquisition is a learning assembly with index 120, representing the process of developing proficiency in motor, cognitive, or social tasks.",
-    "time_origin": "2 million years ago",
+    "time_origin": "2 Myr",
     "copy_number": "Universal learning process"
   },
   {
@@ -1890,7 +1890,7 @@ const nodes = [
     "assembly_index": 120,
     "domain": "cognitive",
     "description": "Theory of Mind is a cognitive assembly with index 120, representing the ability to understand that others have beliefs, desires, and intentions different from one's own. It enables sophisticated socia",
-    "time_origin": "10 million years ago",
+    "time_origin": "10 Myr",
     "copy_number": "Present in humans and some primates"
   },
   {
@@ -1926,7 +1926,7 @@ const nodes = [
     "assembly_index": 125,
     "domain": "cognitive",
     "description": "Analogical reasoning is a cognitive assembly with index 125, representing the ability to recognize and use similarities between different situations to solve problems and make inferences.",
-    "time_origin": "10 million years ago",
+    "time_origin": "10 Myr",
     "copy_number": "Present in humans and some animals"
   },
   {
@@ -1935,7 +1935,7 @@ const nodes = [
     "assembly_index": 135,
     "domain": "cognitive",
     "description": "Emotional intelligence is a cognitive assembly with index 135, representing the ability to perceive, understand, manage, and use emotions effectively in oneself and others.",
-    "time_origin": "10 million years ago",
+    "time_origin": "10 Myr",
     "copy_number": "Highly developed in humans"
   },
   {
@@ -1944,7 +1944,7 @@ const nodes = [
     "assembly_index": 140,
     "domain": "cognitive",
     "description": "Reciprocity is a cognitive-social assembly with index 140, representing the principle of exchanging things with others for mutual benefit, forming the basis of cooperation and fairness.",
-    "time_origin": "5 million years ago",
+    "time_origin": "5 Myr",
     "copy_number": "Universal social principle"
   },
   {
@@ -1971,7 +1971,7 @@ const nodes = [
     "assembly_index": 150,
     "domain": "cognitive",
     "description": "Emotional regulation is an emotional assembly with index 150, representing the ability to monitor, evaluate, and modify emotional responses.",
-    "time_origin": "50 million years ago",
+    "time_origin": "50 Myr",
     "copy_number": "Present in mammals"
   },
   {
@@ -1980,7 +1980,7 @@ const nodes = [
     "assembly_index": 150,
     "domain": "cognitive",
     "description": "Metacognition is a cognitive assembly with index 150, representing \"thinking about thinking\" - the awareness and understanding of one's own thought processes.",
-    "time_origin": "5 million years ago",
+    "time_origin": "5 Myr",
     "copy_number": "Highly developed in humans"
   },
   {
@@ -1989,7 +1989,7 @@ const nodes = [
     "assembly_index": 150,
     "domain": "cognitive",
     "description": "Social learning is a learning assembly with index 150, representing the process of acquiring knowledge and skills through observation and interaction with others.",
-    "time_origin": "50 million years ago",
+    "time_origin": "50 Myr",
     "copy_number": "Present in social species"
   },
   {
@@ -1998,7 +1998,7 @@ const nodes = [
     "assembly_index": 150,
     "domain": "cognitive",
     "description": "Visual processing is a perceptual assembly with index 150, representing the transformation of light patterns into meaningful visual information.",
-    "time_origin": "500 million years ago",
+    "time_origin": "500 Myr",
     "copy_number": "Universal in animals with eyes"
   },
   {
@@ -2025,7 +2025,7 @@ const nodes = [
     "assembly_index": 160,
     "domain": "cognitive",
     "description": "Social influence is a cognitive-social assembly with index 160, representing the process by which individuals change their thoughts, feelings, or behaviors due to real or imagined pressure from others",
-    "time_origin": "2 million years ago",
+    "time_origin": "2 Myr",
     "copy_number": "Universal social process"
   },
   {
@@ -2043,7 +2043,7 @@ const nodes = [
     "assembly_index": 170,
     "domain": "cognitive",
     "description": "Moral emotions are cognitive-emotional assemblies with index 170, representing feelings that arise from moral judgments and guide ethical behavior.",
-    "time_origin": "10 million years ago",
+    "time_origin": "10 Myr",
     "copy_number": "Present in humans and some primates"
   },
   {
@@ -2052,7 +2052,7 @@ const nodes = [
     "assembly_index": 180,
     "domain": "cognitive",
     "description": "Compassion is an emotional assembly with index 180, representing the emotional response to suffering that motivates helping behavior.",
-    "time_origin": "30 million years ago",
+    "time_origin": "30 Myr",
     "copy_number": "Present in mammals"
   },
   {
@@ -2061,7 +2061,7 @@ const nodes = [
     "assembly_index": 180,
     "domain": "cognitive",
     "description": "Interpersonal trust is a cognitive-social assembly with index 180, representing the willingness to be vulnerable to another person based on expectations of their behavior.",
-    "time_origin": "2 million years ago",
+    "time_origin": "2 Myr",
     "copy_number": "Universal human capacity"
   },
   {
@@ -2097,7 +2097,7 @@ const nodes = [
     "assembly_index": 190,
     "domain": "cognitive",
     "description": "Altruism is a cooperative assembly with index 190, representing behavior that benefits others at cost to oneself.",
-    "time_origin": "50 million years ago",
+    "time_origin": "50 Myr",
     "copy_number": "Present in social species"
   },
   {
@@ -2133,7 +2133,7 @@ const nodes = [
     "assembly_index": 200,
     "domain": "cognitive",
     "description": "Social norm is a cultural system assembly with index 200, representing shared expectations about appropriate behavior in social situations.",
-    "time_origin": "2 million years ago",
+    "time_origin": "2 Myr",
     "copy_number": "Universal in human societies"
   },
   {
@@ -2151,7 +2151,7 @@ const nodes = [
     "assembly_index": 200,
     "domain": "cognitive",
     "description": "Authority is a cognitive-social assembly with index 200, representing the legitimate power to make decisions and enforce compliance within social groups.",
-    "time_origin": "2 million years ago",
+    "time_origin": "2 Myr",
     "copy_number": "Universal in human societies"
   },
   {
@@ -2160,7 +2160,7 @@ const nodes = [
     "assembly_index": 200,
     "domain": "cognitive",
     "description": "Object recognition is a perceptual assembly with index 200, representing the ability to identify and categorize objects from sensory input.",
-    "time_origin": "200 million years ago",
+    "time_origin": "200 Myr",
     "copy_number": "Universal in visual systems"
   },
   {
@@ -2187,7 +2187,7 @@ const nodes = [
     "assembly_index": 220,
     "domain": "cognitive",
     "description": "Moral reasoning is a reasoning assembly with index 220, representing the cognitive process of determining what is right and wrong, and making ethical decisions.",
-    "time_origin": "10 million years ago",
+    "time_origin": "10 Myr",
     "copy_number": "Present in humans and some primates"
   },
   {
@@ -2259,7 +2259,7 @@ const nodes = [
     "assembly_index": 280,
     "domain": "cognitive",
     "description": "Autobiographical memory is a memory assembly with index 280, representing memory for personally experienced events that form one's life narrative.",
-    "time_origin": "10 million years ago",
+    "time_origin": "10 Myr",
     "copy_number": "Highly developed in humans"
   },
   {
@@ -2277,7 +2277,7 @@ const nodes = [
     "assembly_index": 300,
     "domain": "cognitive",
     "description": "Consciousness is a cognitive assembly with index 300, representing subjective, first-person experience and awareness of self and environment.",
-    "time_origin": "200 million years ago",
+    "time_origin": "200 Myr",
     "copy_number": "Present in many vertebrates"
   },
   {
@@ -2295,7 +2295,7 @@ const nodes = [
     "assembly_index": 300,
     "domain": "cognitive",
     "description": "Collective decision making is a decision making assembly with index 300, representing processes where groups make choices together.",
-    "time_origin": "2 million years ago",
+    "time_origin": "2 Myr",
     "copy_number": "Universal in social groups"
   },
   {
@@ -2349,7 +2349,7 @@ const nodes = [
     "assembly_index": 300,
     "domain": "cognitive",
     "description": "Social control is a social structure assembly with index 300, representing mechanisms that regulate individual and group behavior to maintain social order.",
-    "time_origin": "2 million years ago",
+    "time_origin": "2 Myr",
     "copy_number": "Universal in social groups"
   },
   {
@@ -2394,7 +2394,7 @@ const nodes = [
     "assembly_index": 350,
     "domain": "cognitive",
     "description": "Leadership is a social cognitive assembly with index 350, representing the ability to influence and guide others toward shared goals.",
-    "time_origin": "2 million years ago",
+    "time_origin": "2 Myr",
     "copy_number": "Universal in human groups"
   },
   {
@@ -2430,7 +2430,7 @@ const nodes = [
     "assembly_index": 400,
     "domain": "cognitive",
     "description": "Swarm intelligence is a collective intelligence assembly with index 400, representing the emergence of intelligent behavior from simple interactions among large numbers of agents.",
-    "time_origin": "400 million years ago",
+    "time_origin": "400 Myr",
     "copy_number": "Present in social insects and humans"
   },
   {
@@ -2484,7 +2484,7 @@ const nodes = [
     "assembly_index": 400,
     "domain": "geological",
     "description": "Coal is a complex organic sedimentary rock with assembly index 400, formed from compressed plant material over geological time.",
-    "time_origin": "350 million years ago (Carboniferous)",
+    "time_origin": "350 Myr (Carboniferous)",
     "copy_number": "Major fossil fuel deposit"
   },
   {
@@ -2646,7 +2646,7 @@ const nodes = [
     "assembly_index": 600,
     "domain": "geological",
     "description": "Coral reefs are complex carbonate formations with assembly index 600, built by colonial organisms in tropical marine environments.",
-    "time_origin": "500 million years ago",
+    "time_origin": "500 Myr",
     "copy_number": "Major carbonate buildup"
   },
   {
@@ -2988,7 +2988,7 @@ const nodes = [
     "assembly_index": 10000000,
     "domain": "biological",
     "description": "Flight muscles:",
-    "time_origin": "~400 million years ago",
+    "time_origin": "~400 Myr",
     "copy_number": "Unknown"
   },
   {
