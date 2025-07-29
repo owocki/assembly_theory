@@ -1,0 +1,822 @@
+[
+  {
+    "line": 186,
+    "path": "domains/cosmic/molecules/hydrogen_sulfide.md",
+    "text": "/domains/cosmic/molecules/hydrogen_sulfide.md"
+  },
+  {
+    "line": 188,
+    "path": "domains/cosmic/molecules/oxygen_gas.md",
+    "text": "/domains/cosmic/molecules/oxygen_gas.md"
+  },
+  {
+    "line": 190,
+    "path": "domains/cosmic/molecules/carbon_monoxide.md",
+    "text": "/domains/cosmic/molecules/carbon_monoxide.md"
+  },
+  {
+    "line": 194,
+    "path": "domains/cosmic/molecules/nitrogen_gas.md",
+    "text": "/domains/cosmic/molecules/nitrogen_gas.md"
+  },
+  {
+    "line": 208,
+    "path": "domains/cosmic/molecules/acetylene.md",
+    "text": "/domains/cosmic/molecules/acetylene.md"
+  },
+  {
+    "line": 210,
+    "path": "domains/technological/early_human_technology/knot.md",
+    "text": "/domains/technological/basic/knot.md"
+  },
+  {
+    "line": 211,
+    "path": "domains/cosmic/molecules/ethane.md",
+    "text": "/domains/cosmic/molecules/ethane.md"
+  },
+  {
+    "line": 213,
+    "path": "domains/technological/early_human_technology/stone_knife_edge.md",
+    "text": "/domains/technological/tools/stone_knife.md"
+  },
+  {
+    "line": 214,
+    "path": "domains/cosmic/molecules/formaldehyde.md",
+    "text": "/domains/cosmic/molecules/formaldehyde.md"
+  },
+  {
+    "line": 215,
+    "path": "domains/cosmic/molecules/methanol.md",
+    "text": "/domains/cosmic/molecules/methanol.md"
+  },
+  {
+    "line": 217,
+    "path": "domains/geological/minerals/pyrite.md",
+    "text": "/domains/geological/minerals/pyrite.md"
+  },
+  {
+    "line": 218,
+    "path": "domains/biological/prebiotic/phosphate.md",
+    "text": "/domains/biological/compounds/phosphate.md"
+  },
+  {
+    "line": 220,
+    "path": "domains/geological/minerals/calcite.md",
+    "text": "/domains/geological/minerals/calcite.md"
+  },
+  {
+    "line": 222,
+    "path": "domains/cosmic/molecules/acetone.md",
+    "text": "/domains/cosmic/molecules/acetone.md"
+  },
+  {
+    "line": 223,
+    "path": "domains/geological/minerals/olivine.md",
+    "text": "/domains/geological/minerals/olivine.md"
+  },
+  {
+    "line": 224,
+    "path": "domains/geological/minerals/gypsum.md",
+    "text": "/domains/geological/minerals/gypsum.md"
+  },
+  {
+    "line": 226,
+    "path": "domains/geological/minerals/magnetite.md",
+    "text": "/domains/geological/minerals/magnetite.md"
+  },
+  {
+    "line": 228,
+    "path": "domains/biological/amino_acids/alanine.md",
+    "text": "/domains/biological/amino_acids/alanine.md"
+  },
+  {
+    "line": 231,
+    "path": "domains/biological/amino_acids/serine.md",
+    "text": "/domains/biological/amino_acids/serine.md"
+  },
+  {
+    "line": 232,
+    "path": "domains/geological/minerals/pyroxene.md",
+    "text": "/domains/geological/minerals/pyroxene.md"
+  },
+  {
+    "line": 233,
+    "path": "domains/geological/minerals/mica.md",
+    "text": "/domains/geological/minerals/mica.md"
+  },
+  {
+    "line": 234,
+    "path": "domains/biological/prebiotic/ribose.md",
+    "text": "/domains/biological/sugars/ribose.md"
+  },
+  {
+    "line": 235,
+    "path": "domains/geological/minerals/garnet.md",
+    "text": "/domains/geological/minerals/garnet.md"
+  },
+  {
+    "line": 237,
+    "path": "domains/geological/minerals/amphibole.md",
+    "text": "/domains/geological/minerals/amphibole.md"
+  },
+  {
+    "line": 238,
+    "path": "domains/biological/prebiotic/fatty_acids.md",
+    "text": "/domains/biological/lipids/short_fatty_acid.md"
+  },
+  {
+    "line": 245,
+    "path": "domains/technological/materials/pigments.md",
+    "text": "/domains/technological/materials/pigments.md"
+  },
+  {
+    "line": 246,
+    "path": "domains/geological/minerals/zeolite.md",
+    "text": "/domains/geological/minerals/zeolite.md"
+  },
+  {
+    "line": 248,
+    "path": "domains/geological/rocks/sedimentary.md",
+    "text": "/domains/geological/rocks/sedimentary.md"
+  },
+  {
+    "line": 250,
+    "path": "domains/biological/polymers/cellulose.md",
+    "text": "/domains/biological/polymers/cellulose.md"
+  },
+  {
+    "line": 251,
+    "path": "domains/technological/early_human_technology/composite_tool.md",
+    "text": "/domains/technological/tools/composite.md"
+  },
+  {
+    "line": 252,
+    "path": "domains/geological/minerals/complex_clay.md",
+    "text": "/domains/geological/minerals/complex_clay.md"
+  },
+  {
+    "line": 253,
+    "path": "domains/biological/proteins/ferredoxin.md",
+    "text": "/domains/biological/proteins/ferredoxin.md"
+  },
+  {
+    "line": 254,
+    "path": "domains/biological/cofactors/heme.md",
+    "text": "/domains/biological/cofactors/heme.md"
+  },
+  {
+    "line": 256,
+    "path": "domains/biological/polymers/peptidoglycan.md",
+    "text": "/domains/biological/polymers/peptidoglycan.md"
+  },
+  {
+    "line": 257,
+    "path": "domains/technological/materials/ceramic.md",
+    "text": "/domains/technological/materials/ceramic.md"
+  },
+  {
+    "line": 258,
+    "path": "domains/biological/cofactors/nadh.md",
+    "text": "/domains/biological/cofactors/nadh.md"
+  },
+  {
+    "line": 259,
+    "path": "domains/biological/polymers/chitin.md",
+    "text": "/domains/biological/polymers/chitin.md"
+  },
+  {
+    "line": 260,
+    "path": "domains/geological/minerals/metamorphic.md",
+    "text": "/domains/geological/minerals/metamorphic.md"
+  },
+  {
+    "line": 261,
+    "path": "domains/biological/cofactors/coenzyme_a.md",
+    "text": "/domains/biological/cofactors/coenzyme_a.md"
+  },
+  {
+    "line": 263,
+    "path": "domains/biological/membranes/complex_bilayer.md",
+    "text": "/domains/biological/membranes/complex_bilayer.md"
+  },
+  {
+    "line": 264,
+    "path": "domains/biological/hormones/insulin.md",
+    "text": "/domains/biological/hormones/insulin.md"
+  },
+  {
+    "line": 265,
+    "path": "domains/biological/proteins/cytochrome_c.md",
+    "text": "/domains/biological/proteins/cytochrome_c.md"
+  },
+  {
+    "line": 266,
+    "path": "domains/biological/proteins/actin.md",
+    "text": "/domains/biological/proteins/actin.md"
+  },
+  {
+    "line": 267,
+    "path": "domains/biological/polymers/lignin.md",
+    "text": "/domains/biological/polymers/lignin.md"
+  },
+  {
+    "line": 268,
+    "path": "domains/biological/proteins/tubulin.md",
+    "text": "/domains/biological/proteins/tubulin.md"
+  },
+  {
+    "line": 269,
+    "path": "domains/biological/proteins/histone.md",
+    "text": "/domains/biological/proteins/histone.md"
+  },
+  {
+    "line": 270,
+    "path": "domains/biological/proteins/keratin.md",
+    "text": "/domains/biological/proteins/keratin.md"
+  },
+  {
+    "line": 272,
+    "path": "domains/biological/enzymes/atp_synthase.md",
+    "text": "/domains/biological/enzymes/atp_synthase.md"
+  },
+  {
+    "line": 273,
+    "path": "domains/biological/proteins/myosin.md",
+    "text": "/domains/biological/proteins/myosin.md"
+  },
+  {
+    "line": 274,
+    "path": "domains/biological/proteins/collagen.md",
+    "text": "/domains/biological/proteins/collagen.md"
+  },
+  {
+    "line": 280,
+    "path": "domains/technological/early_human_technology/inclined_plane.md",
+    "text": "/domains/technological/machines/inclined_plane.md"
+  },
+  {
+    "line": 281,
+    "path": "domains/technological/early_human_technology/wedge.md",
+    "text": "/domains/technological/tools/wedge.md"
+  },
+  {
+    "line": 282,
+    "path": "domains/technological/early_human_technology/lever.md",
+    "text": "/domains/technological/machines/lever.md"
+  },
+  {
+    "line": 284,
+    "path": "domains/biological/rna/trna_complex.md",
+    "text": "/domains/biological/rna/trna_complex.md"
+  },
+  {
+    "line": 286,
+    "path": "domains/technological/middle_age_technology/pulley.md",
+    "text": "/domains/technological/machines/pulley.md"
+  },
+  {
+    "line": 287,
+    "path": "domains/biological/rna/mrna.md",
+    "text": "/domains/biological/rna/mrna.md"
+  },
+  {
+    "line": 290,
+    "path": "domains/biological/rna/rrna.md",
+    "text": "/domains/biological/rna/rrna.md"
+  },
+  {
+    "line": 291,
+    "path": "domains/biological/genetics/plasmid.md",
+    "text": "/domains/biological/genetics/plasmid.md"
+  },
+  {
+    "line": 292,
+    "path": "domains/biological/motors/flagellar.md",
+    "text": "/domains/biological/motors/flagellar.md"
+  },
+  {
+    "line": 295,
+    "path": "domains/biological/enzymes/restriction.md",
+    "text": "/domains/biological/enzymes/restriction.md"
+  },
+  {
+    "line": 296,
+    "path": "domains/biological/structures/archaea_wall.md",
+    "text": "/domains/biological/structures/archaea_wall.md"
+  },
+  {
+    "line": 297,
+    "path": "domains/biological/pumps/chemiosmotic.md",
+    "text": "/domains/biological/pumps/chemiosmotic.md"
+  },
+  {
+    "line": 298,
+    "path": "domains/biological/enzymes/topoisomerase.md",
+    "text": "/domains/biological/enzymes/topoisomerase.md"
+  },
+  {
+    "line": 299,
+    "path": "domains/biological/enzymes/helicase.md",
+    "text": "/domains/biological/enzymes/helicase.md"
+  },
+  {
+    "line": 301,
+    "path": "domains/biological/structures/spore.md",
+    "text": "/domains/biological/structures/spore.md"
+  },
+  {
+    "line": 302,
+    "path": "domains/biological/enzymes/rna_polymerase.md",
+    "text": "/domains/biological/enzymes/rna_polymerase.md"
+  },
+  {
+    "line": 305,
+    "path": "domains/biological/communities/biofilm.md",
+    "text": "/domains/biological/communities/biofilm.md"
+  },
+  {
+    "line": 307,
+    "path": "domains/geological/processes/rock_cycle.md",
+    "text": "/domains/geological/processes/rock_cycle.md"
+  },
+  {
+    "line": 309,
+    "path": "domains/biological/genetics/bacterial_chromosome.md",
+    "text": "/domains/biological/genetics/bacterial_chromosome.md"
+  },
+  {
+    "line": 315,
+    "path": "domains/technological/middle_age_technology/potters_wheel.md",
+    "text": "/domains/technological/tools/potters_wheel.md"
+  },
+  {
+    "line": 316,
+    "path": "domains/technological/middle_age_technology/metallurgy.md",
+    "text": "/domains/technological/industry/furnace.md"
+  },
+  {
+    "line": 317,
+    "path": "domains/biological/organelles/centriole.md",
+    "text": "/domains/biological/organelles/centriole.md"
+  },
+  {
+    "line": 319,
+    "path": "domains/biological/proteins/ion_channel.md",
+    "text": "/domains/biological/proteins/ion_channel.md"
+  },
+  {
+    "line": 320,
+    "path": "domains/biological/organelles/vacuole.md",
+    "text": "/domains/biological/organelles/vacuole.md"
+  },
+  {
+    "line": 321,
+    "path": "domains/biological/organelles/peroxisome.md",
+    "text": "/domains/biological/organelles/peroxisome.md"
+  },
+  {
+    "line": 322,
+    "path": "domains/biological/organelles/lysosome.md",
+    "text": "/domains/biological/organelles/lysosome.md"
+  },
+  {
+    "line": 323,
+    "path": "domains/biological/proteins/chaperone.md",
+    "text": "/domains/biological/proteins/chaperone.md"
+  },
+  {
+    "line": 324,
+    "path": "domains/biological/structures/nuclear_envelope.md",
+    "text": "/domains/biological/structures/nuclear_envelope.md"
+  },
+  {
+    "line": 325,
+    "path": "domains/technological/middle_age_technology/water_wheel.md",
+    "text": "/domains/technological/machines/water_wheel.md"
+  },
+  {
+    "line": 326,
+    "path": "domains/biological/proteins/receptor.md",
+    "text": "/domains/biological/proteins/receptor.md"
+  },
+  {
+    "line": 327,
+    "path": "domains/biological/structures/nuclear_pore.md",
+    "text": "/domains/biological/structures/nuclear_pore.md"
+  },
+  {
+    "line": 328,
+    "path": "domains/biological/eukaryotic/flagellum.md",
+    "text": "/domains/biological/eukaryotic/flagellum.md"
+  },
+  {
+    "line": 329,
+    "path": "domains/biological/organelles/golgi.md",
+    "text": "/domains/biological/organelles/golgi.md"
+  },
+  {
+    "line": 331,
+    "path": "domains/biological/complexes/ribosome_assembly.md",
+    "text": "/domains/biological/complexes/ribosome_assembly.md"
+  },
+  {
+    "line": 332,
+    "path": "domains/biological/organelles/er.md",
+    "text": "/domains/biological/organelles/er.md"
+  },
+  {
+    "line": 333,
+    "path": "domains/biological/enzymes/complex.md",
+    "text": "/domains/biological/enzymes/complex.md"
+  },
+  {
+    "line": 334,
+    "path": "domains/biological/complexes/proteasome.md",
+    "text": "/domains/biological/complexes/proteasome.md"
+  },
+  {
+    "line": 335,
+    "path": "domains/biological/structures/cytoskeleton.md",
+    "text": "/domains/biological/structures/cytoskeleton.md"
+  },
+  {
+    "line": 336,
+    "path": "domains/biological/complexes/dna_repair.md",
+    "text": "/domains/biological/complexes/dna_repair.md"
+  },
+  {
+    "line": 337,
+    "path": "domains/biological/structures/spindle.md",
+    "text": "/domains/biological/structures/spindle.md"
+  },
+  {
+    "line": 340,
+    "path": "domains/biological/complexes/spliceosome.md",
+    "text": "/domains/biological/complexes/spliceosome.md"
+  },
+  {
+    "line": 342,
+    "path": "domains/biological/proteins/antibody.md",
+    "text": "/domains/biological/proteins/antibody.md"
+  },
+  {
+    "line": 343,
+    "path": "domains/biological/eukaryotic/nucleus.md",
+    "text": "/domains/biological/eukaryotic/nucleus.md"
+  },
+  {
+    "line": 344,
+    "path": "domains/biological/eukaryotic/yeast.md",
+    "text": "/domains/biological/eukaryotic/yeast.md"
+  },
+  {
+    "line": 350,
+    "path": "domains/biological/nervous_systems/cnidarian.md",
+    "text": "/domains/biological/nervous_systems/cnidarian.md"
+  },
+  {
+    "line": 352,
+    "path": "domains/biological/structures/mollusk_shell.md",
+    "text": "/domains/biological/structures/mollusk_shell.md"
+  },
+  {
+    "line": 353,
+    "path": "domains/technological/middle_age_technology/sailing_ship.md",
+    "text": "/domains/technological/transport/sailing_ship.md"
+  },
+  {
+    "line": 354,
+    "path": "domains/biological/nervous_systems/flatworm.md",
+    "text": "/domains/biological/nervous_systems/flatworm.md"
+  },
+  {
+    "line": 355,
+    "path": "domains/biological/reproduction/seed_dispersal.md",
+    "text": "/domains/biological/reproduction/seed_dispersal.md"
+  },
+  {
+    "line": 356,
+    "path": "domains/biological/systems/water_vascular.md",
+    "text": "/domains/biological/systems/water_vascular.md"
+  },
+  {
+    "line": 358,
+    "path": "domains/biological/sensory/compound_eye.md",
+    "text": "/domains/biological/sensory/compound_eye.md"
+  },
+  {
+    "line": 359,
+    "path": "domains/biological/systems/excretory.md",
+    "text": "/domains/biological/systems/excretory.md"
+  },
+  {
+    "line": 360,
+    "path": "domains/biological/systems/vascular.md",
+    "text": "/domains/biological/systems/vascular.md"
+  },
+  {
+    "line": 361,
+    "path": "domains/technological/middle_age_technology/castle.md",
+    "text": "/domains/technological/architecture/castle.md"
+  },
+  {
+    "line": 363,
+    "path": "domains/biological/systems/respiratory.md",
+    "text": "/domains/biological/systems/respiratory.md"
+  },
+  {
+    "line": 364,
+    "path": "domains/biological/reproduction/flower.md",
+    "text": "/domains/biological/reproduction/flower.md"
+  },
+  {
+    "line": 365,
+    "path": "domains/biological/systems/skeletal.md",
+    "text": "/domains/biological/systems/skeletal.md"
+  },
+  {
+    "line": 366,
+    "path": "domains/biological/multicellular/fungi/mushroom.md",
+    "text": "/domains/biological/multicellular/fungus.md"
+  },
+  {
+    "line": 367,
+    "path": "domains/biological/symbiosis/mycorrhizal.md",
+    "text": "/domains/biological/symbiosis/mycorrhizal.md"
+  },
+  {
+    "line": 368,
+    "path": "domains/technological/middle_age_technology/cathedral.md",
+    "text": "/domains/technological/architecture/cathedral.md"
+  },
+  {
+    "line": 369,
+    "path": "domains/biological/systems/digestive.md",
+    "text": "/domains/biological/systems/digestive.md"
+  },
+  {
+    "line": 370,
+    "path": "domains/biological/systems/photosynthetic.md",
+    "text": "/domains/biological/systems/photosynthetic.md"
+  },
+  {
+    "line": 372,
+    "path": "domains/biological/systems/endocrine.md",
+    "text": "/domains/biological/systems/endocrine.md"
+  },
+  {
+    "line": 373,
+    "path": "domains/biological/systems/circulatory.md",
+    "text": "/domains/biological/systems/circulatory.md"
+  },
+  {
+    "line": 374,
+    "path": "domains/biological/systems/reproductive.md",
+    "text": "/domains/biological/systems/reproductive.md"
+  },
+  {
+    "line": 375,
+    "path": "domains/biological/systems/immune.md",
+    "text": "/domains/biological/systems/immune.md"
+  },
+  {
+    "line": 377,
+    "path": "domains/biological/systems/muscular.md",
+    "text": "/domains/biological/systems/muscular.md"
+  },
+  {
+    "line": 378,
+    "path": "domains/biological/multicellular/worms/simple_worm.md",
+    "text": "/domains/biological/multicellular/worm.md"
+  },
+  {
+    "line": 385,
+    "path": "domains/technological/late_age_technology/steam_locomotive.md",
+    "text": "/domains/technological/transport/steam_locomotive.md"
+  },
+  {
+    "line": 386,
+    "path": "domains/technological/late_age_technology/photography.md",
+    "text": "/domains/technological/media/photography.md"
+  },
+  {
+    "line": 387,
+    "path": "domains/biological/structures/spine.md",
+    "text": "/domains/biological/structures/spine.md"
+  },
+  {
+    "line": 389,
+    "path": "domains/biological/multicellular/animals/invertebrates/insect.md",
+    "text": "/domains/biological/multicellular/insect.md"
+  },
+  {
+    "line": 391,
+    "path": "domains/biological/locomotion/avian_flight.md",
+    "text": "/domains/biological/locomotion/avian_flight.md"
+  },
+  {
+    "line": 393,
+    "path": "domains/biological/reproduction/placenta.md",
+    "text": "/domains/biological/reproduction/placenta.md"
+  },
+  {
+    "line": 394,
+    "path": "domains/technological/late_age_technology/assembly_line.md",
+    "text": "/domains/technological/manufacturing/assembly_line.md"
+  },
+  {
+    "line": 395,
+    "path": "domains/biological/multicellular/animals/vertebrates/fish.md",
+    "text": "/domains/biological/multicellular/fish.md"
+  },
+  {
+    "line": 396,
+    "path": "domains/technological/late_age_technology/electric_power_grid.md",
+    "text": "/domains/technological/infrastructure/power_grid.md"
+  },
+  {
+    "line": 397,
+    "path": "domains/cognitive/communication/waggle_dance.md",
+    "text": "/domains/cognitive/communication/waggle_dance.md"
+  },
+  {
+    "line": 398,
+    "path": "domains/cognitive/communication/echolocation.md",
+    "text": "/domains/cognitive/navigation/echolocation.md"
+  },
+  {
+    "line": 399,
+    "path": "domains/biological/navigation/migration.md",
+    "text": "/domains/biological/navigation/migration.md"
+  },
+  {
+    "line": 400,
+    "path": "domains/biological/multicellular/plants/tree.md",
+    "text": "/domains/biological/multicellular/tree.md"
+  },
+  {
+    "line": 401,
+    "path": "domains/cognitive/neural_networks/primate_brain.md",
+    "text": "/domains/cognitive/social/primate_cognition.md"
+  },
+  {
+    "line": 402,
+    "path": "domains/cognitive/communication/whale_song.md",
+    "text": "/domains/cognitive/communication/whale_song.md"
+  },
+  {
+    "line": 403,
+    "path": "domains/cognitive/culture/wolf_pack_hierarchy.md",
+    "text": "/domains/cognitive/social/pack_hierarchy.md"
+  },
+  {
+    "line": 404,
+    "path": "domains/biological/physiology/endothermic.md",
+    "text": "/domains/biological/physiology/endothermic.md"
+  },
+  {
+    "line": 405,
+    "path": "domains/biological/multicellular/animals/vertebrates/bird.md",
+    "text": "/domains/biological/multicellular/bird.md"
+  },
+  {
+    "line": 406,
+    "path": "domains/cognitive/neural_networks/octopus_brain.md",
+    "text": "/domains/cognitive/neural_networks/octopus_brain.md"
+  },
+  {
+    "line": 407,
+    "path": "domains/biological/immunity/complex_immune.md",
+    "text": "/domains/biological/immunity/complex_immune.md"
+  },
+  {
+    "line": 408,
+    "path": "domains/cognitive/communication/ant_pheromones.md",
+    "text": "/domains/cognitive/collective/ant_colony.md"
+  },
+  {
+    "line": 409,
+    "path": "domains/biological/ecology/forest_succession.md",
+    "text": "/domains/biological/ecology/forest_succession.md"
+  },
+  {
+    "line": 410,
+    "path": "domains/cognitive/memory/elephant_memory.md",
+    "text": "/domains/cognitive/memory/elephant_memory.md"
+  },
+  {
+    "line": 411,
+    "path": "domains/biological/ecology/food_web.md",
+    "text": "/domains/biological/ecology/food_web.md"
+  },
+  {
+    "line": 412,
+    "path": "domains/cognitive/neural_networks/mammal_brain.md",
+    "text": "/domains/cognitive/neural_networks/mammal_brain.md"
+  },
+  {
+    "line": 413,
+    "path": "domains/cognitive/culture/tool_culture.md",
+    "text": "/domains/cognitive/culture/tool_culture.md"
+  },
+  {
+    "line": 414,
+    "path": "domains/biological/locomotion/bipedalism.md",
+    "text": "/domains/biological/locomotion/bipedalism.md"
+  },
+  {
+    "line": 422,
+    "path": "domains/technological/late_age_technology/global_financial_system.md",
+    "text": "/domains/technological/economic/financial_system.md"
+  },
+  {
+    "line": 423,
+    "path": "domains/technological/late_age_technology/supply_chain_network.md",
+    "text": "/domains/technological/logistics/supply_chain.md"
+  },
+  {
+    "line": 426,
+    "path": "domains/technological/late_age_technology/smart_city.md",
+    "text": "/domains/technological/urban/smart_city.md"
+  },
+  {
+    "line": 427,
+    "path": "domains/technological/late_age_technology/gene_therapy.md",
+    "text": "/domains/hybrid/medical/gene_therapy.md"
+  },
+  {
+    "line": 428,
+    "path": "domains/technological/late_age_technology/transportation_network.md",
+    "text": "/domains/technological/transport/network.md"
+  },
+  {
+    "line": 431,
+    "path": "domains/cognitive/institutions/legal_system.md",
+    "text": "/domains/cognitive/institutions/legal.md"
+  },
+  {
+    "line": 432,
+    "path": "domains/technological/late_age_technology/healthcare_system.md",
+    "text": "/domains/technological/medical/healthcare.md"
+  },
+  {
+    "line": 433,
+    "path": "domains/technological/late_age_technology/brain_computer_interface.md",
+    "text": "/domains/hybrid/neural/brain_computer.md"
+  },
+  {
+    "line": 435,
+    "path": "domains/cognitive/culture/mass_media.md",
+    "text": "/domains/cognitive/media/mass_media.md"
+  },
+  {
+    "line": 436,
+    "path": "domains/cognitive/institutions/scientific_method.md",
+    "text": "/domains/cognitive/institutions/science.md"
+  },
+  {
+    "line": 439,
+    "path": "domains/geological/systems/climate.md",
+    "text": "/domains/geological/systems/climate.md"
+  },
+  {
+    "line": 443,
+    "path": "domains/technological/late_age_technology/satellite_constellation.md",
+    "text": "/domains/technological/space/satellites.md"
+  },
+  {
+    "line": 444,
+    "path": "domains/technological/late_age_technology/cloud_computing.md",
+    "text": "/domains/technological/computing/cloud.md"
+  },
+  {
+    "line": 445,
+    "path": "domains/technological/late_age_technology/computer.md",
+    "text": "/domains/technological/computers/"
+  },
+  {
+    "line": 446,
+    "path": "domains/technological/late_age_technology/social_media.md",
+    "text": "/domains/technological/social/social_media.md"
+  },
+  {
+    "line": 447,
+    "path": "domains/technological/late_age_technology/database_system.md",
+    "text": "/domains/technological/data/database.md"
+  },
+  {
+    "line": 448,
+    "path": "domains/technological/late_age_technology/search_engine.md",
+    "text": "/domains/technological/information/search.md"
+  },
+  {
+    "line": 449,
+    "path": "domains/technological/late_age_technology/operating_system.md",
+    "text": "/domains/technological/software/operating_system.md"
+  },
+  {
+    "line": 452,
+    "path": "domains/technological/late_age_technology/internet.md",
+    "text": "/domains/technological/networks/"
+  }
+]

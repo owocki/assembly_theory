@@ -184,20 +184,20 @@ Weak nuclear force carrier | 2 | Cosmic | [/domains/cosmic/forces/weak_nuclear.m
 | Lithium atom | 5 | Cosmic | [/domains/cosmic/atoms/lithium.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/atoms/lithium.md) | 380,000 yr |
 | Hydronium ion (H₃O⁺) | 5 | Cosmic | [/domains/cosmic/ions/hydronium.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/ions/hydronium.md) | 13.4 Gyr ago |
 | Hydrogen sulfide (H₂S) | 5 | Cosmic | [/domains/cosmic/molecules/hydrogen_sulfide.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/molecules/hydrogen_sulfide.md) | 13 Gyr ago |
-| Beryllium atom | 6 | Cosmic | [/domains/cosmic/atoms/beryllium.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/atoms/beryllium.md) | 13 Gyr ago |
+| Beryllium atom | 6 | Cosmic | [/domains/cosmic/atoms/beryllium.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/elements/beryllium.md) | 13 Gyr ago |
 | Oxygen molecule (O₂) | 6 | Cosmic | [/domains/cosmic/molecules/oxygen_gas.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/molecules/oxygen_gas.md) | 2.4 Gyr ago |
-| Boron atom | 7 | Cosmic | [/domains/cosmic/atoms/boron.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/atoms/boron.md) | 13 Gyr ago |
+| Boron atom | 7 | Cosmic | [/domains/cosmic/atoms/boron.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/elements/boron.md) | 13 Gyr ago |
 | Carbon monoxide (CO) | 7 | Cosmic | [/domains/cosmic/molecules/carbon_monoxide.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/molecules/carbon_monoxide.md) | 13 Gyr ago |
-| Aluminum atom | 7 | Cosmic | [/domains/cosmic/atoms/aluminum.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/atoms/aluminum.md) | 13 Gyr ago |
-| Sulfur atom | 7 | Cosmic | [/domains/cosmic/atoms/sulfur.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/atoms/sulfur.md) | 13 Gyr ago |
+| Aluminum atom | 7 | Cosmic | [/domains/cosmic/atoms/aluminum.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/elements/aluminum.md) | 13 Gyr ago |
+| Sulfur atom | 7 | Cosmic | [/domains/cosmic/atoms/sulfur.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/elements/sulfur.md) | 13 Gyr ago |
 | Nitrogen atom | 8 | Cosmic | [/domains/cosmic/atoms/nitrogen.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/atoms/nitrogen.md) | 13 Gyr ago |
 | Nitrogen molecule (N₂) | 8 | Cosmic | [/domains/cosmic/molecules/nitrogen_gas.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/molecules/nitrogen_gas.md) | 13 Gyr ago |
-| Iron atom | 8 | Cosmic | [/domains/cosmic/atoms/iron.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/atoms/iron.md) | 13 Gyr ago |
-| Phosphorus atom | 8 | Cosmic | [/domains/cosmic/atoms/phosphorus.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/atoms/phosphorus.md) | 13 Gyr ago |
-| Fluorine atom | 9 | Cosmic | [/domains/cosmic/atoms/fluorine.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/atoms/fluorine.md) | 13 Gyr ago |
-| Copper atom | 9 | Cosmic | [/domains/cosmic/atoms/copper.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/atoms/copper.md) | 13 Gyr ago |
+| Iron atom | 8 | Cosmic | [/domains/cosmic/atoms/iron.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/elements/iron.md) | 13 Gyr ago |
+| Phosphorus atom | 8 | Cosmic | [/domains/cosmic/atoms/phosphorus.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/elements/phosphorus.md) | 13 Gyr ago |
+| Fluorine atom | 9 | Cosmic | [/domains/cosmic/atoms/fluorine.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/elements/fluorine.md) | 13 Gyr ago |
+| Copper atom | 9 | Cosmic | [/domains/cosmic/atoms/copper.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/elements/copper.md) | 13 Gyr ago |
 | Silicon dioxide unit | 9 | Geological | [/domains/geological/compounds/silica_unit.md](https://github.com/owocki/assembly_theory/tree/master/domains/geological/compounds/silica_unit.md) | 4.4 Gyr ago |
-| Neon atom | 10 | Cosmic | [/domains/cosmic/atoms/neon.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/atoms/neon.md) | 13 Gyr ago |
+| Neon atom | 10 | Cosmic | [/domains/cosmic/atoms/neon.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/elements/neon.md) | 13 Gyr ago |
 
 ### AI: 10-100 (Simple Assemblies)
 
@@ -207,18 +207,18 @@ Weak nuclear force carrier | 2 | Cosmic | [/domains/cosmic/forces/weak_nuclear.m
 | Methane (CH₄) | 12 | Cosmic | [/domains/cosmic/molecules/methane.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/molecules/methane.md) | 13 Gyr ago |
 | Acetylene (C₂H₂) | 15 | Cosmic | [/domains/cosmic/molecules/acetylene.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/molecules/acetylene.md) | 13 Gyr ago |
 | Carbon dioxide | 15 | Cosmic | [/domains/cosmic/molecules/co2.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/molecules/co2.md) | 13 Gyr ago |
-| Knot | 15 | Technological | [/domains/technological/basic/knot.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/basic/knot.md) | 500 kyr ago |
+| Knot | 15 | Technological | [/domains/technological/basic/knot.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/early_human_technology/knot.md) | 500 kyr ago |
 | Ethane (C₂H₆) | 18 | Cosmic | [/domains/cosmic/molecules/ethane.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/molecules/ethane.md) | 13 Gyr ago |
 | Salt (NaCl) | 18 | Geological | [/domains/geological/minerals/salt.md](https://github.com/owocki/assembly_theory/tree/master/domains/geological/minerals/salt.md) | 4.4 Gyr ago |
-| Stone knife edge | 20 | Technological | [/domains/technological/tools/stone_knife.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/tools/stone_knife.md) | 2.6 Myr ago |
+| Stone knife edge | 20 | Technological | [/domains/technological/tools/stone_knife.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/early_human_technology/stone_knife_edge.md) | 2.6 Myr ago |
 | Formaldehyde (CH₂O) | 20 | Cosmic | [/domains/cosmic/molecules/formaldehyde.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/molecules/formaldehyde.md) | 13 Gyr ago |
 | Methanol (CH₃OH) | 22 | Cosmic | [/domains/cosmic/molecules/methanol.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/molecules/methanol.md) | 13 Gyr ago |
 | Quartz crystal | 25 | Geological | [/domains/geological/minerals/quartz.md](https://github.com/owocki/assembly_theory/tree/master/domains/geological/minerals/quartz.md) | 4.4 Gyr ago |
 | Pyrite (FeS₂) | 25 | Geological | [/domains/geological/minerals/pyrite.md](https://github.com/owocki/assembly_theory/tree/master/domains/geological/minerals/pyrite.md) | 4.2 Gyr ago |
-| Phosphate group | 25 | Biological | [/domains/biological/compounds/phosphate.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/compounds/phosphate.md) | 4.0 Gyr ago |
+| Phosphate group | 25 | Biological | [/domains/biological/compounds/phosphate.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/prebiotic/phosphate.md) | 4.0 Gyr ago |
 | Iron oxide | 30 | Geological | [/domains/geological/minerals/iron_oxide.md](https://github.com/owocki/assembly_theory/tree/master/domains/geological/minerals/iron_oxide.md) | 4.3 Gyr ago |
 | Calcite (CaCO₃) | 30 | Geological | [/domains/geological/minerals/calcite.md](https://github.com/owocki/assembly_theory/tree/master/domains/geological/minerals/calcite.md) | 4.0 Gyr ago |
-| Fire control | 30 | Technological | [/domains/technological/basic/fire.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/basic/fire.md) | 1.5 Myr ago |
+| Fire control | 30 | Technological | [/domains/technological/basic/fire.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/early_human_technology/fire.md) | 1.5 Myr ago |
 | Acetone (C₃H₆O) | 35 | Cosmic | [/domains/cosmic/molecules/acetone.md](https://github.com/owocki/assembly_theory/tree/master/domains/cosmic/molecules/acetone.md) | 13 Gyr ago |
 | Olivine | 35 | Geological | [/domains/geological/minerals/olivine.md](https://github.com/owocki/assembly_theory/tree/master/domains/geological/minerals/olivine.md) | 4.5 Gyr ago |
 | Gypsum (CaSO₄·2H₂O) | 40 | Geological | [/domains/geological/minerals/gypsum.md](https://github.com/owocki/assembly_theory/tree/master/domains/geological/minerals/gypsum.md) | 4.0 Gyr ago |
@@ -226,16 +226,16 @@ Weak nuclear force carrier | 2 | Cosmic | [/domains/cosmic/forces/weak_nuclear.m
 | Magnetite (Fe₃O₄) | 45 | Geological | [/domains/geological/minerals/magnetite.md](https://github.com/owocki/assembly_theory/tree/master/domains/geological/minerals/magnetite.md) | 4.2 Gyr ago |
 | Glycine | 45 | Biological | [/domains/biological/amino_acids/glycine.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/amino_acids/glycine.md) | 4.0 Gyr ago |
 | Alanine | 50 | Biological | [/domains/biological/amino_acids/alanine.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/amino_acids/alanine.md) | 4.0 Gyr ago |
-| Feldspar group | 50 | Geological | [/domains/geological/minerals/feldspar.md](https://github.com/owocki/assembly_theory/tree/master/domains/geological/minerals/feldspar.md) | 4.4 Gyr ago |
+| Feldspar group | 50 | Geological | [/domains/geological/minerals/feldspar.md](https://github.com/owocki/assembly_theory/tree/master/domains/geological/minerals/k_feldspar.md) | 4.4 Gyr ago |
 | Amino acid | 50-80 | Biological | [/domains/biological/prebiotic/amino_acids.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/prebiotic/amino_acids.md) | 4 Gyr ago |
 | Serine | 55 | Biological | [/domains/biological/amino_acids/serine.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/amino_acids/serine.md) | 4.0 Gyr ago |
 | Pyroxene group | 55 | Geological | [/domains/geological/minerals/pyroxene.md](https://github.com/owocki/assembly_theory/tree/master/domains/geological/minerals/pyroxene.md) | 4.4 Gyr ago |
 | Mica group | 60 | Geological | [/domains/geological/minerals/mica.md](https://github.com/owocki/assembly_theory/tree/master/domains/geological/minerals/mica.md) | 4.2 Gyr ago |
-| Ribose | 65 | Biological | [/domains/biological/sugars/ribose.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/sugars/ribose.md) | 4.0 Gyr ago |
+| Ribose | 65 | Biological | [/domains/biological/sugars/ribose.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/prebiotic/ribose.md) | 4.0 Gyr ago |
 | Garnet group | 65 | Geological | [/domains/geological/minerals/garnet.md](https://github.com/owocki/assembly_theory/tree/master/domains/geological/minerals/garnet.md) | 4.0 Gyr ago |
-| Glucose precursor | 70 | Biological | [/domains/biological/sugars/glucose_precursor.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/sugars/glucose_precursor.md) | 4.0 Gyr ago |
+| Glucose precursor | 70 | Biological | [/domains/biological/sugars/glucose_precursor.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/prebiotic/sugars.md) | 4.0 Gyr ago |
 | Amphibole group | 70 | Geological | [/domains/geological/minerals/amphibole.md](https://github.com/owocki/assembly_theory/tree/master/domains/geological/minerals/amphibole.md) | 4.0 Gyr ago |
-| Fatty acid (short) | 80 | Biological | [/domains/biological/lipids/short_fatty_acid.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/lipids/short_fatty_acid.md) | 3.8 Gyr ago |
+| Fatty acid (short) | 80 | Biological | [/domains/biological/lipids/short_fatty_acid.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/prebiotic/fatty_acids.md) | 3.8 Gyr ago |
 
 ### AI: 100-1,000 (Molecular Complexity)
 
@@ -248,7 +248,7 @@ Weak nuclear force carrier | 2 | Cosmic | [/domains/cosmic/forces/weak_nuclear.m
 | Sedimentary layer | 250 | Geological | [/domains/geological/rocks/sedimentary.md](https://github.com/owocki/assembly_theory/tree/master/domains/geological/rocks/sedimentary.md) | 3.5 Gyr ago |
 | Clay mineral | 300 | Geological | [/domains/geological/minerals/clay.md](https://github.com/owocki/assembly_theory/tree/master/domains/geological/minerals/clay.md) | 4.3 Gyr ago |
 | Cellulose | 300 | Biological | [/domains/biological/polymers/cellulose.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/polymers/cellulose.md) | 1.5 Gyr ago |
-| Composite tool | 300 | Technological | [/domains/technological/tools/composite.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/tools/composite.md) | 100 kyr ago |
+| Composite tool | 300 | Technological | [/domains/technological/tools/composite.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/early_human_technology/composite_tool.md) | 100 kyr ago |
 | Complex clay structure | 350 | Geological | [/domains/geological/minerals/complex_clay.md](https://github.com/owocki/assembly_theory/tree/master/domains/geological/minerals/complex_clay.md) | 4.0 Gyr ago |
 | Ferredoxin | 350 | Biological | [/domains/biological/proteins/ferredoxin.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/proteins/ferredoxin.md) | 3.8 Gyr ago |
 | Heme group | 400 | Biological | [/domains/biological/cofactors/heme.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/cofactors/heme.md) | 3.5 Gyr ago |
@@ -277,20 +277,20 @@ Weak nuclear force carrier | 2 | Cosmic | [/domains/cosmic/forces/weak_nuclear.m
 
 | Assembly | AI | Domain | Locations | Time Origin |
 |----------|----|---------|-----------| ------------|
-| Inclined plane | 500 | Technological | [/domains/technological/machines/inclined_plane.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/machines/inclined_plane.md) | 500 kyr ago |
-| Wedge | 600 | Technological | [/domains/technological/tools/wedge.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/tools/wedge.md) | 1.5 Myr ago |
-| Lever | 800 | Technological | [/domains/technological/machines/lever.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/machines/lever.md) | 200 kyr ago |
-| Rope | 1,000 | Technological | [/domains/technological/tools/rope.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/tools/rope.md) | 100 kyr ago |
+| Inclined plane | 500 | Technological | [/domains/technological/machines/inclined_plane.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/early_human_technology/inclined_plane.md) | 500 kyr ago |
+| Wedge | 600 | Technological | [/domains/technological/tools/wedge.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/early_human_technology/wedge.md) | 1.5 Myr ago |
+| Lever | 800 | Technological | [/domains/technological/machines/lever.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/early_human_technology/lever.md) | 200 kyr ago |
+| Rope | 1,000 | Technological | [/domains/technological/tools/rope.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/early_human_technology/rope.md) | 100 kyr ago |
 | Transfer RNA | 1,200 | Biological | [/domains/biological/rna/trna_complex.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/rna/trna_complex.md) | 3.8 Gyr ago |
-| Atlatl | 1,200 | Technological | [/domains/technological/weapons/atlatl.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/weapons/atlatl.md) | 30 kyr ago |
-| Pulley | 1,400 | Technological | [/domains/technological/machines/pulley.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/machines/pulley.md) | 8 kyr ago |
+| Atlatl | 1,200 | Technological | [/domains/technological/weapons/atlatl.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/early_human_technology/atlatl.md) | 30 kyr ago |
+| Pulley | 1,400 | Technological | [/domains/technological/machines/pulley.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/middle_age_technology/pulley.md) | 8 kyr ago |
 | Messenger RNA | 1,500 | Biological | [/domains/biological/rna/mrna.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/rna/mrna.md) | 3.8 Gyr ago |
-| Basket weaving | 1,500 | Technological | [/domains/technological/crafts/basket.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/crafts/basket.md) | 50 kyr ago |
-| Bow and arrow | 1,800 | Technological | [/domains/technological/weapons/bow_arrow.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/weapons/bow_arrow.md) | 65 kyr ago |
+| Basket weaving | 1,500 | Technological | [/domains/technological/crafts/basket.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/early_human_technology/basket.md) | 50 kyr ago |
+| Bow and arrow | 1,800 | Technological | [/domains/technological/weapons/bow_arrow.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/early_human_technology/bow_and_arrow.md) | 65 kyr ago |
 | Ribosomal RNA | 2,000 | Biological | [/domains/biological/rna/rrna.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/rna/rrna.md) | 3.8 Gyr ago |
 | Plasmid | 2,200 | Biological | [/domains/biological/genetics/plasmid.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/genetics/plasmid.md) | 3.0 Gyr ago |
 | Bacterial flagellar motor | 2,500 | Biological | [/domains/biological/motors/flagellar.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/motors/flagellar.md) | 3.0 Gyr ago |
-| Fishing net | 2,500 | Technological | [/domains/technological/tools/fishing_net.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/tools/fishing_net.md) | 45 kyr ago |
+| Fishing net | 2,500 | Technological | [/domains/technological/tools/fishing_net.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/early_human_technology/fishing_net.md) | 45 kyr ago |
 | Basic virus | 3,000 | Biological | [/domains/biological/prokaryotic/virus.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/prokaryotic/virus.md) | 3.5 Gyr ago |
 | Restriction enzyme | 3,000 | Biological | [/domains/biological/enzymes/restriction.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/enzymes/restriction.md) | 3.0 Gyr ago |
 | Archaea cell wall | 3,200 | Biological | [/domains/biological/structures/archaea_wall.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/structures/archaea_wall.md) | 3.8 Gyr ago |
@@ -301,7 +301,7 @@ Weak nuclear force carrier | 2 | Cosmic | [/domains/cosmic/forces/weak_nuclear.m
 | Spore | 4,500 | Biological | [/domains/biological/structures/spore.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/structures/spore.md) | 3.2 Gyr ago |
 | RNA polymerase | 4,500 | Biological | [/domains/biological/enzymes/rna_polymerase.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/enzymes/rna_polymerase.md) | 3.8 Gyr ago |
 | Ribosome | 5,000 | Biological | [/domains/biological/prokaryotic/ribosome.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/prokaryotic/ribosome.md) | 3.8 Gyr ago |
-| CRISPR system | 5,000 | Biological | [/domains/biological/immunity/crispr.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/immunity/crispr.md) | 2.5 Gyr ago |
+| CRISPR system | 5,000 | Biological | [/domains/biological/immunity/crispr.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/late_age_technology/crispr.md) | 2.5 Gyr ago |
 | Biofilm | 6,000 | Biological | [/domains/biological/communities/biofilm.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/communities/biofilm.md) | 3.4 Gyr ago |
 | Photosystem | 6,000 | Biological | [/domains/biological/prokaryotic/photosystem.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/prokaryotic/photosystem.md) | 3.4 Gyr ago |
 | Sedimentary rock cycle | 7,500 | Geological | [/domains/geological/processes/rock_cycle.md](https://github.com/owocki/assembly_theory/tree/master/domains/geological/processes/rock_cycle.md) | 3.8 Gyr ago |
@@ -312,22 +312,22 @@ Weak nuclear force carrier | 2 | Cosmic | [/domains/cosmic/forces/weak_nuclear.m
 
 | Assembly | AI | Domain | Locations | Time Origin |
 |----------|----|---------|-----------| ------------|
-| Potter's wheel | 8,000 | Technological | [/domains/technological/tools/potters_wheel.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/tools/potters_wheel.md) | 5.5 kyr ago |
-| Metallurgy furnace | 12,000 | Technological | [/domains/technological/industry/furnace.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/industry/furnace.md) | 6 kyr ago |
+| Potter's wheel | 8,000 | Technological | [/domains/technological/tools/potters_wheel.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/middle_age_technology/potters_wheel.md) | 5.5 kyr ago |
+| Metallurgy furnace | 12,000 | Technological | [/domains/technological/industry/furnace.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/middle_age_technology/metallurgy.md) | 6 kyr ago |
 | Centriole | 15,000 | Biological | [/domains/biological/organelles/centriole.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/organelles/centriole.md) | 1.5 Gyr ago |
-| Loom | 15,000 | Technological | [/domains/technological/tools/loom.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/tools/loom.md) | 7 kyr ago |
+| Loom | 15,000 | Technological | [/domains/technological/tools/loom.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/early_human_technology/loom.md) | 7 kyr ago |
 | Ion channel | 18,000 | Biological | [/domains/biological/proteins/ion_channel.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/proteins/ion_channel.md) | 1.5 Gyr ago |
 | Vacuole | 18,000 | Biological | [/domains/biological/organelles/vacuole.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/organelles/vacuole.md) | 1.5 Gyr ago |
 | Peroxisome | 20,000 | Biological | [/domains/biological/organelles/peroxisome.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/organelles/peroxisome.md) | 1.5 Gyr ago |
 | Lysosome | 22,000 | Biological | [/domains/biological/organelles/lysosome.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/organelles/lysosome.md) | 1.5 Gyr ago |
 | Chaperone system | 24,000 | Biological | [/domains/biological/proteins/chaperone.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/proteins/chaperone.md) | 2.0 Gyr ago |
 | Nuclear envelope | 25,000 | Biological | [/domains/biological/structures/nuclear_envelope.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/structures/nuclear_envelope.md) | 2.0 Gyr ago |
-| Water wheel | 25,000 | Technological | [/domains/technological/machines/water_wheel.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/machines/water_wheel.md) | 2 kyr ago |
+| Water wheel | 25,000 | Technological | [/domains/technological/machines/water_wheel.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/middle_age_technology/water_wheel.md) | 2 kyr ago |
 | Receptor protein | 26,000 | Biological | [/domains/biological/proteins/receptor.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/proteins/receptor.md) | 1.0 Gyr ago |
 | Nuclear pore complex | 28,000 | Biological | [/domains/biological/structures/nuclear_pore.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/structures/nuclear_pore.md) | 2.0 Gyr ago |
 | Flagellum | 30,000 | Biological | [/domains/biological/eukaryotic/flagellum.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/eukaryotic/flagellum.md) | 2 Gyr ago |
 | Golgi apparatus | 30,000 | Biological | [/domains/biological/organelles/golgi.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/organelles/golgi.md) | 1.8 Gyr ago |
-| Windmill | 30,000 | Technological | [/domains/technological/machines/windmill.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/machines/windmill.md) | 1.2 kyr ago |
+| Windmill | 30,000 | Technological | [/domains/technological/machines/windmill.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/middle_age_technology/windmill.md) | 1.2 kyr ago |
 | Ribosome assembly | 32,000 | Biological | [/domains/biological/complexes/ribosome_assembly.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/complexes/ribosome_assembly.md) | 1.8 Gyr ago |
 | Endoplasmic reticulum | 35,000 | Biological | [/domains/biological/organelles/er.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/organelles/er.md) | 2.0 Gyr ago |
 | Enzyme complex | 35,000 | Biological | [/domains/biological/enzymes/complex.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/enzymes/complex.md) | 2.0 Gyr ago |
@@ -336,7 +336,7 @@ Weak nuclear force carrier | 2 | Cosmic | [/domains/cosmic/forces/weak_nuclear.m
 | DNA repair complex | 42,000 | Biological | [/domains/biological/complexes/dna_repair.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/complexes/dna_repair.md) | 2.0 Gyr ago |
 | Spindle apparatus | 45,000 | Biological | [/domains/biological/structures/spindle.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/structures/spindle.md) | 1.5 Gyr ago |
 | Mitochondrion | 50,000 | Biological | [/domains/biological/eukaryotic/mitochondrion.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/eukaryotic/mitochondrion.md) | 2 Gyr ago |
-| Mechanical clock | 50,000 | Technological | [/domains/technological/instruments/clock.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/instruments/clock.md) | 700 yr ago |
+| Mechanical clock | 50,000 | Technological | [/domains/technological/instruments/clock.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/middle_age_technology/mechanical_clock.md) | 700 yr ago |
 | Spliceosome | 55,000 | Biological | [/domains/biological/complexes/spliceosome.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/complexes/spliceosome.md) | 1.0 Gyr ago |
 | Chloroplast | 60,000 | Biological | [/domains/biological/eukaryotic/chloroplast.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/eukaryotic/chloroplast.md) | 1.5 Gyr ago |
 | Antibody | 65,000 | Biological | [/domains/biological/proteins/antibody.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/proteins/antibody.md) | 500 Myr ago |
@@ -348,64 +348,64 @@ Weak nuclear force carrier | 2 | Cosmic | [/domains/cosmic/forces/weak_nuclear.m
 | Assembly | AI | Domain | Locations | Time Origin |
 |----------|----|---------|-----------| ------------|
 | Cnidarian nervous system | 200,000 | Biological | [/domains/biological/nervous_systems/cnidarian.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/nervous_systems/cnidarian.md) | 600 Myr ago |
-| Printing press | 200,000 | Technological | [/domains/technological/information/printing_press.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/information/printing_press.md) | 575 yr ago |
+| Printing press | 200,000 | Technological | [/domains/technological/information/printing_press.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/middle_age_technology/printing_press.md) | 575 yr ago |
 | Mollusk shell | 250,000 | Biological | [/domains/biological/structures/mollusk_shell.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/structures/mollusk_shell.md) | 540 Myr ago |
-| Sailing ship | 300,000 | Technological | [/domains/technological/transport/sailing_ship.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/transport/sailing_ship.md) | 5 kyr ago |
+| Sailing ship | 300,000 | Technological | [/domains/technological/transport/sailing_ship.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/middle_age_technology/sailing_ship.md) | 5 kyr ago |
 | Flatworm brain | 300,000 | Biological | [/domains/biological/nervous_systems/flatworm.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/nervous_systems/flatworm.md) | 550 Myr ago |
 | Seed dispersal mechanism | 300,000 | Biological | [/domains/biological/reproduction/seed_dispersal.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/reproduction/seed_dispersal.md) | 365 Myr ago |
 | Echinoderm water vascular | 350,000 | Biological | [/domains/biological/systems/water_vascular.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/systems/water_vascular.md) | 520 Myr ago |
-| Aqueduct system | 400,000 | Technological | [/domains/technological/infrastructure/aqueduct.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/infrastructure/aqueduct.md) | 2.5 kyr ago |
+| Aqueduct system | 400,000 | Technological | [/domains/technological/infrastructure/aqueduct.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/middle_age_technology/aqueduct.md) | 2.5 kyr ago |
 | Arthropod compound eye | 400,000 | Biological | [/domains/biological/sensory/compound_eye.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/sensory/compound_eye.md) | 540 Myr ago |
 | Excretory system | 400,000 | Biological | [/domains/biological/systems/excretory.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/systems/excretory.md) | 500 Myr ago |
 | Plant vascular system | 450,000 | Biological | [/domains/biological/systems/vascular.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/systems/vascular.md) | 420 Myr ago |
-| Medieval castle | 500,000 | Technological | [/domains/technological/architecture/castle.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/architecture/castle.md) | 1.5 kyr ago |
-| Sponge | 500,000 | Biological | [/domains/biological/multicellular/sponge.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/multicellular/sponge.md) | 600 Myr ago |
+| Medieval castle | 500,000 | Technological | [/domains/technological/architecture/castle.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/middle_age_technology/castle.md) | 1.5 kyr ago |
+| Sponge | 500,000 | Biological | [/domains/biological/multicellular/sponge.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/multicellular/sponges/sponge.md) | 600 Myr ago |
 | Respiratory system | 500,000 | Biological | [/domains/biological/systems/respiratory.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/systems/respiratory.md) | 450 Myr ago |
 | Flower reproductive system | 550,000 | Biological | [/domains/biological/reproduction/flower.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/reproduction/flower.md) | 130 Myr ago |
 | Skeletal system | 600,000 | Biological | [/domains/biological/systems/skeletal.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/systems/skeletal.md) | 500 Myr ago |
-| Mushroom | 600,000 | Biological | [/domains/biological/multicellular/fungus.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/multicellular/fungus.md) | 500 Myr ago |
+| Mushroom | 600,000 | Biological | [/domains/biological/multicellular/fungus.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/multicellular/fungi/mushroom.md) | 500 Myr ago |
 | Root-mycorrhizal network | 600,000 | Biological | [/domains/biological/symbiosis/mycorrhizal.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/symbiosis/mycorrhizal.md) | 400 Myr ago |
-| Cathedral | 600,000 | Technological | [/domains/technological/architecture/cathedral.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/architecture/cathedral.md) | 800 yr ago |
+| Cathedral | 600,000 | Technological | [/domains/technological/architecture/cathedral.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/middle_age_technology/cathedral.md) | 800 yr ago |
 | Digestive system | 650,000 | Biological | [/domains/biological/systems/digestive.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/systems/digestive.md) | 550 Myr ago |
 | Photosynthetic apparatus | 700,000 | Biological | [/domains/biological/systems/photosynthetic.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/systems/photosynthetic.md) | 3.4 Gyr ago |
-| Moss | 700,000 | Biological | [/domains/biological/multicellular/moss.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/multicellular/moss.md) | 450 Myr ago |
+| Moss | 700,000 | Biological | [/domains/biological/multicellular/moss.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/multicellular/plants/moss.md) | 450 Myr ago |
 | Endocrine system | 700,000 | Biological | [/domains/biological/systems/endocrine.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/systems/endocrine.md) | 450 Myr ago |
 | Circulatory system | 750,000 | Biological | [/domains/biological/systems/circulatory.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/systems/circulatory.md) | 500 Myr ago |
 | Reproductive system | 750,000 | Biological | [/domains/biological/systems/reproductive.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/systems/reproductive.md) | 1.2 Gyr ago |
 | Immune system (basic) | 800,000 | Biological | [/domains/biological/systems/immune.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/systems/immune.md) | 500 Myr ago |
-| Jellyfish | 800,000 | Biological | [/domains/biological/multicellular/jellyfish.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/multicellular/jellyfish.md) | 550 Myr ago |
+| Jellyfish | 800,000 | Biological | [/domains/biological/multicellular/jellyfish.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/multicellular/cnidarians/jellyfish.md) | 550 Myr ago |
 | Muscular system | 850,000 | Biological | [/domains/biological/systems/muscular.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/systems/muscular.md) | 540 Myr ago |
-| Simple worm | 900,000 | Biological | [/domains/biological/multicellular/worm.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/multicellular/worm.md) | 550 Myr ago |
+| Simple worm | 900,000 | Biological | [/domains/biological/multicellular/worm.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/multicellular/worms/simple_worm.md) | 550 Myr ago |
 | Coral reef ecosystem | 900,000 | Biological | [/domains/biological/ecosystems/coral_reef.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/ecosystems/coral_reef.md) | 500 Myr ago |
 
 ### AI: 1M-1B (Complex Organisms)
 
 | Assembly | AI | Domain | Locations | Time Origin |
 |----------|----|---------|-----------| ------------|
-| Steam locomotive | 2M | Technological | [/domains/technological/transport/steam_locomotive.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/transport/steam_locomotive.md) | 220 yr ago |
-| Photography | 5M | Technological | [/domains/technological/media/photography.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/media/photography.md) | 200 yr ago |
+| Steam locomotive | 2M | Technological | [/domains/technological/transport/steam_locomotive.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/late_age_technology/steam_locomotive.md) | 220 yr ago |
+| Photography | 5M | Technological | [/domains/technological/media/photography.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/late_age_technology/photography.md) | 200 yr ago |
 | Vertebrate spine | 5M | Biological | [/domains/biological/structures/spine.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/structures/spine.md) | 525 Myr ago |
-| Telegraph system | 8M | Technological | [/domains/technological/communication/telegraph.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/communication/telegraph.md) | 180 yr ago |
-| Insect | 10M | Biological | [/domains/biological/multicellular/insect.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/multicellular/insect.md) | 400 Myr ago |
-| Internal combustion engine | 12M | Technological | [/domains/technological/engines/internal_combustion.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/engines/internal_combustion.md) | 160 yr ago |
+| Telegraph system | 8M | Technological | [/domains/technological/communication/telegraph.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/tools/telegraph.md) | 180 yr ago |
+| Insect | 10M | Biological | [/domains/biological/multicellular/insect.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/multicellular/animals/invertebrates/insect.md) | 400 Myr ago |
+| Internal combustion engine | 12M | Technological | [/domains/technological/engines/internal_combustion.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/late_age_technology/internal_combustion_engine.md) | 160 yr ago |
 | Avian flight system | 15M | Biological | [/domains/biological/locomotion/avian_flight.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/locomotion/avian_flight.md) | 150 Myr ago |
-| Radio broadcasting | 20M | Technological | [/domains/technological/communication/radio.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/communication/radio.md) | 120 yr ago |
+| Radio broadcasting | 20M | Technological | [/domains/technological/communication/radio.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/late_age_technology/radio.md) | 120 yr ago |
 | Mammalian placenta | 25M | Biological | [/domains/biological/reproduction/placenta.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/reproduction/placenta.md) | 160 Myr ago |
-| Assembly line production | 30M | Technological | [/domains/technological/manufacturing/assembly_line.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/manufacturing/assembly_line.md) | 120 yr ago |
-| Fish | 50M | Biological | [/domains/biological/multicellular/fish.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/multicellular/fish.md) | 450 Myr ago |
-| Electric power grid | 50M | Technological | [/domains/technological/infrastructure/power_grid.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/infrastructure/power_grid.md) | 140 yr ago |
+| Assembly line production | 30M | Technological | [/domains/technological/manufacturing/assembly_line.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/late_age_technology/assembly_line.md) | 120 yr ago |
+| Fish | 50M | Biological | [/domains/biological/multicellular/fish.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/multicellular/animals/vertebrates/fish.md) | 450 Myr ago |
+| Electric power grid | 50M | Technological | [/domains/technological/infrastructure/power_grid.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/late_age_technology/electric_power_grid.md) | 140 yr ago |
 | Honeybee waggle dance | 50M | Cognitive | [/domains/cognitive/communication/waggle_dance.md](https://github.com/owocki/assembly_theory/tree/master/domains/cognitive/communication/waggle_dance.md) | 100 Myr ago |
-| Dolphin echolocation | 80M | Cognitive | [/domains/cognitive/navigation/echolocation.md](https://github.com/owocki/assembly_theory/tree/master/domains/cognitive/navigation/echolocation.md) | 34 Myr ago |
+| Dolphin echolocation | 80M | Cognitive | [/domains/cognitive/navigation/echolocation.md](https://github.com/owocki/assembly_theory/tree/master/domains/cognitive/communication/echolocation.md) | 34 Myr ago |
 | Migratory navigation | 90M | Biological | [/domains/biological/navigation/migration.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/navigation/migration.md) | 200 Myr ago |
-| Tree | 100M | Biological | [/domains/biological/multicellular/tree.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/multicellular/tree.md) | 380 Myr ago |
-| Primate social cognition | 100M | Cognitive | [/domains/cognitive/social/primate_cognition.md](https://github.com/owocki/assembly_theory/tree/master/domains/cognitive/social/primate_cognition.md) | 55 Myr ago |
+| Tree | 100M | Biological | [/domains/biological/multicellular/tree.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/multicellular/plants/tree.md) | 380 Myr ago |
+| Primate social cognition | 100M | Cognitive | [/domains/cognitive/social/primate_cognition.md](https://github.com/owocki/assembly_theory/tree/master/domains/cognitive/neural_networks/primate_brain.md) | 55 Myr ago |
 | Whale song communication | 120M | Cognitive | [/domains/cognitive/communication/whale_song.md](https://github.com/owocki/assembly_theory/tree/master/domains/cognitive/communication/whale_song.md) | 30 Myr ago |
-| Wolf pack hierarchy | 150M | Cognitive | [/domains/cognitive/social/pack_hierarchy.md](https://github.com/owocki/assembly_theory/tree/master/domains/cognitive/social/pack_hierarchy.md) | 1 Myr ago |
+| Wolf pack hierarchy | 150M | Cognitive | [/domains/cognitive/social/pack_hierarchy.md](https://github.com/owocki/assembly_theory/tree/master/domains/cognitive/culture/wolf_pack_hierarchy.md) | 1 Myr ago |
 | Endothermic regulation | 180M | Biological | [/domains/biological/physiology/endothermic.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/physiology/endothermic.md) | 300 Myr ago |
-| Bird | 200M | Biological | [/domains/biological/multicellular/bird.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/multicellular/bird.md) | 150 Myr ago |
+| Bird | 200M | Biological | [/domains/biological/multicellular/bird.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/multicellular/animals/vertebrates/bird.md) | 150 Myr ago |
 | Octopus distributed brain | 200M | Cognitive | [/domains/cognitive/neural_networks/octopus_brain.md](https://github.com/owocki/assembly_theory/tree/master/domains/cognitive/neural_networks/octopus_brain.md) | 300 Myr ago |
 | Complex immune system | 250M | Biological | [/domains/biological/immunity/complex_immune.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/immunity/complex_immune.md) | 450 Myr ago |
-| Ant colony intelligence | 300M | Cognitive | [/domains/cognitive/collective/ant_colony.md](https://github.com/owocki/assembly_theory/tree/master/domains/cognitive/collective/ant_colony.md) | 130 Myr ago |
+| Ant colony intelligence | 300M | Cognitive | [/domains/cognitive/collective/ant_colony.md](https://github.com/owocki/assembly_theory/tree/master/domains/cognitive/communication/ant_pheromones.md) | 130 Myr ago |
 | Forest succession | 350M | Biological | [/domains/biological/ecology/forest_succession.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/ecology/forest_succession.md) | 385 Myr ago |
 | Elephant memory network | 400M | Cognitive | [/domains/cognitive/memory/elephant_memory.md](https://github.com/owocki/assembly_theory/tree/master/domains/cognitive/memory/elephant_memory.md) | 37 Myr ago |
 | Ecosystem food web | 500M | Biological | [/domains/biological/ecology/food_web.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/ecology/food_web.md) | 540 Myr ago |
@@ -419,39 +419,39 @@ Weak nuclear force carrier | 2 | Cosmic | [/domains/cosmic/forces/weak_nuclear.m
 |----------|----|---------|-----------| ------------|
 | GMO | 1B | Hybrid | [/pathways/hybrid/synthetic_biology/](https://github.com/owocki/assembly_theory/tree/master/pathways/hybrid/synthetic_biology/) | 50 yr ago |
 | mRNA Vaccine | 1B | Biological | [/domains/biological/modern/mrna_vaccine_platforms.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/modern/mrna_vaccine_platforms.md) | 2 yr ago |
-| Global financial system | 5B | Technological | [/domains/technological/economic/financial_system.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/economic/financial_system.md) | 500 yr ago |
-| Supply chain network | 8B | Technological | [/domains/technological/logistics/supply_chain.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/logistics/supply_chain.md) | 100 yr ago |
+| Global financial system | 5B | Technological | [/domains/technological/economic/financial_system.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/late_age_technology/global_financial_system.md) | 500 yr ago |
+| Supply chain network | 8B | Technological | [/domains/technological/logistics/supply_chain.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/late_age_technology/supply_chain_network.md) | 100 yr ago |
 | Human brain | 10B | Cognitive | [/domains/cognitive/neural_networks/human_brain.md](https://github.com/owocki/assembly_theory/tree/master/domains/cognitive/neural_networks/human_brain.md) | 300 kyr ago |
 | Cyborg | 10B | Hybrid | [/pathways/hybrid/cyborgs/](https://github.com/owocki/assembly_theory/tree/master/pathways/hybrid/cyborgs/) | 50 yr ago |
-| Smart city infrastructure | 12T | Technological | [/domains/technological/urban/smart_city.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/urban/smart_city.md) | 15 yr ago |
-| Gene therapy system | 15T | Hybrid | [/domains/hybrid/medical/gene_therapy.md](https://github.com/owocki/assembly_theory/tree/master/domains/hybrid/medical/gene_therapy.md) | 30 yr ago |
-| Transportation network | 15B | Technological | [/domains/technological/transport/network.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/transport/network.md) | 200 yr ago |
-| Educational system | 25B | Cognitive | [/domains/cognitive/institutions/education.md](https://github.com/owocki/assembly_theory/tree/master/domains/cognitive/institutions/education.md) | 5 kyr ago |
-| Synthetic biology platform | 25T | Hybrid | [/domains/hybrid/biotechnology/synthetic_biology.md](https://github.com/owocki/assembly_theory/tree/master/domains/hybrid/biotechnology/synthetic_biology.md) | 20 yr ago |
-| Legal system | 30B | Cognitive | [/domains/cognitive/institutions/legal.md](https://github.com/owocki/assembly_theory/tree/master/domains/cognitive/institutions/legal.md) | 5 kyr ago |
-| Healthcare system | 40B | Technological | [/domains/technological/medical/healthcare.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/medical/healthcare.md) | 150 yr ago |
-| Brain-computer interface | 50T | Hybrid | [/domains/hybrid/neural/brain_computer.md](https://github.com/owocki/assembly_theory/tree/master/domains/hybrid/neural/brain_computer.md) | 20 yr ago |
+| Smart city infrastructure | 12T | Technological | [/domains/technological/urban/smart_city.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/late_age_technology/smart_city.md) | 15 yr ago |
+| Gene therapy system | 15T | Hybrid | [/domains/hybrid/medical/gene_therapy.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/late_age_technology/gene_therapy.md) | 30 yr ago |
+| Transportation network | 15B | Technological | [/domains/technological/transport/network.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/late_age_technology/transportation_network.md) | 200 yr ago |
+| Educational system | 25B | Cognitive | [/domains/cognitive/institutions/education.md](https://github.com/owocki/assembly_theory/tree/master/domains/cognitive/institutions/education_system.md) | 5 kyr ago |
+| Synthetic biology platform | 25T | Hybrid | [/domains/hybrid/biotechnology/synthetic_biology.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/late_age_technology/synthetic_biology.md) | 20 yr ago |
+| Legal system | 30B | Cognitive | [/domains/cognitive/institutions/legal.md](https://github.com/owocki/assembly_theory/tree/master/domains/cognitive/institutions/legal_system.md) | 5 kyr ago |
+| Healthcare system | 40B | Technological | [/domains/technological/medical/healthcare.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/late_age_technology/healthcare_system.md) | 150 yr ago |
+| Brain-computer interface | 50T | Hybrid | [/domains/hybrid/neural/brain_computer.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/late_age_technology/brain_computer_interface.md) | 20 yr ago |
 | Language | 50B | Cognitive | [/domains/cognitive/language/](https://github.com/owocki/assembly_theory/tree/master/domains/cognitive/language/), [/pathways/divergent/from_language/](https://github.com/owocki/assembly_theory/tree/master/pathways/divergent/from_language/) | 100 kyr ago |
-| Mass media network | 60B | Cognitive | [/domains/cognitive/media/mass_media.md](https://github.com/owocki/assembly_theory/tree/master/domains/cognitive/media/mass_media.md) | 100 yr ago |
-| Scientific establishment | 80B | Cognitive | [/domains/cognitive/institutions/science.md](https://github.com/owocki/assembly_theory/tree/master/domains/cognitive/institutions/science.md) | 500 yr ago |
+| Mass media network | 60B | Cognitive | [/domains/cognitive/media/mass_media.md](https://github.com/owocki/assembly_theory/tree/master/domains/cognitive/culture/mass_media.md) | 100 yr ago |
+| Scientific establishment | 80B | Cognitive | [/domains/cognitive/institutions/science.md](https://github.com/owocki/assembly_theory/tree/master/domains/cognitive/institutions/scientific_method.md) | 500 yr ago |
 | City | 100B | Technological | [/case_studies/cities/](https://github.com/owocki/assembly_theory/tree/master/case_studies/cities/) | 10 kyr ago |
 | Social Network | 100B | Hybrid | [/pathways/hybrid/collective_intelligence/](https://github.com/owocki/assembly_theory/tree/master/pathways/hybrid/collective_intelligence/) | 20 yr ago |
 | Global climate system | 100T | Geological | [/domains/geological/systems/climate.md](https://github.com/owocki/assembly_theory/tree/master/domains/geological/systems/climate.md) | 4.4 Gyr ago |
 | Democratic governance | 120B | Cognitive | [/domains/cognitive/governance/democracy.md](https://github.com/owocki/assembly_theory/tree/master/domains/cognitive/governance/democracy.md) | 2.5 kyr ago |
-| Global trade network | 200B | Technological | [/domains/technological/economic/trade.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/economic/trade.md) | 5 kyr ago |
-| GPS system | 300B | Technological | [/domains/technological/navigation/gps.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/navigation/gps.md) | 50 yr ago |
-| Satellite constellation | 500B | Technological | [/domains/technological/space/satellites.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/space/satellites.md) | 60 yr ago |
-| Cloud computing | 800B | Technological | [/domains/technological/computing/cloud.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/computing/cloud.md) | 20 yr ago |
-| Computer | 1T | Technological | [/domains/technological/computers/](https://github.com/owocki/assembly_theory/tree/master/domains/technological/computers/) | 70 yr ago |
-| Social media ecosystem | 1T | Technological | [/domains/technological/social/social_media.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/social/social_media.md) | 20 yr ago |
-| Database system | 1.5T | Technological | [/domains/technological/data/database.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/data/database.md) | 50 yr ago |
-| Search engine | 2T | Technological | [/domains/technological/information/search.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/information/search.md) | 25 yr ago |
-| Operating system | 3T | Technological | [/domains/technological/software/operating_system.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/software/operating_system.md) | 60 yr ago |
-| Blockchain network | 5T | Technological | [/domains/technological/distributed/blockchain.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/distributed/blockchain.md) | 15 yr ago |
-| Autonomous vehicle network | 8T | Technological | [/domains/technological/transport/autonomous.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/transport/autonomous.md) | 10 yr ago |
-| Internet | 10T | Technological | [/case_studies/internet/](https://github.com/owocki/assembly_theory/tree/master/case_studies/internet/), [/domains/technological/networks/](https://github.com/owocki/assembly_theory/tree/master/domains/technological/networks/) | 50 yr ago |
-| Quantum computer | 20T | Technological | [/domains/technological/quantum/computer.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/quantum/computer.md) | 5 yr ago |
-| AI System | 100T | Technological | [/domains/technological/networks/ai.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/networks/ai.md), [/domains/technological/modern/](https://github.com/owocki/assembly_theory/tree/master/domains/technological/modern/) | 10 yr ago |
+| Global trade network | 200B | Technological | [/domains/technological/economic/trade.md](https://github.com/owocki/assembly_theory/tree/master/domains/cognitive/economic_systems/trade.md) | 5 kyr ago |
+| GPS system | 300B | Technological | [/domains/technological/navigation/gps.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/late_age_technology/gps.md) | 50 yr ago |
+| Satellite constellation | 500B | Technological | [/domains/technological/space/satellites.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/late_age_technology/satellite_constellation.md) | 60 yr ago |
+| Cloud computing | 800B | Technological | [/domains/technological/computing/cloud.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/late_age_technology/cloud_computing.md) | 20 yr ago |
+| Computer | 1T | Technological | [/domains/technological/computers/](https://github.com/owocki/assembly_theory/tree/master/domains/technological/late_age_technology/computer.md) | 70 yr ago |
+| Social media ecosystem | 1T | Technological | [/domains/technological/social/social_media.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/late_age_technology/social_media.md) | 20 yr ago |
+| Database system | 1.5T | Technological | [/domains/technological/data/database.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/late_age_technology/database_system.md) | 50 yr ago |
+| Search engine | 2T | Technological | [/domains/technological/information/search.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/late_age_technology/search_engine.md) | 25 yr ago |
+| Operating system | 3T | Technological | [/domains/technological/late_age_technology/operating_system.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/late_age_technology/operating_system.md) | 60 yr ago |
+| Blockchain network | 5T | Technological | [/domains/technological/distributed/blockchain.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/late_age_technology/blockchain.md) | 15 yr ago |
+| Autonomous vehicle network | 8T | Technological | [/domains/technological/transport/autonomous.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/late_age_technology/autonomous_vehicle.md) | 10 yr ago |
+| Internet | 10T | Technological | [/case_studies/internet/](https://github.com/owocki/assembly_theory/tree/master/case_studies/internet/), [/domains/technological/late_age_technology/internet.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/late_age_technology/internet.md) | 50 yr ago |
+| Quantum computer | 20T | Technological | [/domains/technological/quantum/computer.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/late_age_technology/quantum_computer.md) | 5 yr ago |
+| AI System | 100T | Technological | [/domains/technological/late_age_technology/ai_system.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/late_age_technology/ai_system.md) | 10 yr ago |
 
 ### Cross-Domain Assemblies
 
