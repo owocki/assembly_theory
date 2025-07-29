@@ -170,7 +170,8 @@ class NetworkVisualization {
             Assembly Index: ${d.assembly_index}<br>
             Domain: ${d.domain}<br>
             Time Origin: ${d.time_origin || 'Unknown'}<br>
-            Complexity: ${d.visual_complexity}
+            Complexity: ${d.visual_complexity}<br>
+            <em>Ctrl/Cmd+Click for GitHub details</em>
         `;
         
         this.tooltip
@@ -189,7 +190,15 @@ class NetworkVisualization {
     }
     
     onNodeClick(event, d) {
-        // Update selection
+        // Check if Ctrl/Cmd key is pressed for GitHub link
+        if (event.ctrlKey || event.metaKey) {
+            if (d.github_url) {
+                window.open(d.github_url, '_blank');
+                return;
+            }
+        }
+        
+        // Update selection  
         if (this.selectedNode) {
             this.selectedNode.classed('selected', false);
         }
@@ -249,6 +258,8 @@ class NetworkVisualization {
             <div><strong>Time Origin:</strong> ${node.time_origin || 'Unknown'}</div>
             <div><strong>Estimated Copies:</strong> ${node.copy_number?.toLocaleString() || 'Unknown'}</div>
             <div><strong>Description:</strong> ${node.description || 'No description available'}</div>
+            ${node.github_url ? `<div><strong>GitHub Details:</strong> <a href="${node.github_url}" target="_blank" class="github-link">View on GitHub</a></div>` : ''}
+            <div class="click-instruction"><em>Ctrl/Cmd+Click to open GitHub link directly</em></div>
         `;
         
         infoDetails.innerHTML = detailsHTML;
@@ -277,11 +288,26 @@ class NetworkVisualization {
             case 'hierarchical':
                 this.applyHierarchicalLayout();
                 break;
-            case 'timeline':
-                this.applyTimelineLayout();
-                break;
             case 'radial':
                 this.applyRadialLayout();
+                break;
+            case 'grid':
+                this.applyGridLayout();
+                break;
+            case 'circular':
+                this.applyCircularLayout();
+                break;
+            case 'tree':
+                this.applyTreeLayout();
+                break;
+            case 'cluster':
+                this.applyClusterLayout();
+                break;
+            case 'spiral':
+                this.applySpiralLayout();
+                break;
+            case 'timeline':
+                this.applyTimelineLayout();
                 break;
             default:
                 this.applyForceLayout();
@@ -311,48 +337,6 @@ class NetworkVisualization {
             .force('collision', d3.forceCollide().radius(d => d.radius + 10));
     }
     
-    applyTimelineLayout() {
-        // Arrange by temporal origin - Big Bang to present/future
-        const getTimePosition = (node) => {
-            const timeOrigin = node.time_origin || '';
-            
-            // Parse time origins to positions (0 = Big Bang, 1 = present/future)
-            if (timeOrigin.includes('13.8') || timeOrigin.includes('13.7')) return 0.05; // Big Bang
-            if (timeOrigin.includes('13.4') || timeOrigin.includes('13.0')) return 0.1;  // Early cosmic
-            if (timeOrigin.includes('12.') || timeOrigin.includes('11.')) return 0.15;   // Stellar nucleosynthesis
-            if (timeOrigin.includes('4.5') || timeOrigin.includes('4.4')) return 0.3;   // Solar system formation
-            if (timeOrigin.includes('3.8') || timeOrigin.includes('3.5')) return 0.4;   // Early life
-            if (timeOrigin.includes('2.0') || timeOrigin.includes('1.5')) return 0.5;   // Eukaryotes
-            if (timeOrigin.includes('Gyr')) return 0.6;                                 // Other billion year events
-            if (timeOrigin.includes('Myr') || timeOrigin.includes('600')) return 0.7;   // Complex life
-            if (timeOrigin.includes('kyr') || timeOrigin.includes('100')) return 0.8;   // Human history
-            if (timeOrigin.includes('years_ago') || timeOrigin.includes('CE')) return 0.85; // Historical
-            if (timeOrigin.includes('Future') || timeOrigin.includes('Concept')) return 0.95; // Future
-            
-            // Domain-based fallback for nodes without specific time origins
-            const domainTimes = {
-                cosmic: 0.1,
-                geological: 0.3,
-                biological: 0.5,
-                cognitive: 0.75,
-                technological: 0.85,
-                hybrid: 0.9
-            };
-            
-            return domainTimes[node.domain] || 0.5;
-        };
-        
-        this.simulation
-            .force('charge', d3.forceManyBody().strength(-150))
-            .force('center', null)
-            .force('x', d3.forceX(d => {
-                const timePos = getTimePosition(d);
-                return this.width * 0.1 + timePos * this.width * 0.8;
-            }).strength(0.9))
-            .force('y', d3.forceY(this.height / 2).strength(0.2))
-            .force('collision', d3.forceCollide().radius(d => d.radius + 8));
-    }
-    
     applyRadialLayout() {
         // Radial layout with complexity as radius
         this.simulation
@@ -361,6 +345,337 @@ class NetworkVisualization {
             .force('x', d3.forceX(this.width / 2).strength(0.1))
             .force('y', d3.forceY(this.height / 2).strength(0.1))
             .force('radial', d3.forceRadial(d => (d.tier / 8) * Math.min(this.width, this.height) * 0.4, this.width / 2, this.height / 2).strength(0.8));
+    }
+    
+    applyGridLayout() {
+        // Grid layout: domains on x-axis, complexity tiers on y-axis
+        const domains = ['cosmic', 'geological', 'biological', 'cognitive', 'technological', 'hybrid'];
+        
+        this.simulation
+            .force('charge', d3.forceManyBody().strength(-50))
+            .force('center', null)
+            .force('x', d3.forceX(d => {
+                const domainIndex = domains.indexOf(d.domain) || 0;
+                return this.width * 0.1 + (domainIndex / (domains.length - 1)) * this.width * 0.8;
+            }).strength(0.9))
+            .force('y', d3.forceY(d => {
+                const tierPosition = (d.tier - 1) / 7; // 0 to 1
+                return this.height * 0.1 + tierPosition * this.height * 0.8;
+            }).strength(0.9))
+            .force('collision', d3.forceCollide().radius(d => d.radius + 5));
+    }
+    
+    applyCircularLayout() {
+        // Circular layout with complexity tiers as concentric circles
+        const centerX = this.width / 2;
+        const centerY = this.height / 2;
+        const maxRadius = Math.min(this.width, this.height) * 0.4;
+        
+        this.simulation
+            .force('charge', d3.forceManyBody().strength(-80))
+            .force('center', null)
+            .force('x', d3.forceX(centerX).strength(0.1))
+            .force('y', d3.forceY(centerY).strength(0.1))
+            .force('radial', d3.forceRadial(d => {
+                return (d.tier / 8) * maxRadius;
+            }, centerX, centerY).strength(0.8))
+            .force('collision', d3.forceCollide().radius(d => d.radius + 3));
+    }
+    
+    applyTreeLayout() {
+        // Tree/Dendrogram layout based on assembly pathways
+        this.simulation
+            .force('charge', d3.forceManyBody().strength(-200))
+            .force('center', null)
+            .force('x', d3.forceX(d => {
+                // Spread nodes horizontally based on domain and some randomness
+                const domains = ['cosmic', 'geological', 'biological', 'cognitive', 'technological', 'hybrid'];
+                const domainIndex = domains.indexOf(d.domain) || 0;
+                const baseX = (domainIndex / domains.length) * this.width;
+                return baseX + (Math.random() - 0.5) * this.width * 0.15;
+            }).strength(0.5))
+            .force('y', d3.forceY(d => {
+                // Vertical position based on complexity tier
+                const tierPosition = (d.tier - 1) / 7;
+                return this.height * 0.1 + tierPosition * this.height * 0.8;
+            }).strength(0.8))
+            .force('collision', d3.forceCollide().radius(d => d.radius + 8));
+    }
+    
+    applyClusterLayout() {
+        // Cluster layout grouping similar assemblies
+        const domains = ['cosmic', 'geological', 'biological', 'cognitive', 'technological', 'hybrid'];
+        const clusterCenters = domains.map((_, i) => ({
+            x: this.width * 0.2 + (i % 3) * this.width * 0.3,
+            y: this.height * 0.25 + Math.floor(i / 3) * this.height * 0.5
+        }));
+        
+        this.simulation
+            .force('charge', d3.forceManyBody().strength(-150))
+            .force('center', null)
+            .force('x', d3.forceX(d => {
+                const domainIndex = domains.indexOf(d.domain) || 0;
+                return clusterCenters[domainIndex].x;
+            }).strength(0.3))
+            .force('y', d3.forceY(d => {
+                const domainIndex = domains.indexOf(d.domain) || 0;
+                return clusterCenters[domainIndex].y;
+            }).strength(0.3))
+            .force('collision', d3.forceCollide().radius(d => d.radius + 8));
+    }
+    
+    applySpiralLayout() {
+        // Spiral layout based on complexity tiers
+        const centerX = this.width / 2;
+        const centerY = this.height / 2;
+        const maxRadius = Math.min(this.width, this.height) * 0.4;
+        
+        this.simulation
+            .force('charge', d3.forceManyBody().strength(-100))
+            .force('center', null)
+            .force('x', d3.forceX(d => {
+                const tierPos = (d.tier - 1) / 7; // 0 to 1 based on tier
+                const radius = tierPos * maxRadius;
+                const angle = tierPos * 4 * Math.PI; // 2 full rotations
+                return centerX + radius * Math.cos(angle);
+            }).strength(0.8))
+            .force('y', d3.forceY(d => {
+                const tierPos = (d.tier - 1) / 7; // 0 to 1 based on tier
+                const radius = tierPos * maxRadius;
+                const angle = tierPos * 4 * Math.PI;
+                return centerY + radius * Math.sin(angle);
+            }).strength(0.8))
+            .force('collision', d3.forceCollide().radius(d => d.radius + 5));
+    }
+    
+    applyTimelineLayout() {
+        // Timeline layout: arrange nodes horizontally by time of origin
+        this.simulation
+            .force('charge', d3.forceManyBody().strength(-50))
+            .force('center', null)
+            .force('x', d3.forceX(d => {
+                const timePos = this.getTimePosition(d.time_origin || d.timeOrigin || '', d.domain);
+                return this.width * 0.1 + timePos * this.width * 0.8;
+            }).strength(0.9))
+            .force('y', d3.forceY(this.height / 2).strength(0.1))
+            .force('collision', d3.forceCollide().radius(d => d.radius + 8));
+    }
+    
+    getTimePosition(timeOrigin, domain) {
+        if (!timeOrigin) {
+            // Fallback to domain-based positioning
+            const domainTimes = {
+                cosmic: 0.1,
+                geological: 0.3,
+                biological: 0.5,
+                cognitive: 0.75,
+                technological: 0.85,
+                hybrid: 0.9
+            };
+            return domainTimes[domain] || 0.5;
+        }
+        
+        const timeStr = timeOrigin.toLowerCase();
+        
+        // Big Bang and early cosmic events
+        if (timeStr.includes('big bang')) return 0.05;
+        if (timeStr.includes('13.8') && timeStr.includes('billion')) return 0.05;
+        if (timeStr.includes('13.7') && timeStr.includes('billion')) return 0.05;
+        
+        // Early cosmic structure formation
+        if (timeStr.includes('cosmic microwave background')) return 0.08;
+        if (timeStr.includes('first stars')) return 0.1;
+        if (timeStr.includes('stellar nucleosynthesis')) return 0.12;
+        if (timeStr.includes('galaxy formation')) return 0.15;
+        
+        // Solar system formation
+        if (timeStr.includes('4.6') && timeStr.includes('billion')) return 0.25;
+        if (timeStr.includes('4.5') && timeStr.includes('billion')) return 0.26;
+        if (timeStr.includes('solar system')) return 0.25;
+        
+        // Early Earth and geological events
+        if (timeStr.includes('4.4') && timeStr.includes('billion')) return 0.28;
+        if (timeStr.includes('4.0') && timeStr.includes('billion')) return 0.3;
+        if (timeStr.includes('3.8') && timeStr.includes('billion')) return 0.32;
+        if (timeStr.includes('3.5') && timeStr.includes('billion')) return 0.35;
+        if (timeStr.includes('hadean')) return 0.28;
+        if (timeStr.includes('archean')) return 0.32;
+        
+        // Early life
+        if (timeStr.includes('3.5') && timeStr.includes('billion')) return 0.35;
+        if (timeStr.includes('3.0') && timeStr.includes('billion')) return 0.4;
+        if (timeStr.includes('2.5') && timeStr.includes('billion')) return 0.45;
+        if (timeStr.includes('2.0') && timeStr.includes('billion')) return 0.5;
+        if (timeStr.includes('first life')) return 0.35;
+        if (timeStr.includes('prokaryotes')) return 0.4;
+        
+        // Complex life emergence
+        if (timeStr.includes('1.5') && timeStr.includes('billion')) return 0.55;
+        if (timeStr.includes('1.0') && timeStr.includes('billion')) return 0.6;
+        if (timeStr.includes('eukaryotes')) return 0.55;
+        if (timeStr.includes('multicellular')) return 0.6;
+        
+        // Phanerozoic eon
+        if (timeStr.includes('cambrian')) return 0.65;
+        if (timeStr.includes('ordovician')) return 0.66;
+        if (timeStr.includes('silurian')) return 0.67;
+        if (timeStr.includes('devonian')) return 0.68;
+        if (timeStr.includes('carboniferous')) return 0.69;
+        if (timeStr.includes('permian')) return 0.7;
+        if (timeStr.includes('triassic')) return 0.71;
+        if (timeStr.includes('jurassic')) return 0.72;
+        if (timeStr.includes('cretaceous')) return 0.73;
+        if (timeStr.includes('paleogene')) return 0.74;
+        if (timeStr.includes('neogene')) return 0.75;
+        
+        // Recent geological/biological events (million years ago)
+        if (timeStr.includes('500') && (timeStr.includes('myr') || timeStr.includes('million'))) return 0.64;
+        if (timeStr.includes('400') && (timeStr.includes('myr') || timeStr.includes('million'))) return 0.68;
+        if (timeStr.includes('300') && (timeStr.includes('myr') || timeStr.includes('million'))) return 0.7;
+        if (timeStr.includes('200') && (timeStr.includes('myr') || timeStr.includes('million'))) return 0.72;
+        if (timeStr.includes('100') && (timeStr.includes('myr') || timeStr.includes('million'))) return 0.76;
+        if (timeStr.includes('50') && (timeStr.includes('myr') || timeStr.includes('million'))) return 0.78;
+        if (timeStr.includes('10') && (timeStr.includes('myr') || timeStr.includes('million'))) return 0.8;
+        if (timeStr.includes('5') && (timeStr.includes('myr') || timeStr.includes('million'))) return 0.82;
+        if (timeStr.includes('2') && (timeStr.includes('myr') || timeStr.includes('million'))) return 0.84;
+        if (timeStr.includes('1') && (timeStr.includes('myr') || timeStr.includes('million'))) return 0.86;
+        
+        // Human evolution and technology (thousand years ago and recent)
+        if (timeStr.includes('300') && (timeStr.includes('kyr') || (timeStr.includes('thousand') && timeStr.includes('year')))) return 0.87;
+        if (timeStr.includes('200') && (timeStr.includes('kyr') || (timeStr.includes('thousand') && timeStr.includes('year')))) return 0.875;
+        if (timeStr.includes('100') && (timeStr.includes('kyr') || (timeStr.includes('thousand') && timeStr.includes('year')))) return 0.88;
+        if (timeStr.includes('50') && (timeStr.includes('kyr') || (timeStr.includes('thousand') && timeStr.includes('year')))) return 0.885;
+        if (timeStr.includes('10') && (timeStr.includes('kyr') || (timeStr.includes('thousand') && timeStr.includes('year')))) return 0.89;
+        
+        if (timeStr.includes('human')) return 0.88;
+        if (timeStr.includes('homo sapiens')) return 0.88;
+        if (timeStr.includes('agriculture')) return 0.9;
+        if (timeStr.includes('civilization')) return 0.92;
+        if (timeStr.includes('industrial')) return 0.94;
+        if (timeStr.includes('digital')) return 0.96;
+        if (timeStr.includes('modern') || timeStr.includes('present') || timeStr.includes('current')) return 0.98;
+        
+        // Handle specific years (1800s, 1900s, 2000s)
+        const yearMatch = timeStr.match(/(\d{4})/);
+        if (yearMatch) {
+            const year = parseInt(yearMatch[1]);
+            const currentYear = 2024;
+            const yearsAgo = currentYear - year;
+            
+            // For years within recorded history (say, last 5000 years), use precise positioning
+            if (year >= 1000 && year <= currentYear) {
+                const maxAge = 13.8e9; // Age of universe
+                const position = 1 - (yearsAgo / maxAge);
+                return Math.max(0.95, position); // Ensure very recent items are at least at 95% position
+            }
+        }
+        
+        // Parse numeric values for more precise positioning
+        // First try to match patterns with scientific units (Gyr, Myr, Kyr)
+        let match = timeStr.match(/(\d+\.?\d*)\s*(gyr|myr|kyr)\s*ago?/i);
+        if (match) {
+            let value = parseFloat(match[1]);
+            const unit = match[2].toLowerCase();
+            
+            // Handle scientific unit scaling (Gyr = gigayears = billion years, Myr = megayears = million years, Kyr = kiloyears = thousand years)
+            if (unit === 'gyr') {
+                value *= 1e9; // gigayears = billion years
+            } else if (unit === 'myr') {
+                value *= 1e6; // megayears = million years
+            } else if (unit === 'kyr') {
+                value *= 1e3; // kiloyears = thousand years
+            }
+            
+            // Map to timeline position (0 = Big Bang, 1 = present)
+            const maxAge = 13.8e9; // Age of universe
+            return Math.max(0.05, 1 - (value / maxAge));
+        }
+        
+        // Then try to match patterns with magnitude words
+        match = timeStr.match(/(\d+\.?\d*)\s*(billion|million|thousand)?\s*(year|yr|ago)/i);
+        if (match) {
+            let value = parseFloat(match[1]);
+            const magnitude = match[2] || '';
+            
+            // Handle magnitude scaling for regular years
+            if (magnitude.includes('billion')) value *= 1e9;
+            else if (magnitude.includes('million')) value *= 1e6;
+            else if (magnitude.includes('thousand')) value *= 1e3;
+            
+            // Map to timeline position (0 = Big Bang, 1 = present)
+            const maxAge = 13.8e9; // Age of universe
+            return Math.max(0.05, 1 - (value / maxAge));
+        }
+        
+        // Fallback to domain-based positioning
+        const domainTimes = {
+            cosmic: 0.1,
+            geological: 0.3,
+            biological: 0.5,
+            cognitive: 0.75,
+            technological: 0.85,
+            hybrid: 0.9
+        };
+        return domainTimes[domain] || 0.5;
+    }
+    
+    parseTimeOrigin(timeString) {
+        if (!timeString) return 0;
+        
+        // Convert various time formats to years ago
+        const str = timeString.toLowerCase();
+        
+        // Handle "big bang" specially
+        if (str.includes('big bang')) {
+            const match = str.match(/(\d+\.?\d*)\s*(second|minute|hour|day|year|myr|gyr)?/);
+            if (match) {
+                const value = parseFloat(match[1]);
+                const unit = match[2] || '';
+                
+                // Convert time after big bang to years ago (13.8 billion years)
+                const bigBangYearsAgo = 13.8e9;
+                
+                if (unit.includes('second')) return bigBangYearsAgo - value / (365.25 * 24 * 3600);
+                if (unit.includes('minute')) return bigBangYearsAgo - value / (365.25 * 24 * 60);
+                if (unit.includes('hour')) return bigBangYearsAgo - value / (365.25 * 24);
+                if (unit.includes('day')) return bigBangYearsAgo - value / 365.25;
+                if (unit.includes('year')) return bigBangYearsAgo - value;
+                if (unit.includes('myr')) return bigBangYearsAgo - value * 1e6;
+                if (unit.includes('gyr')) return bigBangYearsAgo - value * 1e9;
+            }
+            return 13.8e9; // Big Bang
+        }
+        
+        // Extract number and unit
+        const match = str.match(/(\d+\.?\d*)\s*(billion|million|thousand|hundred)?\s*(year|yr|myr|gyr|ce|bce|bc|ad)?/);
+        if (!match) return 0;
+        
+        let value = parseFloat(match[1]);
+        const magnitude = match[2] || '';
+        const unit = match[3] || '';
+        
+        // Apply magnitude
+        if (magnitude.includes('billion')) value *= 1e9;
+        else if (magnitude.includes('million')) value *= 1e6;
+        else if (magnitude.includes('thousand')) value *= 1e3;
+        else if (magnitude.includes('hundred')) value *= 1e2;
+        
+        // Handle different units
+        if (unit === 'gyr') value *= 1e9;
+        else if (unit === 'myr') value *= 1e6;
+        
+        // Handle CE/BCE/BC/AD
+        if (unit === 'ce' || unit === 'ad') value = 2024 - value;
+        else if (unit === 'bce' || unit === 'bc') value = 2024 + value;
+        
+        // If the string contains "ago", use as is; otherwise assume it's years ago
+        if (!str.includes('ago') && !str.includes('after') && (unit === 'ce' || unit === 'bce' || unit === 'bc' || unit === 'ad')) {
+            // Already handled above
+        } else if (str.includes('present') || str.includes('modern') || str.includes('current')) {
+            value = 0;
+        }
+        
+        return value;
     }
     
     // Zoom control methods

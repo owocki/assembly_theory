@@ -2,25 +2,24 @@ class AssemblyTheoryApp {
     constructor() {
         this.dataProcessor = new DataProcessor();
         this.visualization = new NetworkVisualization('network-svg');
+        this.linkOptions = new LinkOptions();
         this.currentData = null;
         this.currentFilters = {
             aiRange: { min: 1, max: 8 },
-            domains: ['cosmic', 'geological', 'biological', 'cognitive', 'technological', 'hybrid'],
+            domains: ['cosmic', 'geological', 'biological', 'cognitive', 'technological'],
             searchTerm: ''
         };
+        this.currentLinkStrategy = 'none';
         
         this.init();
     }
     
     init() {
-        // Initialize data
-        this.loadData();
-        
         // Set up event listeners
         this.setupEventListeners();
         
-        // Hide loading indicator
-        document.getElementById('loading').classList.add('hidden');
+        // Initialize data
+        this.loadData();
         
         console.log('Assembly Theory Network Visualization initialized');
     }
@@ -36,28 +35,53 @@ class AssemblyTheoryApp {
             this.rawData = this.dataProcessor.generateSampleData();
         }
         this.updateVisualization();
+        
+        // Hide loading indicator after data is loaded and visualization is updated
+        document.getElementById('loading').classList.add('hidden');
     }
     
     setupEventListeners() {
         // Assembly Index range sliders
         const aiRangeMin = document.getElementById('ai-range-min');
         const aiRangeMax = document.getElementById('ai-range-max');
+        const aiMinValue = document.getElementById('ai-min-value');
+        const aiMaxValue = document.getElementById('ai-max-value');
+        
+        // Helper to get tier label
+        const getTierLabel = (value) => {
+            const tierRanges = [
+                'AI 1-10',
+                'AI 10-100',
+                'AI 100-1K',
+                'AI 1K-10K',
+                'AI 10K-100K',
+                'AI 100K-1M',
+                'AI 1M-1B',
+                'AI 1B+'
+            ];
+            const index = Math.min(parseInt(value), tierRanges.length - 1);
+            return `Tier ${index + 1} (${tierRanges[index]})`;
+        };
         
         aiRangeMin.addEventListener('input', (e) => {
-            this.currentFilters.aiRange.min = parseInt(e.target.value);
+            this.currentFilters.aiRange.min = parseInt(e.target.value) + 1; // Convert 0-7 to 1-8
             if (this.currentFilters.aiRange.min > this.currentFilters.aiRange.max) {
                 this.currentFilters.aiRange.max = this.currentFilters.aiRange.min;
-                aiRangeMax.value = this.currentFilters.aiRange.min;
+                aiRangeMax.value = this.currentFilters.aiRange.min - 1;
+                aiMaxValue.textContent = getTierLabel(aiRangeMax.value);
             }
+            aiMinValue.textContent = getTierLabel(e.target.value);
             this.updateVisualization();
         });
         
         aiRangeMax.addEventListener('input', (e) => {
-            this.currentFilters.aiRange.max = parseInt(e.target.value);
+            this.currentFilters.aiRange.max = parseInt(e.target.value) + 1; // Convert 0-7 to 1-8
             if (this.currentFilters.aiRange.max < this.currentFilters.aiRange.min) {
                 this.currentFilters.aiRange.min = this.currentFilters.aiRange.max;
-                aiRangeMin.value = this.currentFilters.aiRange.max;
+                aiRangeMin.value = this.currentFilters.aiRange.max - 1;
+                aiMinValue.textContent = getTierLabel(aiRangeMin.value);
             }
+            aiMaxValue.textContent = getTierLabel(e.target.value);
             this.updateVisualization();
         });
         
@@ -90,19 +114,70 @@ class AssemblyTheoryApp {
         
         // Layout selector
         const layoutSelect = document.getElementById('layout-select');
+        const layoutDescription = document.getElementById('layout-description');
+        
+        // Layout descriptions
+        const layoutDescriptions = {
+            'hierarchical': 'Arranges nodes vertically by complexity - simpler assemblies at top, complex at bottom',
+            'timeline': 'Arranges nodes horizontally by time of emergence - Big Bang to present day'
+        };
+        
         layoutSelect.addEventListener('change', (e) => {
             this.visualization.applyLayout(e.target.value);
             this.visualization.simulation.alpha(0.3).restart();
+            
+            // Update layout description
+            layoutDescription.textContent = layoutDescriptions[e.target.value] || '';
         });
         
-        // Control buttons
-        document.getElementById('reset-view').addEventListener('click', () => {
-            this.visualization.resetView();
+        // Set initial layout description
+        layoutDescription.textContent = layoutDescriptions[layoutSelect.value] || '';
+        
+        // Set initial tier labels
+        aiMinValue.textContent = getTierLabel(aiRangeMin.value);
+        aiMaxValue.textContent = getTierLabel(aiRangeMax.value);
+        
+        // Link strategy selector
+        const linkStrategySelect = document.getElementById('link-strategy-select');
+        const strategyDescription = document.getElementById('link-strategy-description');
+        const customOptions = document.getElementById('custom-link-options');
+        
+        linkStrategySelect.addEventListener('change', (e) => {
+            this.currentLinkStrategy = e.target.value;
+            
+            // Update description
+            const strategy = this.linkOptions.linkStrategies[e.target.value];
+            strategyDescription.textContent = strategy ? strategy.description : '';
+            
+            // Show/hide custom options
+            if (customOptions) {
+                customOptions.style.display = e.target.value === 'custom' ? 'block' : 'none';
+            }
+            
+            // Regenerate links with new strategy
+            this.updateVisualization();
         });
         
-        document.getElementById('export-data').addEventListener('click', () => {
-            this.exportData();
-        });
+        // Set initial description
+        const initialStrategy = this.linkOptions.linkStrategies[this.currentLinkStrategy];
+        strategyDescription.textContent = initialStrategy ? initialStrategy.description : '';
+        
+        // Custom option listeners
+        const customMinWeight = document.getElementById('custom-min-weight');
+        if (customMinWeight) {
+            customMinWeight.addEventListener('input', (e) => {
+                const weightValue = document.getElementById('weight-value');
+                if (weightValue) {
+                    weightValue.textContent = e.target.value;
+                }
+                if (this.currentLinkStrategy === 'custom') {
+                    this.updateVisualization();
+                }
+            });
+        }
+        
+        // Control buttons - removed from UI
+        // Keeping the functionality available via keyboard shortcuts (0 for reset)
         
         // Zoom controls
         document.getElementById('zoom-in').addEventListener('click', () => {
@@ -156,7 +231,38 @@ class AssemblyTheoryApp {
     
     updateVisualization() {
         // Filter data based on current filters
-        this.currentData = this.dataProcessor.filterData(this.rawData, this.currentFilters);
+        let filteredData = this.dataProcessor.filterData(this.rawData, this.currentFilters);
+        
+        // Apply selected link strategy
+        if (this.linkOptions && this.currentLinkStrategy) {
+            const strategy = this.linkOptions.linkStrategies[this.currentLinkStrategy];
+            if (strategy) {
+                // Get custom options if using custom strategy
+                let options = {};
+                if (this.currentLinkStrategy === 'custom') {
+                    const maxConn = document.getElementById('custom-max-connections');
+                    const aiRatio = document.getElementById('custom-ai-ratio');
+                    const sameDomain = document.getElementById('custom-same-domain');
+                    const minWeight = document.getElementById('custom-min-weight');
+                    
+                    options = {
+                        maxConnections: maxConn ? parseInt(maxConn.value) : 5,
+                        aiRatioThreshold: aiRatio ? parseInt(aiRatio.value) : 10,
+                        sameDomainOnly: sameDomain ? sameDomain.checked : false,
+                        minWeight: minWeight ? parseFloat(minWeight.value) : 0.1
+                    };
+                }
+                
+                // Generate new links based on strategy
+                const newLinks = strategy.generateLinks(filteredData.nodes, options);
+                filteredData = {
+                    ...filteredData,
+                    edges: newLinks
+                };
+            }
+        }
+        
+        this.currentData = filteredData;
         
         // Update visualization
         this.visualization.render(this.currentData);

@@ -24,12 +24,56 @@ class DataProcessor {
     // Generate comprehensive network data from all repository sources
     async generateRealData() {
         try {
-            // Try comprehensive data ingestion first
+            // First, try to use the pre-generated comprehensive data
+            if (typeof nodes !== 'undefined' && nodes && nodes.length > 0) {
+                console.log(`✅ Successfully loaded ${nodes.length} nodes from all-assemblies-data.js`);
+                
+                // Process nodes to ensure all required fields
+                const processedNodes = nodes.map(node => {
+                    const tierInfo = this.getAssemblyTier(node.assembly_index);
+                    return {
+                        ...node,
+                        tier: tierInfo.tier,
+                        visual_complexity: tierInfo.symbol,
+                        color: this.domainColors[node.domain] || '#999999',
+                        radius: this.getNodeRadius(tierInfo.tier),
+                        x: null,
+                        y: null
+                    };
+                });
+                
+                const data = {
+                    nodes: processedNodes,
+                    edges: []  // Edges will be generated based on link strategy
+                };
+                return this.addBiologicalEntities(data);
+            }
+        } catch (error) {
+            console.warn('Failed to load pre-generated data:', error);
+        }
+        
+        try {
+            // Try complete markdown ingestion (from file list without fetching)
+            if (typeof CompleteMarkdownIngestion !== 'undefined') {
+                const completeIngestion = new CompleteMarkdownIngestion();
+                const completeData = completeIngestion.generateDataFromFileList();
+                
+                if (completeData && completeData.nodes.length > 0) {
+                    console.log(`✅ Successfully generated ${completeData.nodes.length} nodes from file list`);
+                    return this.addBiologicalEntities(completeData);
+                }
+            }
+        } catch (error) {
+            console.warn('Complete markdown ingestion failed, trying other methods:', error);
+        }
+        
+        try {
+            // Try comprehensive data ingestion 
             const comprehensiveIngestion = new ComprehensiveDataIngestion();
             const comprehensiveData = await comprehensiveIngestion.generateComprehensiveDataset();
             
             if (comprehensiveData) {
-                return comprehensiveData;
+                return this.addBiologicalEntities(comprehensiveData);
             }
         } catch (error) {
             console.warn('Comprehensive data ingestion failed, trying basic ingestion:', error);
@@ -41,7 +85,7 @@ class DataProcessor {
             const realData = await dataIngestion.generateCompleteDataset();
             
             if (realData) {
-                return realData;
+                return this.addBiologicalEntities(realData);
             }
         } catch (error) {
             console.warn('Basic data ingestion failed, using sample data:', error);
@@ -144,8 +188,33 @@ class DataProcessor {
             { source: 'internet', target: 'brain', type: 'functional_analogy', symbol: '≈' }
         ];
         
+        // Add 100 biological entities
+        let allNodes = nodes;
+        if (typeof BiologicalEntities !== 'undefined') {
+            const bioEntities = new BiologicalEntities();
+            const biologicalNodes = bioEntities.generateBiologicalEntities();
+            allNodes = [...nodes, ...biologicalNodes];
+            console.log(`Added ${biologicalNodes.length} biological entities to the dataset`);
+        }
+        
+        // Add 100+ organisms (animals and plants)
+        if (typeof Organisms !== 'undefined') {
+            const organisms = new Organisms();
+            const organismNodes = organisms.generateOrganisms();
+            allNodes = [...allNodes, ...organismNodes];
+            console.log(`Added ${organismNodes.length} organisms (animals and plants) to the dataset`);
+        }
+        
+        // Add 265 technological nodes
+        if (typeof TechnologicalNodes !== 'undefined') {
+            const techNodes = new TechnologicalNodes();
+            const technologicalNodes = techNodes.generateTechnologies();
+            allNodes = [...allNodes, ...technologicalNodes];
+            console.log(`Added ${technologicalNodes.length} technological nodes to the dataset`);
+        }
+        
         // Process nodes with assembly tiers and colors
-        const processedNodes = nodes.map(node => this.processNode(node));
+        const processedNodes = allNodes.map(node => this.processNode(node));
         
         return {
             nodes: processedNodes,
@@ -167,8 +236,8 @@ class DataProcessor {
             visual_complexity: tier.symbol,
             color: this.domainColors[node.domain] || '#666666',
             radius: this.getNodeRadius(tier.tier),
-            time_origin: this.estimateTimeOrigin(node.domain, node.assembly_index),
-            copy_number: this.estimateCopyNumber(node.assembly_index, node.domain)
+            copy_number: this.estimateCopyNumber(node.assembly_index, node.domain),
+            github_url: this.generateGitHubUrl(node)
         };
     }
     
@@ -182,16 +251,161 @@ class DataProcessor {
         return 3 + (tier * 2); // Scale from 5px to 19px
     }
     
-    estimateTimeOrigin(domain, assemblyIndex) {
-        const timeEstimates = {
-            cosmic: '13.8 Gyr ago',
-            geological: '4.5 Gyr ago',
-            biological: '3.8 Gyr ago',
-            cognitive: '500 Myr ago',
-            technological: '2.5 Myr ago',
-            hybrid: '50 yr ago'
+    generateGitHubUrl(node) {
+        const baseUrl = 'https://github.com/owocki/assembly_theory/tree/master/domains';
+        
+        // Convert node name to filename format
+        const filename = node.name
+            .toLowerCase()
+            .replace(/[^a-z0-9\s]/g, '') // Remove special characters
+            .replace(/\s+/g, '_') // Replace spaces with underscores
+            .replace(/_+/g, '_') // Remove duplicate underscores
+            .replace(/^_|_$/g, ''); // Remove leading/trailing underscores
+        
+        // Map domain to likely subdirectory structure based on file organization
+        const subdirMap = {
+            'cosmic': this.getCosmicSubdir(filename),
+            'geological': this.getGeologicalSubdir(filename),
+            'biological': this.getBiologicalSubdir(filename),
+            'cognitive': this.getCognitiveSubdir(filename),
+            'technological': this.getTechnologicalSubdir(filename)
         };
-        return timeEstimates[domain] || 'Unknown';
+        
+        const subdir = subdirMap[node.domain] || '';
+        const path = subdir ? `${node.domain}/${subdir}/${filename}.md` : `${node.domain}/${filename}.md`;
+        
+        return `${baseUrl}/${path}`;
+    }
+    
+    getCosmicSubdir(filename) {
+        const atomNames = ['hydrogen', 'helium', 'carbon', 'oxygen', 'nitrogen', 'lithium'];
+        const moleculeNames = ['water', 'co2', 'methane', 'ammonia', 'hydrogen_gas'];
+        const particleNames = ['proton', 'electron', 'neutron', 'photon', 'neutrino', 'quark', 'muon'];
+        const starNames = ['main_sequence'];
+        const galaxyNames = ['milky_way'];
+        const ionNames = ['hydronium', 'hydroxide'];
+        const forceNames = ['strong_nuclear', 'weak_nuclear'];
+        const fieldNames = ['electromagnetic_field'];
+        
+        if (atomNames.includes(filename)) return 'atoms';
+        if (moleculeNames.includes(filename)) return 'molecules';
+        if (particleNames.includes(filename)) return 'particles';
+        if (starNames.includes(filename)) return 'stars';
+        if (galaxyNames.includes(filename)) return 'galaxies';
+        if (ionNames.includes(filename)) return 'ions';
+        if (forceNames.includes(filename)) return 'forces';
+        if (fieldNames.includes(filename)) return 'quantum_fields';
+        return '';
+    }
+    
+    getGeologicalSubdir(filename) {
+        const mineralNames = ['quartz', 'clay', 'iron_oxide', 'salt', 'diamond', 'graphite', 'hematite', 'corundum', 'apatite', 'halite', 'dolomite', 'siderite', 'fluorite', 'sylvite', 'anhydrite', 'barite', 'bornite', 'chalcopyrite', 'galena', 'molybdenite', 'sphalerite', 'actinolite', 'andalusite', 'beryl', 'cassiterite', 'chlorite', 'chromite', 'cordierite', 'diopside', 'epidote', 'hornblende', 'k_feldspar', 'kyanite', 'plagioclase', 'rutile', 'scheelite', 'serpentine', 'sillimanite', 'spinel', 'staurolite', 'talc', 'topaz', 'tourmaline', 'tremolite', 'vesuvianite', 'wolframite', 'wollastonite', 'zircon'];
+        const rockNames = ['basalt', 'gabbro', 'gneiss', 'granite', 'obsidian', 'schist'];
+        const formationNames = ['alluvial_deposit', 'banded_iron_formation', 'coal', 'epithermal_deposit', 'karst', 'kimberlite', 'limestone', 'ophiolite', 'pegmatite', 'porphyry_deposit', 'reef', 'sandstone', 'shale', 'skarn'];
+        const processNames = ['erosion', 'hydrothermal_alteration', 'plate_tectonics', 'volcanism', 'weathering'];
+        const compoundNames = ['silica_unit'];
+        const planetaryNames = ['earth_system'];
+        
+        if (mineralNames.includes(filename)) {
+            // Handle mineral subcategories
+            const oxides = ['hematite', 'corundum', 'iron_oxide'];
+            const carbonates = ['dolomite', 'siderite'];
+            const halides = ['fluorite', 'sylvite', 'halite'];
+            const sulfates = ['anhydrite', 'barite'];
+            const sulfides = ['bornite', 'chalcopyrite', 'galena', 'molybdenite', 'sphalerite'];
+            const phosphates = ['apatite'];
+            
+            if (oxides.includes(filename)) return 'minerals/oxides';
+            if (carbonates.includes(filename)) return 'minerals/carbonates';
+            if (halides.includes(filename)) return 'minerals/halides';
+            if (sulfates.includes(filename)) return 'minerals/sulfates';
+            if (sulfides.includes(filename)) return 'minerals/sulfides';
+            if (phosphates.includes(filename)) return 'minerals/phosphates';
+            return 'minerals';
+        }
+        if (rockNames.includes(filename)) return 'rocks';
+        if (formationNames.includes(filename)) return 'formations';
+        if (processNames.includes(filename)) return 'processes';
+        if (compoundNames.includes(filename)) return 'compounds';
+        if (planetaryNames.includes(filename)) return 'planetary_systems';
+        return '';
+    }
+    
+    getBiologicalSubdir(filename) {
+        const prokaryoticNames = ['bacteria', 'ribosome', 'trna', 'dna_polymerase', 'photosystem', 'virus'];
+        const eukaryoticNames = ['mitochondrion', 'chloroplast'];
+        const prebioticNames = ['amino_acids', 'nucleotides', 'peptides', 'sugars', 'membranes'];
+        const multicellularNames = ['insect'];
+        const ecosystemNames = ['coral_reef'];
+        const aminoAcidNames = ['glycine'];
+        const modernNames = ['mrna_vaccine_platforms'];
+        
+        if (prokaryoticNames.includes(filename)) return 'prokaryotic';
+        if (eukaryoticNames.includes(filename)) return 'eukaryotic';
+        if (prebioticNames.includes(filename)) return 'prebiotic';
+        if (multicellularNames.includes(filename)) return 'multicellular';
+        if (ecosystemNames.includes(filename)) return 'ecosystems';
+        if (aminoAcidNames.includes(filename)) return 'amino_acids';
+        if (modernNames.includes(filename)) return 'modern';
+        return '';
+    }
+    
+    getCognitiveSubdir(filename) {
+        const memoryNames = ['episodic_memory', 'semantic_memory', 'working_memory'];
+        const learningNames = ['associative_learning', 'habit_formation', 'metacognition'];
+        const socialNames = ['empathy', 'stereotype', 'theory_of_mind'];
+        const languageNames = ['human_language', 'language_acquisition', 'nonverbal_communication'];
+        const emotionNames = ['emotional_intelligence', 'moral_emotions'];
+        const reasoningNames = ['analogical_reasoning', 'critical_thinking', 'executive_function'];
+        const neuralNames = ['human_brain'];
+        const basicNames = ['attention'];
+        const collectiveNames = ['swarm_intelligence'];
+        const cooperationNames = ['reciprocity'];
+        const cultureNames = ['cultural_evolution'];
+        const decisionNames = ['rational_choice'];
+        const economicNames = ['market'];
+        const governanceNames = ['authority', 'democracy'];
+        const groupNames = ['social_influence'];
+        const institutionNames = ['bureaucracy'];
+        const socialStructureNames = ['kinship', 'tribe'];
+        const trustNames = ['interpersonal_trust'];
+        const consciousnessNames = ['emergence'];
+        
+        if (memoryNames.includes(filename)) return 'memory';
+        if (learningNames.includes(filename)) return 'learning';
+        if (socialNames.includes(filename)) return 'social_cognition';
+        if (languageNames.includes(filename)) return filename.includes('language') ? 'language' : 'communication';
+        if (emotionNames.includes(filename)) return 'emotions';
+        if (reasoningNames.includes(filename)) return 'reasoning';
+        if (neuralNames.includes(filename)) return 'neural_networks';
+        if (basicNames.includes(filename)) return 'basic_cognition';
+        if (collectiveNames.includes(filename)) return 'collective_intelligence';
+        if (cooperationNames.includes(filename)) return 'cooperation';
+        if (cultureNames.includes(filename)) return 'culture';
+        if (decisionNames.includes(filename)) return 'decision_making';
+        if (economicNames.includes(filename)) return 'economic_systems';
+        if (governanceNames.includes(filename)) return 'governance';
+        if (groupNames.includes(filename)) return 'group_dynamics';
+        if (institutionNames.includes(filename)) return 'institutions';
+        if (socialStructureNames.includes(filename)) return 'social_structures';
+        if (trustNames.includes(filename)) return 'trust';
+        if (consciousnessNames.includes(filename)) return 'consciousness';
+        return '';
+    }
+    
+    getTechnologicalSubdir(filename) {
+        const computerNames = ['microprocessor'];
+        const machineNames = ['steam_engine'];
+        const networkNames = ['ai', 'internet'];
+        const toolNames = ['stone_tools'];
+        const modernNames = ['ai_native_applications', 'amazon_fulfillment', 'defi_yield_farming', 'edge_computing', 'layer2_rollups', 'llm_token_systems', 'react_server_components', 'tesla_gigafactory', 'tsmc_semiconductor'];
+        
+        if (computerNames.includes(filename)) return 'computers';
+        if (machineNames.includes(filename)) return 'machines';
+        if (networkNames.includes(filename)) return 'networks';
+        if (toolNames.includes(filename)) return 'tools';
+        if (modernNames.includes(filename)) return 'modern';
+        return '';
     }
     
     estimateCopyNumber(assemblyIndex, domain) {
@@ -210,6 +424,58 @@ class DataProcessor {
     }
     
     // Filter data based on current filter settings
+    // Add biological entities to existing data
+    addBiologicalEntities(data) {
+        let enhancedData = data;
+        
+        // Add biological entities
+        if (typeof BiologicalEntities !== 'undefined') {
+            const bioEntities = new BiologicalEntities();
+            const biologicalNodes = bioEntities.generateBiologicalEntities();
+            const biologicalLinks = bioEntities.generateBiologicalLinks(biologicalNodes);
+            
+            console.log(`Adding ${biologicalNodes.length} biological entities to the dataset`);
+            
+            enhancedData = {
+                ...enhancedData,
+                nodes: [...enhancedData.nodes, ...biologicalNodes],
+                edges: [...(enhancedData.edges || enhancedData.links || []), ...biologicalLinks]
+            };
+        }
+        
+        // Add organisms (animals and plants)
+        if (typeof Organisms !== 'undefined') {
+            const organisms = new Organisms();
+            const organismNodes = organisms.generateOrganisms();
+            const organismLinks = organisms.generateOrganismLinks(organismNodes);
+            
+            console.log(`Adding ${organismNodes.length} organisms (animals and plants) to the dataset`);
+            
+            enhancedData = {
+                ...enhancedData,
+                nodes: [...enhancedData.nodes, ...organismNodes],
+                edges: [...(enhancedData.edges || enhancedData.links || []), ...organismLinks]
+            };
+        }
+        
+        // Add technological nodes
+        if (typeof TechnologicalNodes !== 'undefined') {
+            const techNodes = new TechnologicalNodes();
+            const technologicalNodes = techNodes.generateTechnologies();
+            const technologicalLinks = techNodes.generateTechnologyLinks(technologicalNodes);
+            
+            console.log(`Adding ${technologicalNodes.length} technological nodes to the dataset`);
+            
+            enhancedData = {
+                ...enhancedData,
+                nodes: [...enhancedData.nodes, ...technologicalNodes],
+                edges: [...(enhancedData.edges || enhancedData.links || []), ...technologicalLinks]
+            };
+        }
+        
+        return enhancedData;
+    }
+    
     filterData(data, filters) {
         const { aiRange, domains, searchTerm } = filters;
         
@@ -221,6 +487,11 @@ class DataProcessor {
             
             // Domain filter
             if (!domains.includes(node.domain)) {
+                return false;
+            }
+            
+            // Cosmic domain special filter - remove nodes with AI > 5000
+            if (node.domain === 'cosmic' && node.assembly_index > 5000) {
                 return false;
             }
             

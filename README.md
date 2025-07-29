@@ -1,5 +1,7 @@
 # Assembly Theory Knowledge Tree
 
+View webapp at https://assemblytheory.vercel.app/i
+
 ## Table of Contents
 
 - [What is Assembly Theory?](#what-is-assembly-theory)
@@ -12,8 +14,6 @@
 - [Profound Implications](#profound-implications)
 - [Mathematical Framework](#mathematical-framework)
 - [Repository Structure](#repository-structure)
-- [How to Navigate](#how-to-navigate)
-- [Key Files](#key-files)
 - [Experimental Validation](#experimental-validation)
 - [Criticisms and Limitations](#criticisms-and-limitations)
 - [Future Directions](#future-directions)
@@ -607,19 +607,6 @@ assembly/
 └── theory/          # Mathematical frameworks
 ```
 
-## How to Navigate
-
-1. **Linear Exploration**: Follow complexity from simple to complex within each domain
-2. **Network Exploration**: Jump between related assemblies across domains
-3. **Dimensional Slicing**: View all assemblies at a specific complexity level or time scale
-4. **Pathway Tracing**: Track convergent evolution and parallel development
-
-## Key Files
-
-- [`ASSEMBLY_INDEX.md`](https://github.com/owocki/assembly_theory/tree/master/ASSEMBLY_INDEX.md) - Master index of all assemblies with cross-references
-- [`VISUALIZATION_GUIDE.md`](https://github.com/owocki/assembly_theory/tree/master/VISUALIZATION_GUIDE.md) - Guide to understanding visual representations
-- Domain `PATHWAYS.md` files - Connection maps within each domain
-
 ## Experimental Validation
 
 ### 1. Mass Spectrometry
@@ -660,6 +647,12 @@ When adding new assemblies:
 
 ## Navigation Tips
 
+1. **Linear Exploration**: Follow complexity from simple to complex within each domain
+2. **Network Exploration**: Jump between related assemblies across domains
+3. **Dimensional Slicing**: View all assemblies at a specific complexity level or time scale
+4. **Pathway Tracing**: Track convergent evolution and parallel development
+
+
 1. Each assembly links to its primary domain file
 2. Complex assemblies often appear in multiple locations
 3. Use `/pathways/` to trace connections between assemblies
@@ -670,4 +663,11 @@ For theoretical foundations, see `/theory/`
 For mathematical details, see `/theory/mathematics/`
 For philosophical implications, see `/theory/philosophy/`
 
+Key Files:
 
+- [`ASSEMBLY_INDEX.md`](https://github.com/owocki/assembly_theory/tree/master/ASSEMBLY_INDEX.md) - Master index of all assemblies with cross-references
+- [`VISUALIZATION_GUIDE.md`](https://github.com/owocki/assembly_theory/tree/master/VISUALIZATION_GUIDE.md) - Guide to understanding visual representations
+- Domain `PATHWAYS.md` files - Connection maps within each domain
+
+
+You can also navigate this data via the companion webapp, hosted at https://assemblytheory.vercel.app/i

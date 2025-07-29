@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Assembly Theory Network Visualization</title>
+    
+    <!-- Favicon - Lego brick representing assembly -->
+    <link rel="icon" type="image/svg+xml" href="favicon-assembly.svg">
+    <link rel="alternate icon" href="favicon.svg">
+    <link rel="shortcut icon" href="favicon-assembly.svg">
+    <link rel="apple-touch-icon" href="favicon-assembly.svg">
+    
     <link rel="stylesheet" href="styles.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
@@ -21,10 +28,26 @@
                     
                     <div class="filter-group">
                         <label for="ai-range">Assembly Index Range</label>
-                        <input type="range" id="ai-range-min" min="0" max="8" value="0" step="1">
-                        <input type="range" id="ai-range-max" min="0" max="8" value="8" step="1">
+                        <div class="range-inputs">
+                            <div class="range-input-group">
+                                <label class="range-label">Min:</label>
+                                <input type="range" id="ai-range-min" min="0" max="8" value="0" step="1">
+                                <span class="range-value" id="ai-min-value">Tier 1</span>
+                            </div>
+                            <div class="range-input-group">
+                                <label class="range-label">Max:</label>
+                                <input type="range" id="ai-range-max" min="0" max="8" value="8" step="1">
+                                <span class="range-value" id="ai-max-value">Tier 8</span>
+                            </div>
+                        </div>
                         <div class="range-labels">
                             <span>AI 1-10</span>
+                            <span>AI 10-100</span>
+                            <span>AI 100-1K</span>
+                            <span>AI 1K-10K</span>
+                            <span>AI 10K-100K</span>
+                            <span>AI 100K-1M</span>
+                            <span>AI 1M-1B</span>
                             <span>AI 1B+</span>
                         </div>
                     </div>
@@ -37,30 +60,35 @@
                             <label><input type="checkbox" checked data-domain="biological"> <span class="domain-color biological"></span> Biological</label>
                             <label><input type="checkbox" checked data-domain="cognitive"> <span class="domain-color cognitive"></span> Cognitive</label>
                             <label><input type="checkbox" checked data-domain="technological"> <span class="domain-color technological"></span> Technological</label>
-                            <label><input type="checkbox" checked data-domain="hybrid"> <span class="domain-color hybrid"></span> Hybrid</label>
                         </div>
                     </div>
-                    
-                    <div class="filter-group">
-                        <label for="search">Search Assemblies</label>
-                        <input type="text" id="search" placeholder="Search by name...">
-                    </div>
+                </div>
+                
+                <div class="section">
+                    <h3>Link Strategy</h3>
+                    <select id="link-strategy-select">
+                        <option value="none" selected>⚪ None</option>
+                        <option value="hierarchical">🏗️ Hierarchical Assembly</option>
+                        <option value="proximity">🔗 Complexity Proximity</option>
+                        <option value="domain_clusters">🎯 Domain Clusters</option>
+                    </select>
+                    <div id="link-strategy-description" class="strategy-description"></div>
                 </div>
                 
                 <div class="section">
                     <h3>Layout</h3>
                     <select id="layout-select">
-                        <option value="force">Force-Directed</option>
                         <option value="hierarchical">Hierarchical</option>
                         <option value="timeline" selected>Timeline</option>
-                        <option value="radial">Radial</option>
                     </select>
+                    <div id="layout-description" class="layout-description"></div>
                 </div>
                 
                 <div class="section">
-                    <h3>Controls</h3>
-                    <button id="reset-view">Reset View</button>
-                    <button id="export-data">Export Data</button>
+                    <h3>Search</h3>
+                    <div class="filter-group">
+                        <input type="text" id="search" placeholder="Search by name...">
+                    </div>
                 </div>
             </aside>
             
@@ -86,10 +114,20 @@
     <!-- Tooltip -->
     <div class="tooltip" id="tooltip"></div>
     
+    <script src="all-assemblies-data.js"></script>
     <script src="data-ingestion.js"></script>
+    <script src="markdown-parser.js"></script>
     <script src="comprehensive-data-ingestion.js"></script>
+    <script src="complete-markdown-ingestion.js"></script>
+    <script src="repository-data-loader.js"></script>
+    <script src="markdown-ingestion.js"></script>
+    <script src="biological-entities.js"></script>
+    <script src="organisms.js"></script>
+    <script src="technological-nodes.js"></script>
+    <script src="link-options.js"></script>
     <script src="data-processor.js"></script>
     <script src="network-visualization.js"></script>
+    <script src="test-ingestion.js"></script>
     <script src="app.js"></script>
 </body>
 </html>

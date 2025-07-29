@@ -360,6 +360,7 @@ Digital consciousness,information_system,10000000000000000000,technological,Conc
             time_origin: timeOrigin,
             description: description,
             copy_number: this.estimateCopyNumber(assemblyIndex, domain),
+            github_url: this.generateGitHubUrl({ name, domain }),
             raw_data: rawNode
         };
     }
@@ -383,6 +384,40 @@ Digital consciousness,information_system,10000000000000000000,technological,Conc
     
     getNodeRadius(tier) {
         return 3 + (tier * 2);
+    }
+    
+    generateGitHubUrl(node) {
+        const baseUrl = 'https://github.com/owocki/assembly_theory/tree/master/domains';
+        
+        // Convert node name to filename format
+        const filename = node.name
+            .toLowerCase()
+            .replace(/[^a-z0-9\s]/g, '') // Remove special characters
+            .replace(/\s+/g, '_') // Replace spaces with underscores
+            .replace(/_+/g, '_') // Remove duplicate underscores
+            .replace(/^_|_$/g, ''); // Remove leading/trailing underscores
+        
+        // Basic subdirectory mapping
+        const subdir = this.getBasicSubdir(node.domain, filename);
+        const path = subdir ? `${node.domain}/${subdir}/${filename}.md` : `${node.domain}/${filename}.md`;
+        
+        return `${baseUrl}/${path}`;
+    }
+    
+    getBasicSubdir(domain, filename) {
+        // Basic mapping for common files
+        if (domain === 'cosmic') {
+            if (['hydrogen', 'helium', 'carbon', 'oxygen'].includes(filename)) return 'atoms';
+            if (['water', 'co2', 'methane'].includes(filename)) return 'molecules';
+            if (['proton', 'electron', 'neutron'].includes(filename)) return 'particles';
+        }
+        if (domain === 'geological') {
+            if (['quartz', 'clay'].includes(filename)) return 'minerals';
+        }
+        if (domain === 'biological') {
+            if (['ribosome', 'bacteria'].includes(filename)) return 'prokaryotic';
+        }
+        return '';
     }
     
     estimateCopyNumber(assemblyIndex, domain) {

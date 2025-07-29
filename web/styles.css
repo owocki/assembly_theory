@@ -68,11 +68,36 @@ body {
     margin-bottom: 1.5rem;
 }
 
-.filter-group label {
+.filter-group > label {
     display: block;
     margin-bottom: 0.5rem;
     color: #ccc;
     font-size: 0.9rem;
+}
+
+.range-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.range-input-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.range-label {
+    font-size: 0.85em;
+    color: #aaa;
+    min-width: 35px;
+}
+
+.range-value {
+    font-size: 0.85em;
+    color: #58a6ff;
+    min-width: 50px;
 }
 
 .filter-group input[type="range"] {
@@ -81,10 +106,16 @@ body {
 }
 
 .range-labels {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.8rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.25rem;
+    font-size: 0.7rem;
     color: #888;
+    margin-top: 0.5rem;
+}
+
+.range-labels span {
+    text-align: center;
 }
 
 .filter-group input[type="text"] {
@@ -361,4 +392,124 @@ button:active {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
+}
+
+/* GitHub link styling */
+.github-link {
+    color: #58a6ff;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+}
+
+.github-link:hover {
+    border-bottom-color: #58a6ff;
+}
+
+.click-instruction {
+    margin-top: 0.5rem;
+    font-size: 0.9em;
+    color: #888;
+}
+
+/* Node cursor styling for GitHub links */
+.nodes circle {
+    cursor: pointer;
+}
+
+.nodes circle:hover {
+    stroke-width: 3px;
+    filter: brightness(1.2);
+}
+
+/* Link strategy styling */
+.strategy-description,
+.layout-description {
+    font-size: 0.85em;
+    color: #888;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    min-height: 2em;
+}
+
+.custom-options {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    border: 1px solid #333;
+}
+
+.custom-options label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9em;
+}
+
+.custom-options input[type="number"],
+.custom-options input[type="range"] {
+    width: 100%;
+    margin-top: 0.25rem;
+}
+
+.custom-options input[type="checkbox"] {
+    margin-right: 0.5rem;
+}
+
+#weight-value {
+    font-size: 0.85em;
+    color: #58a6ff;
+    margin-left: 0.5rem;
+}
+
+/* Link styling based on strategy */
+.links line {
+    stroke-opacity: 0.6;
+    transition: stroke-opacity 0.3s ease;
+}
+
+.links line.hierarchical {
+    stroke: #4B0082;
+}
+
+.links line.proximity {
+    stroke: #FFD700;
+}
+
+.links line.temporal {
+    stroke: #1E90FF;
+}
+
+.links line.domain_cluster {
+    stroke: #228B22;
+}
+
+.links line.cross_domain_bridge {
+    stroke: #DC143C;
+}
+
+.links line.component_of {
+    stroke: #FF6347;
+}
+
+.links line.evolutionary_sequence {
+    stroke: #32CD32;
+}
+
+.links line.information_flow {
+    stroke: #00CED1;
+}
+
+.links line.energy_flow {
+    stroke: #FFA500;
+}
+
+.links line.scale_free {
+    stroke: #9370DB;
+}
+
+.links line.minimal_spanning {
+    stroke: #708090;
 }
