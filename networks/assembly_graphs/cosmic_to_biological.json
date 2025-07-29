@@ -1,0 +1,584 @@
+{
+  "metadata": {
+    "name": "Cosmic to Biological Assembly Network",
+    "description": "Network graph showing transitions and connections between cosmic and biological assemblies",
+    "version": "1.0",
+    "created": "2025-07-28",
+    "domains": ["cosmic", "biological"],
+    "ai_range": [1, 1000000],
+    "format": "assembly_graph_v1"
+  },
+  "nodes": [
+    {
+      "id": "hydrogen_atom",
+      "ai": 2,
+      "domain": "cosmic",
+      "name": "Hydrogen Atom",
+      "description": "Simplest atom, most abundant element in universe",
+      "type": "atomic",
+      "emergence_time": "13.7_billion_years_ago"
+    },
+    {
+      "id": "carbon_atom",
+      "ai": 6,
+      "domain": "cosmic",
+      "name": "Carbon Atom",
+      "description": "Essential element for organic chemistry",
+      "type": "atomic",
+      "emergence_time": "13.0_billion_years_ago"
+    },
+    {
+      "id": "oxygen_atom",
+      "ai": 8,
+      "domain": "cosmic",
+      "name": "Oxygen Atom",
+      "description": "Highly reactive element, basis for oxidation",
+      "type": "atomic",
+      "emergence_time": "12.5_billion_years_ago"
+    },
+    {
+      "id": "nitrogen_atom",
+      "ai": 7,
+      "domain": "cosmic",
+      "name": "Nitrogen Atom",
+      "description": "Inert gas, essential for amino acids",
+      "type": "atomic",
+      "emergence_time": "12.5_billion_years_ago"
+    },
+    {
+      "id": "water_molecule",
+      "ai": 3,
+      "domain": "cosmic",
+      "name": "Water Molecule",
+      "description": "Universal solvent, enabler of life chemistry",
+      "type": "molecular",
+      "emergence_time": "13.4_billion_years_ago"
+    },
+    {
+      "id": "carbon_dioxide",
+      "ai": 5,
+      "domain": "cosmic",
+      "name": "Carbon Dioxide",
+      "description": "Simple carbon compound, greenhouse gas",
+      "type": "molecular",
+      "emergence_time": "12.0_billion_years_ago"
+    },
+    {
+      "id": "methane",
+      "ai": 4,
+      "domain": "cosmic",
+      "name": "Methane",
+      "description": "Simplest hydrocarbon, reducing atmosphere component",
+      "type": "molecular",
+      "emergence_time": "12.0_billion_years_ago"
+    },
+    {
+      "id": "ammonia",
+      "ai": 4,
+      "domain": "cosmic",
+      "name": "Ammonia",
+      "description": "Nitrogen-hydrogen compound, prebiotic molecule",
+      "type": "molecular",
+      "emergence_time": "12.0_billion_years_ago"
+    },
+    {
+      "id": "formaldehyde",
+      "ai": 6,
+      "domain": "cosmic",
+      "name": "Formaldehyde",
+      "description": "Simple organic molecule, found in space",
+      "type": "molecular",
+      "emergence_time": "11.0_billion_years_ago"
+    },
+    {
+      "id": "amino_acid",
+      "ai": 150,
+      "domain": "biological",
+      "name": "Amino Acid",
+      "description": "Building blocks of proteins, 20 standard types",
+      "type": "organic",
+      "emergence_time": "4.2_billion_years_ago"
+    },
+    {
+      "id": "nucleotide",
+      "ai": 200,
+      "domain": "biological",
+      "name": "Nucleotide",
+      "description": "Building blocks of DNA/RNA",
+      "type": "organic",
+      "emergence_time": "4.0_billion_years_ago"
+    },
+    {
+      "id": "fatty_acid",
+      "ai": 100,
+      "domain": "biological",
+      "name": "Fatty Acid",
+      "description": "Lipid components, membrane building blocks",
+      "type": "organic",
+      "emergence_time": "4.0_billion_years_ago"
+    },
+    {
+      "id": "glucose",
+      "ai": 80,
+      "domain": "biological",
+      "name": "Glucose",
+      "description": "Simple sugar, universal energy currency",
+      "type": "organic",
+      "emergence_time": "3.8_billion_years_ago"
+    },
+    {
+      "id": "peptide_chain",
+      "ai": 800,
+      "domain": "biological",
+      "name": "Peptide Chain",
+      "description": "Short chain of amino acids",
+      "type": "macromolecular",
+      "emergence_time": "4.0_billion_years_ago"
+    },
+    {
+      "id": "rna_strand",
+      "ai": 1500,
+      "domain": "biological",
+      "name": "RNA Strand",
+      "description": "Single-stranded nucleic acid, catalytic and informational",
+      "type": "macromolecular",
+      "emergence_time": "4.0_billion_years_ago"
+    },
+    {
+      "id": "dna_double_helix",
+      "ai": 3000,
+      "domain": "biological",
+      "name": "DNA Double Helix",
+      "description": "Information storage molecule of life",
+      "type": "macromolecular",
+      "emergence_time": "3.8_billion_years_ago"
+    },
+    {
+      "id": "protein_fold",
+      "ai": 2000,
+      "domain": "biological",
+      "name": "Protein Fold",
+      "description": "Functional protein with tertiary structure",
+      "type": "macromolecular",
+      "emergence_time": "3.8_billion_years_ago"
+    },
+    {
+      "id": "lipid_bilayer",
+      "ai": 500,
+      "domain": "biological",
+      "name": "Lipid Bilayer",
+      "description": "Cell membrane structure",
+      "type": "supramolecular",
+      "emergence_time": "3.8_billion_years_ago"
+    },
+    {
+      "id": "ribosome",
+      "ai": 5000,
+      "domain": "biological",
+      "name": "Ribosome",
+      "description": "Protein synthesis machine",
+      "type": "molecular_machine",
+      "emergence_time": "3.8_billion_years_ago"
+    },
+    {
+      "id": "cell_membrane",
+      "ai": 10000,
+      "domain": "biological",
+      "name": "Cell Membrane",
+      "description": "Complex membrane with embedded proteins",
+      "type": "cellular_component",
+      "emergence_time": "3.8_billion_years_ago"
+    },
+    {
+      "id": "prokaryotic_cell",
+      "ai": 100000,
+      "domain": "biological",
+      "name": "Prokaryotic Cell",
+      "description": "Simple cell without nucleus",
+      "type": "cellular",
+      "emergence_time": "3.8_billion_years_ago"
+    },
+    {
+      "id": "eukaryotic_cell",
+      "ai": 1000000,
+      "domain": "biological",
+      "name": "Eukaryotic Cell",
+      "description": "Complex cell with nucleus and organelles",
+      "type": "cellular",
+      "emergence_time": "2.0_billion_years_ago"
+    }
+  ],
+  "edges": [
+    {
+      "source": "hydrogen_atom",
+      "target": "water_molecule",
+      "type": "component",
+      "description": "Hydrogen atoms form covalent bonds with oxygen",
+      "strength": 1.0
+    },
+    {
+      "source": "oxygen_atom",
+      "target": "water_molecule",
+      "type": "component",
+      "description": "Oxygen atom is central component of water",
+      "strength": 1.0
+    },
+    {
+      "source": "carbon_atom",
+      "target": "carbon_dioxide",
+      "type": "component",
+      "description": "Carbon forms double bonds with oxygen atoms",
+      "strength": 1.0
+    },
+    {
+      "source": "carbon_atom",
+      "target": "methane",
+      "type": "component",
+      "description": "Carbon forms single bonds with hydrogen atoms",
+      "strength": 1.0
+    },
+    {
+      "source": "hydrogen_atom",
+      "target": "methane",
+      "type": "component",
+      "description": "Four hydrogen atoms bond to carbon",
+      "strength": 1.0
+    },
+    {
+      "source": "nitrogen_atom",
+      "target": "ammonia",
+      "type": "component",
+      "description": "Nitrogen forms bonds with three hydrogens",
+      "strength": 1.0
+    },
+    {
+      "source": "hydrogen_atom",
+      "target": "ammonia",
+      "type": "component",
+      "description": "Hydrogen atoms bond to nitrogen",
+      "strength": 1.0
+    },
+    {
+      "source": "carbon_atom",
+      "target": "formaldehyde",
+      "type": "component",
+      "description": "Carbon forms C=O and C-H bonds",
+      "strength": 1.0
+    },
+    {
+      "source": "water_molecule",
+      "target": "amino_acid",
+      "type": "enabler",
+      "description": "Water enables amino acid formation and stability",
+      "strength": 0.9
+    },
+    {
+      "source": "carbon_atom",
+      "target": "amino_acid",
+      "type": "component",
+      "description": "Carbon forms backbone and side chains",
+      "strength": 1.0
+    },
+    {
+      "source": "nitrogen_atom",
+      "target": "amino_acid",
+      "type": "component",
+      "description": "Nitrogen in amino group",
+      "strength": 1.0
+    },
+    {
+      "source": "ammonia",
+      "target": "amino_acid",
+      "type": "precursor",
+      "description": "Ammonia provides nitrogen for amino group",
+      "strength": 0.8
+    },
+    {
+      "source": "formaldehyde",
+      "target": "amino_acid",
+      "type": "precursor",
+      "description": "Formaldehyde can form amino acid precursors",
+      "strength": 0.7
+    },
+    {
+      "source": "carbon_atom",
+      "target": "nucleotide",
+      "type": "component",
+      "description": "Carbon in sugar and base components",
+      "strength": 1.0
+    },
+    {
+      "source": "nitrogen_atom",
+      "target": "nucleotide",
+      "type": "component",
+      "description": "Nitrogen in purine and pyrimidine bases",
+      "strength": 1.0
+    },
+    {
+      "source": "water_molecule",
+      "target": "nucleotide",
+      "type": "enabler",
+      "description": "Water enables nucleotide synthesis and stability",
+      "strength": 0.9
+    },
+    {
+      "source": "carbon_atom",
+      "target": "fatty_acid",
+      "type": "component",
+      "description": "Carbon forms hydrocarbon chain",
+      "strength": 1.0
+    },
+    {
+      "source": "hydrogen_atom",
+      "target": "fatty_acid",
+      "type": "component",
+      "description": "Hydrogen saturates carbon chain",
+      "strength": 1.0
+    },
+    {
+      "source": "carbon_atom",
+      "target": "glucose",
+      "type": "component",
+      "description": "Carbon forms sugar backbone",
+      "strength": 1.0
+    },
+    {
+      "source": "water_molecule",
+      "target": "glucose",
+      "type": "enabler",
+      "description": "Water enables glucose stability and reactions",
+      "strength": 0.9
+    },
+    {
+      "source": "amino_acid",
+      "target": "peptide_chain",
+      "type": "component",
+      "description": "Amino acids link via peptide bonds",
+      "strength": 1.0
+    },
+    {
+      "source": "water_molecule",
+      "target": "peptide_chain",
+      "type": "catalyst",
+      "description": "Water involved in peptide bond formation/breaking",
+      "strength": 0.8
+    },
+    {
+      "source": "nucleotide",
+      "target": "rna_strand",
+      "type": "component",
+      "description": "Nucleotides polymerize to form RNA",
+      "strength": 1.0
+    },
+    {
+      "source": "water_molecule",
+      "target": "rna_strand",
+      "type": "enabler",
+      "description": "Water stabilizes RNA structure and enables folding",
+      "strength": 0.9
+    },
+    {
+      "source": "nucleotide",
+      "target": "dna_double_helix",
+      "type": "component",
+      "description": "Nucleotides form complementary DNA strands",
+      "strength": 1.0
+    },
+    {
+      "source": "water_molecule",
+      "target": "dna_double_helix",
+      "type": "enabler",
+      "description": "Water stabilizes DNA structure and major groove",
+      "strength": 0.9
+    },
+    {
+      "source": "peptide_chain",
+      "target": "protein_fold",
+      "type": "precursor",
+      "description": "Peptide chains fold into functional proteins",
+      "strength": 1.0
+    },
+    {
+      "source": "water_molecule",
+      "target": "protein_fold",
+      "type": "enabler",
+      "description": "Water drives hydrophobic collapse and folding",
+      "strength": 1.0
+    },
+    {
+      "source": "fatty_acid",
+      "target": "lipid_bilayer",
+      "type": "component",
+      "description": "Fatty acids form lipid tails in membranes",
+      "strength": 1.0
+    },
+    {
+      "source": "water_molecule",
+      "target": "lipid_bilayer",
+      "type": "enabler",
+      "description": "Water drives hydrophobic membrane assembly",
+      "strength": 1.0
+    },
+    {
+      "source": "rna_strand",
+      "target": "ribosome",
+      "type": "component",
+      "description": "rRNA forms catalytic core of ribosome",
+      "strength": 1.0
+    },
+    {
+      "source": "protein_fold",
+      "target": "ribosome",
+      "type": "component",
+      "description": "Ribosomal proteins stabilize structure",
+      "strength": 1.0
+    },
+    {
+      "source": "water_molecule",
+      "target": "ribosome",
+      "type": "enabler",
+      "description": "Water enables ribosome assembly and function",
+      "strength": 0.9
+    },
+    {
+      "source": "lipid_bilayer",
+      "target": "cell_membrane",
+      "type": "component",
+      "description": "Lipid bilayer forms membrane foundation",
+      "strength": 1.0
+    },
+    {
+      "source": "protein_fold",
+      "target": "cell_membrane",
+      "type": "component",
+      "description": "Membrane proteins enable transport and signaling",
+      "strength": 1.0
+    },
+    {
+      "source": "water_molecule",
+      "target": "cell_membrane",
+      "type": "enabler",
+      "description": "Water maintains membrane fluidity and function",
+      "strength": 0.9
+    },
+    {
+      "source": "dna_double_helix",
+      "target": "prokaryotic_cell",
+      "type": "component",
+      "description": "DNA stores genetic information",
+      "strength": 1.0
+    },
+    {
+      "source": "ribosome",
+      "target": "prokaryotic_cell",
+      "type": "component",
+      "description": "Ribosomes enable protein synthesis",
+      "strength": 1.0
+    },
+    {
+      "source": "cell_membrane",
+      "target": "prokaryotic_cell",
+      "type": "component",
+      "description": "Membrane defines cell boundary",
+      "strength": 1.0
+    },
+    {
+      "source": "water_molecule",
+      "target": "prokaryotic_cell",
+      "type": "enabler",
+      "description": "Water fills cytoplasm and enables all biochemistry",
+      "strength": 1.0
+    },
+    {
+      "source": "prokaryotic_cell",
+      "target": "eukaryotic_cell",
+      "type": "precursor",
+      "description": "Eukaryotes evolved from prokaryotic ancestors",
+      "strength": 0.9
+    },
+    {
+      "source": "water_molecule",
+      "target": "eukaryotic_cell",
+      "type": "enabler",
+      "description": "Water enables complex cellular compartmentalization",
+      "strength": 1.0
+    }
+  ],
+  "assembly_pathways": [
+    {
+      "name": "Stellar Nucleosynthesis to Life",
+      "description": "Pathway from stellar element formation to living cells",
+      "nodes": [
+        "hydrogen_atom",
+        "carbon_atom",
+        "oxygen_atom",
+        "nitrogen_atom",
+        "water_molecule",
+        "amino_acid",
+        "nucleotide",
+        "protein_fold",
+        "dna_double_helix",
+        "ribosome",
+        "prokaryotic_cell"
+      ],
+      "ai_progression": [2, 6, 8, 7, 3, 150, 200, 2000, 3000, 5000, 100000]
+    },
+    {
+      "name": "Prebiotic Chemistry to Biochemistry",
+      "description": "Transition from simple molecules to biological macromolecules",
+      "nodes": [
+        "formaldehyde",
+        "ammonia",
+        "water_molecule",
+        "amino_acid",
+        "peptide_chain",
+        "protein_fold"
+      ],
+      "ai_progression": [6, 4, 3, 150, 800, 2000]
+    },
+    {
+      "name": "Membrane Assembly Pathway",
+      "description": "Formation of cellular boundaries from simple molecules",
+      "nodes": [
+        "carbon_atom",
+        "hydrogen_atom",
+        "fatty_acid",
+        "lipid_bilayer",
+        "cell_membrane"
+      ],
+      "ai_progression": [6, 2, 100, 500, 10000]
+    }
+  ],
+  "domain_transitions": [
+    {
+      "from_domain": "cosmic",
+      "to_domain": "biological",
+      "transition_point": "prebiotic_chemistry",
+      "key_enablers": ["water_molecule", "carbon_atom"],
+      "emergence_time": "4.2_billion_years_ago",
+      "location": "early_earth_surface"
+    }
+  ],
+  "complexity_metrics": {
+    "ai_distribution": {
+      "cosmic": {
+        "min": 2,
+        "max": 8,
+        "median": 5,
+        "nodes": 9
+      },
+      "biological": {
+        "min": 80,
+        "max": 1000000,
+        "median": 2000,
+        "nodes": 13
+      }
+    },
+    "connectivity": {
+      "total_edges": 41,
+      "avg_degree": 3.7,
+      "max_degree": 11,
+      "most_connected": "water_molecule"
+    }
+  }
+}
