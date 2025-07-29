@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assembly Theory Network Visualization</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <h1>Assembly Theory Network Visualization</h1>
+            <p>Interactive exploration of assembly pathways across complexity scales</p>
+        </header>
+        
+        <main class="main-content">
+            <aside class="control-panel">
+                <div class="section">
+                    <h3>Filters</h3>
+                    
+                    <div class="filter-group">
+                        <label for="ai-range">Assembly Index Range</label>
+                        <input type="range" id="ai-range-min" min="0" max="8" value="0" step="1">
+                        <input type="range" id="ai-range-max" min="0" max="8" value="8" step="1">
+                        <div class="range-labels">
+                            <span>AI 1-10</span>
+                            <span>AI 1B+</span>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label>Domains</label>
+                        <div class="domain-checkboxes">
+                            <label><input type="checkbox" checked data-domain="cosmic"> <span class="domain-color cosmic"></span> Cosmic</label>
+                            <label><input type="checkbox" checked data-domain="geological"> <span class="domain-color geological"></span> Geological</label>
+                            <label><input type="checkbox" checked data-domain="biological"> <span class="domain-color biological"></span> Biological</label>
+                            <label><input type="checkbox" checked data-domain="cognitive"> <span class="domain-color cognitive"></span> Cognitive</label>
+                            <label><input type="checkbox" checked data-domain="technological"> <span class="domain-color technological"></span> Technological</label>
+                            <label><input type="checkbox" checked data-domain="hybrid"> <span class="domain-color hybrid"></span> Hybrid</label>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="search">Search Assemblies</label>
+                        <input type="text" id="search" placeholder="Search by name...">
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h3>Layout</h3>
+                    <select id="layout-select">
+                        <option value="force">Force-Directed</option>
+                        <option value="hierarchical">Hierarchical</option>
+                        <option value="timeline" selected>Timeline</option>
+                        <option value="radial">Radial</option>
+                    </select>
+                </div>
+                
+                <div class="section">
+                    <h3>Controls</h3>
+                    <button id="reset-view">Reset View</button>
+                    <button id="export-data">Export Data</button>
+                </div>
+            </aside>
+            
+            <div class="visualization-area">
+                <div class="zoom-controls">
+                    <button id="zoom-in">+</button>
+                    <button id="zoom-out">-</button>
+                    <button id="fit-to-screen">⌂</button>
+                </div>
+                <svg id="network-svg"></svg>
+                <div class="loading" id="loading">Loading network data...</div>
+            </div>
+        </main>
+        
+        <div class="info-panel" id="info-panel">
+            <div class="info-content">
+                <h3 id="info-title">Select a node to view details</h3>
+                <div id="info-details"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Tooltip -->
+    <div class="tooltip" id="tooltip"></div>
+    
+    <script src="data-ingestion.js"></script>
+    <script src="data-processor.js"></script>
+    <script src="network-visualization.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
