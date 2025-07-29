@@ -418,7 +418,7 @@ Weak nuclear force carrier | 2 | Cosmic | [/domains/cosmic/forces/weak_nuclear.m
 | Assembly | AI | Domain | Locations | Time Origin |
 |----------|----|---------|-----------| ------------|
 | GMO | 1B | Hybrid | [/pathways/hybrid/synthetic_biology/](https://github.com/owocki/assembly_theory/tree/master/pathways/hybrid/synthetic_biology/) | 50 yr ago |
-| mRNA Vaccine | 1B | Biological | [/domains/biological/modern/](https://github.com/owocki/assembly_theory/tree/master/domains/biological/modern/) | 2 yr ago |
+| mRNA Vaccine | 1B | Biological | [/domains/biological/modern/mrna_vaccine_platforms.md](https://github.com/owocki/assembly_theory/tree/master/domains/biological/modern/mrna_vaccine_platforms.md) | 2 yr ago |
 | Global financial system | 5B | Technological | [/domains/technological/economic/financial_system.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/economic/financial_system.md) | 500 yr ago |
 | Supply chain network | 8B | Technological | [/domains/technological/logistics/supply_chain.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/logistics/supply_chain.md) | 100 yr ago |
 | Human brain | 10B | Cognitive | [/domains/cognitive/neural_networks/human_brain.md](https://github.com/owocki/assembly_theory/tree/master/domains/cognitive/neural_networks/human_brain.md) | 300 kyr ago |
@@ -442,7 +442,7 @@ Weak nuclear force carrier | 2 | Cosmic | [/domains/cosmic/forces/weak_nuclear.m
 | GPS system | 300B | Technological | [/domains/technological/navigation/gps.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/navigation/gps.md) | 50 yr ago |
 | Satellite constellation | 500B | Technological | [/domains/technological/space/satellites.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/space/satellites.md) | 60 yr ago |
 | Cloud computing | 800B | Technological | [/domains/technological/computing/cloud.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/computing/cloud.md) | 20 yr ago |
-| Computer | 1T | Technological | [/domains/technological/computers/](https://github.com/owlocki/assembly_theory/tree/master/domains/technological/computers/) | 70 yr ago |
+| Computer | 1T | Technological | [/domains/technological/computers/](https://github.com/owocki/assembly_theory/tree/master/domains/technological/computers/) | 70 yr ago |
 | Social media ecosystem | 1T | Technological | [/domains/technological/social/social_media.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/social/social_media.md) | 20 yr ago |
 | Database system | 1.5T | Technological | [/domains/technological/data/database.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/data/database.md) | 50 yr ago |
 | Search engine | 2T | Technological | [/domains/technological/information/search.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/information/search.md) | 25 yr ago |
@@ -452,7 +452,6 @@ Weak nuclear force carrier | 2 | Cosmic | [/domains/cosmic/forces/weak_nuclear.m
 | Internet | 10T | Technological | [/case_studies/internet/](https://github.com/owocki/assembly_theory/tree/master/case_studies/internet/), [/domains/technological/networks/](https://github.com/owocki/assembly_theory/tree/master/domains/technological/networks/) | 50 yr ago |
 | Quantum computer | 20T | Technological | [/domains/technological/quantum/computer.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/quantum/computer.md) | 5 yr ago |
 | AI System | 100T | Technological | [/domains/technological/networks/ai.md](https://github.com/owocki/assembly_theory/tree/master/domains/technological/networks/ai.md), [/domains/technological/modern/](https://github.com/owocki/assembly_theory/tree/master/domains/technological/modern/) | 10 yr ago |
-| mRNA Vaccine | 1B | Biological | [/domains/biological/modern/](https://github.com/owocki/assembly_theory/tree/master/domains/biological/modern/) | 2 yr ago |
 
 ### Cross-Domain Assemblies
 
