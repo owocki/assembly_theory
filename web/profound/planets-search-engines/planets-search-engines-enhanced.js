@@ -1,74 +1,186 @@
 // Enhanced Planets as Search Engines Visualization
-const width = document.getElementById('mainViz').clientWidth;
-const height = 600;
+let width = 800; // Default width
+let height = 600;
 
-// Create SVG
-const svg = d3.select('#mainViz')
-    .attr('viewBox', `0 0 ${width} ${height}`)
-    .attr('preserveAspectRatio', 'xMidYMid meet');
-
-// Create groups for different layers
-const backgroundGroup = svg.append('g').attr('class', 'background');
-const searchSpaceGroup = svg.append('g').attr('class', 'search-space');
-const pathsGroup = svg.append('g').attr('class', 'paths');
-const planetsGroup = svg.append('g').attr('class', 'planets');
-const particlesGroup = svg.append('g').attr('class', 'particles');
-const lifeGroup = svg.append('g').attr('class', 'life-forms');
-
-// Planet data with search parameters
-const planets = [
-    {
-        id: 'earth',
-        name: 'Earth',
-        x: width * 0.5,
-        y: height * 0.3,
-        radius: 50,
-        color: '#4fc3f7',
-        gradient: ['#29b6f6', '#4fc3f7', '#81d4fa'],
-        searchSpace: {
-            temperature: [-50, 100],
-            pressure: [0.1, 100],
-            ph: [0, 14],
-            elements: ['C', 'H', 'O', 'N', 'P', 'S', 'Fe', 'Mg', 'Ca', 'K', 'Na'],
-            successRate: 0.8
-        },
-        discoveries: []
-    },
-    {
-        id: 'mars',
-        name: 'Mars',
-        x: width * 0.25,
-        y: height * 0.5,
-        radius: 35,
-        color: '#ff7043',
-        gradient: ['#d84315', '#ff5722', '#ff7043'],
-        searchSpace: {
-            temperature: [-140, 20],
-            pressure: [0.001, 0.01],
-            ph: [3, 10],
-            elements: ['Fe', 'O', 'Si', 'Mg', 'S', 'Cl'],
-            successRate: 0.2
-        },
-        discoveries: []
-    },
-    {
-        id: 'europa',
-        name: 'Europa',
-        x: width * 0.75,
-        y: height * 0.5,
-        radius: 30,
-        color: '#81c784',
-        gradient: ['#388e3c', '#4caf50', '#81c784'],
-        searchSpace: {
-            temperature: [-220, 0],
-            pressure: [0, 1300],
-            ph: [6, 9],
-            elements: ['H', 'O', 'S', 'Cl', 'Na', 'Mg'],
-            successRate: 0.4
-        },
-        discoveries: []
+// Update dimensions when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    const vizElement = document.getElementById('mainViz');
+    if (vizElement) {
+        width = vizElement.clientWidth || 800;
     }
-];
+});
+
+// Create SVG and groups (will be initialized after DOM ready)
+let svg, backgroundGroup, searchSpaceGroup, pathsGroup, planetsGroup, particlesGroup, lifeGroup;
+
+function initializeSVG() {
+    svg = d3.select('#mainViz')
+        .attr('viewBox', `0 0 ${width} ${height}`)
+        .attr('preserveAspectRatio', 'xMidYMid meet');
+
+    // Create groups for different layers
+    backgroundGroup = svg.append('g').attr('class', 'background');
+    searchSpaceGroup = svg.append('g').attr('class', 'search-space');
+    pathsGroup = svg.append('g').attr('class', 'paths');
+    planetsGroup = svg.append('g').attr('class', 'planets');
+    particlesGroup = svg.append('g').attr('class', 'particles');
+    lifeGroup = svg.append('g').attr('class', 'life-forms');
+}
+
+// Global selected elements
+let selectedElements = new Set(['H', 'C', 'N', 'O']);
+
+// Dynamic planet generation
+let planets = [];
+
+function generatePlanets(numPlanets) {
+    planets = [];
+    const planetTypes = [
+        { name: 'Terra', color: '#4fc3f7', gradient: ['#29b6f6', '#4fc3f7', '#81d4fa'] },
+        { name: 'Desert', color: '#ff7043', gradient: ['#d84315', '#ff5722', '#ff7043'] },
+        { name: 'Ice', color: '#81c784', gradient: ['#388e3c', '#4caf50', '#81c784'] },
+        { name: 'Ocean', color: '#4dd0e1', gradient: ['#0097a7', '#00acc1', '#4dd0e1'] },
+        { name: 'Volcanic', color: '#ff5252', gradient: ['#c62828', '#f44336', '#ff5252'] },
+        { name: 'Toxic', color: '#ba68c8', gradient: ['#6a1b9a', '#8e24aa', '#ba68c8'] },
+        { name: 'Frozen', color: '#e1f5fe', gradient: ['#81d4fa', '#b3e5fc', '#e1f5fe'] },
+        { name: 'Rocky', color: '#8d6e63', gradient: ['#4e342e', '#6d4c41', '#8d6e63'] },
+        { name: 'Gaseous', color: '#ffab91', gradient: ['#d84315', '#ff5722', '#ffab91'] },
+        { name: 'Metal', color: '#9e9e9e', gradient: ['#424242', '#616161', '#9e9e9e'] }
+    ];
+    
+    for (let i = 0; i < numPlanets; i++) {
+        const type = planetTypes[i % planetTypes.length];
+        const angle = (i / numPlanets) * 2 * Math.PI - Math.PI / 2;
+        
+        // Spiral layout for many planets
+        const spiralRadius = 150 + (i / numPlanets) * 200;
+        const radiusOffset = spiralRadius + (i % 3) * 30;
+        
+        // Smaller planets when there are many
+        const baseRadius = numPlanets > 20 ? 15 : (numPlanets > 10 ? 20 : 30);
+        
+        planets.push({
+            id: `planet-${i}`,
+            name: `${type.name}-${i + 1}`,
+            x: width / 2 + Math.cos(angle) * radiusOffset,
+            y: height / 2 + Math.sin(angle) * radiusOffset,
+            radius: baseRadius + Math.random() * 10,
+            color: type.color,
+            gradient: type.gradient,
+            searchSpace: {
+                temperature: [-200 + Math.random() * 400, -100 + Math.random() * 600],
+                pressure: [Math.random() * 10, Math.random() * 1000],
+                ph: [Math.random() * 7, 7 + Math.random() * 7],
+                elements: Array.from(selectedElements),
+                successRate: calculateSuccessRate()
+            },
+            discoveries: []
+        });
+    }
+}
+
+function calculateSuccessRate() {
+    // Success rate based on selected elements
+    const essentialElements = ['C', 'H', 'O', 'N'];
+    const importantElements = ['P', 'S', 'Fe'];
+    
+    let rate = 0.1;
+    essentialElements.forEach(el => {
+        if (selectedElements.has(el)) rate += 0.15;
+    });
+    importantElements.forEach(el => {
+        if (selectedElements.has(el)) rate += 0.1;
+    });
+    
+    // Environmental factors - using ranges
+    const tempMin = parseFloat(document.getElementById('tempMin')?.value || -50);
+    const tempMax = parseFloat(document.getElementById('tempMax')?.value || 100);
+    const pressureMin = parseFloat(document.getElementById('pressureMin')?.value || 0.1);
+    const pressureMax = parseFloat(document.getElementById('pressureMax')?.value || 10);
+    const phMin = parseFloat(document.getElementById('phMin')?.value || 5);
+    const phMax = parseFloat(document.getElementById('phMax')?.value || 9);
+    
+    // Optimal conditions boost success rate
+    // Temperature range that includes liquid water zone
+    if (tempMin <= 0 && tempMax >= 0 && tempMax <= 150) rate += 0.1;
+    
+    // Pressure range that allows liquid water
+    if (pressureMin <= 1 && pressureMax >= 0.006) rate += 0.1;
+    
+    // pH range that supports life
+    if (phMin <= 7 && phMax >= 7 && (phMax - phMin) < 6) rate += 0.1;
+    
+    // Search strategies boost success rate
+    const strategies = {
+        'strategy-random': 0.05,
+        'strategy-energy': 0.08,
+        'strategy-catalytic': 0.1,
+        'strategy-hydrothermal': 0.12,
+        'strategy-uv': 0.06,
+        'strategy-freeze': 0.07
+    };
+    
+    Object.entries(strategies).forEach(([id, boost]) => {
+        const checkbox = document.getElementById(id);
+        if (checkbox?.checked) {
+            rate += boost;
+        }
+    });
+    
+    return Math.min(rate, 0.95);
+}
+
+// URL parameter handling
+function getUrlParams() {
+    const params = new URLSearchParams(window.location.search);
+    return {
+        numPlanets: parseInt(params.get('planets')) || 3,
+        tempMin: parseFloat(params.get('tempMin')) || -50,
+        tempMax: parseFloat(params.get('tempMax')) || 100,
+        pressureMin: parseFloat(params.get('pressureMin')) || 0.1,
+        pressureMax: parseFloat(params.get('pressureMax')) || 10,
+        phMin: parseFloat(params.get('phMin')) || 5,
+        phMax: parseFloat(params.get('phMax')) || 9,
+        elements: params.get('elements')?.split(',') || ['H', 'C', 'N', 'O'],
+        strategies: params.get('strategies')?.split(',') || ['random', 'energy', 'catalytic', 'hydrothermal']
+    };
+}
+
+function updateUrlParams() {
+    const params = new URLSearchParams();
+    
+    // Get current values
+    params.set('planets', document.getElementById('numPlanets').value);
+    params.set('tempMin', document.getElementById('tempMin').value);
+    params.set('tempMax', document.getElementById('tempMax').value);
+    params.set('pressureMin', document.getElementById('pressureMin').value);
+    params.set('pressureMax', document.getElementById('pressureMax').value);
+    params.set('phMin', document.getElementById('phMin').value);
+    params.set('phMax', document.getElementById('phMax').value);
+    
+    // Get selected elements
+    const selectedElems = Array.from(selectedElements);
+    if (selectedElems.length > 0) {
+        params.set('elements', selectedElems.join(','));
+    }
+    
+    // Get selected strategies
+    const selectedStrategies = [];
+    document.querySelectorAll('input[id^="strategy-"]:checked').forEach(checkbox => {
+        selectedStrategies.push(checkbox.id.replace('strategy-', ''));
+    });
+    if (selectedStrategies.length > 0) {
+        params.set('strategies', selectedStrategies.join(','));
+    }
+    
+    // Update URL without reload
+    const newUrl = window.location.pathname + '?' + params.toString();
+    window.history.replaceState({}, '', newUrl);
+}
+
+// Initialize with URL params or defaults
+const urlParams = getUrlParams();
+generatePlanets(urlParams.numPlanets);
 
 // Create possibility space visualization in background
 function createPossibilitySpace() {
@@ -103,21 +215,27 @@ function createPossibilitySpace() {
     return possibilityData;
 }
 
-// Create planet gradients
-planets.forEach(planet => {
-    const gradient = svg.append('defs')
-        .append('radialGradient')
-        .attr('id', `${planet.id}-gradient`);
-        
-    gradient.selectAll('stop')
-        .data(planet.gradient)
-        .enter().append('stop')
-        .attr('offset', (d, i) => `${i * 50}%`)
-        .attr('stop-color', d => d);
-});
 
 // Draw planets
 function drawPlanets() {
+    // Clear existing planets
+    planetsGroup.selectAll('*').remove();
+    svg.selectAll('defs').remove();
+    
+    
+    // Create gradients for new planets
+    planets.forEach(planet => {
+        const gradient = svg.append('defs')
+            .append('radialGradient')
+            .attr('id', `${planet.id}-gradient`);
+            
+        gradient.selectAll('stop')
+            .data(planet.gradient)
+            .enter().append('stop')
+            .attr('offset', (d, i) => `${i * 50}%`)
+            .attr('stop-color', d => d);
+    });
+    
     const planetElements = planetsGroup.selectAll('.planet-group')
         .data(planets)
         .enter().append('g')
@@ -138,7 +256,7 @@ function drawPlanets() {
         .attr('y', d => d.radius + 20)
         .attr('text-anchor', 'middle')
         .attr('fill', 'white')
-        .attr('font-size', '14px')
+        .attr('font-size', '12px')
         .text(d => d.name);
     
     // Add invisible hover area (larger than planet) to prevent bounce
@@ -147,10 +265,6 @@ function drawPlanets() {
         .attr('r', d => d.radius + 20)
         .attr('fill', 'transparent')
         .attr('cursor', 'pointer')
-        .on('click', function(event, d) {
-            event.stopPropagation();
-            focusOnPlanet(d.id);
-        })
         .on('mouseover', function(event, d) {
             // Highlight planet without changing its size
             d3.select(this.parentNode).select('.planet')
@@ -175,8 +289,10 @@ function drawPlanets() {
 class SearchParticle {
     constructor(planet, targetX, targetY) {
         this.planet = planet;
-        this.x = planet.x + (Math.random() - 0.5) * planet.radius;
-        this.y = planet.y + (Math.random() - 0.5) * planet.radius;
+        // Start from planet surface
+        const angle = Math.random() * Math.PI * 2;
+        this.x = planet.x + Math.cos(angle) * planet.radius;
+        this.y = planet.y + Math.sin(angle) * planet.radius;
         this.targetX = targetX;
         this.targetY = targetY;
         this.speed = 0.5 + Math.random() * 1.5;
@@ -184,17 +300,43 @@ class SearchParticle {
         this.viable = Math.random() < planet.searchSpace.successRate;
         this.age = 0;
         this.maxAge = 300;
+        this.id = `particle-${Date.now()}-${Math.random()}`;
+        
+        // Create launch effect
+        this.createLaunchEffect();
+    }
+    
+    createLaunchEffect() {
+        // Create a smaller pulse effect at launch position
+        const pulse = particlesGroup.append('circle')
+            .attr('cx', this.x)
+            .attr('cy', this.y)
+            .attr('r', 3)
+            .attr('fill', 'none')
+            .attr('stroke', this.viable ? '#00f5ff' : '#ff006e')
+            .attr('stroke-width', 1)
+            .attr('opacity', 0.8);
+            
+        pulse.transition()
+            .duration(300)
+            .attr('r', 10)
+            .attr('opacity', 0)
+            .remove();
     }
     
     generateChemicalFormula(planet) {
-        const numElements = 2 + Math.floor(Math.random() * 3);
+        const availableElements = planet.searchSpace.elements;
+        if (availableElements.length === 0) return 'XX'; // No elements selected
+        
+        const numElements = Math.min(2 + Math.floor(Math.random() * 3), availableElements.length);
         const selected = [];
+        
+        // Select random elements from available ones
+        const shuffled = [...availableElements].sort(() => Math.random() - 0.5);
         for (let i = 0; i < numElements; i++) {
-            const element = planet.searchSpace.elements[
-                Math.floor(Math.random() * planet.searchSpace.elements.length)
-            ];
-            selected.push(element);
+            selected.push(shuffled[i]);
         }
+        
         return selected.join('');
     }
     
@@ -204,8 +346,13 @@ class SearchParticle {
         const dist = Math.sqrt(dx * dx + dy * dy);
         
         if (dist > 5) {
-            this.x += (dx / dist) * this.speed;
-            this.y += (dy / dist) * this.speed;
+            // Add some spiral movement for visual effect
+            const spiralFactor = this.age * 0.02;
+            const perpX = -dy / dist;
+            const perpY = dx / dist;
+            
+            this.x += (dx / dist) * this.speed + perpX * Math.sin(spiralFactor) * 0.5;
+            this.y += (dy / dist) * this.speed + perpY * Math.sin(spiralFactor) * 0.5;
         }
         
         this.age++;
@@ -239,23 +386,40 @@ function startSystematicSearch() {
         updateStats();
         
         // Generate search particles for each planet
-        planets.forEach(planet => {
+        planets.forEach((planet, planetIndex) => {
             // Systematic grid search
             const gridX = (searchIndex % 50) * (width / 50);
             const gridY = Math.floor(searchIndex / 50) * (height / 50);
             
-            // Also do some random exploration
-            for (let i = 0; i < 3; i++) {
-                const targetX = Math.random() * width;
-                const targetY = Math.random() * height;
+            // Generate particles but only show 1 in 100 for performance
+            for (let i = 0; i < 8; i++) {
+                // Random exploration from planet
+                const angle = Math.random() * Math.PI * 2;
+                const targetDistance = 50 + Math.random() * 150;
+                const targetX = planet.x + Math.cos(angle) * targetDistance;
+                const targetY = planet.y + Math.sin(angle) * targetDistance;
                 
-                const particle = new SearchParticle(planet, targetX, targetY);
-                searchParticles.push(particle);
+                // Always count the experiment
                 searchStats.totalExperiments++;
-                searchStats.uniqueMolecules.add(particle.elements);
                 
-                // Check if viable
-                if (particle.viable && Math.random() > 0.9) {
+                // Only create visible particle 1 in 100 times
+                if (Math.random() < 0.01) {
+                    const particle = new SearchParticle(planet, targetX, targetY);
+                    searchParticles.push(particle);
+                }
+                
+                // Still track unique molecules for statistics
+                const availableElements = planet.searchSpace.elements;
+                if (availableElements.length > 0) {
+                    const numElements = Math.min(2 + Math.floor(Math.random() * 3), availableElements.length);
+                    const shuffled = [...availableElements].sort(() => Math.random() - 0.5);
+                    const elements = shuffled.slice(0, numElements).join('');
+                    searchStats.uniqueMolecules.add(elements);
+                }
+                
+                // Check if viable (simulate for statistics even if particle not visible)
+                const viable = Math.random() < planet.searchSpace.successRate;
+                if (viable && Math.random() > 0.9) {
                     searchStats.stablePatterns++;
                     
                     if (Math.random() > 0.8) {
@@ -263,19 +427,32 @@ function startSystematicSearch() {
                         
                         if (Math.random() > 0.7) {
                             searchStats.lifeForms++;
-                            createLifeForm(particle.targetX, particle.targetY, planet);
-                            addDiscoveryLog(`${planet.name}: Life discovered! Formula: ${particle.elements}`);
+                            // Only create visual life form occasionally to reduce graphics load
+                            if (Math.random() < 0.1) {
+                                const lifeX = planet.x + (Math.random() - 0.5) * 200;
+                                const lifeY = planet.y + (Math.random() - 0.5) * 200;
+                                createLifeForm(lifeX, lifeY, planet);
+                            }
+                            addDiscoveryLog(`${planet.name}: Life discovered!`);
                             
                             // Check for advanced life evolution (requires 100+ basic life forms)
                             if (searchStats.lifeForms > 100 && Math.random() > 0.85) {
                                 searchStats.advancedLife++;
-                                createAdvancedLifeForm(particle.targetX, particle.targetY, planet);
+                                if (Math.random() < 0.2) {
+                                    const advX = planet.x + (Math.random() - 0.5) * 200;
+                                    const advY = planet.y + (Math.random() - 0.5) * 200;
+                                    createAdvancedLifeForm(advX, advY, planet);
+                                }
                                 addDiscoveryLog(`${planet.name}: ADVANCED LIFE emerged! Multicellular organism detected`, 'advanced');
                                 
                                 // Check for civilizational life (requires 20+ advanced life forms)
                                 if (searchStats.advancedLife > 20 && Math.random() > 0.95) {
                                     searchStats.civilizations++;
-                                    createCivilization(particle.targetX, particle.targetY, planet);
+                                    if (Math.random() < 0.5) {
+                                        const civX = planet.x + (Math.random() - 0.5) * 200;
+                                        const civY = planet.y + (Math.random() - 0.5) * 200;
+                                        createCivilization(civX, civY, planet);
+                                    }
                                     addDiscoveryLog(`${planet.name}: CIVILIZATION DETECTED! Intelligent life has emerged!`, 'civilization');
                                 }
                             }
@@ -283,12 +460,12 @@ function startSystematicSearch() {
                     }
                 }
             }
-            
-            // Update progress bars
-            updatePlanetProgress(planet.id, (searchIndex % 1000) / 10);
         });
         
         searchIndex++;
+        
+        // Update overall progress
+        updateOverallProgress(searchIndex);
         
         // Update particles
         updateParticles();
@@ -296,25 +473,38 @@ function startSystematicSearch() {
         // Mark explored regions
         markExploredRegions(possibilitySpace, searchParticles);
         
-    }, 50);
+    }, 50); // Faster interval for more particles
 }
 
 // Update particle positions and render
 function updateParticles() {
     searchParticles = searchParticles.filter(p => p.update());
     
+    // Generate unique IDs for particles
+    searchParticles.forEach((p, i) => {
+        if (!p.id) p.id = `particle-${Date.now()}-${i}`;
+    });
+    
     const particles = particlesGroup.selectAll('.search-particle')
         .data(searchParticles, d => d.id);
     
-    particles.enter().append('circle')
-        .attr('class', 'search-particle')
+    const particlesEnter = particles.enter().append('circle')
+        .attr('class', d => `search-particle ${d.viable ? 'viable' : 'failed'}`)
         .attr('r', 2)
         .attr('fill', d => d.viable ? '#00f5ff' : '#ff006e')
-        .attr('opacity', 0.8)
-        .merge(particles)
+        .attr('stroke', 'none')
+        .attr('opacity', 0)
+        .attr('cx', d => d.x)
+        .attr('cy', d => d.y);
+    
+    particlesEnter.merge(particles)
         .attr('cx', d => d.x)
         .attr('cy', d => d.y)
-        .attr('opacity', d => 0.8 * (1 - d.age / d.maxAge));
+        .attr('r', 2)
+        .attr('opacity', d => Math.max(0.8 * (1 - d.age / d.maxAge), 0.1))
+        .attr('filter', d => d.viable ? 
+            'drop-shadow(0 0 3px rgba(0, 245, 255, 0.8))' : 
+            'drop-shadow(0 0 3px rgba(255, 0, 110, 0.6))');
     
     particles.exit().remove();
 }
@@ -464,9 +654,19 @@ function updateStats() {
         `${(searchStats.searchTime / 1000).toFixed(1)} Myr`;
 }
 
-// Update planet progress bars
-function updatePlanetProgress(planetId, percent) {
-    document.getElementById(`${planetId}Progress`).style.width = percent + '%';
+// Update overall progress bar
+function updateOverallProgress(searchIndex) {
+    // Calculate progress based on search index and total possibility space
+    const progress = Math.min((searchIndex / 10000) * 100, 100); // Arbitrary scale for visualization
+    const progressBar = document.getElementById('overallProgress');
+    const progressText = document.getElementById('progressPercentage');
+    
+    if (progressBar) {
+        progressBar.style.width = progress + '%';
+    }
+    if (progressText) {
+        progressText.textContent = progress.toFixed(2) + '%';
+    }
 }
 
 // Add to discovery log
@@ -543,44 +743,6 @@ function showPossibilitySpace() {
         .on('click', () => modal.remove());
 }
 
-// Focus on specific planet
-function focusOnPlanet(planetId) {
-    const planet = planets.find(p => p.id === planetId);
-    if (!planet) return;
-    
-    // Zoom effect
-    const scale = 2;
-    const translateX = width / 2 - planet.x * scale;
-    const translateY = height / 2 - planet.y * scale;
-    
-    svg.transition()
-        .duration(1000)
-        .attr('viewBox', `${-translateX} ${-translateY} ${width/scale} ${height/scale}`);
-    
-    // Show planet-specific search pattern
-    showPlanetSearchPattern(planet);
-}
-
-// Show planet-specific search pattern
-function showPlanetSearchPattern(planet) {
-    // Create search waves
-    for (let i = 0; i < 5; i++) {
-        pathsGroup.append('circle')
-            .attr('cx', planet.x)
-            .attr('cy', planet.y)
-            .attr('r', planet.radius)
-            .attr('fill', 'none')
-            .attr('stroke', planet.color)
-            .attr('stroke-width', 1)
-            .attr('opacity', 0.5)
-            .transition()
-            .delay(i * 200)
-            .duration(2000)
-            .attr('r', planet.radius + 100)
-            .attr('opacity', 0)
-            .remove();
-    }
-}
 
 // Reset visualization
 function resetVisualization() {
@@ -608,10 +770,8 @@ function resetVisualization() {
     
     updateStats();
     
-    // Reset progress bars
-    planets.forEach(planet => {
-        updatePlanetProgress(planet.id, 0);
-    });
+    // Reset overall progress
+    updateOverallProgress(0);
     
     // Reset discovery log
     document.getElementById('discoveryLog').innerHTML = '<p>Waiting for search to begin...</p>';
@@ -637,24 +797,257 @@ function hideTooltip() {
     document.getElementById('tooltip').style.display = 'none';
 }
 
-// Initialize visualization
-drawPlanets();
+// Element selection handling
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize SVG first
+    const vizElement = document.getElementById('mainViz');
+    if (vizElement) {
+        width = vizElement.clientWidth || 800;
+    }
+    initializeSVG();
+    
+    // Initialize visualization
+    drawPlanets();
+    
+    // Load values from URL
+    const urlParams = getUrlParams();
+    
+    // Set input values from URL
+    document.getElementById('numPlanets').value = urlParams.numPlanets;
+    document.getElementById('tempMin').value = urlParams.tempMin;
+    document.getElementById('tempMax').value = urlParams.tempMax;
+    document.getElementById('tempMinSlider').value = urlParams.tempMin;
+    document.getElementById('tempMaxSlider').value = urlParams.tempMax;
+    document.getElementById('pressureMin').value = urlParams.pressureMin;
+    document.getElementById('pressureMax').value = urlParams.pressureMax;
+    document.getElementById('pressureMinSlider').value = urlParams.pressureMin;
+    document.getElementById('pressureMaxSlider').value = urlParams.pressureMax;
+    document.getElementById('phMin').value = urlParams.phMin;
+    document.getElementById('phMax').value = urlParams.phMax;
+    document.getElementById('phMinSlider').value = urlParams.phMin;
+    document.getElementById('phMaxSlider').value = urlParams.phMax;
+    
+    // Set selected elements from URL
+    selectedElements = new Set(urlParams.elements);
+    document.querySelectorAll('.chemical-node').forEach(node => {
+        const element = node.getAttribute('data-element');
+        if (selectedElements.has(element)) {
+            node.classList.add('selected');
+        } else {
+            node.classList.remove('selected');
+        }
+    });
+    
+    // Set selected strategies from URL
+    urlParams.strategies.forEach(strategy => {
+        const checkbox = document.getElementById(`strategy-${strategy}`);
+        if (checkbox) checkbox.checked = true;
+    });
+    
+    // Element selection
+    document.querySelectorAll('.chemical-node').forEach(node => {
+        node.addEventListener('click', function() {
+            const element = this.getAttribute('data-element');
+            if (this.classList.contains('selected')) {
+                this.classList.remove('selected');
+                selectedElements.delete(element);
+            } else {
+                this.classList.add('selected');
+                selectedElements.add(element);
+            }
+            
+            // Update planet success rates
+            planets.forEach(planet => {
+                planet.searchSpace.elements = Array.from(selectedElements);
+                planet.searchSpace.successRate = calculateSuccessRate();
+            });
+            
+            updateUrlParams();
+        });
+    });
+    
+    // Number of planets input
+    const numPlanetsInput = document.getElementById('numPlanets');
+    if (numPlanetsInput) {
+        numPlanetsInput.addEventListener('change', function() {
+            let num = parseInt(this.value);
+            // Validate input
+            if (isNaN(num) || num < 1) num = 1;
+            if (num > 100) num = 100;
+            this.value = num;
+            
+            generatePlanets(num);
+            drawPlanets();
+            resetVisualization();
+            updateUrlParams();
+        });
+        
+        // Also handle Enter key
+        numPlanetsInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                this.blur(); // Trigger change event
+            }
+        });
+    }
+    
+    // Temperature range controls
+    const tempMin = document.getElementById('tempMin');
+    const tempMax = document.getElementById('tempMax');
+    const tempMinSlider = document.getElementById('tempMinSlider');
+    const tempMaxSlider = document.getElementById('tempMaxSlider');
+    
+    if (tempMin && tempMax && tempMinSlider && tempMaxSlider) {
+        // Sync number inputs with sliders
+        tempMin.addEventListener('input', function() {
+            tempMinSlider.value = this.value;
+            if (parseFloat(this.value) > parseFloat(tempMax.value)) {
+                tempMax.value = this.value;
+                tempMaxSlider.value = this.value;
+            }
+            updateSuccessRates();
+        });
+        
+        tempMax.addEventListener('input', function() {
+            tempMaxSlider.value = this.value;
+            if (parseFloat(this.value) < parseFloat(tempMin.value)) {
+                tempMin.value = this.value;
+                tempMinSlider.value = this.value;
+            }
+            updateSuccessRates();
+        });
+        
+        tempMinSlider.addEventListener('input', function() {
+            tempMin.value = this.value;
+            if (parseFloat(this.value) > parseFloat(tempMax.value)) {
+                tempMax.value = this.value;
+                tempMaxSlider.value = this.value;
+            }
+            updateSuccessRates();
+        });
+        
+        tempMaxSlider.addEventListener('input', function() {
+            tempMax.value = this.value;
+            if (parseFloat(this.value) < parseFloat(tempMin.value)) {
+                tempMin.value = this.value;
+                tempMinSlider.value = this.value;
+            }
+            updateSuccessRates();
+        });
+    }
+    
+    // Pressure range controls
+    const pressureMin = document.getElementById('pressureMin');
+    const pressureMax = document.getElementById('pressureMax');
+    const pressureMinSlider = document.getElementById('pressureMinSlider');
+    const pressureMaxSlider = document.getElementById('pressureMaxSlider');
+    
+    if (pressureMin && pressureMax && pressureMinSlider && pressureMaxSlider) {
+        pressureMin.addEventListener('input', function() {
+            pressureMinSlider.value = this.value;
+            if (parseFloat(this.value) > parseFloat(pressureMax.value)) {
+                pressureMax.value = this.value;
+                pressureMaxSlider.value = this.value;
+            }
+            updateSuccessRates();
+        });
+        
+        pressureMax.addEventListener('input', function() {
+            pressureMaxSlider.value = this.value;
+            if (parseFloat(this.value) < parseFloat(pressureMin.value)) {
+                pressureMin.value = this.value;
+                pressureMinSlider.value = this.value;
+            }
+            updateSuccessRates();
+        });
+        
+        pressureMinSlider.addEventListener('input', function() {
+            pressureMin.value = this.value;
+            if (parseFloat(this.value) > parseFloat(pressureMax.value)) {
+                pressureMax.value = this.value;
+                pressureMaxSlider.value = this.value;
+            }
+            updateSuccessRates();
+        });
+        
+        pressureMaxSlider.addEventListener('input', function() {
+            pressureMax.value = this.value;
+            if (parseFloat(this.value) < parseFloat(pressureMin.value)) {
+                pressureMin.value = this.value;
+                pressureMinSlider.value = this.value;
+            }
+            updateSuccessRates();
+        });
+    }
+    
+    // pH range controls
+    const phMin = document.getElementById('phMin');
+    const phMax = document.getElementById('phMax');
+    const phMinSlider = document.getElementById('phMinSlider');
+    const phMaxSlider = document.getElementById('phMaxSlider');
+    
+    if (phMin && phMax && phMinSlider && phMaxSlider) {
+        phMin.addEventListener('input', function() {
+            phMinSlider.value = this.value;
+            if (parseFloat(this.value) > parseFloat(phMax.value)) {
+                phMax.value = this.value;
+                phMaxSlider.value = this.value;
+            }
+            updateSuccessRates();
+        });
+        
+        phMax.addEventListener('input', function() {
+            phMaxSlider.value = this.value;
+            if (parseFloat(this.value) < parseFloat(phMin.value)) {
+                phMin.value = this.value;
+                phMinSlider.value = this.value;
+            }
+            updateSuccessRates();
+        });
+        
+        phMinSlider.addEventListener('input', function() {
+            phMin.value = this.value;
+            if (parseFloat(this.value) > parseFloat(phMax.value)) {
+                phMax.value = this.value;
+                phMaxSlider.value = this.value;
+            }
+            updateSuccessRates();
+        });
+        
+        phMaxSlider.addEventListener('input', function() {
+            phMax.value = this.value;
+            if (parseFloat(this.value) < parseFloat(phMin.value)) {
+                phMin.value = this.value;
+                phMinSlider.value = this.value;
+            }
+            updateSuccessRates();
+        });
+    }
+    
+    // Search strategy checkboxes
+    const strategyCheckboxes = document.querySelectorAll('input[id^="strategy-"]');
+    strategyCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            updateSuccessRates();
+        });
+    });
+});
+
+function updateSuccessRates() {
+    planets.forEach(planet => {
+        planet.searchSpace.successRate = calculateSuccessRate();
+    });
+    updateUrlParams();
+}
+
+// Pause search function
+window.pauseSearch = function() {
+    if (searchInterval) {
+        clearInterval(searchInterval);
+        searchInterval = null;
+    }
+};
 
 // Make functions globally accessible
 window.startSystematicSearch = startSystematicSearch;
 window.showPossibilitySpace = showPossibilitySpace;
-window.focusOnPlanet = focusOnPlanet;
 window.resetVisualization = resetVisualization;
-
-// Debug check for stats elements
-console.log('Advanced Life element:', document.getElementById('advancedLife'));
-console.log('Civilizations element:', document.getElementById('civilizations'));
-
-// Test function to verify stats work
-window.testStats = function() {
-    searchStats.lifeForms = 150;
-    searchStats.advancedLife = 25;
-    searchStats.civilizations = 3;
-    updateStats();
-    console.log('Stats updated - check if Advanced Life and Civilizations show values');
-};

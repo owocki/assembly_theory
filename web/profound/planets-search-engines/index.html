@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Planets Are Search Engines for Life - Assembly Theory</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧬</text></svg>">
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <style>
         body {
@@ -104,6 +105,12 @@
         .chemical-node:hover {
             transform: scale(1.2);
             z-index: 10;
+        }
+        
+        .chemical-node.selected {
+            background: rgba(0, 255, 100, 0.4) !important;
+            border: 2px solid rgba(0, 255, 100, 0.8) !important;
+            box-shadow: 0 0 10px rgba(0, 255, 100, 0.5);
         }
         
         /* Central visualization */
@@ -258,8 +265,15 @@
         }
         
         .search-particle {
-            fill: #00f5ff;
             opacity: 0.8;
+        }
+        
+        .search-particle.viable {
+            fill: #00f5ff;
+        }
+        
+        .search-particle.failed {
+            fill: #ff006e;
         }
         
         .life-marker {
@@ -325,6 +339,90 @@
             border-radius: 50%;
             margin-right: 10px;
         }
+        
+        /* Style for number inputs */
+        input[type="number"] {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            color: white;
+            border-radius: 5px;
+            padding: 4px 8px;
+            font-size: 14px;
+        }
+        
+        input[type="number"]:focus {
+            outline: none;
+            border-color: rgba(0, 245, 255, 0.6);
+            box-shadow: 0 0 5px rgba(0, 245, 255, 0.3);
+        }
+        
+        /* Style for checkboxes */
+        input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: #00f5ff;
+            cursor: pointer;
+        }
+        
+        /* Style for range sliders */
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            background: rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            border-radius: 4px;
+            padding: 2px;
+            height: 1px;
+        }
+        
+        input[type="range"]::-webkit-slider-track {
+            background: rgba(255, 255, 255, 0.3);
+            height: 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            background: white;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid #00f5ff;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            margin-top: -5px;
+        }
+        
+        input[type="range"]::-moz-range-track {
+            background: rgba(255, 255, 255, 0.3);
+            height: 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        input[type="range"]::-moz-range-thumb {
+            background: white;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid #00f5ff;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+        
+        input[type="range"]:hover::-webkit-slider-thumb {
+            background: #00f5ff;
+            border-color: white;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 1);
+        }
+        
+        input[type="range"]:hover::-moz-range-thumb {
+            background: #00f5ff;
+            border-color: white;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 1);
+        }
     </style>
 </head>
 <body>
@@ -378,45 +476,91 @@
                 <h3>Chemical Possibility Space</h3>
                 
                 <h4 style="color: #ffb347; margin-top: 20px;">Essential Elements</h4>
+                <p style="font-size: 12px; opacity: 0.7; margin: 5px 0;">Click to select/deselect elements</p>
                 <div class="chemical-grid">
-                    <div class="chemical-node chemical-possible" title="Hydrogen - Most abundant">H</div>
-                    <div class="chemical-node chemical-possible" title="Carbon - Organic backbone">C</div>
-                    <div class="chemical-node chemical-possible" title="Nitrogen - Proteins & DNA">N</div>
-                    <div class="chemical-node chemical-possible" title="Oxygen - Energy & water">O</div>
-                    <div class="chemical-node chemical-possible" title="Phosphorus - DNA & ATP">P</div>
-                    <div class="chemical-node chemical-possible" title="Sulfur - Proteins">S</div>
-                    <div class="chemical-node chemical-rare" title="Iron - Catalysis">Fe</div>
-                    <div class="chemical-node chemical-rare" title="Magnesium - Chlorophyll">Mg</div>
+                    <div class="chemical-node chemical-possible selected" data-element="H" title="Hydrogen - Most abundant">H</div>
+                    <div class="chemical-node chemical-possible selected" data-element="C" title="Carbon - Organic backbone">C</div>
+                    <div class="chemical-node chemical-possible selected" data-element="N" title="Nitrogen - Proteins & DNA">N</div>
+                    <div class="chemical-node chemical-possible selected" data-element="O" title="Oxygen - Energy & water">O</div>
+                    <div class="chemical-node chemical-possible" data-element="P" title="Phosphorus - DNA & ATP">P</div>
+                    <div class="chemical-node chemical-possible" data-element="S" title="Sulfur - Proteins">S</div>
+                    <div class="chemical-node chemical-rare" data-element="Fe" title="Iron - Catalysis">Fe</div>
+                    <div class="chemical-node chemical-rare" data-element="Mg" title="Magnesium - Chlorophyll">Mg</div>
+                    <div class="chemical-node chemical-rare" data-element="Ca" title="Calcium - Shells & bones">Ca</div>
+                    <div class="chemical-node chemical-rare" data-element="K" title="Potassium - Cell function">K</div>
+                    <div class="chemical-node chemical-rare" data-element="Na" title="Sodium - Nerve signals">Na</div>
+                    <div class="chemical-node chemical-rare" data-element="Cl" title="Chlorine - Cell balance">Cl</div>
                 </div>
                 
-                <h4 style="color: #ffb347; margin-top: 20px;">Environmental Factors</h4>
+                <h4 style="color: #ffb347; margin-top: 20px;">Search Parameters</h4>
                 <div style="margin: 10px 0;">
-                    <div style="margin: 10px 0;">
-                        <label style="display: block; margin-bottom: 5px;">Temperature</label>
-                        <input type="range" min="-273" max="500" value="20" style="width: 100%;">
-                        <span style="font-size: 12px; opacity: 0.7;">-273°C to 500°C</span>
+                    <div style="margin: 15px 0;">
+                        <label style="display: block; margin-bottom: 5px;">Number of Planets</label>
+                        <input type="number" id="numPlanets" min="1" max="100" value="3" style="width: 80px; padding: 4px 8px; font-size: 14px;">
+                        <span style="font-size: 12px; opacity: 0.7;">Enter 1-100 planets</span>
                     </div>
-                    <div style="margin: 10px 0;">
-                        <label style="display: block; margin-bottom: 5px;">Pressure</label>
-                        <input type="range" min="0" max="1000" value="1" style="width: 100%;">
-                        <span style="font-size: 12px; opacity: 0.7;">0 to 1000 atm</span>
+                    
+                    <div style="margin: 15px 0;">
+                        <label style="display: block; margin-bottom: 5px;">Temperature Range (°C)</label>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <input type="number" id="tempMin" min="-273" max="500" value="-50" style="width: 60px; padding: 4px;">
+                            <span style="opacity: 0.7;">to</span>
+                            <input type="number" id="tempMax" min="-273" max="500" value="100" style="width: 60px; padding: 4px;">
+                        </div>
+                        <input type="range" id="tempMinSlider" min="-273" max="500" value="-50" style="width: 100%; margin-top: 5px;">
+                        <input type="range" id="tempMaxSlider" min="-273" max="500" value="100" style="width: 100%; margin-top: 5px;">
                     </div>
-                    <div style="margin: 10px 0;">
-                        <label style="display: block; margin-bottom: 5px;">pH</label>
-                        <input type="range" min="0" max="14" value="7" style="width: 100%;">
-                        <span style="font-size: 12px; opacity: 0.7;">0 to 14</span>
+                    
+                    <div style="margin: 15px 0;">
+                        <label style="display: block; margin-bottom: 5px;">Pressure Range (atm)</label>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <input type="number" id="pressureMin" min="0" max="1000" value="0.1" step="0.1" style="width: 60px; padding: 4px;">
+                            <span style="opacity: 0.7;">to</span>
+                            <input type="number" id="pressureMax" min="0" max="1000" value="10" step="0.1" style="width: 60px; padding: 4px;">
+                        </div>
+                        <input type="range" id="pressureMinSlider" min="0" max="1000" value="0.1" step="0.1" style="width: 100%; margin-top: 5px;">
+                        <input type="range" id="pressureMaxSlider" min="0" max="1000" value="10" step="0.1" style="width: 100%; margin-top: 5px;">
+                    </div>
+                    
+                    <div style="margin: 15px 0;">
+                        <label style="display: block; margin-bottom: 5px;">pH Range</label>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <input type="number" id="phMin" min="0" max="14" value="5" step="0.1" style="width: 60px; padding: 4px;">
+                            <span style="opacity: 0.7;">to</span>
+                            <input type="number" id="phMax" min="0" max="14" value="9" step="0.1" style="width: 60px; padding: 4px;">
+                        </div>
+                        <input type="range" id="phMinSlider" min="0" max="14" value="5" step="0.1" style="width: 100%; margin-top: 5px;">
+                        <input type="range" id="phMaxSlider" min="0" max="14" value="9" step="0.1" style="width: 100%; margin-top: 5px;">
                     </div>
                 </div>
                 
                 <h4 style="color: #ffb347; margin-top: 20px;">Search Strategies</h4>
-                <ul style="font-size: 14px; opacity: 0.9;">
-                    <li>Random molecular collisions</li>
-                    <li>Energy gradient exploitation</li>
-                    <li>Catalytic surface reactions</li>
-                    <li>Hydrothermal cycling</li>
-                    <li>UV-driven chemistry</li>
-                    <li>Freeze-thaw concentration</li>
-                </ul>
+                <div style="font-size: 14px; opacity: 0.9;">
+                    <label style="display: flex; align-items: center; margin: 8px 0; cursor: pointer;">
+                        <input type="checkbox" id="strategy-random" checked style="margin-right: 8px;">
+                        <span>Random molecular collisions</span>
+                    </label>
+                    <label style="display: flex; align-items: center; margin: 8px 0; cursor: pointer;">
+                        <input type="checkbox" id="strategy-energy" checked style="margin-right: 8px;">
+                        <span>Energy gradient exploitation</span>
+                    </label>
+                    <label style="display: flex; align-items: center; margin: 8px 0; cursor: pointer;">
+                        <input type="checkbox" id="strategy-catalytic" checked style="margin-right: 8px;">
+                        <span>Catalytic surface reactions</span>
+                    </label>
+                    <label style="display: flex; align-items: center; margin: 8px 0; cursor: pointer;">
+                        <input type="checkbox" id="strategy-hydrothermal" checked style="margin-right: 8px;">
+                        <span>Hydrothermal cycling</span>
+                    </label>
+                    <label style="display: flex; align-items: center; margin: 8px 0; cursor: pointer;">
+                        <input type="checkbox" id="strategy-uv" style="margin-right: 8px;">
+                        <span>UV-driven chemistry</span>
+                    </label>
+                    <label style="display: flex; align-items: center; margin: 8px 0; cursor: pointer;">
+                        <input type="checkbox" id="strategy-freeze" style="margin-right: 8px;">
+                        <span>Freeze-thaw concentration</span>
+                    </label>
+                </div>
             </div>
             
             <!-- Center: Main Visualization -->
@@ -436,6 +580,11 @@
                         <div class="legend-color" style="background: #00ff00;"></div>
                         <span>Life discovered!</span>
                     </div>
+                    <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(0, 245, 255, 0.3);">
+                        <div style="font-size: 10px; opacity: 0.7; margin-bottom: 5px;">FULL POSSIBILITY SPACE</div>
+                        <div style="font-size: 14px; color: #00f5ff;">~10<sup>100</sup> combinations</div>
+                        <div style="font-size: 11px; opacity: 0.8; margin-top: 5px;">A googol of possible molecular assemblies</div>
+                    </div>
                 </div>
             </div>
             
@@ -443,22 +592,15 @@
             <div class="search-progress">
                 <h3>Search Progress</h3>
                 
-                <h4 style="color: #ffb347; margin-top: 20px;">Earth</h4>
+                <h4 style="color: #ffb347; margin-top: 20px;">Overall Search Progress</h4>
                 <div class="progress-bar">
-                    <div class="progress-fill" id="earthProgress" style="width: 0%;"></div>
+                    <div class="progress-fill" id="overallProgress" style="width: 0%;"></div>
                 </div>
+                <p style="text-align: center; margin-top: 10px; font-size: 14px; opacity: 0.8;">
+                    <span id="progressPercentage">0%</span> of possibility space explored
+                </p>
                 
-                <h4 style="color: #ffb347; margin-top: 20px;">Mars</h4>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="marsProgress" style="width: 0%;"></div>
-                </div>
-                
-                <h4 style="color: #ffb347; margin-top: 20px;">Europa</h4>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="europaProgress" style="width: 0%;"></div>
-                </div>
-                
-                <h4 style="color: #ffb347; margin-top: 20px;">Statistics</h4>
+                <h4 style="color: #ffb347; margin-top: 30px;">Statistics</h4>
                 <div class="stat-item">
                     <span>Total Experiments:</span>
                     <span class="stat-value" id="totalExperiments">0</span>
@@ -502,10 +644,7 @@
         <!-- Control Panel -->
         <div class="controls">
             <button class="control-btn" onclick="startSystematicSearch()">Start Systematic Search</button>
-            <button class="control-btn" onclick="showPossibilitySpace()">Show Full Space</button>
-            <button class="control-btn" onclick="focusOnPlanet('earth')">Focus Earth</button>
-            <button class="control-btn" onclick="focusOnPlanet('mars')">Focus Mars</button>
-            <button class="control-btn" onclick="focusOnPlanet('europa')">Focus Europa</button>
+            <button class="control-btn" onclick="pauseSearch()">Pause</button>
             <button class="control-btn" onclick="resetVisualization()">Reset</button>
         </div>
     </div>
