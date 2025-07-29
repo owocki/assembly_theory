@@ -1,0 +1,610 @@
+{
+  "metadata": {
+    "name": "Complete Assembly Theory Network",
+    "description": "Full network graph connecting all domains and assembly levels",
+    "version": "2.0",
+    "created": "2025-01-29",
+    "domains": ["cosmic", "geological", "biological", "cognitive", "technological"],
+    "ai_range": [1, 1000000000000000],
+    "format": "assembly_graph_v2"
+  },
+  "nodes": [
+    {
+      "id": "photon",
+      "ai": 1,
+      "domain": "cosmic",
+      "name": "Photon",
+      "type": "fundamental_particle",
+      "emergence_time": "0_seconds"
+    },
+    {
+      "id": "electron",
+      "ai": 1,
+      "domain": "cosmic", 
+      "name": "Electron",
+      "type": "fundamental_particle",
+      "emergence_time": "10e-12_seconds"
+    },
+    {
+      "id": "proton",
+      "ai": 3,
+      "domain": "cosmic",
+      "name": "Proton", 
+      "type": "composite_particle",
+      "emergence_time": "10e-6_seconds"
+    },
+    {
+      "id": "hydrogen_atom",
+      "ai": 2,
+      "domain": "cosmic",
+      "name": "Hydrogen Atom",
+      "type": "atomic",
+      "emergence_time": "380000_years"
+    },
+    {
+      "id": "carbon_atom",
+      "ai": 6,
+      "domain": "cosmic",
+      "name": "Carbon Atom",
+      "type": "atomic", 
+      "emergence_time": "13.0_billion_years_ago"
+    },
+    {
+      "id": "oxygen_atom",
+      "ai": 8,
+      "domain": "cosmic",
+      "name": "Oxygen Atom",
+      "type": "atomic",
+      "emergence_time": "12.5_billion_years_ago"
+    },
+    {
+      "id": "water_molecule",
+      "ai": 3,
+      "domain": "cosmic",
+      "name": "Water Molecule",
+      "type": "molecular",
+      "emergence_time": "13.4_billion_years_ago"
+    },
+    {
+      "id": "carbon_dioxide",
+      "ai": 15,
+      "domain": "cosmic",
+      "name": "Carbon Dioxide",
+      "type": "molecular", 
+      "emergence_time": "12.0_billion_years_ago"
+    },
+    {
+      "id": "quartz",
+      "ai": 25,
+      "domain": "geological",
+      "name": "Quartz Crystal",
+      "type": "mineral",
+      "emergence_time": "4.4_billion_years_ago"
+    },
+    {
+      "id": "granite",
+      "ai": 10000,
+      "domain": "geological", 
+      "name": "Granite Rock",
+      "type": "igneous_rock",
+      "emergence_time": "4.0_billion_years_ago"
+    },
+    {
+      "id": "amino_acid",
+      "ai": 150,
+      "domain": "biological",
+      "name": "Amino Acid",
+      "type": "organic_molecule",
+      "emergence_time": "4.2_billion_years_ago"
+    },
+    {
+      "id": "nucleotide",
+      "ai": 200,
+      "domain": "biological",
+      "name": "Nucleotide", 
+      "type": "organic_molecule",
+      "emergence_time": "4.0_billion_years_ago"
+    },
+    {
+      "id": "rna_strand",
+      "ai": 1500,
+      "domain": "biological",
+      "name": "RNA Strand",
+      "type": "macromolecule",
+      "emergence_time": "4.0_billion_years_ago"
+    },
+    {
+      "id": "protein_fold",
+      "ai": 2000,
+      "domain": "biological",
+      "name": "Protein Fold",
+      "type": "macromolecule", 
+      "emergence_time": "3.8_billion_years_ago"
+    },
+    {
+      "id": "ribosome",
+      "ai": 5000,
+      "domain": "biological",
+      "name": "Ribosome",
+      "type": "molecular_machine",
+      "emergence_time": "3.8_billion_years_ago"
+    },
+    {
+      "id": "prokaryotic_cell",
+      "ai": 100000,
+      "domain": "biological",
+      "name": "Prokaryotic Cell",
+      "type": "cellular",
+      "emergence_time": "3.8_billion_years_ago"
+    },
+    {
+      "id": "eukaryotic_cell",
+      "ai": 1000000,
+      "domain": "biological",
+      "name": "Eukaryotic Cell",
+      "type": "cellular",
+      "emergence_time": "2.0_billion_years_ago"
+    },
+    {
+      "id": "neuron",
+      "ai": 100000,
+      "domain": "biological",
+      "name": "Neuron",
+      "type": "specialized_cell",
+      "emergence_time": "550_million_years_ago"
+    },
+    {
+      "id": "neural_network",
+      "ai": 100000000,
+      "domain": "cognitive",
+      "name": "Neural Network",
+      "type": "information_system",
+      "emergence_time": "550_million_years_ago"
+    },
+    {
+      "id": "human_brain",
+      "ai": 10000000000,
+      "domain": "cognitive",
+      "name": "Human Brain",
+      "type": "cognitive_system",
+      "emergence_time": "300000_years_ago"
+    },
+    {
+      "id": "language",
+      "ai": 50000000000,
+      "domain": "cognitive", 
+      "name": "Human Language",
+      "type": "communication_system",
+      "emergence_time": "100000_years_ago"
+    },
+    {
+      "id": "stone_tool",
+      "ai": 1000,
+      "domain": "technological",
+      "name": "Stone Tool",
+      "type": "simple_tool",
+      "emergence_time": "3.3_million_years_ago"
+    },
+    {
+      "id": "wheel",
+      "ai": 30000,
+      "domain": "technological",
+      "name": "Wheel",
+      "type": "machine_component",
+      "emergence_time": "5500_years_ago"
+    },
+    {
+      "id": "steam_engine",
+      "ai": 10000000,
+      "domain": "technological",
+      "name": "Steam Engine",
+      "type": "power_system",
+      "emergence_time": "1712_CE"
+    },
+    {
+      "id": "computer",
+      "ai": 10000000000,
+      "domain": "technological",
+      "name": "Computer",
+      "type": "information_system", 
+      "emergence_time": "1940s_CE"
+    },
+    {
+      "id": "internet",
+      "ai": 100000000000000,
+      "domain": "technological",
+      "name": "Internet",
+      "type": "network_system",
+      "emergence_time": "1969_CE"
+    },
+    {
+      "id": "city",
+      "ai": 100000000000,
+      "domain": "technological",
+      "name": "Modern City",
+      "type": "human_collective",
+      "emergence_time": "10000_years_ago"
+    },
+    {
+      "id": "smartphone",
+      "ai": 10000000000000,
+      "domain": "technological",
+      "name": "Smartphone", 
+      "type": "integrated_system",
+      "emergence_time": "2007_CE"
+    },
+    {
+      "id": "ai_system",
+      "ai": 100000000000000,
+      "domain": "technological",
+      "name": "AI System",
+      "type": "artificial_intelligence",
+      "emergence_time": "2010s_CE"
+    }
+  ],
+  "edges": [
+    {
+      "source": "proton",
+      "target": "hydrogen_atom",
+      "type": "component",
+      "strength": 1.0
+    },
+    {
+      "source": "electron", 
+      "target": "hydrogen_atom",
+      "type": "component",
+      "strength": 1.0
+    },
+    {
+      "source": "hydrogen_atom",
+      "target": "water_molecule",
+      "type": "component",
+      "strength": 1.0
+    },
+    {
+      "source": "oxygen_atom",
+      "target": "water_molecule", 
+      "type": "component",
+      "strength": 1.0
+    },
+    {
+      "source": "carbon_atom",
+      "target": "carbon_dioxide",
+      "type": "component",
+      "strength": 1.0
+    },
+    {
+      "source": "oxygen_atom",
+      "target": "carbon_dioxide",
+      "type": "component", 
+      "strength": 1.0
+    },
+    {
+      "source": "oxygen_atom",
+      "target": "quartz",
+      "type": "component",
+      "strength": 1.0
+    },
+    {
+      "source": "quartz",
+      "target": "granite",
+      "type": "component",
+      "strength": 1.0
+    },
+    {
+      "source": "water_molecule",
+      "target": "granite",
+      "type": "enabler",
+      "strength": 0.8
+    },
+    {
+      "source": "carbon_atom",
+      "target": "amino_acid",
+      "type": "component",
+      "strength": 1.0
+    },
+    {
+      "source": "water_molecule",
+      "target": "amino_acid",
+      "type": "enabler", 
+      "strength": 0.9
+    },
+    {
+      "source": "carbon_atom",
+      "target": "nucleotide",
+      "type": "component",
+      "strength": 1.0
+    },
+    {
+      "source": "water_molecule",
+      "target": "nucleotide",
+      "type": "enabler",
+      "strength": 0.9
+    },
+    {
+      "source": "nucleotide",
+      "target": "rna_strand",
+      "type": "component",
+      "strength": 1.0
+    },
+    {
+      "source": "amino_acid",
+      "target": "protein_fold",
+      "type": "component",
+      "strength": 1.0
+    },
+    {
+      "source": "water_molecule",
+      "target": "protein_fold",
+      "type": "enabler",
+      "strength": 1.0
+    },
+    {
+      "source": "rna_strand",
+      "target": "ribosome",
+      "type": "component",
+      "strength": 1.0
+    },
+    {
+      "source": "protein_fold",
+      "target": "ribosome",
+      "type": "component",
+      "strength": 1.0
+    },
+    {
+      "source": "ribosome", 
+      "target": "prokaryotic_cell",
+      "type": "component",
+      "strength": 1.0
+    },
+    {
+      "source": "water_molecule",
+      "target": "prokaryotic_cell",
+      "type": "enabler",
+      "strength": 1.0
+    },
+    {
+      "source": "prokaryotic_cell",
+      "target": "eukaryotic_cell",
+      "type": "precursor",
+      "strength": 0.9
+    },
+    {
+      "source": "eukaryotic_cell",
+      "target": "neuron",
+      "type": "specialization",
+      "strength": 0.8
+    },
+    {
+      "source": "neuron",
+      "target": "neural_network",
+      "type": "component", 
+      "strength": 1.0
+    },
+    {
+      "source": "neural_network",
+      "target": "human_brain",
+      "type": "component",
+      "strength": 1.0
+    },
+    {
+      "source": "human_brain",
+      "target": "language",
+      "type": "enabler",
+      "strength": 1.0
+    },
+    {
+      "source": "human_brain",
+      "target": "stone_tool", 
+      "type": "creator",
+      "strength": 1.0
+    },
+    {
+      "source": "stone_tool",
+      "target": "wheel",
+      "type": "technological_progression",
+      "strength": 0.7
+    },
+    {
+      "source": "wheel",
+      "target": "steam_engine",
+      "type": "technological_progression",
+      "strength": 0.8
+    },
+    {
+      "source": "steam_engine",
+      "target": "computer",
+      "type": "technological_progression",
+      "strength": 0.6
+    },
+    {
+      "source": "computer",
+      "target": "internet",
+      "type": "component",
+      "strength": 1.0
+    },
+    {
+      "source": "language",
+      "target": "city",
+      "type": "enabler",
+      "strength": 0.9
+    },
+    {
+      "source": "computer",
+      "target": "city",
+      "type": "component",
+      "strength": 0.8
+    },
+    {
+      "source": "computer",
+      "target": "smartphone",
+      "type": "component",
+      "strength": 1.0
+    },
+    {
+      "source": "internet",
+      "target": "smartphone", 
+      "type": "enabler",
+      "strength": 1.0
+    },
+    {
+      "source": "computer",
+      "target": "ai_system",
+      "type": "component",
+      "strength": 1.0
+    },
+    {
+      "source": "internet",
+      "target": "ai_system",
+      "type": "enabler",
+      "strength": 1.0
+    },
+    {
+      "source": "human_brain",
+      "target": "ai_system",
+      "type": "inspiration",
+      "strength": 0.9
+    }
+  ],
+  "assembly_pathways": [
+    {
+      "name": "Cosmic to Biological",
+      "description": "Fundamental particles to living cells",
+      "nodes": [
+        "proton",
+        "hydrogen_atom", 
+        "water_molecule",
+        "carbon_atom",
+        "amino_acid",
+        "protein_fold",
+        "ribosome",
+        "prokaryotic_cell"
+      ],
+      "ai_progression": [3, 2, 3, 6, 150, 2000, 5000, 100000]
+    },
+    {
+      "name": "Biological to Cognitive",
+      "description": "Living cells to consciousness",
+      "nodes": [
+        "prokaryotic_cell",
+        "eukaryotic_cell", 
+        "neuron",
+        "neural_network",
+        "human_brain",
+        "language"
+      ],
+      "ai_progression": [100000, 1000000, 100000, 100000000, 10000000000, 50000000000]
+    },
+    {
+      "name": "Cognitive to Technological",
+      "description": "Human intelligence to technology",
+      "nodes": [
+        "human_brain",
+        "language",
+        "stone_tool",
+        "wheel",
+        "steam_engine", 
+        "computer",
+        "internet",
+        "ai_system"
+      ],
+      "ai_progression": [10000000000, 50000000000, 1000, 30000, 10000000, 10000000000, 100000000000000, 100000000000000]
+    },
+    {
+      "name": "Geological Integration",
+      "description": "Mineral formation and planetary systems",
+      "nodes": [
+        "oxygen_atom",
+        "quartz",
+        "granite",
+        "water_molecule",
+        "amino_acid"
+      ],
+      "ai_progression": [8, 25, 10000, 3, 150]
+    }
+  ],
+  "domain_transitions": [
+    {
+      "from_domain": "cosmic",
+      "to_domain": "geological", 
+      "transition_point": "planetary_formation",
+      "key_enablers": ["gravity", "heat", "pressure"],
+      "emergence_time": "4.6_billion_years_ago"
+    },
+    {
+      "from_domain": "cosmic",
+      "to_domain": "biological",
+      "transition_point": "prebiotic_chemistry",
+      "key_enablers": ["water_molecule", "carbon_atom"],
+      "emergence_time": "4.2_billion_years_ago"
+    },
+    {
+      "from_domain": "biological", 
+      "to_domain": "cognitive",
+      "transition_point": "neural_evolution",
+      "key_enablers": ["neuron", "neural_network"],
+      "emergence_time": "550_million_years_ago"
+    },
+    {
+      "from_domain": "cognitive",
+      "to_domain": "technological",
+      "transition_point": "tool_making",
+      "key_enablers": ["human_brain", "language"],
+      "emergence_time": "3.3_million_years_ago"
+    }
+  ],
+  "complexity_metrics": {
+    "ai_distribution_by_domain": {
+      "cosmic": {
+        "min": 1,
+        "max": 15,
+        "median": 6,
+        "nodes": 8
+      },
+      "geological": {
+        "min": 25,
+        "max": 10000,
+        "median": 5012,
+        "nodes": 2
+      },
+      "biological": {
+        "min": 100000,
+        "max": 1000000,
+        "median": 550000,
+        "nodes": 8
+      },
+      "cognitive": {
+        "min": 100000000,
+        "max": 50000000000,
+        "median": 10050000000,
+        "nodes": 3
+      },
+      "technological": {
+        "min": 1000,
+        "max": 100000000000000,
+        "median": 10000005000500,
+        "nodes": 8
+      }
+    },
+    "connectivity": {
+      "total_edges": 35,
+      "avg_degree": 2.3,
+      "max_degree": 6,
+      "most_connected": "water_molecule"
+    },
+    "emergence_timeline": {
+      "big_bang": 1,
+      "first_atoms": 2,
+      "first_molecules": 8,
+      "first_life": 8,
+      "first_cognition": 3,
+      "first_technology": 8
+    }
+  },
+  "scaling_laws": {
+    "assembly_index_growth": "exponential_by_domain",
+    "network_effects": "superlinear_scaling",
+    "emergence_time": "logarithmic_compression",
+    "information_content": "exponential_growth"
+  }
+}

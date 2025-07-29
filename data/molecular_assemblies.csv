@@ -1,0 +1,55 @@
+name,chemical_formula,assembly_index,domain,molecular_mass,first_appearance,description,components,assembly_pathway
+Hydrogen atom,H,2,cosmic,1.008,13.7_Gyr_ago,Simplest atom in universe,proton+electron,Big Bang nucleosynthesis
+Helium atom,He,2,cosmic,4.003,13.7_Gyr_ago,Second lightest noble gas,2_protons+2_neutrons+2_electrons,Big Bang nucleosynthesis
+Lithium atom,Li,3,cosmic,6.941,13.7_Gyr_ago,Lightest metal,3_protons+4_neutrons+3_electrons,Big Bang + stellar
+Carbon atom,C,6,cosmic,12.011,13.0_Gyr_ago,Foundation of organic chemistry,6_protons+6_neutrons+6_electrons,Triple-alpha process
+Nitrogen atom,N,7,cosmic,14.007,12.5_Gyr_ago,Essential for amino acids,7_protons+7_neutrons+7_electrons,CNO cycle
+Oxygen atom,O,8,cosmic,15.999,12.5_Gyr_ago,Highly reactive oxidizer,8_protons+8_neutrons+8_electrons,Alpha process
+Fluorine atom,F,9,cosmic,18.998,12.0_Gyr_ago,Most electronegative element,9_protons+10_neutrons+9_electrons,Alpha process
+Neon atom,Ne,10,cosmic,20.180,12.0_Gyr_ago,Noble gas in stellar cores,10_protons+10_neutrons+10_electrons,Alpha process
+Water,H2O,3,cosmic,18.015,13.4_Gyr_ago,Universal solvent,hydrogen+oxygen,Molecular cloud chemistry
+Carbon monoxide,CO,12,cosmic,28.010,13.0_Gyr_ago,Common interstellar molecule,carbon+oxygen,Gas phase reactions
+Carbon dioxide,CO2,15,cosmic,44.010,12.0_Gyr_ago,Greenhouse gas,carbon+2_oxygen,Combustion/respiration
+Methane,CH4,12,cosmic,16.043,12.0_Gyr_ago,Simplest hydrocarbon,carbon+4_hydrogen,Hydrogenation reactions
+Ammonia,NH3,10,cosmic,17.031,12.0_Gyr_ago,Nitrogen source for biology,nitrogen+3_hydrogen,Gas phase chemistry
+Hydrogen sulfide,H2S,8,cosmic,34.082,12.0_Gyr_ago,Reducing gas in early atmospheres,sulfur+2_hydrogen,Volcanic outgassing
+Formaldehyde,CH2O,15,cosmic,30.026,11.0_Gyr_ago,Organic precursor molecule,carbon+2_hydrogen+oxygen,Gas phase organic chemistry
+Acetylene,C2H2,18,cosmic,26.038,10.0_Gyr_ago,Hydrocarbon building block,2_carbon+2_hydrogen,High temperature chemistry
+Hydrogen cyanide,HCN,20,cosmic,27.025,10.0_Gyr_ago,Prebiotic synthesis precursor,hydrogen+carbon+nitrogen,Miller-Urey conditions
+Formic acid,HCOOH,25,cosmic,46.025,8.0_Gyr_ago,Simplest carboxylic acid,carbon+2_oxygen+2_hydrogen,Organic synthesis
+Glycine,C2H5NO2,80,biological,75.067,4.2_Gyr_ago,Simplest amino acid,carbon_backbone+amino_group+carboxyl,Prebiotic synthesis
+Alanine,C3H7NO2,90,biological,89.094,4.2_Gyr_ago,Simple amino acid,methyl_side_chain+amino_acid_backbone,Strecker synthesis
+Serine,C3H7NO3,95,biological,105.093,4.2_Gyr_ago,Hydroxyl amino acid,hydroxyl+amino_acid_backbone,Enzymatic synthesis
+Ribose,C5H10O5,120,biological,150.130,4.0_Gyr_ago,RNA sugar component,5_carbon_sugar+hydroxyl_groups,Formose reaction
+Glucose,C6H12O6,150,biological,180.156,3.8_Gyr_ago,Universal energy currency,6_carbon_ring+hydroxyl_groups,Photosynthesis
+Adenosine,C10H13N5O4,300,biological,267.242,4.0_Gyr_ago,Nucleoside building block,adenine+ribose,Nucleoside synthesis
+ATP,C10H16N5O13P3,400,biological,507.181,3.8_Gyr_ago,Universal energy currency,adenosine+3_phosphates,Enzymatic phosphorylation
+Palmitic acid,C16H32O2,180,biological,256.424,3.5_Gyr_ago,Common fatty acid,16_carbon_chain+carboxyl,Fatty acid synthesis
+Cholesterol,C27H46O,450,biological,386.654,2.0_Gyr_ago,Membrane component,steroid_backbone+hydroxyl,Mevalonate pathway
+Hemoglobin subunit,C738H1166N812O203S2Fe,15000,biological,15840,600_Myr_ago,Oxygen transport protein,globin_chain+heme_group,Protein synthesis
+Chlorophyll a,C55H72MgN4O5,800,biological,893.509,3.5_Gyr_ago,Photosynthesis pigment,porphyrin_ring+magnesium+phytol,Biosynthetic pathway
+Cellulose,C6H10O5,200,biological,162.140,1.0_Gyr_ago,Structural polysaccharide,glucose_polymer+beta_linkages,Enzymatic polymerization
+Quartz,SiO2,25,geological,60.083,4.4_Gyr_ago,Common silicate mineral,silicon+2_oxygen,Crystallization
+Calcite,CaCO3,35,geological,100.087,3.8_Gyr_ago,Carbonate mineral,calcium+carbonate,Precipitation
+Pyrite,FeS2,40,geological,119.975,3.5_Gyr_ago,Iron sulfide mineral,iron+2_sulfur,Hydrothermal precipitation
+Magnetite,Fe3O4,60,geological,231.533,3.8_Gyr_ago,Iron oxide mineral,3_iron+4_oxygen,Oxidation-reduction
+Diamond,C,25,geological,12.011,3.0_Gyr_ago,Carbon allotrope,carbon_network,High pressure crystallization
+Graphite,C,20,geological,12.011,4.0_Gyr_ago,Carbon allotrope,carbon_layers,Metamorphism
+Silicon dioxide,SiO2,25,technological,60.083,4.4_Gyr_ago,Glass component,silicon+2_oxygen,High temperature melting
+Steel,Fe+C,10000,technological,55.845,3000_years_ago,Iron-carbon alloy,iron+carbon,Metallurgy
+Polyethylene,C2H4,5000,technological,28.054,100_years_ago,Plastic polymer,ethylene_monomers,Polymerization
+Polystyrene,C8H8,8000,technological,104.150,100_years_ago,Plastic polymer,styrene_monomers,Free radical polymerization
+Silicon chip,Si+dopants,1000000,technological,28.086,70_years_ago,Semiconductor device,silicon_crystal+dopants,Photolithography
+Carbon nanotube,C,50000,technological,12.011,30_years_ago,Cylindrical carbon structure,graphene_sheet,Chemical vapor deposition
+Graphene,C,30000,technological,12.011,20_years_ago,2D carbon sheet,carbon_hexagonal_lattice,Exfoliation/CVD
+Fullerene C60,C60,10000,technological,720.660,40_years_ago,Soccer ball carbon cage,60_carbon_atoms,Arc discharge
+DNA nucleotide,C15H20N5O10P,500,biological,499.386,3.8_Gyr_ago,DNA building block,base+sugar+phosphate,Biosynthesis
+RNA nucleotide,C14H18N5O11P,450,biological,507.308,4.0_Gyr_ago,RNA building block,base+ribose+phosphate,Biosynthesis
+Penicillin,C16H18N2O4S,600,biological,334.390,100_years_ago,Antibiotic,beta_lactam_ring+side_chains,Fungal biosynthesis
+Aspirin,C9H8O4,300,technological,180.158,150_years_ago,Pharmaceutical,acetyl_group+salicylic_acid,Chemical synthesis
+Caffeine,C8H10N4O2,350,biological,194.194,30_Myr_ago,Stimulant alkaloid,purine_base+methyl_groups,Plant biosynthesis
+Ethanol,C2H6O,35,biological,46.068,1_Gyr_ago,Alcohol,ethyl_group+hydroxyl,Fermentation
+Acetic acid,C2H4O2,40,biological,60.052,3.5_Gyr_ago,Carboxylic acid,methyl+carboxyl_group,Acetyl-CoA pathway
+Benzene,C6H6,150,technological,78.114,200_years_ago,Aromatic hydrocarbon,6_carbon_ring,Petroleum refining
+Toluene,C7H8,180,technological,92.141,200_years_ago,Aromatic solvent,benzene+methyl_group,Petroleum refining
+Phenol,C6H6O,200,technological,94.111,150_years_ago,Aromatic alcohol,benzene+hydroxyl,Coal tar distillation

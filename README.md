@@ -1,4 +1,4 @@
-# Assembly Theory Repository
+# Assembly Theory
 
 ## What is Assembly Theory?
 

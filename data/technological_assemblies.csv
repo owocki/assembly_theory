@@ -1,0 +1,57 @@
+name,type,assembly_index,domain,invention_date,inventor_culture,description,components,complexity_estimate
+Stone tool,tool,1000,technological,3.3_Myr_ago,Early hominins,Shaped stone implement,Stone+knapping_technique,Simple tool
+Spear,weapon,5000,technological,400_kyr_ago,Homo heidelbergensis,Hunting projectile,Wooden_shaft+stone_point+binding,Composite tool
+Bow and arrow,weapon_system,20000,technological,65_kyr_ago,Modern humans,Projectile weapon system,Bow+arrows+string+fletching,Precision weapon system
+Wheel,machine_component,30000,technological,5500_years_ago,Mesopotamians,Rotating transport aid,Wood/stone_disc+axle+bearing,Revolutionary transport
+Lever,simple_machine,5000,technological,Ancient,Multiple cultures,Force multiplication tool,Rigid_bar+fulcrum+effort+load,Mechanical advantage
+Pulley,simple_machine,15000,technological,Ancient,Greeks/Romans,Lifting mechanism,Wheel+rope+mounting,Compound machine
+Screw,simple_machine,25000,technological,Ancient,Greeks,Threaded fastener,Helical_thread+shaft+head,Precise mechanism
+Water wheel,power_system,100000,technological,2000_years_ago,Romans/Chinese,Water-powered mill,Wheel+paddles+axle+gearing,Power conversion
+Windmill,power_system,150000,technological,1000_years_ago,Europeans,Wind-powered mill,Blades+tower+gearing+millstones,Wind power system
+Printing press,information_system,500000,technological,1450_CE,Gutenberg,Movable type printing,Press+type+ink+paper_feed,Information revolution
+Clock,precision_instrument,1000000,technological,1300_CE,Europeans,Mechanical timekeeper,Escapement+gears+springs+dial,Precision timekeeping
+Steam engine,power_system,10000000,technological,1712_CE,Newcomen/Watt,Heat-to-work converter,Boiler+piston+cylinder+condenser,Industrial power
+Locomotive,transport_system,50000000,technological,1804_CE,Trevithick,Steam-powered transport,Steam_engine+wheels+rails+cars,Transportation revolution
+Telegraph,communication_system,5000000,technological,1844_CE,Morse,Electrical communication,Wire+key+receiver+code,Long-distance communication
+Telephone,communication_device,20000000,technological,1876_CE,Bell,Voice communication,Microphone+speaker+switching+wires,Voice transmission
+Light bulb,electrical_device,100000,technological,1879_CE,Edison,Electrical illumination,Filament+glass+base+electrical,Electric lighting
+Electric motor,power_system,5000000,technological,1886_CE,Tesla,Electrical to mechanical,Stator+rotor+commutator+brushes,Electric power conversion
+Automobile,transport_system,100000000,technological,1885_CE,Benz,Personal motor vehicle,Engine+chassis+wheels+controls,Personal transportation
+Airplane,transport_system,500000000,technological,1903_CE,Wright Brothers,Powered flight machine,Wings+engine+propeller+controls,Aviation technology
+Radio,communication_system,10000000,technological,1901_CE,Marconi,Wireless communication,Transmitter+receiver+antenna+tuning,Wireless broadcasting
+Television,information_system,100000000,technological,1926_CE,Baird,Visual broadcasting,Camera+transmitter+receiver+display,Visual communication
+Computer,information_system,10000000000,technological,1940s_CE,Multiple inventors,Electronic calculation,Processor+memory+storage+input/output,Information processing
+Transistor,electronic_component,1000000,technological,1947_CE,Bell Labs,Electronic switch,Semiconductor+gate+source+drain,Electronic revolution
+Integrated circuit,electronic_system,100000000,technological,1958_CE,Kilby/Noyce,Miniaturized electronics,Transistors+resistors+capacitors+chip,Microelectronics
+Microprocessor,computational_system,1000000000,technological,1971_CE,Intel,Computer on a chip,CPU_core+cache+buses+packaging,Computer revolution
+Personal computer,computational_system,10000000000,technological,1975_CE,Multiple,Individual computing,Microprocessor+memory+storage+interface,Personal computing
+Internet,network_system,100000000000000,technological,1969_CE,ARPANET,Global network,Routers+servers+cables+protocols,Global connectivity
+Smartphone,communication_system,10000000000000,technological,2007_CE,Apple,Pocket computer/phone,Processor+memory+sensors+display+radio,Mobile computing
+World Wide Web,information_system,1000000000000000,technological,1989_CE,Berners-Lee,Global information system,Servers+browsers+HTML+HTTP+URLs,Global information
+Laser,optical_device,10000000,technological,1960_CE,Maiman,Coherent light source,Gain_medium+mirrors+pump+beam,Coherent optics
+Solar panel,energy_system,50000000,technological,1954_CE,Bell Labs,Photovoltaic converter,Silicon_cells+glass+frame+wiring,Solar energy conversion
+Nuclear reactor,energy_system,1000000000000,technological,1942_CE,Fermi,Controlled nuclear fission,Fuel+moderator+control_rods+containment,Nuclear power
+Satellite,space_system,1000000000,technological,1957_CE,Soviet Union,Orbital communication,Spacecraft+solar_panels+antennas+electronics,Space technology
+Rocket engine,propulsion_system,500000000,technological,1926_CE,Goddard,Reaction propulsion,Combustion_chamber+nozzle+fuel_system,Space propulsion
+Space station,space_habitat,10000000000000,technological,1971_CE,Soviet Union,Orbital laboratory,Modules+life_support+solar_arrays+docking,Space habitation
+GPS system,navigation_system,100000000000000,technological,1978_CE,US Military,Global positioning,Satellites+receivers+atomic_clocks+computers,Global navigation
+MRI machine,medical_device,10000000000,technological,1977_CE,Damadian,Magnetic resonance imaging,Magnet+RF_coils+computer+software,Medical imaging
+CT scanner,medical_device,1000000000,technological,1972_CE,Hounsfield,X-ray computed tomography,X-ray_source+detectors+computer+reconstruction,Medical diagnosis
+DNA sequencer,scientific_instrument,100000000000,technological,1977_CE,Sanger/Gilbert,Genetic code reader,Enzymes+fluorescence+detectors+computer,Genomics revolution
+PCR machine,laboratory_instrument,100000000,technological,1983_CE,Mullis,DNA amplification,Thermal_cycler+enzymes+primers+detection,Molecular biology
+Electron microscope,scientific_instrument,1000000000,technological,1931_CE,Ruska,High-resolution imaging,Electron_gun+lenses+detector+vacuum,Nanoscale imaging
+Particle accelerator,physics_instrument,100000000000000,technological,1930_CE,Lawrence,High-energy physics,Magnets+RF_cavities+beam_pipes+detectors,Fundamental physics
+3D printer,manufacturing_system,1000000000,technological,1983_CE,Hull,Additive manufacturing,Print_head+materials+software+platform,Digital manufacturing
+Robot,automation_system,1000000000,technological,1954_CE,Devol,Programmable automation,Actuators+sensors+controller+software,Industrial automation
+Artificial heart,medical_device,10000000000,technological,1957_CE,Kolff,Mechanical heart replacement,Pumps+valves+power+controls,Artificial organs
+Pacemaker,medical_device,100000000,technological,1958_CE,Senning,Heart rhythm control,Pulse_generator+leads+battery+electronics,Cardiac therapy
+Cochlear implant,medical_device,500000000,technological,1961_CE,House,Artificial hearing,Microphone+processor+stimulator+electrodes,Sensory restoration
+Brain-computer interface,neural_device,10000000000000,technological,1970s_CE,Multiple,Direct neural control,Electrodes+amplifiers+computer+software,Neural technology
+Quantum computer,computational_system,1000000000000000,technological,1998_CE,Multiple,Quantum information processing,Qubits+control+readout+error_correction,Quantum computing
+CRISPR system,biotechnology_tool,100000000000,technological,2012_CE,Doudna/Charpentier,Gene editing tool,Guide_RNA+Cas_protein+delivery+targets,Genetic engineering
+Fusion reactor,energy_system,10000000000000000,technological,2022_CE,Multiple,Controlled nuclear fusion,Magnetic_confinement+plasma+heating+control,Fusion power
+Artificial general intelligence,ai_system,1000000000000000000,technological,Future,Unknown,Human-level AI,Neural_networks+training+inference+integration,AGI system
+Space elevator,transport_system,100000000000000000,technological,Concept,Theoretical,Orbital transport,Tether+counterweight+climbers+power,Space access
+Dyson sphere,energy_system,10000000000000000000,technological,Concept,Theoretical,Stellar energy capture,Solar_collectors+structure+transmission,Stellar engineering
+Molecular assembler,manufacturing_system,1000000000000000000,technological,Concept,Theoretical,Atomic precision manufacturing,Manipulators+feedstock+software+products,Molecular manufacturing
+Digital consciousness,information_system,10000000000000000000,technological,Concept,Theoretical,Uploaded human mind,Neural_simulation+storage+processing+interface,Mind uploading

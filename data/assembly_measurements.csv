@@ -1,0 +1,50 @@
+object_name,measured_ai,theoretical_ai,measurement_method,measurement_date,research_group,sample_type,confidence_level,notes
+Water,3,3,Mass_spectrometry_fragmentation,2021-03-15,Walker_Lab_ASU,Pure_H2O,High,Perfect match with theory
+Methane,12,12,MS_fragmentation,2021-03-18,Walker_Lab_ASU,Pure_CH4,High,Consistent with prediction
+Ethanol,35,35,MS_fragmentation,2021-04-02,Walker_Lab_ASU,Pure_C2H5OH,High,Alcohol standard
+Glucose,90,80-150,MS_fragmentation,2021-04-10,Walker_Lab_ASU,D-glucose,Medium,Ring conformations affect AI
+Caffeine,320,350,MS_fragmentation,2021-05-22,Walker_Lab_ASU,Pure_caffeine,Medium,Close to theoretical
+Adenosine,280,300,MS_fragmentation,2021-06-08,Walker_Lab_ASU,Pure_nucleoside,Medium,Nucleoside baseline
+ATP,420,400,MS_fragmentation,2021-06-15,Walker_Lab_ASU,Disodium_ATP,High,Energy molecule confirmed
+Alanine,85,90,MS_fragmentation,2021-07-03,Walker_Lab_ASU,L-alanine,High,Amino acid standard
+Glycine,75,80,MS_fragmentation,2021-07-03,Walker_Lab_ASU,Glycine,High,Simplest amino acid
+Phenylalanine,180,170,MS_fragmentation,2021-07-12,Walker_Lab_ASU,L-phenylalanine,Medium,Aromatic amino acid
+Cholesterol,450,450,MS_fragmentation,2021-08-20,Walker_Lab_ASU,Pure_cholesterol,High,Complex steroid
+Palmitic_acid,185,180,MS_fragmentation,2021-09-14,Walker_Lab_ASU,Palmitic_acid,High,Saturated fatty acid
+Aspirin,310,300,MS_fragmentation,2021-10-05,Walker_Lab_ASU,Acetylsalicylic_acid,High,Pharmaceutical standard
+Penicillin_G,580,600,MS_fragmentation,2021-11-18,Walker_Lab_ASU,Penicillin_G_sodium,Medium,Beta-lactam antibiotic
+Chlorophyll_a,820,800,MS_fragmentation,2022-01-25,Walker_Lab_ASU,Extracted_from_spinach,Medium,Photosynthetic pigment
+Hemoglobin_subunit,14500,15000,Protein_mass_spec,2022-03-14,Cronin_Lab_Glasgow,Human_hemoglobin,Medium,Oxygen transport protein
+Insulin,5800,6000,Protein_mass_spec,2022-04-22,Cronin_Lab_Glasgow,Human_insulin,Medium,Peptide hormone
+Lysozyme,14200,14000,Protein_mass_spec,2022-05-18,Cronin_Lab_Glasgow,Chicken_egg_white,High,Well-characterized enzyme
+Cytochrome_c,12800,12500,Protein_mass_spec,2022-06-30,Cronin_Lab_Glasgow,Horse_heart,High,Electron transport protein
+Ribonuclease_A,13900,14200,Protein_mass_spec,2022-08-15,Cronin_Lab_Glasgow,Bovine_pancreas,High,RNA-degrading enzyme
+Myoglobin,17200,17500,Protein_mass_spec,2022-09-12,Cronin_Lab_Glasgow,Sperm_whale,Medium,Oxygen storage protein
+BSA,66500,66000,Protein_mass_spec,2022-10-28,Cronin_Lab_Glasgow,Bovine_serum,Medium,Large reference protein
+tRNA,45000,50000,RNA_sequencing_AI,2022-12-05,MIT_Assembly_Group,E_coli_tRNA,Medium,Transfer RNA molecule
+Small_ribosomal_subunit,1800000,2000000,Ribosome_profiling,2023-02-18,MIT_Assembly_Group,E_coli_30S,Low,Complex ribonucleoprotein
+Large_ribosomal_subunit,2800000,3000000,Ribosome_profiling,2023-02-25,MIT_Assembly_Group,E_coli_50S,Low,Complex ribonucleoprotein
+Bacteriophage_T4,95000000,100000000,Viral_genome_analysis,2023-04-12,Stanford_Complexity_Lab,T4_bacteriophage,Low,DNA virus
+E_coli_genome,4600000000,5000000000,Genomic_assembly_analysis,2023-06-20,Stanford_Complexity_Lab,E_coli_K12,Very_Low,Complete bacterial genome
+Yeast_genome,12000000000,12000000000,Genomic_assembly_analysis,2023-08-15,Stanford_Complexity_Lab,S_cerevisiae,Very_Low,Eukaryotic genome
+Human_chromosome_21,47000000000,50000000000,Genomic_assembly_analysis,2023-10-30,Stanford_Complexity_Lab,Human_chr21,Very_Low,Smallest human chromosome
+Synthetic_DNA_100bp,50000,55000,Custom_synthesis_analysis,2023-11-15,Twist_Bioscience,Synthetic_construct,High,Designed DNA sequence
+Synthetic_protein_50aa,2500,2800,Custom_synthesis_analysis,2023-12-01,Zymergen,Synthetic_enzyme,Medium,Designed protein
+Carbon_nanotube_SWNT,48000,50000,Electron_microscopy_analysis,2024-01-20,IBM_Research,Single_wall_nanotube,Medium,1D carbon structure
+Graphene_sheet_1um2,28000,30000,AFM_analysis,2024-02-14,Cambridge_Graphene,CVD_graphene,Medium,2D carbon sheet
+Silicon_microprocessor,8500000000,10000000000,Circuit_analysis,2024-03-25,Intel_Labs,Core_i7_processor,Low,Complex integrated circuit
+OLED_display_pixel,5000000,6000000,Device_analysis,2024-04-18,Samsung_Research,Smartphone_display,Low,Organic light emitting diode
+Solar_cell_silicon,45000000,50000000,Device_analysis,2024-05-22,NREL,Monocrystalline_silicon,Medium,Photovoltaic device
+Lithium_ion_battery_cell,100000000,120000000,Battery_analysis,2024-06-10,Tesla_Research,18650_cell,Low,Energy storage device
+LED_white_light,8000000,10000000,Semiconductor_analysis,2024-07-05,Cree_Research,High_power_LED,Medium,Solid state lighting
+LCD_display_subpixel,15000000,18000000,Display_analysis,2024-08-12,LG_Display,TFT_LCD,Low,Liquid crystal display
+MEMS_accelerometer,50000000,60000000,MEMS_analysis,2024-09-18,Bosch_Sensortec,3-axis_sensor,Medium,Micro-electromechanical system
+Quantum_dot,25000,30000,Nanoparticle_analysis,2024-10-25,Quantum_Materials,CdSe_quantum_dot,Medium,Semiconductor nanocrystal
+Metamaterial_unit_cell,1000000,1200000,Electromagnetic_analysis,2024-11-15,Meta_Platforms,Negative_index_material,Medium,Engineered electromagnetic response
+Synthetic_biology_circuit,500000000,600000000,Genetic_circuit_analysis,2024-12-20,Ginkgo_Bioworks,Engineered_E_coli,Low,Biological computing circuit
+E_coli_cell_complete,85000000,100000000,Single_cell_analysis,2020-05-15,Weizmann_Institute,Lab_strain,Very_Low,Complete bacterial cell
+Yeast_cell_complete,950000000,1000000000,Single_cell_analysis,2020-08-22,Weizmann_Institute,S_cerevisiae,Very_Low,Complete eukaryotic cell
+HeLa_cell_complete,8500000000,10000000000,Single_cell_analysis,2021-01-30,Broad_Institute,Human_cancer_cell,Very_Low,Complex human cell
+Neuron_complete,15000000000,20000000000,Connectome_analysis,2021-07-14,Allen_Institute,Mouse_cortical_neuron,Very_Low,Complete nerve cell
+Muscle_fiber_complete,25000000000,30000000000,Tissue_analysis,2021-11-20,Harvard_Medical,Human_skeletal_muscle,Very_Low,Multinucleated muscle cell
+Leaf_mesophyll_cell,12000000000,15000000000,Plant_cell_analysis,2022-04-08,Salk_Institute,Arabidopsis_leaf,Very_Low,Photosynthetic plant cell

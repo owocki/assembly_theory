@@ -1,0 +1,53 @@
+name,type,assembly_index,domain,first_appearance,organism_examples,description,components,estimated_complexity
+Ribosome,molecular_machine,5000,biological,3.8_Gyr_ago,All cellular life,Protein synthesis machinery,rRNA+ribosomal_proteins,~80 proteins + 3-4 rRNAs
+DNA polymerase,enzyme,4000,biological,3.8_Gyr_ago,All cellular life,DNA replication enzyme,Protein complex,~500-1000 amino acids
+RNA polymerase,enzyme,6000,biological,3.8_Gyr_ago,All cellular life,RNA synthesis enzyme,Multi-subunit protein,~1400 amino acids
+ATP synthase,molecular_motor,8000,biological,3.5_Gyr_ago,All cellular life,ATP production machine,F0F1 complex,~1650 amino acids total
+Photosystem II,protein_complex,10000,biological,3.4_Gyr_ago,Cyanobacteria+plants,Water-splitting photosystem,~20 protein subunits,~350 kDa complex
+Photosystem I,protein_complex,9000,biological,3.4_Gyr_ago,Cyanobacteria+plants,NADPH production system,~20 protein subunits,~300 kDa complex
+Bacterial flagellum,motility_system,30000,biological,3.0_Gyr_ago,Many bacteria,Rotating molecular motor,~50 different proteins,Type III secretion system
+Bacterial cell wall,structural_system,5000,biological,3.5_Gyr_ago,Most bacteria,Protective peptidoglycan layer,Peptidoglycan+associated_proteins,Cross-linked polymer network
+Bacterial chromosome,genetic_system,500000,biological,3.8_Gyr_ago,All bacteria,Circular DNA genome,DNA+nucleoid_proteins,1-10 million base pairs
+Bacterial plasmid,genetic_element,10000,biological,3.0_Gyr_ago,Many bacteria,Autonomous DNA element,Circular DNA,1000-100000 base pairs
+Virus capsid,structural_system,50000,biological,3.5_Gyr_ago,All viruses,Protein shell for genome,Capsid proteins,20-2000 proteins
+Bacteriophage,viral_system,100000,biological,3.0_Gyr_ago,Bacterial viruses,Bacterial infection system,DNA/RNA+capsid+tail,Complex assembly machine
+Cell membrane,barrier_system,10000,biological,3.8_Gyr_ago,All cells,Lipid bilayer boundary,Phospholipids+membrane_proteins,~1000 different lipids/proteins
+Mitochondrion,organelle,50000,biological,2.0_Gyr_ago,Eukaryotes,Powerhouse of the cell,Double membrane+matrix+cristae,~1500 different proteins
+Chloroplast,organelle,60000,biological,1.5_Gyr_ago,Plants+algae,Photosynthesis organelle,Triple membrane+thylakoids+stroma,~3000 different proteins
+Cell nucleus,organelle,80000,biological,2.0_Gyr_ago,Eukaryotes,Genetic control center,Nuclear envelope+nucleoplasm+chromatin,~20000 different proteins
+Eukaryotic chromosome,genetic_system,1000000,biological,2.0_Gyr_ago,Eukaryotes,Linear DNA+histones,DNA+histone_proteins+centromere,Millions to billions of base pairs
+Endoplasmic reticulum,organelle_system,40000,biological,2.0_Gyr_ago,Eukaryotes,Protein/lipid synthesis network,Membrane network+ribosomes,Extended membrane system
+Golgi apparatus,organelle_system,30000,biological,2.0_Gyr_ago,Eukaryotes,Protein modification center,Stacked membrane cisternae,~100 different enzymes
+Cytoskeleton,structural_system,100000,biological,2.0_Gyr_ago,Eukaryotes,Cellular scaffold,Actin+tubulin+intermediate_filaments,Dynamic polymer networks
+Centrosome,organizational_center,20000,biological,2.0_Gyr_ago,Animal cells,Microtubule organizing center,Two centrioles+pericentriolar_material,~100 different proteins
+Prokaryotic cell,cellular_system,100000,biological,3.8_Gyr_ago,Bacteria+Archaea,Simple cellular life,Cell_wall+membrane+cytoplasm+nucleoid,~1000-5000 genes
+Eukaryotic cell,cellular_system,1000000,biological,2.0_Gyr_ago,Eukaryotes,Complex cellular life,Nucleus+organelles+cytoplasm+membrane,~20000-25000 genes
+Biofilm,multicellular_system,500000,biological,3.5_Gyr_ago,Many bacteria,Bacterial community matrix,Cells+extracellular_polymers,10^6-10^9 cells
+Fruiting body,developmental_system,2000000,biological,1.0_Gyr_ago,Slime molds+fungi,Multicellular reproductive structure,Specialized cell types,10^5-10^7 cells
+Simple tissue,tissue_system,5000000,biological,800_Myr_ago,Simple animals,Organized cell layer,Single cell type+ECM,10^3-10^6 cells
+Complex tissue,tissue_system,10000000,biological,600_Myr_ago,Complex animals,Multiple cell type tissue,Multiple_cell_types+ECM+vasculature,10^6-10^9 cells
+Organ,organ_system,50000000,biological,550_Myr_ago,Complex animals,Specialized functional structure,Multiple_tissues+vasculature+innervation,10^8-10^12 cells
+Organ system,body_system,200000000,biological,500_Myr_ago,Complex animals,Coordinated organ group,Multiple_organs+control_systems,10^10-10^14 cells
+Simple organism,organism,10000000,biological,800_Myr_ago,Simple animals,Multicellular individual,Tissues+organs+systems,10^4-10^8 cells
+Complex organism,organism,1000000000,biological,500_Myr_ago,Vertebrates,Advanced multicellular life,All body systems+behaviors,10^12-10^14 cells
+Neural network,nervous_system,100000000,biological,550_Myr_ago,Animals with neurons,Information processing network,Neurons+synapses+glia,10^6-10^11 neurons
+Brain,nervous_system,10000000000,biological,500_Myr_ago,Complex animals,Central nervous system,Specialized_neural_regions+circuits,10^8-10^11 neurons
+Ecosystem,ecological_system,10000000000,biological,3.5_Gyr_ago,All environments,Interacting species community,Multiple_species+environment+flows,100s-1000s of species
+Food web,ecological_network,1000000000,biological,3.0_Gyr_ago,All ecosystems,Species interaction network,Producers+consumers+decomposers+flows,10s-100s of trophic links
+Symbiosis,interspecies_system,50000000,biological,3.0_Gyr_ago,Many organisms,Mutualistic species partnership,Host+symbiont+interface,Two+ species integration
+Lichen,composite_organism,20000000,biological,400_Myr_ago,Fungi+algae/cyanobacteria,Fungal-phototroph partnership,Mycobiont+photobiont+structure,Dual organism system
+Coral holobiont,composite_organism,100000000,biological,500_Myr_ago,Corals+zooxanthellae,Coral-algae partnership,Coral+zooxanthellae+bacteria+structure,Multi-species system
+Colony,colonial_system,10000000,biological,1.0_Gyr_ago,Colonial organisms,Integrated individual colony,Multiple_connected_individuals,10^2-10^6 individuals
+Superorganism,colonial_system,500000000,biological,100_Myr_ago,Social insects,Highly integrated colony,Specialized_castes+communication+coordination,10^3-10^7 individuals
+Social group,behavioral_system,200000000,biological,100_Myr_ago,Social animals,Coordinated animal group,Individuals+communication+roles+behaviors,10-1000 individuals
+Swarm intelligence,collective_system,1000000000,biological,200_Myr_ago,Flocking/schooling species,Emergent group intelligence,Individuals+simple_rules+environment,100s-millions of individuals
+Language system,communication_system,50000000000,cognitive,100_kyr_ago,Humans,Symbolic communication system,Vocabulary+grammar+semantics+pragmatics,10^4-10^5 words
+Culture,information_system,100000000000,cognitive,100_kyr_ago,Humans+some animals,Transmitted knowledge system,Beliefs+practices+artifacts+institutions,Complex knowledge networks
+Protein fold,structural_motif,2000,biological,3.8_Gyr_ago,All life,3D protein structure,Secondary_structures+loops+domains,50-1000 amino acids
+Enzyme active site,functional_motif,500,biological,3.8_Gyr_ago,All life,Catalytic binding pocket,Amino_acid_residues+cofactors,5-20 key residues
+Antibody,immune_protein,15000,biological,500_Myr_ago,Jawed vertebrates,Antigen recognition protein,Heavy+light_chains+variable_regions,~150 kDa protein
+Hemoglobin,transport_protein,15000,biological,600_Myr_ago,Most animals,Oxygen transport protein,4_globin_subunits+4_heme_groups,~64 kDa protein
+Myosin,motor_protein,20000,biological,1.0_Gyr_ago,Eukaryotes,Actin-based motor,Head+neck+tail_domains,~200 kDa protein
+Kinesin,motor_protein,12000,biological,1.5_Gyr_ago,Eukaryotes,Microtubule motor,Motor_domain+stalk+tail,~120 kDa protein
+Histone,DNA_packaging,8000,biological,2.0_Gyr_ago,Eukaryotes,DNA packaging protein,Core+tail_domains,~11-15 kDa proteins
+Transcription factor,regulatory_protein,5000,biological,3.5_Gyr_ago,All life,Gene expression regulator,DNA_binding+regulatory_domains,~30-100 kDa proteins
