@@ -6,7 +6,10 @@ class DataProcessor {
             biological: '#228B22',
             cognitive: '#FFD700',
             technological: '#DC143C',
-            hybrid: '#9932CC'
+            hybrid: '#9932CC',
+            earth: '#4B8B3B',
+            physics: '#6A5ACD',
+            technology: '#FF6347'
         };
         
         this.assemblyIndexTiers = [
@@ -24,18 +27,26 @@ class DataProcessor {
     // Generate comprehensive network data from all repository sources
     async generateRealData() {
         try {
-            // First, try to use the pre-generated comprehensive data
-            if (typeof nodes !== 'undefined' && nodes && nodes.length > 0) {
-                console.log(`✅ Successfully loaded ${nodes.length} nodes from all-assemblies-data.js`);
+            // Use the new assembliesData from the extracted domain files
+            if (typeof assembliesData !== 'undefined' && assembliesData && assembliesData.length > 0) {
+                console.log(`✅ Successfully loaded ${assembliesData.length} assemblies from domain extraction`);
                 
-                // Process nodes to ensure all required fields
-                const processedNodes = nodes.map(node => {
-                    const tierInfo = this.getAssemblyTier(node.assembly_index);
+                // Process assemblies to match expected node format
+                const processedNodes = assembliesData.map(assembly => {
+                    const tierInfo = this.getAssemblyTier(assembly.assemblyIndex);
                     return {
-                        ...node,
+                        id: assembly.id,
+                        name: assembly.name,
+                        domain: assembly.domain,
+                        category: assembly.category,
+                        assembly_index: assembly.assemblyIndex,
+                        time_origin: assembly.timeOrigin,
+                        description: assembly.description,
+                        connections: assembly.connections,
+                        file_path: assembly.filePath,
                         tier: tierInfo.tier,
                         visual_complexity: tierInfo.symbol,
-                        color: this.domainColors[node.domain] || '#999999',
+                        color: this.domainColors[assembly.domain] || '#999999',
                         radius: this.getNodeRadius(tierInfo.tier),
                         x: null,
                         y: null
@@ -46,7 +57,18 @@ class DataProcessor {
                     nodes: processedNodes,
                     edges: []  // Edges will be generated based on link strategy
                 };
-                return this.addBiologicalEntities(data);
+                
+                console.log(`📊 Data summary:`, {
+                    totalNodes: data.nodes.length,
+                    withAssemblyIndex: data.nodes.filter(n => n.assembly_index !== null).length,
+                    domains: [...new Set(data.nodes.map(n => n.domain))],
+                    aiRange: {
+                        min: Math.min(...data.nodes.filter(n => n.assembly_index !== null).map(n => n.assembly_index)),
+                        max: Math.max(...data.nodes.filter(n => n.assembly_index !== null).map(n => n.assembly_index))
+                    }
+                });
+                
+                return data;
             }
         } catch (error) {
             console.warn('Failed to load pre-generated data:', error);

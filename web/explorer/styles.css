@@ -525,3 +525,23 @@ a:hover {
 .links line.minimal_spanning {
     stroke: #708090;
 }
+
+/* Domain color indicators */
+.domain-color {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+.domain-color.cosmic { background-color: #0066CC; }
+.domain-color.geological { background-color: #8B4513; }
+.domain-color.biological { background-color: #228B22; }
+.domain-color.cognitive { background-color: #FFD700; }
+.domain-color.technological { background-color: #DC143C; }
+.domain-color.hybrid { background-color: #9932CC; }
+.domain-color.earth { background-color: #4B8B3B; }
+.domain-color.physics { background-color: #6A5ACD; }
+.domain-color.technology { background-color: #FF6347; }

@@ -171,6 +171,7 @@
                     <option value="echolocation">Echolocation</option>
                     <option value="eyes">Camera Eyes</option>
                     <option value="venom">Venom Systems</option>
+                    <option value="intelligence">Intelligence</option>
                 </select>
             </div>
             
@@ -335,6 +336,66 @@
                     }
                 ],
                 convergenceZone: {x: 75, y: 80, radius: 15}
+            },
+            intelligence: {
+                name: "Intelligence",
+                lineages: [
+                    {
+                        name: "Primates",
+                        color: "#FF6B35",
+                        species: [
+                            {name: "Early Primates", x: 10, y: 15, ai: 5000, time: -65},
+                            {name: "Great Apes", x: 45, y: 50, ai: 15000, time: -25},
+                            {name: "Modern Humans", x: 85, y: 95, ai: 50000, time: 0}
+                        ]
+                    },
+                    {
+                        name: "Corvids",
+                        color: "#1A1A1A",
+                        species: [
+                            {name: "Early Corvids", x: 35, y: 10, ai: 3000, time: -50},
+                            {name: "Crows", x: 65, y: 40, ai: 8000, time: -25},
+                            {name: "New Caledonian Crows", x: 80, y: 75, ai: 12000, time: 0}
+                        ]
+                    },
+                    {
+                        name: "Cephalopods",
+                        color: "#8E44AD",
+                        species: [
+                            {name: "Early Cephalopods", x: 5, y: 40, ai: 2000, time: -100},
+                            {name: "Cuttlefish", x: 30, y: 65, ai: 6000, time: -50},
+                            {name: "Octopuses", x: 65, y: 85, ai: 10000, time: 0}
+                        ]
+                    },
+                    {
+                        name: "Cetaceans",
+                        color: "#3498DB",
+                        species: [
+                            {name: "Early Whales", x: 50, y: 20, ai: 4000, time: -40},
+                            {name: "Toothed Whales", x: 75, y: 55, ai: 9000, time: -20},
+                            {name: "Dolphins", x: 90, y: 80, ai: 15000, time: 0}
+                        ]
+                    },
+                    {
+                        name: "Elephants",
+                        color: "#95A5A6",
+                        species: [
+                            {name: "Early Proboscideans", x: 15, y: 60, ai: 3500, time: -55},
+                            {name: "Mastodons", x: 40, y: 80, ai: 7000, time: -30},
+                            {name: "Modern Elephants", x: 70, y: 90, ai: 12000, time: 0}
+                        ]
+                    },
+                    {
+                        name: "Parrots",
+                        color: "#E74C3C",
+                        species: [
+                            {name: "Early Parrots", x: 25, y: 35, ai: 2500, time: -60},
+                            {name: "Cockatoos", x: 55, y: 70, ai: 6500, time: -30},
+                            {name: "African Greys", x: 75, y: 85, ai: 11000, time: 0}
+                        ]
+                    }
+                ],
+                convergenceZone: {x: 75, y: 82, radius: 18}
             }
         };
 
@@ -417,8 +478,8 @@
             const data = convergentTraits[traitKey];
             
             // Set fixed axis labels for morphospace
-            xLabel.text("Trait Optimization →");
-            yLabel.text("Performance →");
+            xLabel.text("Time →");
+            yLabel.text("Trait Optimization →");
 
             // Clear previous visualization
             g.selectAll(".evolution-path").remove();
