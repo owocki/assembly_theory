@@ -174,23 +174,6 @@
                 </select>
             </div>
             
-            <div class="control-group">
-                <label>X-Axis:</label>
-                <select id="xAxisSelect">
-                    <option value="trait1">Primary Trait</option>
-                    <option value="efficiency">Efficiency</option>
-                    <option value="complexity">Complexity</option>
-                </select>
-            </div>
-            
-            <div class="control-group">
-                <label>Y-Axis:</label>
-                <select id="yAxisSelect">
-                    <option value="trait2">Secondary Trait</option>
-                    <option value="performance">Performance</option>
-                    <option value="energyCost">Energy Cost</option>
-                </select>
-            </div>
             
             <div class="control-group">
                 <button id="animateBtn">Animate Evolution</button>
@@ -433,21 +416,9 @@
         function updateVisualization(traitKey) {
             const data = convergentTraits[traitKey];
             
-            // Update axis labels based on selection
-            const xAxisType = document.getElementById('xAxisSelect').value;
-            const yAxisType = document.getElementById('yAxisSelect').value;
-            
-            const axisLabels = {
-                trait1: "Primary Trait Optimization →",
-                trait2: "Secondary Trait Optimization →",
-                efficiency: "Efficiency →",
-                performance: "Performance →",
-                complexity: "Structural Complexity →",
-                energyCost: "Energy Cost →"
-            };
-            
-            xLabel.text(axisLabels[xAxisType]);
-            yLabel.text(axisLabels[yAxisType]);
+            // Set fixed axis labels for morphospace
+            xLabel.text("Trait Optimization →");
+            yLabel.text("Performance →");
 
             // Clear previous visualization
             g.selectAll(".evolution-path").remove();
@@ -573,14 +544,6 @@
         // Event listeners
         document.getElementById('traitSelect').addEventListener('change', (e) => {
             updateVisualization(e.target.value);
-        });
-
-        document.getElementById('xAxisSelect').addEventListener('change', () => {
-            updateVisualization(document.getElementById('traitSelect').value);
-        });
-
-        document.getElementById('yAxisSelect').addEventListener('change', () => {
-            updateVisualization(document.getElementById('traitSelect').value);
         });
 
         document.getElementById('animateBtn').addEventListener('click', animateEvolution);
