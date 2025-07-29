@@ -10,11 +10,93 @@ class AssemblyTheoryApp {
             searchTerm: ''
         };
         this.currentLinkStrategy = 'none';
+        this.currentLayout = 'timeline';
+        
+        // Parse URL parameters on initialization
+        this.parseURLParameters();
         
         this.init();
     }
     
+    parseURLParameters() {
+        const params = new URLSearchParams(window.location.search);
+        
+        // Parse AI range
+        if (params.has('aiMin')) {
+            this.currentFilters.aiRange.min = Math.max(1, Math.min(8, parseInt(params.get('aiMin'))));
+        }
+        if (params.has('aiMax')) {
+            this.currentFilters.aiRange.max = Math.max(1, Math.min(8, parseInt(params.get('aiMax'))));
+        }
+        
+        // Parse domains
+        if (params.has('domains')) {
+            const domains = params.get('domains').split(',').filter(d => 
+                ['cosmic', 'geological', 'biological', 'cognitive', 'technological'].includes(d)
+            );
+            if (domains.length > 0) {
+                this.currentFilters.domains = domains;
+            }
+        }
+        
+        // Parse search term
+        if (params.has('search')) {
+            this.currentFilters.searchTerm = params.get('search');
+        }
+        
+        // Parse link strategy
+        if (params.has('linkStrategy')) {
+            const strategy = params.get('linkStrategy');
+            if (['none', 'hierarchical', 'proximity', 'domain_clusters'].includes(strategy)) {
+                this.currentLinkStrategy = strategy;
+            }
+        }
+        
+        // Parse layout
+        if (params.has('layout')) {
+            const layout = params.get('layout');
+            if (['hierarchical', 'timeline'].includes(layout)) {
+                this.currentLayout = layout;
+            }
+        }
+    }
+    
+    updateURLParameters() {
+        const params = new URLSearchParams();
+        
+        // Add AI range
+        params.set('aiMin', this.currentFilters.aiRange.min);
+        params.set('aiMax', this.currentFilters.aiRange.max);
+        
+        // Add domains (only if not all are selected)
+        if (this.currentFilters.domains.length < 5) {
+            params.set('domains', this.currentFilters.domains.join(','));
+        }
+        
+        // Add search term (only if not empty)
+        if (this.currentFilters.searchTerm) {
+            params.set('search', this.currentFilters.searchTerm);
+        }
+        
+        // Add link strategy (only if not 'none')
+        if (this.currentLinkStrategy !== 'none') {
+            params.set('linkStrategy', this.currentLinkStrategy);
+        }
+        
+        // Add layout (only if not 'timeline')
+        if (this.currentLayout !== 'timeline') {
+            params.set('layout', this.currentLayout);
+        }
+        
+        // Update URL without reloading the page
+        const newURL = params.toString() ? `?${params.toString()}` : window.location.pathname;
+        window.history.replaceState({}, '', newURL);
+    }
+    
     init() {
+        // Apply URL parameters to UI elements
+        this.applyURLParametersToUI();
+        
         // Set up event listeners
         this.setupEventListeners();
         
@@ -22,6 +104,76 @@ class AssemblyTheoryApp {
         this.loadData();
         
         console.log('Assembly Theory Network Visualization initialized');
+    }
+    
+    applyURLParametersToUI() {
+        // Helper to get tier label
+        const getTierLabel = (value) => {
+            const tierRanges = [
+                'AI 1-10',
+                'AI 10-100',
+                'AI 100-1K',
+                'AI 1K-10K',
+                'AI 10K-100K',
+                'AI 100K-1M',
+                'AI 1M-1B',
+                'AI 1B+'
+            ];
+            const index = Math.min(parseInt(value), tierRanges.length - 1);
+            return `Tier ${index + 1} (${tierRanges[index]})`;
+        };
+        
+        // Apply AI range
+        const aiRangeMin = document.getElementById('ai-range-min');
+        const aiRangeMax = document.getElementById('ai-range-max');
+        aiRangeMin.value = this.currentFilters.aiRange.min - 1;
+        aiRangeMax.value = this.currentFilters.aiRange.max - 1;
+        
+        // Update tier labels
+        document.getElementById('ai-min-value').textContent = getTierLabel(aiRangeMin.value);
+        document.getElementById('ai-max-value').textContent = getTierLabel(aiRangeMax.value);
+        
+        // Apply domain checkboxes
+        const allDomains = ['cosmic', 'geological', 'biological', 'cognitive', 'technological'];
+        allDomains.forEach(domain => {
+            const checkbox = document.querySelector(`[data-domain="${domain}"]`);
+            if (checkbox) {
+                checkbox.checked = this.currentFilters.domains.includes(domain);
+            }
+        });
+        
+        // Apply search term
+        const searchInput = document.getElementById('search');
+        if (searchInput && this.currentFilters.searchTerm) {
+            searchInput.value = this.currentFilters.searchTerm;
+        }
+        
+        // Apply link strategy
+        const linkStrategySelect = document.getElementById('link-strategy-select');
+        if (linkStrategySelect) {
+            linkStrategySelect.value = this.currentLinkStrategy;
+            // Update strategy description
+            const strategyDescription = document.getElementById('link-strategy-description');
+            const strategy = this.linkOptions.linkStrategies[this.currentLinkStrategy];
+            if (strategyDescription && strategy) {
+                strategyDescription.textContent = strategy.description;
+            }
+        }
+        
+        // Apply layout
+        const layoutSelect = document.getElementById('layout-select');
+        if (layoutSelect) {
+            layoutSelect.value = this.currentLayout;
+            // Update layout description
+            const layoutDescription = document.getElementById('layout-description');
+            const layoutDescriptions = {
+                'hierarchical': 'Arranges nodes vertically by complexity - simpler assemblies at top, complex at bottom',
+                'timeline': 'Arranges nodes horizontally by time of emergence - Big Bang to present day'
+            };
+            if (layoutDescription) {
+                layoutDescription.textContent = layoutDescriptions[this.currentLayout] || '';
+            }
+        }
     }
     
     async loadData() {
@@ -72,6 +224,7 @@ class AssemblyTheoryApp {
             }
             aiMinValue.textContent = getTierLabel(e.target.value);
             this.updateVisualization();
+            this.updateURLParameters();
         });
         
         aiRangeMax.addEventListener('input', (e) => {
@@ -83,6 +236,7 @@ class AssemblyTheoryApp {
             }
             aiMaxValue.textContent = getTierLabel(e.target.value);
             this.updateVisualization();
+            this.updateURLParameters();
         });
         
         // Domain checkboxes
@@ -98,6 +252,7 @@ class AssemblyTheoryApp {
                     this.currentFilters.domains = this.currentFilters.domains.filter(d => d !== domain);
                 }
                 this.updateVisualization();
+                this.updateURLParameters();
             });
         });
         
@@ -109,6 +264,7 @@ class AssemblyTheoryApp {
             searchTimeout = setTimeout(() => {
                 this.currentFilters.searchTerm = e.target.value;
                 this.updateVisualization();
+                this.updateURLParameters();
             }, 300);
         });
         
@@ -123,11 +279,13 @@ class AssemblyTheoryApp {
         };
         
         layoutSelect.addEventListener('change', (e) => {
+            this.currentLayout = e.target.value;
             this.visualization.applyLayout(e.target.value);
             this.visualization.simulation.alpha(0.3).restart();
             
             // Update layout description
             layoutDescription.textContent = layoutDescriptions[e.target.value] || '';
+            this.updateURLParameters();
         });
         
         // Set initial layout description
@@ -156,6 +314,7 @@ class AssemblyTheoryApp {
             
             // Regenerate links with new strategy
             this.updateVisualization();
+            this.updateURLParameters();
         });
         
         // Set initial description
