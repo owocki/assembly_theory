@@ -122,7 +122,9 @@ function parseMarkdownFile(filePath) {
       '\\*\\*Assembly Index\\*\\*:\\s*([^\\n]+)',
       'Assembly Index:\\s*([^\\n]+)',
       '- \\*\\*Assembly Index\\*\\*:\\s*([^\\n]+)',
-      '- Assembly Index:\\s*([^\\n]+)'
+      '- Assembly Index:\\s*([^\\n]+)',
+      'Assembly Theory Complexity:\\s*([^\\n]+)',
+      '## Assembly Theory Complexity:\\s*([^\\n]+)'
     ];
     const aiValue = extractValue(content, aiPatterns);
     const assembly_index = parseAssemblyIndex(aiValue);
@@ -253,8 +255,8 @@ function findMarkdownFiles(dir, files = []) {
 
 // Main function
 function main() {
-  const domainsDir = '/Users/owocki/Sites/assembly_theory/domains';
-  const outputFile = '/Users/owocki/Sites/assembly_theory/web/all-assemblies-data.js';
+  const domainsDir = '/Users/owocki/Sites/assembly/domains';
+  const outputFile = '/Users/owocki/Sites/assembly/web/all-assemblies-data.js';
   
   console.log('Finding markdown files...');
   const markdownFiles = findMarkdownFiles(domainsDir);

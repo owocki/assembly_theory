@@ -179,7 +179,7 @@
     },
     {
       "id": "stone_tool",
-      "ai": 1000,
+      "ai": 20,
       "domain": "technological",
       "name": "Stone Tool",
       "type": "simple_tool",
@@ -187,7 +187,7 @@
     },
     {
       "id": "wheel",
-      "ai": 30000,
+      "ai": 800,
       "domain": "technological",
       "name": "Wheel",
       "type": "machine_component",
@@ -195,7 +195,7 @@
     },
     {
       "id": "steam_engine",
-      "ai": 10000000,
+      "ai": 2000000,
       "domain": "technological",
       "name": "Steam Engine",
       "type": "power_system",
@@ -203,7 +203,7 @@
     },
     {
       "id": "computer",
-      "ai": 10000000000,
+      "ai": 1000000000000,
       "domain": "technological",
       "name": "Computer",
       "type": "information_system", 
@@ -211,7 +211,7 @@
     },
     {
       "id": "internet",
-      "ai": 100000000000000,
+      "ai": 10000000000000,
       "domain": "technological",
       "name": "Internet",
       "type": "network_system",
