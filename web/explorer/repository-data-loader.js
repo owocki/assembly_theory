@@ -2,6 +2,7 @@ class RepositoryDataLoader {
     constructor() {
         this.baseUrl = '.'; // Relative path to current directory
         this.domainColors = {
+            ethereum: '#627EEA',
             cosmic: '#0066CC',
             geological: '#8B4513',
             biological: '#228B22',
@@ -37,6 +38,9 @@ class RepositoryDataLoader {
         
         // Define markdown files by domain
         const markdownFilesByDomain = {
+            ethereum: [
+                'tokens/erc-20', 'nft/erc-721', 'nft/erc-1155'
+            ],
             cosmic: [
                 'atoms/carbon', 'atoms/hydrogen', 'atoms/oxygen', 'atoms/helium',
                 'atoms/nitrogen', 'atoms/lithium', 'atoms/deuterium', 'atoms/tritium',

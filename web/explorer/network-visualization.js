@@ -349,7 +349,7 @@ class NetworkVisualization {
     
     applyGridLayout() {
         // Grid layout: domains on x-axis, complexity tiers on y-axis
-        const domains = ['cosmic', 'geological', 'biological', 'cognitive', 'technological', 'hybrid'];
+        const domains = ['ethereum'];
         
         this.simulation
             .force('charge', d3.forceManyBody().strength(-50))
@@ -389,7 +389,7 @@ class NetworkVisualization {
             .force('center', null)
             .force('x', d3.forceX(d => {
                 // Spread nodes horizontally based on domain and some randomness
-                const domains = ['cosmic', 'geological', 'biological', 'cognitive', 'technological', 'hybrid'];
+                const domains = ['ethereum'];
                 const domainIndex = domains.indexOf(d.domain) || 0;
                 const baseX = (domainIndex / domains.length) * this.width;
                 return baseX + (Math.random() - 0.5) * this.width * 0.15;
@@ -404,7 +404,7 @@ class NetworkVisualization {
     
     applyClusterLayout() {
         // Cluster layout grouping similar assemblies
-        const domains = ['cosmic', 'geological', 'biological', 'cognitive', 'technological', 'hybrid'];
+        const domains = ['ethereum'];
         const clusterCenters = domains.map((_, i) => ({
             x: this.width * 0.2 + (i % 3) * this.width * 0.3,
             y: this.height * 0.25 + Math.floor(i / 3) * this.height * 0.5
@@ -465,12 +465,7 @@ class NetworkVisualization {
         if (!timeOrigin) {
             // Fallback to domain-based positioning
             const domainTimes = {
-                cosmic: 0.1,
-                geological: 0.3,
-                biological: 0.5,
-                cognitive: 0.75,
-                technological: 0.85,
-                hybrid: 0.9
+                ethereum: 0.9
             };
             return domainTimes[domain] || 0.5;
         }
@@ -609,12 +604,7 @@ class NetworkVisualization {
         
         // Fallback to domain-based positioning
         const domainTimes = {
-            cosmic: 0.1,
-            geological: 0.3,
-            biological: 0.5,
-            cognitive: 0.75,
-            technological: 0.85,
-            hybrid: 0.9
+            ethereum: 0.9
         };
         return domainTimes[domain] || 0.5;
     }

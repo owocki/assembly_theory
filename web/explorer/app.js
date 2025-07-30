@@ -6,7 +6,7 @@ class AssemblyTheoryApp {
         this.currentData = null;
         this.currentFilters = {
             aiRange: { min: 1, max: 8 },
-            domains: ['cosmic', 'geological', 'biological', 'cognitive', 'technological', 'earth', 'hybrid', 'physics', 'technology'],
+            domains: ['ethereum'],
             searchTerm: ''
         };
         this.currentLinkStrategy = 'none';
@@ -31,7 +31,7 @@ class AssemblyTheoryApp {
         
         // Parse domains
         if (params.has('domains')) {
-            const validDomains = ['cosmic', 'geological', 'biological', 'cognitive', 'technological', 'earth', 'hybrid', 'physics', 'technology'];
+            const validDomains = ['ethereum'];
             const domains = params.get('domains').split(',').filter(d => validDomains.includes(d));
             if (domains.length > 0) {
                 this.currentFilters.domains = domains;

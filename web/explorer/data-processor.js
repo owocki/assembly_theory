@@ -1,15 +1,7 @@
 class DataProcessor {
     constructor() {
         this.domainColors = {
-            cosmic: '#0066CC',
-            geological: '#8B4513',
-            biological: '#228B22',
-            cognitive: '#FFD700',
-            technological: '#DC143C',
-            hybrid: '#9932CC',
-            earth: '#4B8B3B',
-            physics: '#6A5ACD',
-            technology: '#FF6347'
+            ethereum: '#627EEA'
         };
         
         this.assemblyIndexTiers = [

@@ -160,12 +160,7 @@ body {
     margin: 0 0.5rem;
 }
 
-.domain-color.cosmic { background: #0066CC; }
-.domain-color.geological { background: #8B4513; }
-.domain-color.biological { background: #228B22; }
-.domain-color.cognitive { background: #FFD700; }
-.domain-color.technological { background: #DC143C; }
-.domain-color.hybrid { background: #9932CC; }
+.domain-color.ethereum { background: #627EEA; }
 
 /* Layout and control buttons */
 select, button {
@@ -536,12 +531,4 @@ a:hover {
     vertical-align: middle;
 }
 
-.domain-color.cosmic { background-color: #0066CC; }
-.domain-color.geological { background-color: #8B4513; }
-.domain-color.biological { background-color: #228B22; }
-.domain-color.cognitive { background-color: #FFD700; }
-.domain-color.technological { background-color: #DC143C; }
-.domain-color.hybrid { background-color: #9932CC; }
-.domain-color.earth { background-color: #4B8B3B; }
-.domain-color.physics { background-color: #6A5ACD; }
-.domain-color.technology { background-color: #FF6347; }
+.domain-color.ethereum { background-color: #627EEA; }
