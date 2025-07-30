@@ -303,6 +303,9 @@ function createObjects() {
             .attr("cy", obj.y)
             .attr("r", obj.radius)
             .attr("fill", obj.color)
+            .attr("fill-opacity", 0.3)
+            .attr("stroke", obj.color)
+            .attr("stroke-width", 2)
             .on("click", () => showNestedContainment(obj))
             .on("mouseover", function(event) {
                 showTooltip(event, obj);
@@ -312,6 +315,13 @@ function createObjects() {
                 hideTooltip();
                 unhighlightContainment();
             });
+        
+        // Add icon inside circle
+        const iconScale = obj.radius / 20; // Scale icon based on circle size
+        group.append("use")
+            .attr("href", `#icon-${obj.id}`)
+            .attr("transform", `translate(${obj.x}, ${obj.y}) scale(${iconScale})`)
+            .style("pointer-events", "none");
         
         // Object label
         group.append("text")
@@ -366,22 +376,32 @@ function showNestedContainment(selectedObj) {
     containedObjects.forEach((obj, index) => {
         const scale = 1 - (index * 0.15);
         const opacity = 1 - (index * 0.1);
+        const circleRadius = obj.radius * scale * 2;
         
         // Draw containing circle
         containerGroup.append("circle")
             .attr("cx", centerX)
             .attr("cy", centerY)
-            .attr("r", obj.radius * scale * 2)
-            .attr("fill", "none")
+            .attr("r", circleRadius)
+            .attr("fill", obj.color)
+            .attr("fill-opacity", 0.1)
             .attr("stroke", obj.color)
             .attr("stroke-width", 2)
             .attr("opacity", opacity)
             .attr("stroke-dasharray", index === 0 ? "none" : "10,5");
         
+        // Add icon for each level
+        const iconScale = circleRadius / 25;
+        containerGroup.append("use")
+            .attr("href", `#icon-${obj.id}`)
+            .attr("transform", `translate(${centerX}, ${centerY}) scale(${iconScale})`)
+            .attr("opacity", opacity * 0.8)
+            .style("pointer-events", "none");
+        
         // Label for each level
         containerGroup.append("text")
             .attr("x", centerX)
-            .attr("y", centerY - (obj.radius * scale * 2) - 10)
+            .attr("y", centerY - circleRadius - 10)
             .attr("text-anchor", "middle")
             .attr("fill", obj.color)
             .attr("font-size", `${14 - index}px`)
@@ -391,7 +411,7 @@ function showNestedContainment(selectedObj) {
         // Description
         containerGroup.append("text")
             .attr("x", centerX)
-            .attr("y", centerY + (obj.radius * scale * 2) + 20)
+            .attr("y", centerY + circleRadius + 20)
             .attr("text-anchor", "middle")
             .attr("fill", "rgba(255, 255, 255, 0.6)")
             .attr("font-size", "11px")
@@ -405,8 +425,9 @@ function showNestedContainment(selectedObj) {
 
 // Highlight containment relationships on hover
 function highlightContainment(obj) {
-    // Dim all objects
+    // Dim all objects and icons
     svg.selectAll(".object-node").attr("opacity", 0.3);
+    svg.selectAll(".object-group use").attr("opacity", 0.3);
     
     // Highlight the selected object and its containment chain
     const highlightChain = [];
@@ -439,11 +460,13 @@ function highlightContainment(obj) {
     // Highlight the chain
     highlightChain.forEach(id => {
         svg.select(`#${id} .object-node`).attr("opacity", 1);
+        svg.select(`#${id} use`).attr("opacity", 1);
     });
 }
 
 function unhighlightContainment() {
     svg.selectAll(".object-node").attr("opacity", 1);
+    svg.selectAll(".object-group use").attr("opacity", 1);
 }
 
 // Update memory panel for nested containment view
@@ -836,7 +859,134 @@ function hideTooltip() {
     d3.selectAll(".tooltip").remove();
 }
 
+// Create icon definitions
+function createIconDefs() {
+    const defs = svg.append("defs");
+    
+    // Electron icon - orbital paths
+    defs.append("g").attr("id", "icon-electron").html(`
+        <circle cx="0" cy="0" r="2" fill="#ff6b9d"/>
+        <ellipse cx="0" cy="0" rx="8" ry="4" fill="none" stroke="#ff6b9d" stroke-width="1" opacity="0.6" transform="rotate(45)"/>
+        <ellipse cx="0" cy="0" rx="8" ry="4" fill="none" stroke="#ff6b9d" stroke-width="1" opacity="0.6" transform="rotate(-45)"/>
+        <ellipse cx="0" cy="0" rx="8" ry="4" fill="none" stroke="#ff6b9d" stroke-width="1" opacity="0.6" transform="rotate(90)"/>
+    `);
+    
+    // Atom icon - nucleus with electron
+    defs.append("g").attr("id", "icon-atom").html(`
+        <circle cx="0" cy="0" r="5" fill="#c44569"/>
+        <circle cx="10" cy="0" r="2" fill="#ff6b9d"/>
+        <circle cx="0" cy="0" r="12" fill="none" stroke="#c44569" stroke-width="1" opacity="0.5"/>
+    `);
+    
+    // Molecule icon - connected spheres
+    defs.append("g").attr("id", "icon-molecule").html(`
+        <line x1="-8" y1="0" x2="8" y2="0" stroke="#f8b500" stroke-width="2"/>
+        <line x1="0" y1="-8" x2="0" y2="8" stroke="#f8b500" stroke-width="2"/>
+        <circle cx="-8" cy="0" r="4" fill="#f8b500"/>
+        <circle cx="8" cy="0" r="4" fill="#f8b500"/>
+        <circle cx="0" cy="-8" r="4" fill="#f8b500"/>
+        <circle cx="0" cy="8" r="3" fill="#f8b500"/>
+        <circle cx="0" cy="0" r="5" fill="#ffa502"/>
+    `);
+    
+    // Tissue icon - cell pattern
+    defs.append("g").attr("id", "icon-tissue").html(`
+        <path d="M-10,-5 Q-10,-10 -5,-10 L5,-10 Q10,-10 10,-5 L10,5 Q10,10 5,10 L-5,10 Q-10,10 -10,5 Z" fill="none" stroke="#a55eea" stroke-width="1.5"/>
+        <circle cx="-5" cy="-5" r="2" fill="#a55eea"/>
+        <circle cx="5" cy="-5" r="2" fill="#a55eea"/>
+        <circle cx="-5" cy="5" r="2" fill="#a55eea"/>
+        <circle cx="5" cy="5" r="2" fill="#a55eea"/>
+        <circle cx="0" cy="0" r="3" fill="#8c7ae6"/>
+    `);
+    
+    // Organ icon - heart shape
+    defs.append("g").attr("id", "icon-organ").html(`
+        <path d="M0,-8 C-5,-13 -15,-13 -15,-5 C-15,0 -10,5 0,12 C10,5 15,0 15,-5 C15,-13 5,-13 0,-8 Z" fill="#0fb9b1" stroke="none"/>
+        <path d="M-5,-5 L-2,0 L0,-3 L2,2 L5,-5" fill="none" stroke="white" stroke-width="1.5" opacity="0.8"/>
+    `);
+    
+    // Organism icon - human figure
+    defs.append("g").attr("id", "icon-organism").html(`
+        <circle cx="0" cy="-8" r="4" fill="#6c5ce7"/>
+        <rect x="-5" y="-4" width="10" height="12" rx="2" fill="#6c5ce7"/>
+        <rect x="-7" y="-2" width="3" height="8" rx="1" fill="#6c5ce7"/>
+        <rect x="4" y="-2" width="3" height="8" rx="1" fill="#6c5ce7"/>
+        <rect x="-3" y="8" width="2" height="6" rx="1" fill="#6c5ce7"/>
+        <rect x="1" y="8" width="2" height="6" rx="1" fill="#6c5ce7"/>
+    `);
+    
+    // Family icon - group of people
+    defs.append("g").attr("id", "icon-family").html(`
+        <circle cx="-6" cy="-6" r="3" fill="#fd79a8"/>
+        <circle cx="6" cy="-6" r="3" fill="#fd79a8"/>
+        <circle cx="0" cy="-2" r="2" fill="#fd79a8"/>
+        <path d="M-9,-3 L-9,3 L-3,3 L-3,-3 Z" fill="#fd79a8"/>
+        <path d="M3,-3 L3,3 L9,3 L9,-3 Z" fill="#fd79a8"/>
+        <path d="M-2,0 L-2,5 L2,5 L2,0 Z" fill="#fd79a8"/>
+    `);
+    
+    // Town icon - buildings
+    defs.append("g").attr("id", "icon-town").html(`
+        <rect x="-12" y="-5" width="6" height="10" fill="#00b894"/>
+        <rect x="-4" y="-8" width="8" height="13" fill="#00b894"/>
+        <rect x="6" y="-6" width="6" height="11" fill="#00b894"/>
+        <polygon points="-12,-5 -9,-8 -6,-5" fill="#00d2d3"/>
+        <polygon points="-4,-8 0,-11 4,-8" fill="#00d2d3"/>
+        <polygon points="6,-6 9,-9 12,-6" fill="#00d2d3"/>
+        <rect x="-10" y="-2" width="2" height="2" fill="#2ed573" opacity="0.8"/>
+        <rect x="-1" y="-5" width="2" height="2" fill="#2ed573" opacity="0.8"/>
+        <rect x="8" y="-3" width="2" height="2" fill="#2ed573" opacity="0.8"/>
+    `);
+    
+    // City icon - skyline
+    defs.append("g").attr("id", "icon-city").html(`
+        <rect x="-14" y="-4" width="4" height="12" fill="#e17055"/>
+        <rect x="-9" y="-8" width="5" height="16" fill="#e17055"/>
+        <rect x="-3" y="-10" width="6" height="18" fill="#d63031"/>
+        <rect x="4" y="-6" width="5" height="14" fill="#e17055"/>
+        <rect x="10" y="-7" width="4" height="15" fill="#e17055"/>
+        <circle cx="0" cy="-12" r="1" fill="#ff7675" opacity="0.8"/>
+        <rect x="-7" y="-5" width="1" height="1" fill="#fab1a0" opacity="0.8"/>
+        <rect x="-1" y="-7" width="1" height="1" fill="#fab1a0" opacity="0.8"/>
+        <rect x="6" y="-3" width="1" height="1" fill="#fab1a0" opacity="0.8"/>
+    `);
+    
+    // Country icon - flag/map outline
+    defs.append("g").attr("id", "icon-country").html(`
+        <path d="M-12,-8 Q-10,-10 -5,-10 L5,-10 Q10,-10 12,-6 L12,0 Q10,2 8,2 L10,6 Q8,8 5,8 L-5,8 Q-10,8 -12,4 L-12,-8 Z" fill="#74b9ff" stroke="#0984e3" stroke-width="1"/>
+        <circle cx="-4" cy="-3" r="2" fill="#0984e3"/>
+        <rect x="2" y="-2" width="6" height="1" fill="#0984e3"/>
+        <rect x="2" y="0" width="6" height="1" fill="#0984e3"/>
+        <rect x="2" y="2" width="6" height="1" fill="#0984e3"/>
+    `);
+    
+    // Planet icon - Earth
+    defs.append("g").attr("id", "icon-planet").html(`
+        <circle cx="0" cy="0" r="12" fill="#74b9ff"/>
+        <path d="M-12,0 Q-8,-4 -4,-4 Q0,-6 4,-4 Q8,-4 12,0" fill="#2ed573" opacity="0.8"/>
+        <path d="M-12,0 Q-8,4 -4,4 Q0,6 4,4 Q8,4 12,0" fill="#2ed573" opacity="0.8"/>
+        <path d="M-8,-8 Q-4,-6 0,-8 Q4,-6 8,-8" fill="#2ed573" opacity="0.6"/>
+        <ellipse cx="0" cy="0" rx="12" ry="6" fill="none" stroke="#a29bfe" stroke-width="1" opacity="0.5"/>
+    `);
+    
+    // Cosmos icon - galaxy/stars
+    defs.append("g").attr("id", "icon-cosmos").html(`
+        <circle cx="0" cy="0" r="3" fill="#ff7675"/>
+        <path d="M0,-12 Q-12,0 0,12 Q12,0 0,-12 Z" fill="none" stroke="#ff7675" stroke-width="1.5" opacity="0.8"/>
+        <path d="M-12,0 Q0,-12 12,0 Q0,12 -12,0 Z" fill="none" stroke="#ff7675" stroke-width="1.5" opacity="0.8"/>
+        <circle cx="-8" cy="-8" r="1" fill="#fab1a0"/>
+        <circle cx="8" cy="-8" r="1" fill="#fab1a0"/>
+        <circle cx="-8" cy="8" r="1" fill="#fab1a0"/>
+        <circle cx="8" cy="8" r="1" fill="#fab1a0"/>
+        <circle cx="-10" cy="0" r="0.5" fill="white" opacity="0.8"/>
+        <circle cx="10" cy="0" r="0.5" fill="white" opacity="0.8"/>
+        <circle cx="0" cy="-10" r="0.5" fill="white" opacity="0.8"/>
+        <circle cx="0" cy="10" r="0.5" fill="white" opacity="0.8"/>
+    `);
+}
+
 // Initialize visualization
+createIconDefs();
 createTimeline();
 createObjects();
 
