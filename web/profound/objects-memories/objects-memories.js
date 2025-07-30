@@ -6,81 +6,171 @@ const height = window.innerHeight;
 
 svg.attr("width", width).attr("height", height);
 
-// Object data with embedded memories
-const objects = [
+// Hierarchical object data from electron to cosmos
+const hierarchyLevels = [
     {
-        id: "protein",
-        name: "Protein",
-        x: width * 0.7,
-        y: height * 0.3,
-        radius: 40,
+        id: "electron",
+        name: "Electron",
+        level: 0,
+        radius: 15,
         color: "#ff6b9d",
-        assemblyIndex: 600,
-        memories: [
-            { time: "13.8 Gyr", event: "Hydrogen formation", layer: "cosmic" },
-            { time: "4.6 Gyr", event: "Heavy elements from supernovae", layer: "stellar" },
-            { time: "3.8 Gyr", event: "Amino acid synthesis", layer: "chemical" },
-            { time: "3.5 Gyr", event: "First proteins fold", layer: "molecular" },
-            { time: "2.0 Gyr", event: "Protein family diversification", layer: "evolutionary" },
-            { time: "500 Myr", event: "Complex multicellular proteins", layer: "biological" },
-            { time: "Present", event: "Specific protein structure", layer: "functional" }
-        ]
+        assemblyIndex: 1,
+        containedIn: ["atom"],
+        description: "Fundamental particle, wave-function memory"
     },
     {
-        id: "smartphone",
-        name: "Smartphone",
-        x: width * 0.6,
-        y: height * 0.6,
-        radius: 35,
+        id: "atom",
+        name: "Atom",
+        level: 1,
+        radius: 25,
         color: "#c44569",
-        assemblyIndex: 1000000000,
-        memories: [
-            { time: "13.8 Gyr", event: "Elements forged in stars", layer: "cosmic" },
-            { time: "4.6 Gyr", event: "Silicon and rare earth formation", layer: "geological" },
-            { time: "10 kyr", event: "Human civilization begins", layer: "cultural" },
-            { time: "200 yr", event: "Electricity discovered", layer: "scientific" },
-            { time: "70 yr", event: "Transistor invented", layer: "technological" },
-            { time: "50 yr", event: "Integrated circuits", layer: "engineering" },
-            { time: "15 yr", event: "Modern smartphone design", layer: "contemporary" }
-        ]
+        assemblyIndex: 10,
+        containedIn: ["molecule"],
+        contains: ["electron"],
+        description: "Hydrogen - simplest atomic memory"
     },
     {
-        id: "dna",
-        name: "DNA Molecule",
-        x: width * 0.4,
-        y: height * 0.4,
-        radius: 45,
+        id: "molecule",
+        name: "Molecule",
+        level: 2,
+        radius: 35,
         color: "#f8b500",
-        assemblyIndex: 100000,
-        memories: [
-            { time: "13.8 Gyr", event: "Carbon, nitrogen, phosphorus creation", layer: "cosmic" },
-            { time: "4.0 Gyr", event: "Nucleotide synthesis", layer: "prebiotic" },
-            { time: "3.8 Gyr", event: "RNA world emergence", layer: "primordial" },
-            { time: "3.5 Gyr", event: "DNA-RNA transition", layer: "genetic" },
-            { time: "2.0 Gyr", event: "Error correction mechanisms", layer: "informational" },
-            { time: "540 Myr", event: "Complex organism encoding", layer: "developmental" },
-            { time: "Present", event: "Individual genetic sequence", layer: "personal" }
-        ]
+        assemblyIndex: 100,
+        containedIn: ["tissue"],
+        contains: ["atom"],
+        description: "Water molecule - chemical bonds as memory"
     },
     {
-        id: "neuron",
-        name: "Neuron",
-        x: width * 0.5,
-        y: height * 0.7,
-        radius: 38,
+        id: "tissue",
+        name: "Tissue",
+        level: 3,
+        radius: 45,
         color: "#a55eea",
-        assemblyIndex: 50000000,
-        memories: [
-            { time: "13.8 Gyr", event: "Basic elements formed", layer: "cosmic" },
-            { time: "3.8 Gyr", event: "First cellular membranes", layer: "cellular" },
-            { time: "1.5 Gyr", event: "Eukaryotic cells emerge", layer: "complexity" },
-            { time: "600 Myr", event: "First nervous systems", layer: "neural" },
-            { time: "500 Myr", event: "Vertebrate brain evolution", layer: "cognitive" },
-            { time: "7 Myr", event: "Primate brain expansion", layer: "mammalian" },
-            { time: "Present", event: "Individual neural connections", layer: "experience" }
-        ]
+        assemblyIndex: 10000,
+        containedIn: ["organ"],
+        contains: ["molecule"],
+        description: "Living tissue - cellular organization memory"
+    },
+    {
+        id: "organ",
+        name: "Organ",
+        level: 4,
+        radius: 55,
+        color: "#0fb9b1",
+        assemblyIndex: 1000000,
+        containedIn: ["organism"],
+        contains: ["tissue"],
+        description: "Heart - functional structure memory"
+    },
+    {
+        id: "organism",
+        name: "Organism",
+        level: 5,
+        radius: 65,
+        color: "#6c5ce7",
+        assemblyIndex: 100000000,
+        containedIn: ["family"],
+        contains: ["organ"],
+        description: "Human - integrated system memory"
+    },
+    {
+        id: "family",
+        name: "Family",
+        level: 6,
+        radius: 75,
+        color: "#fd79a8",
+        assemblyIndex: 500000000,
+        containedIn: ["town"],
+        contains: ["organism"],
+        description: "Family unit - social structure memory"
+    },
+    {
+        id: "town",
+        name: "Town",
+        level: 7,
+        radius: 85,
+        color: "#00b894",
+        assemblyIndex: 1000000000,
+        containedIn: ["city"],
+        contains: ["family"],
+        description: "Community - collective organization memory"
+    },
+    {
+        id: "city",
+        name: "City",
+        level: 8,
+        radius: 95,
+        color: "#e17055",
+        assemblyIndex: 10000000000,
+        containedIn: ["country"],
+        contains: ["town"],
+        description: "Metropolis - urban system memory"
+    },
+    {
+        id: "country",
+        name: "Country",
+        level: 9,
+        radius: 105,
+        color: "#74b9ff",
+        assemblyIndex: 100000000000,
+        containedIn: ["planet"],
+        contains: ["city"],
+        description: "Nation - political structure memory"
+    },
+    {
+        id: "planet",
+        name: "Planet",
+        level: 10,
+        radius: 115,
+        color: "#a29bfe",
+        assemblyIndex: 1000000000000,
+        containedIn: ["cosmos"],
+        contains: ["country"],
+        description: "Earth - biosphere memory"
+    },
+    {
+        id: "cosmos",
+        name: "Cosmos",
+        level: 11,
+        radius: 125,
+        color: "#ff7675",
+        assemblyIndex: 10000000000000,
+        contains: ["planet"],
+        description: "Universe - all possible memories"
     }
 ];
+
+// Calculate positions for hierarchical layout
+hierarchyLevels.forEach((obj, index) => {
+    const angle = (index / hierarchyLevels.length) * 2 * Math.PI - Math.PI/2;
+    const centerX = width / 2;
+    const centerY = height / 2;
+    const radiusMultiplier = Math.min(width, height) * 0.35;
+    
+    obj.x = centerX + Math.cos(angle) * radiusMultiplier;
+    obj.y = centerY + Math.sin(angle) * radiusMultiplier;
+    
+    // Add memories based on hierarchy
+    obj.memories = [];
+    
+    // All objects contain the memory of the Big Bang
+    obj.memories.push({ time: "13.8 Gyr", event: "Big Bang - quantum fluctuations", layer: "cosmic" });
+    
+    // Add level-specific memories
+    if (obj.level >= 1) obj.memories.push({ time: "13.7 Gyr", event: "First atoms form", layer: "atomic" });
+    if (obj.level >= 2) obj.memories.push({ time: "4.6 Gyr", event: "Molecular clouds in space", layer: "chemical" });
+    if (obj.level >= 3) obj.memories.push({ time: "3.8 Gyr", event: "First organic molecules", layer: "biological" });
+    if (obj.level >= 4) obj.memories.push({ time: "600 Myr", event: "Complex multicellular life", layer: "evolutionary" });
+    if (obj.level >= 5) obj.memories.push({ time: "7 Myr", event: "Hominid evolution begins", layer: "species" });
+    if (obj.level >= 6) obj.memories.push({ time: "300 kyr", event: "Homo sapiens emerges", layer: "human" });
+    if (obj.level >= 7) obj.memories.push({ time: "10 kyr", event: "Agricultural revolution", layer: "cultural" });
+    if (obj.level >= 8) obj.memories.push({ time: "5 kyr", event: "First cities", layer: "urban" });
+    if (obj.level >= 9) obj.memories.push({ time: "500 yr", event: "Nation states form", layer: "political" });
+    if (obj.level >= 10) obj.memories.push({ time: "4.5 Gyr", event: "Earth forms", layer: "planetary" });
+    if (obj.level >= 11) obj.memories.push({ time: "Now", event: "Conscious observation", layer: "present" });
+});
+
+const objects = hierarchyLevels;
 
 // Color scales for different memory layers
 const layerColors = {
@@ -108,7 +198,14 @@ const layerColors = {
     "functional": "#00b894",
     "complexity": "#fd79a8",
     "experience": "#a29bfe",
-    "personal": "#ff7675"
+    "personal": "#ff7675",
+    "atomic": "#00cec9",
+    "species": "#dfe6e9",
+    "human": "#fab1a0",
+    "urban": "#ff7979",
+    "political": "#badc58",
+    "planetary": "#74b9ff",
+    "present": "#ffffff"
 };
 
 let currentView = "default";
@@ -166,6 +263,23 @@ function createTimeline() {
 function createObjects() {
     const objectGroup = svg.append("g").attr("class", "objects");
     
+    // Draw containment connections first
+    objects.forEach(obj => {
+        if (obj.contains) {
+            obj.contains.forEach(containedId => {
+                const containedObj = objects.find(o => o.id === containedId);
+                if (containedObj) {
+                    objectGroup.append("path")
+                        .attr("class", "containment-link")
+                        .attr("d", `M ${obj.x},${obj.y} L ${containedObj.x},${containedObj.y}`)
+                        .attr("stroke", "rgba(255, 255, 255, 0.2)")
+                        .attr("stroke-width", 2)
+                        .attr("stroke-dasharray", "5,5");
+                }
+            });
+        }
+    });
+    
     objects.forEach(obj => {
         const group = objectGroup.append("g")
             .attr("class", "object-group")
@@ -189,11 +303,15 @@ function createObjects() {
             .attr("cy", obj.y)
             .attr("r", obj.radius)
             .attr("fill", obj.color)
-            .on("click", () => showObjectMemories(obj))
+            .on("click", () => showNestedContainment(obj))
             .on("mouseover", function(event) {
                 showTooltip(event, obj);
+                highlightContainment(obj);
             })
-            .on("mouseout", hideTooltip);
+            .on("mouseout", function() {
+                hideTooltip();
+                unhighlightContainment();
+            });
         
         // Object label
         group.append("text")
@@ -214,6 +332,158 @@ function createObjects() {
             .attr("font-size", "12px")
             .text(`AI: ${obj.assemblyIndex.toLocaleString()}`);
     });
+}
+
+// Show nested containment visualization
+function showNestedContainment(selectedObj) {
+    // Clear previous visualizations
+    svg.selectAll(".memory-trace").remove();
+    svg.selectAll(".memory-layer").remove();
+    svg.selectAll(".nested-container").remove();
+    
+    const containerGroup = svg.append("g").attr("class", "nested-container");
+    
+    // Find all objects contained within the selected object
+    const containedObjects = [];
+    function findContained(obj) {
+        containedObjects.push(obj);
+        if (obj.contains) {
+            obj.contains.forEach(id => {
+                const contained = objects.find(o => o.id === id);
+                if (contained) findContained(contained);
+            });
+        }
+    }
+    findContained(selectedObj);
+    
+    // Sort by level for proper rendering order
+    containedObjects.sort((a, b) => b.level - a.level);
+    
+    // Create nested visualization centered on selected object
+    const centerX = width / 2;
+    const centerY = height / 2;
+    
+    containedObjects.forEach((obj, index) => {
+        const scale = 1 - (index * 0.15);
+        const opacity = 1 - (index * 0.1);
+        
+        // Draw containing circle
+        containerGroup.append("circle")
+            .attr("cx", centerX)
+            .attr("cy", centerY)
+            .attr("r", obj.radius * scale * 2)
+            .attr("fill", "none")
+            .attr("stroke", obj.color)
+            .attr("stroke-width", 2)
+            .attr("opacity", opacity)
+            .attr("stroke-dasharray", index === 0 ? "none" : "10,5");
+        
+        // Label for each level
+        containerGroup.append("text")
+            .attr("x", centerX)
+            .attr("y", centerY - (obj.radius * scale * 2) - 10)
+            .attr("text-anchor", "middle")
+            .attr("fill", obj.color)
+            .attr("font-size", `${14 - index}px`)
+            .attr("opacity", opacity)
+            .text(obj.name);
+        
+        // Description
+        containerGroup.append("text")
+            .attr("x", centerX)
+            .attr("y", centerY + (obj.radius * scale * 2) + 20)
+            .attr("text-anchor", "middle")
+            .attr("fill", "rgba(255, 255, 255, 0.6)")
+            .attr("font-size", "11px")
+            .attr("opacity", opacity * 0.8)
+            .text(obj.description);
+    });
+    
+    // Update memory panel for nested view
+    updateNestedMemoryPanel(selectedObj, containedObjects);
+}
+
+// Highlight containment relationships on hover
+function highlightContainment(obj) {
+    // Dim all objects
+    svg.selectAll(".object-node").attr("opacity", 0.3);
+    
+    // Highlight the selected object and its containment chain
+    const highlightChain = [];
+    
+    // Find all contained objects
+    function findContainedChain(currentObj) {
+        highlightChain.push(currentObj.id);
+        if (currentObj.contains) {
+            currentObj.contains.forEach(id => {
+                const contained = objects.find(o => o.id === id);
+                if (contained) findContainedChain(contained);
+            });
+        }
+    }
+    
+    // Find all containing objects
+    function findContainingChain(currentObj) {
+        if (currentObj.containedIn) {
+            currentObj.containedIn.forEach(id => {
+                highlightChain.push(id);
+                const container = objects.find(o => o.id === id);
+                if (container) findContainingChain(container);
+            });
+        }
+    }
+    
+    findContainedChain(obj);
+    findContainingChain(obj);
+    
+    // Highlight the chain
+    highlightChain.forEach(id => {
+        svg.select(`#${id} .object-node`).attr("opacity", 1);
+    });
+}
+
+function unhighlightContainment() {
+    svg.selectAll(".object-node").attr("opacity", 1);
+}
+
+// Update memory panel for nested containment view
+function updateNestedMemoryPanel(selectedObj, containedObjects) {
+    const content = document.getElementById("memoryContent");
+    content.innerHTML = `
+        <h4>${selectedObj.name} Contains:</h4>
+        <p style="font-size: 12px; opacity: 0.8; margin-bottom: 15px;">
+            Each level inherits all memories from smaller scales
+        </p>
+    `;
+    
+    containedObjects.slice(1).forEach(obj => {
+        const item = document.createElement("div");
+        item.className = "memory-item";
+        item.style.borderLeftColor = obj.color;
+        
+        item.innerHTML = `
+            <div style="font-weight: bold; color: ${obj.color};">${obj.name}</div>
+            <div style="font-size: 12px; opacity: 0.8;">${obj.description}</div>
+            <div style="font-size: 11px; opacity: 0.6; margin-top: 3px;">
+                Assembly Index: ${obj.assemblyIndex.toLocaleString()}
+            </div>
+        `;
+        
+        content.appendChild(item);
+    });
+    
+    // Add total memory calculation
+    const totalMemory = containedObjects.reduce((sum, obj) => sum + obj.memories.length, 0);
+    const summary = document.createElement("div");
+    summary.style.marginTop = "20px";
+    summary.style.padding = "10px";
+    summary.style.background = "rgba(255, 107, 157, 0.2)";
+    summary.style.borderRadius = "5px";
+    summary.innerHTML = `
+        <strong>Total Embedded Memories:</strong> ${totalMemory}<br>
+        <small>Each object preserves the history of all its components</small>
+    `;
+    content.appendChild(summary);
 }
 
 // Show memory layers for selected object
@@ -372,56 +642,163 @@ function showLayeredMemory() {
     });
 }
 
-// Show assembly pathway
-function showAssemblyPath() {
-    currentView = "assembly";
+// Show hierarchy pathway from electron to cosmos
+function showHierarchyPath() {
+    currentView = "hierarchy";
     
     // Clear previous
     svg.selectAll(".memory-trace").remove();
     svg.selectAll(".memory-layer").remove();
+    svg.selectAll(".nested-container").remove();
     
-    // Show assembly progression
-    const sortedObjects = [...objects].sort((a, b) => a.assemblyIndex - b.assemblyIndex);
+    // Show hierarchy progression by level
+    const sortedByLevel = [...objects].sort((a, b) => a.level - b.level);
     
-    for (let i = 0; i < sortedObjects.length - 1; i++) {
-        const obj1 = sortedObjects[i];
-        const obj2 = sortedObjects[i + 1];
+    for (let i = 0; i < sortedByLevel.length - 1; i++) {
+        const obj1 = sortedByLevel[i];
+        const obj2 = sortedByLevel[i + 1];
         
         svg.append("path")
             .attr("class", "memory-trace active-memory")
             .attr("d", `M ${obj1.x},${obj1.y} Q ${(obj1.x + obj2.x) / 2},${(obj1.y + obj2.y) / 2 - 50} ${obj2.x},${obj2.y}`)
-            .attr("stroke", "#ff6b9d")
+            .attr("stroke", `url(#gradient${i})`)
             .attr("stroke-width", 3)
             .attr("opacity", 0)
             .transition()
-            .delay(i * 500)
-            .duration(1000)
+            .delay(i * 300)
+            .duration(800)
             .attr("opacity", 0.8);
+        
+        // Create gradient for each connection
+        const gradient = svg.append("defs").append("linearGradient")
+            .attr("id", `gradient${i}`)
+            .attr("x1", "0%")
+            .attr("y1", "0%")
+            .attr("x2", "100%")
+            .attr("y2", "0%");
+        
+        gradient.append("stop")
+            .attr("offset", "0%")
+            .attr("stop-color", obj1.color);
+        
+        gradient.append("stop")
+            .attr("offset", "100%")
+            .attr("stop-color", obj2.color);
     }
+}
+
+// Show containment view focusing on nested relationships
+function showContainmentView() {
+    currentView = "containment";
+    
+    // Clear previous
+    svg.selectAll(".memory-trace").remove();
+    svg.selectAll(".memory-layer").remove();
+    svg.selectAll(".nested-container").remove();
+    
+    // Create a central view showing all containment relationships
+    const centerX = width / 2;
+    const centerY = height / 2;
+    
+    // Place cosmos at center
+    const cosmos = objects.find(o => o.id === "cosmos");
+    
+    // Animate all objects to concentric positions
+    objects.forEach(obj => {
+        const distance = (12 - obj.level) * 40;
+        
+        d3.select(`#${obj.id} .object-node`)
+            .transition()
+            .duration(1000)
+            .attr("cx", centerX)
+            .attr("cy", centerY);
+        
+        d3.select(`#${obj.id}`)
+            .selectAll("text")
+            .transition()
+            .duration(1000)
+            .attr("x", centerX)
+            .attr("y", function() {
+                const currentY = parseFloat(d3.select(this).attr("y"));
+                const currentObjY = parseFloat(d3.select(`#${obj.id} .object-node`).attr("cy"));
+                const offset = currentY - currentObjY;
+                return centerY + offset;
+            });
+        
+        // Draw concentric rings
+        svg.append("circle")
+            .attr("class", "memory-layer")
+            .attr("cx", centerX)
+            .attr("cy", centerY)
+            .attr("r", distance)
+            .attr("fill", "none")
+            .attr("stroke", obj.color)
+            .attr("stroke-width", 1)
+            .attr("stroke-dasharray", "10,5")
+            .attr("opacity", 0)
+            .transition()
+            .delay(obj.level * 100)
+            .duration(500)
+            .attr("opacity", 0.3);
+    });
 }
 
 function resetView() {
     currentView = "default";
     svg.selectAll(".memory-trace").remove();
     svg.selectAll(".memory-layer").remove();
+    svg.selectAll(".nested-container").remove();
+    
+    // Reset object positions
+    objects.forEach(obj => {
+        const angle = (obj.level / hierarchyLevels.length) * 2 * Math.PI - Math.PI/2;
+        const centerX = width / 2;
+        const centerY = height / 2;
+        const radiusMultiplier = Math.min(width, height) * 0.35;
+        
+        const targetX = centerX + Math.cos(angle) * radiusMultiplier;
+        const targetY = centerY + Math.sin(angle) * radiusMultiplier;
+        
+        d3.select(`#${obj.id} .object-node`)
+            .transition()
+            .duration(1000)
+            .attr("cx", targetX)
+            .attr("cy", targetY);
+        
+        d3.select(`#${obj.id}`)
+            .selectAll("text")
+            .transition()
+            .duration(1000)
+            .attr("x", targetX)
+            .attr("y", function() {
+                const currentY = parseFloat(d3.select(this).attr("y"));
+                const currentObjY = parseFloat(d3.select(`#${obj.id} .object-node`).attr("cy"));
+                const offset = currentY - currentObjY;
+                return targetY + offset;
+            });
+    });
     
     // Reset memory panel
     document.getElementById("memoryContent").innerHTML = `
         <div class="memory-item">
             <div class="memory-time">13.8 Gyr ago</div>
-            <div>Hydrogen atoms formed - basic building blocks</div>
+            <div>Big Bang - quantum fluctuations begin</div>
+        </div>
+        <div class="memory-item">
+            <div class="memory-time">13.7 Gyr ago</div>
+            <div>First atoms form - hydrogen and helium</div>
         </div>
         <div class="memory-item">
             <div class="memory-time">4.6 Gyr ago</div>
-            <div>Solar system formation - heavy elements available</div>
+            <div>Solar system forms - heavy elements available</div>
         </div>
         <div class="memory-item">
             <div class="memory-time">3.8 Gyr ago</div>
-            <div>First organic molecules - chemical memory begins</div>
+            <div>Life emerges - molecular assembly begins</div>
         </div>
         <div class="memory-item">
             <div class="memory-time">Present</div>
-            <div>Complex object embodies entire history</div>
+            <div>Cosmos contains all possible memories</div>
         </div>
     `;
 }
@@ -432,13 +809,21 @@ function showTooltip(event, obj) {
         .attr("class", "tooltip")
         .style("opacity", 0);
     
+    const containsText = obj.contains ? 
+        `Contains: ${obj.contains.map(id => objects.find(o => o.id === id)?.name).join(', ')}<br/>` : '';
+    const containedInText = obj.containedIn ? 
+        `Contained in: ${obj.containedIn.map(id => objects.find(o => o.id === id)?.name).join(', ')}<br/>` : '';
+    
     tooltip.html(`
         <strong>${obj.name}</strong><br/>
-        Assembly Index: ${obj.assemblyIndex.toLocaleString()}<br/>
-        Memory Layers: ${obj.memories.length}<br/>
+        ${obj.description}<br/>
         <br/>
-        This object contains ${obj.memories.length} layers of historical information, 
-        from cosmic events ${obj.memories[0].time} ago to the present moment.
+        Assembly Index: ${obj.assemblyIndex.toLocaleString()}<br/>
+        Hierarchy Level: ${obj.level}<br/>
+        ${containsText}
+        ${containedInText}
+        <br/>
+        This object embodies ${obj.memories.length} layers of historical memory.
     `)
         .style("left", (event.pageX + 10) + "px")
         .style("top", (event.pageY - 10) + "px")
@@ -455,7 +840,8 @@ function hideTooltip() {
 createTimeline();
 createObjects();
 
-// Auto-demonstration
+// Auto-demonstration - show cosmos containing all
 setTimeout(() => {
-    showObjectMemories(objects[0]);
+    const cosmos = objects.find(o => o.id === "cosmos");
+    showNestedContainment(cosmos);
 }, 2000);
