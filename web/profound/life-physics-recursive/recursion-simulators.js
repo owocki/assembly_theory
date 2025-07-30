@@ -360,138 +360,267 @@ class NeuralSimulator extends RecursionSimulator {
     }
 }
 
-// Evolution Simulator
+// Evolution Simulator - Clear visualization of Genes → Organisms → Genes cycle
 class EvolutionSimulator extends RecursionSimulator {
     constructor(canvas) {
         super(canvas);
         this.organisms = [];
+        this.genes = [];
         this.generation = 0;
+        this.reproductionPhase = false;
+        this.phaseTimer = 0;
         this.initPopulation();
     }
     
     initPopulation() {
-        for (let i = 0; i < 20; i++) {
-            this.organisms.push({
-                x: Math.random() * this.width,
-                y: Math.random() * this.height,
-                genome: this.randomGenome(),
+        // Create initial organisms with visible genes
+        for (let i = 0; i < 6; i++) {
+            const organism = {
+                id: i,
+                x: 100 + (i % 3) * 150,
+                y: 100 + Math.floor(i / 3) * 100,
+                genes: {
+                    size: ['S', 'M', 'L'][Math.floor(Math.random() * 3)],
+                    speed: ['slow', 'medium', 'fast'][Math.floor(Math.random() * 3)],
+                    color: ['red', 'green', 'blue'][Math.floor(Math.random() * 3)]
+                },
+                phenotype: null,
                 fitness: 0,
-                age: 0,
-                generation: 0,
-                evolvability: Math.random() * 0.5
-            });
+                reproducing: false,
+                age: 0
+            };
+            
+            // Express genes as phenotype
+            organism.phenotype = this.expressPhenotype(organism.genes);
+            this.organisms.push(organism);
         }
     }
     
-    randomGenome() {
+    expressPhenotype(genes) {
         return {
-            size: 5 + Math.random() * 10,
-            speed: 0.5 + Math.random() * 2,
-            color: `hsl(${Math.random() * 60 + 60}, 70%, 50%)`,
-            mutationRate: 0.1 + Math.random() * 0.2
+            size: genes.size === 'S' ? 15 : genes.size === 'M' ? 25 : 35,
+            speed: genes.speed === 'slow' ? 0.5 : genes.speed === 'medium' ? 1 : 1.5,
+            color: genes.color === 'red' ? '#ff6b6b' : genes.color === 'green' ? '#4caf50' : '#2196f3'
         };
     }
     
     update() {
         this.frame++;
+        this.phaseTimer++;
         
-        // Move organisms
-        this.organisms.forEach(org => {
-            org.x += (Math.random() - 0.5) * org.genome.speed;
-            org.y += (Math.random() - 0.5) * org.genome.speed;
-            
-            // Wrap around
-            if (org.x < 0) org.x = this.width;
-            if (org.x > this.width) org.x = 0;
-            if (org.y < 0) org.y = this.height;
-            if (org.y > this.height) org.y = 0;
-            
-            org.age++;
-            
-            // Calculate fitness (center preference)
-            const distFromCenter = Math.sqrt(
-                Math.pow(org.x - this.width/2, 2) + 
-                Math.pow(org.y - this.height/2, 2)
-            );
-            org.fitness = 1 - (distFromCenter / (this.width/2));
-        });
-        
-        // Reproduction
-        if (this.frame % 120 === 0) {
-            const parents = this.organisms
-                .sort((a, b) => b.fitness - a.fitness)
-                .slice(0, 10);
-            
-            // Create offspring
-            const offspring = [];
-            parents.forEach(parent => {
-                if (offspring.length < 10) {
-                    const child = {
-                        x: parent.x + (Math.random() - 0.5) * 50,
-                        y: parent.y + (Math.random() - 0.5) * 50,
-                        genome: this.mutate(parent.genome, parent.evolvability),
-                        fitness: 0,
-                        age: 0,
-                        generation: parent.generation + 1,
-                        evolvability: parent.evolvability + (Math.random() - 0.5) * 0.1
-                    };
-                    offspring.push(child);
-                }
+        if (!this.reproductionPhase) {
+            // ORGANISM PHASE - organisms live and accumulate fitness
+            this.organisms.forEach(org => {
+                // Move based on speed gene
+                org.x += (Math.random() - 0.5) * org.phenotype.speed * 2;
+                org.y += (Math.random() - 0.5) * org.phenotype.speed * 2;
+                
+                // Keep in bounds
+                org.x = Math.max(50, Math.min(this.width - 50, org.x));
+                org.y = Math.max(50, Math.min(this.height - 50, org.y));
+                
+                org.age++;
+                
+                // Fitness based on position (favor right side) and traits
+                const rightness = org.x / this.width;
+                const speedBonus = org.phenotype.speed / 1.5;
+                const sizeBonus = (40 - org.phenotype.size) / 40; // Smaller is better
+                org.fitness = rightness * 0.5 + speedBonus * 0.3 + sizeBonus * 0.2;
+                
+                // Visual feedback for high fitness
+                org.reproducing = org.fitness > 0.6;
             });
             
-            // Replace old organisms
-            this.organisms = [...parents, ...offspring];
-            this.generation++;
+            // Switch to reproduction phase
+            if (this.phaseTimer > 180) {
+                this.reproductionPhase = true;
+                this.phaseTimer = 0;
+                this.startReproduction();
+            }
+        } else {
+            // REPRODUCTION PHASE - genes create new organisms
+            if (this.phaseTimer > 120) {
+                this.reproductionPhase = false;
+                this.phaseTimer = 0;
+                this.generation++;
+            }
         }
     }
     
-    mutate(genome, evolvability) {
-        const mutationStrength = genome.mutationRate * evolvability;
-        return {
-            size: genome.size + (Math.random() - 0.5) * mutationStrength * 5,
-            speed: genome.speed + (Math.random() - 0.5) * mutationStrength,
-            color: `hsl(${parseInt(genome.color.match(/\d+/)[0]) + (Math.random() - 0.5) * 20}, 70%, 50%)`,
-            mutationRate: genome.mutationRate + (Math.random() - 0.5) * 0.05
-        };
+    startReproduction() {
+        // Sort by fitness
+        const sorted = [...this.organisms].sort((a, b) => b.fitness - a.fitness);
+        const parents = sorted.slice(0, 3); // Top 3 reproduce
+        
+        // Create gene packets that will form new organisms
+        this.genes = [];
+        parents.forEach(parent => {
+            // Extract and visualize genes
+            const genePacket = {
+                fromOrganism: parent.id,
+                x: parent.x,
+                y: parent.y,
+                targetX: 100 + (this.genes.length % 3) * 150,
+                targetY: 250,
+                genes: { ...parent.genes },
+                moving: true
+            };
+            
+            // Mutation chance
+            if (Math.random() < 0.3) {
+                const geneTypes = ['size', 'speed', 'color'];
+                const mutateGene = geneTypes[Math.floor(Math.random() * 3)];
+                
+                if (mutateGene === 'size') {
+                    genePacket.genes.size = ['S', 'M', 'L'][Math.floor(Math.random() * 3)];
+                } else if (mutateGene === 'speed') {
+                    genePacket.genes.speed = ['slow', 'medium', 'fast'][Math.floor(Math.random() * 3)];
+                } else {
+                    genePacket.genes.color = ['red', 'green', 'blue'][Math.floor(Math.random() * 3)];
+                }
+                genePacket.mutated = true;
+            }
+            
+            this.genes.push(genePacket);
+        });
+        
+        // Remove unfit organisms
+        this.organisms = sorted.slice(0, Math.ceil(this.organisms.length / 2));
     }
     
     draw() {
         this.clear();
         
-        // Draw target zone
-        this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
-        this.ctx.beginPath();
-        this.ctx.arc(this.width/2, this.height/2, 100, 0, Math.PI * 2);
-        this.ctx.stroke();
+        // Draw phase indicator
+        this.ctx.fillStyle = '#ffffff';
+        this.ctx.font = '16px sans-serif';
+        this.ctx.fillText('Genes → Organisms → Genes', 10, 25);
+        this.ctx.font = '14px sans-serif';
+        this.ctx.fillText(`Generation: ${this.generation}`, 10, 45);
         
-        // Draw organisms
-        this.organisms.forEach(org => {
-            this.ctx.fillStyle = org.genome.color;
-            this.ctx.globalAlpha = 0.7;
-            this.ctx.beginPath();
-            this.ctx.arc(org.x, org.y, org.genome.size, 0, Math.PI * 2);
-            this.ctx.fill();
+        // Phase label
+        this.ctx.fillStyle = this.reproductionPhase ? '#ffeb3b' : '#4caf50';
+        this.ctx.fillText(this.reproductionPhase ? 'REPRODUCTION PHASE' : 'ORGANISM PHASE', this.width - 180, 25);
+        
+        if (!this.reproductionPhase) {
+            // Draw fitness gradient
+            const gradient = this.ctx.createLinearGradient(0, 0, this.width, 0);
+            gradient.addColorStop(0, 'rgba(255, 0, 0, 0.1)');
+            gradient.addColorStop(1, 'rgba(0, 255, 0, 0.1)');
+            this.ctx.fillStyle = gradient;
+            this.ctx.fillRect(0, 0, this.width, this.height);
             
-            // Show evolvability
-            if (org.evolvability > 0.5) {
-                this.ctx.strokeStyle = '#ffeb3b';
-                this.ctx.lineWidth = 2;
-                this.ctx.beginPath();
-                this.ctx.arc(org.x, org.y, org.genome.size + 3, 0, Math.PI * 2);
-                this.ctx.stroke();
-            }
-        });
+            // Draw organisms
+            this.organisms.forEach(org => {
+                this.drawOrganism(org);
+            });
+            
+            // Fitness zone indicator
+            this.ctx.strokeStyle = 'rgba(0, 255, 0, 0.3)';
+            this.ctx.lineWidth = 2;
+            this.ctx.strokeRect(this.width * 0.7, 20, this.width * 0.25, this.height - 40);
+            this.ctx.fillStyle = 'rgba(0, 255, 0, 0.6)';
+            this.ctx.font = '12px sans-serif';
+            this.ctx.fillText('High Fitness Zone', this.width * 0.72, 15);
+        } else {
+            // Draw gene transfer
+            this.genes.forEach((gene, index) => {
+                if (gene.moving) {
+                    // Move gene packet
+                    gene.x += (gene.targetX - gene.x) * 0.05;
+                    gene.y += (gene.targetY - gene.y) * 0.05;
+                    
+                    if (Math.abs(gene.x - gene.targetX) < 5) {
+                        gene.moving = false;
+                        
+                        // Create new organism from genes
+                        setTimeout(() => {
+                            const newOrg = {
+                                id: this.organisms.length,
+                                x: gene.targetX,
+                                y: gene.targetY,
+                                genes: gene.genes,
+                                phenotype: this.expressPhenotype(gene.genes),
+                                fitness: 0,
+                                reproducing: false,
+                                age: 0,
+                                isNew: true
+                            };
+                            this.organisms.push(newOrg);
+                        }, 500);
+                    }
+                }
+                
+                this.drawGenePacket(gene);
+            });
+            
+            // Draw remaining organisms (parents)
+            this.organisms.forEach(org => {
+                this.drawOrganism(org);
+                if (org.reproducing) {
+                    // Show as parent
+                    this.ctx.strokeStyle = '#ffeb3b';
+                    this.ctx.lineWidth = 3;
+                    this.ctx.beginPath();
+                    this.ctx.arc(org.x, org.y, org.phenotype.size + 5, 0, Math.PI * 2);
+                    this.ctx.stroke();
+                }
+            });
+        }
+    }
+    
+    drawOrganism(org) {
+        // Body
+        this.ctx.fillStyle = org.phenotype.color;
+        this.ctx.globalAlpha = org.isNew ? 0.6 : 0.8;
+        this.ctx.beginPath();
+        this.ctx.arc(org.x, org.y, org.phenotype.size, 0, Math.PI * 2);
+        this.ctx.fill();
         
-        // Stats
+        // Gene labels
         this.ctx.globalAlpha = 1;
         this.ctx.fillStyle = '#ffffff';
-        this.ctx.font = '14px sans-serif';
-        this.ctx.fillText('Evolution of Evolvability', 10, 20);
-        this.ctx.font = '12px sans-serif';
-        this.ctx.fillText(`Generation: ${this.generation}`, 10, 40);
+        this.ctx.font = '10px sans-serif';
+        this.ctx.textAlign = 'center';
+        this.ctx.fillText(org.genes.size, org.x, org.y - org.phenotype.size - 5);
+        this.ctx.fillText(org.genes.speed[0], org.x - org.phenotype.size - 5, org.y);
         
-        const avgEvolvability = this.organisms.reduce((sum, org) => sum + org.evolvability, 0) / this.organisms.length;
-        this.ctx.fillText(`Avg Evolvability: ${avgEvolvability.toFixed(2)}`, 10, 55);
+        // Fitness indicator
+        if (!this.reproductionPhase && org.fitness > 0) {
+            this.ctx.fillStyle = `rgba(255, 255, 255, ${org.fitness})`;
+            this.ctx.beginPath();
+            this.ctx.arc(org.x, org.y, 5, 0, Math.PI * 2);
+            this.ctx.fill();
+        }
+        
+        this.ctx.textAlign = 'left';
+    }
+    
+    drawGenePacket(gene) {
+        // DNA helix visual
+        this.ctx.strokeStyle = gene.mutated ? '#ffeb3b' : '#4caf50';
+        this.ctx.lineWidth = 2;
+        
+        for (let i = 0; i < 10; i++) {
+            const x1 = gene.x - 10 + Math.sin(i * 0.5) * 5;
+            const x2 = gene.x + 10 - Math.sin(i * 0.5) * 5;
+            const y = gene.y - 15 + i * 3;
+            
+            this.ctx.beginPath();
+            this.ctx.moveTo(x1, y);
+            this.ctx.lineTo(x2, y);
+            this.ctx.stroke();
+        }
+        
+        // Gene content
+        this.ctx.fillStyle = '#ffffff';
+        this.ctx.font = '9px sans-serif';
+        this.ctx.fillText(`${gene.genes.size}-${gene.genes.speed[0]}-${gene.genes.color[0]}`, gene.x - 20, gene.y + 20);
+        
+        if (gene.mutated) {
+            this.ctx.fillStyle = '#ffeb3b';
+            this.ctx.fillText('mutated!', gene.x - 20, gene.y + 30);
+        }
     }
 }
 
