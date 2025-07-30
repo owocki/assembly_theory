@@ -193,20 +193,36 @@ class Particle {
         const yScale = canvas.height / params.possibilityStart;
         const particleY = canvas.height - (this.possibility * yScale);
         
-        // Apply constraints - they push particles down
+        // Apply constraints - they push particles down with much stronger force
         constraints.forEach(constraint => {
             if (this.time >= constraint.timeStart && this.time <= constraint.timeEnd) {
                 // Check if particle is above the constraint bar
                 if (particleY < constraint.yPosition) {
                     // Apply downward force based on distance to constraint
                     const distance = constraint.yPosition - particleY;
-                    const force = constraint.strength * Math.exp(-distance / 100);
                     
-                    // Push particle down
-                    this.possibility -= force * 5;
+                    // Much stronger exponential force
+                    const force = constraint.strength * constraint.strength * Math.exp(-distance / 50);
                     
-                    // Add some turbulence near constraints
-                    this.velocity.possibility += (Math.random() - 0.5) * force * 0.5;
+                    // Strong repulsion when very close
+                    if (distance < 20) {
+                        this.possibility -= force * 50; // Massive push
+                        this.velocity.possibility = -Math.abs(this.velocity.possibility) - force * 10;
+                    } else {
+                        // Progressive push based on distance
+                        this.possibility -= force * 15;
+                        this.velocity.possibility -= force * 5;
+                    }
+                    
+                    // Add violent turbulence near constraints
+                    this.velocity.possibility += (Math.random() - 0.5) * force * 2;
+                    
+                    // Lateral drift based on assembly index
+                    this.velocity.time *= (1 - force * 0.1);
+                    
+                    // Complex structures are affected more
+                    const complexityFactor = Math.log10(this.assemblyIndex) / 15;
+                    this.possibility -= force * complexityFactor * 10;
                 }
             }
         });
@@ -231,10 +247,11 @@ class Particle {
         const x = this.time * xScale;
         const y = canvas.height - (this.possibility * yScale);
         
-        // Draw trail
+        // Draw trail with varying opacity based on velocity
         ctx.strokeStyle = this.color;
-        ctx.lineWidth = 1;
-        ctx.globalAlpha = 0.3;
+        const speed = Math.abs(this.velocity.possibility);
+        ctx.lineWidth = 1 + Math.min(speed * 0.1, 3);
+        ctx.globalAlpha = 0.3 + Math.min(speed * 0.02, 0.5);
         ctx.beginPath();
         this.trailPoints.forEach((point, i) => {
             const tx = point.time * xScale;
@@ -248,12 +265,22 @@ class Particle {
         ctx.lineTo(x, y);
         ctx.stroke();
         
-        // Draw particle
+        // Draw particle - size based on assembly index
+        const particleSize = 2 + Math.log10(this.assemblyIndex) * 0.5;
         ctx.globalAlpha = 0.8;
         ctx.fillStyle = this.color;
         ctx.beginPath();
-        ctx.arc(x, y, 3, 0, Math.PI * 2);
+        ctx.arc(x, y, particleSize, 0, Math.PI * 2);
         ctx.fill();
+        
+        // Draw glow effect when moving fast
+        if (speed > 10) {
+            ctx.globalAlpha = 0.2;
+            ctx.fillStyle = this.color;
+            ctx.beginPath();
+            ctx.arc(x, y, particleSize * 2, 0, Math.PI * 2);
+            ctx.fill();
+        }
     }
 }
 
@@ -262,7 +289,7 @@ function initParticles() {
     particles.length = 0;
     for (let i = 0; i < particleCount; i++) {
         const time = Math.random() * 2; // Start in first 2 billion years
-        const possibility = params.possibilityStart * (0.5 + Math.random() * 0.5);
+        const possibility = params.possibilityStart * (0.7 + Math.random() * 0.3); // Start higher up
         particles.push(new Particle(time, possibility));
     }
 }
@@ -309,29 +336,50 @@ function drawConstraints(ctx, xScale, yScale) {
         const endX = constraint.timeEnd * xScale;
         const y = constraint.yPosition;
         
-        // Draw constraint bar with gradient
+        // Draw constraint bar with gradient - thickness based on strength
+        const barThickness = 4 + constraint.strength * 20;
         const gradient = ctx.createLinearGradient(startX, y, endX, y);
         gradient.addColorStop(0, `${constraint.color}00`);
-        gradient.addColorStop(0.1, `${constraint.color}88`);
-        gradient.addColorStop(0.9, `${constraint.color}88`);
+        gradient.addColorStop(0.1, `${constraint.color}${Math.floor(constraint.strength * 255).toString(16).padStart(2, '0')}`);
+        gradient.addColorStop(0.9, `${constraint.color}${Math.floor(constraint.strength * 255).toString(16).padStart(2, '0')}`);
         gradient.addColorStop(1, `${constraint.color}00`);
         
-        ctx.globalAlpha = 0.7;
+        ctx.globalAlpha = 0.8 + constraint.strength * 0.2;
         ctx.strokeStyle = gradient;
-        ctx.lineWidth = 8;
+        ctx.lineWidth = barThickness;
         ctx.lineCap = 'round';
         ctx.beginPath();
         ctx.moveTo(startX, y);
         ctx.lineTo(endX, y);
         ctx.stroke();
         
-        // Draw pressure field below constraint
-        ctx.globalAlpha = 0.1;
-        const pressureGradient = ctx.createLinearGradient(0, y, 0, y + 100);
+        // Draw pressure field below constraint - stronger when constraint is stronger
+        const pressureHeight = 50 + constraint.strength * 150;
+        ctx.globalAlpha = 0.1 + constraint.strength * 0.2;
+        const pressureGradient = ctx.createLinearGradient(0, y, 0, y + pressureHeight);
         pressureGradient.addColorStop(0, constraint.color);
+        pressureGradient.addColorStop(0.5, `${constraint.color}88`);
         pressureGradient.addColorStop(1, `${constraint.color}00`);
         ctx.fillStyle = pressureGradient;
-        ctx.fillRect(startX, y, endX - startX, 100);
+        ctx.fillRect(startX, y, endX - startX, pressureHeight);
+        
+        // Draw energy waves when constraint is strong
+        if (constraint.strength > 0.5) {
+            ctx.globalAlpha = (constraint.strength - 0.5) * 0.4;
+            ctx.strokeStyle = constraint.color;
+            ctx.lineWidth = 2;
+            for (let wave = 1; wave < 4; wave++) {
+                const waveY = y + wave * 20 * constraint.strength;
+                const waveAmp = Math.sin(Date.now() * 0.001 * wave) * 5;
+                ctx.beginPath();
+                ctx.moveTo(startX, waveY + waveAmp);
+                for (let x = startX; x <= endX; x += 10) {
+                    const phase = (x - startX) / (endX - startX) * Math.PI * 4;
+                    ctx.lineTo(x, waveY + Math.sin(phase + Date.now() * 0.002) * waveAmp);
+                }
+                ctx.stroke();
+            }
+        }
         
         // Draw constraint handle (for dragging)
         if (constraint.isDragging || (Math.abs(mouseY - y) < 15 && mouseX >= startX && mouseX <= endX)) {
@@ -439,9 +487,9 @@ function animate() {
     }
     
     // Continuously add new particles
-    if (particles.length < particleCount && Math.random() < 0.1) {
+    if (particles.length < particleCount && Math.random() < 0.15) {
         const time = Math.random() * 2;
-        const possibility = params.possibilityStart * (0.5 + Math.random() * 0.5);
+        const possibility = params.possibilityStart * (0.8 + Math.random() * 0.2); // Start very high
         particles.push(new Particle(time, possibility));
     }
     
