@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assembly Theory - Convergence Visualizations</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #e74c3c 0%, #f39c12 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header p {
+            margin-top: 10px;
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .visualization-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .viz-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .viz-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #e74c3c, #f39c12);
+        }
+        
+        .viz-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+        
+        .viz-card h2 {
+            margin-top: 0;
+            color: #2c3e50;
+            font-size: 1.8em;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .viz-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #e74c3c, #f39c12);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5em;
+        }
+        
+        .viz-card p {
+            color: #7f8c8d;
+            line-height: 1.6;
+            margin: 20px 0;
+            font-size: 1.1em;
+        }
+        
+        .viz-features {
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+        
+        .viz-features li {
+            color: #555;
+            margin-bottom: 8px;
+        }
+        
+        .viz-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #e74c3c, #f39c12);
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .viz-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(231, 76, 60, 0.3);
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #e74c3c;
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 20px;
+            transition: gap 0.2s;
+        }
+        
+        .back-link:hover {
+            gap: 12px;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: bold;
+            background: #e74c3c;
+            color: white;
+            margin-left: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Convergence Visualizations</h1>
+        <p>Explore how Assembly Theory reveals convergent patterns across different domains</p>
+    </div>
+    
+    <div class="container">
+        <a href="../index.html" class="back-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+            </svg>
+            Back to Main Page
+        </a>
+        
+        <div class="visualization-grid">
+            <div class="viz-card">
+                <h2>
+                    <div class="viz-icon">3D</div>
+                    Convergence 3D
+                    <span class="status-badge">Experimental</span>
+                </h2>
+                <p>Experience convergent evolution patterns in three dimensions. Navigate through assembly pathways and observe how different domains converge on similar solutions.</p>
+                <ul class="viz-features">
+                    <li>Interactive 3D navigation</li>
+                    <li>Multiple convergence patterns</li>
+                    <li>Real-time pathway visualization</li>
+                </ul>
+                <a href="convergence_3d/index.html" class="viz-link">Launch 3D Viewer</a>
+            </div>
+            
+            <div class="viz-card">
+                <h2>
+                    <div class="viz-icon">⚡</div>
+                    Convergence Sankey
+                    <span class="status-badge">Experimental</span>
+                </h2>
+                <p>Visualize the flow of assembly pathways using Sankey diagrams. See how different evolutionary and technological paths converge toward optimal solutions.</p>
+                <ul class="viz-features">
+                    <li>Flight convergence patterns</li>
+                    <li>Intelligence evolution</li>
+                    <li>Social behavior emergence</li>
+                    <li>Vision system development</li>
+                </ul>
+                <a href="convergence_sankey/index.html" class="viz-link">View Sankey Diagrams</a>
+            </div>
+            
+            <div class="viz-card">
+                <h2>
+                    <div class="viz-icon">🏔️</div>
+                    3D Fitness Peaks
+                    <span class="status-badge">Experimental</span>
+                </h2>
+                <p>Explore the fitness landscape of assembly space in 3D. Discover peaks representing optimal configurations and valleys showing evolutionary constraints.</p>
+                <ul class="viz-features">
+                    <li>Interactive landscape navigation</li>
+                    <li>Multiple fitness metrics</li>
+                    <li>Evolutionary pathway tracking</li>
+                </ul>
+                <a href="3d_fitness_peak/index.html" class="viz-link">Explore Landscape</a>
+            </div>
+            
+            <div class="viz-card">
+                <h2>
+                    <div class="viz-icon">🧬</div>
+                    Morphospace Evolution
+                    <span class="status-badge">Experimental</span>
+                </h2>
+                <p>Navigate through morphological space to understand how different forms converge on similar functions despite independent evolutionary origins.</p>
+                <ul class="viz-features">
+                    <li>Morphological mapping</li>
+                    <li>Convergent form analysis</li>
+                    <li>Function-form relationships</li>
+                </ul>
+                <a href="morphospace-convergent-evolution/index.html" class="viz-link">Enter Morphospace</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
