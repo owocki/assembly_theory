@@ -170,6 +170,22 @@
             justify-content: center;
             flex-direction: column;
         }
+        
+        .recursion-simulator {
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #recursionCanvas {
+            width: 100%;
+            height: 100%;
+        }
 
         .concept-explanation {
             background: rgba(76, 175, 80, 0.1);
@@ -334,12 +350,19 @@
             <div class="recursion-display" id="recursionDisplay">
                 <p>Select a recursive system above to explore how it works...</p>
             </div>
+            
+            <div class="recursion-simulator" id="recursionSimulator" style="display: none;">
+                <canvas id="recursionCanvas"></canvas>
+            </div>
         </div>
 
         <a href="../index.html" class="back-link">← Back to Profound Implications</a>
     </div>
 
+    <script src="recursion-simulators.js"></script>
     <script>
+        // Legacy function - now handled by recursion-simulators.js
+        /*
         function showRecursion(type) {
             const display = document.getElementById('recursionDisplay');
             const recursions = {
@@ -391,6 +414,7 @@
                 ${recursion.steps.map(step => `<div style="margin: 10px 0; text-align: left;">${step}</div>`).join('')}
             `;
         }
+        */
 
         // Add subtle animations
         document.addEventListener('DOMContentLoaded', function() {
