@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compositional Risk Assessment - Assembly Theory</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f0f0f;
+            color: #fff;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 60px 20px;
+            text-align: center;
+            border-bottom: 2px solid #627EEA;
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #627EEA, #e74c3c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .header p {
+            font-size: 1.3em;
+            color: #a0a0a0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: #627EEA;
+            text-decoration: none;
+            margin-bottom: 40px;
+            transition: color 0.3s ease;
+        }
+        
+        .back-link:hover {
+            color: #3498db;
+        }
+        
+        .section {
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid #2a2a4e;
+        }
+        
+        .section h2 {
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            color: #627EEA;
+        }
+        
+        .section h3 {
+            font-size: 1.6em;
+            margin-bottom: 20px;
+            margin-top: 30px;
+            color: #3498db;
+        }
+        
+        .section p {
+            color: #c0c0c0;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .risk-matrix {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            grid-template-rows: auto repeat(3, 1fr);
+            gap: 2px;
+            background: #0a0a1a;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+            height: 400px;
+        }
+        
+        .matrix-header {
+            grid-column: 2;
+            grid-row: 1;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px;
+        }
+        
+        .matrix-ylabel {
+            grid-column: 1;
+            grid-row: 2 / -1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-weight: bold;
+            color: #627EEA;
+        }
+        
+        .matrix-grid {
+            grid-column: 2;
+            grid-row: 2 / -1;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 2px;
+        }
+        
+        .matrix-cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .risk-low {
+            background: #27ae60;
+            color: #fff;
+        }
+        
+        .risk-medium {
+            background: #f39c12;
+            color: #000;
+        }
+        
+        .risk-high {
+            background: #e74c3c;
+            color: #fff;
+        }
+        
+        .risk-critical {
+            background: #c0392b;
+            color: #fff;
+        }
+        
+        .matrix-cell:hover {
+            transform: scale(1.1);
+            z-index: 10;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        }
+        
+        .risk-formula {
+            background: #0a0a1a;
+            border: 1px solid #e74c3c;
+            border-radius: 8px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .risk-formula h4 {
+            color: #e74c3c;
+            margin-bottom: 15px;
+        }
+        
+        .formula {
+            font-size: 1.3em;
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            margin: 20px 0;
+        }
+        
+        .attack-vectors {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .attack-card {
+            background: #0a0a1a;
+            border: 1px solid #2a2a4e;
+            border-radius: 8px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .attack-card:hover {
+            border-color: #e74c3c;
+            transform: translateY(-2px);
+        }
+        
+        .attack-card h4 {
+            color: #e74c3c;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .risk-level {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        
+        .risk-score {
+            background: #0a0a1a;
+            border-radius: 8px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .score-display {
+            font-size: 4em;
+            font-weight: bold;
+            margin: 20px 0;
+            background: linear-gradient(45deg, #e74c3c, #f39c12);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .mitigation-strategies {
+            background: #16213e;
+            border-left: 4px solid #27ae60;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .mitigation-strategies h4 {
+            color: #27ae60;
+            margin-bottom: 15px;
+        }
+        
+        .case-study {
+            background: #0a0a1a;
+            border: 1px solid #e74c3c;
+            border-radius: 8px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        
+        .case-study h4 {
+            color: #e74c3c;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+        
+        .protocol-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .protocol-layer {
+            background: #16213e;
+            border: 1px solid #2a2a4e;
+            border-radius: 6px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .protocol-layer:hover {
+            border-color: #e74c3c;
+            transform: translateX(5px);
+        }
+        
+        .layer-name {
+            font-weight: bold;
+        }
+        
+        .layer-ai {
+            color: #e74c3c;
+            font-family: 'Courier New', monospace;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .risk-matrix {
+                height: 300px;
+                font-size: 0.8em;
+            }
+            
+            .attack-vectors {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Compositional Risk Assessment</h1>
+        <p>Using Assembly Theory to quantify and predict systemic risks in composed DeFi protocols</p>
+    </div>
+    
+    <div class="main-content">
+        <a href="../index.html" class="back-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+            </svg>
+            Back to Profound Implications
+        </a>
+        
+        <div class="section">
+            <h2>The Risk Multiplication Effect</h2>
+            <p>When smart contracts compose, their risks don't simply add—they multiply. Assembly theory provides a framework to understand and quantify this multiplication effect, revealing how seemingly secure individual protocols can create systemic vulnerabilities when combined.</p>
+            
+            <div class="risk-formula">
+                <h4>Compositional Risk Formula</h4>
+                <div class="formula">
+                    Risk(A∘B) = Risk(A) × Risk(B) × Interaction_Complexity × External_Dependencies
+                </div>
+                <p style="color: #a0a0a0; margin-top: 15px;">Where ∘ represents protocol composition</p>
+            </div>
+            
+            <p>This multiplicative nature explains why DeFi hacks often occur at protocol boundaries rather than within individual protocols. The assembly index helps predict where these vulnerabilities are most likely to emerge.</p>
+        </div>
+        
+        <div class="section">
+            <h2>Risk Assessment Matrix</h2>
+            <p>By mapping Assembly Index against protocol interactions, we can create a risk matrix that highlights danger zones:</p>
+            
+            <div class="risk-matrix">
+                <div class="matrix-header">
+                    <span>Low AI<br>(< 10K)</span>
+                    <span>Medium AI<br>(10K-100K)</span>
+                    <span>High AI<br>(> 100K)</span>
+                </div>
+                <div class="matrix-ylabel">Protocol Interactions</div>
+                <div class="matrix-grid">
+                    <div class="matrix-cell risk-low">Low Risk</div>
+                    <div class="matrix-cell risk-low">Low Risk</div>
+                    <div class="matrix-cell risk-medium">Medium Risk</div>
+                    <div class="matrix-cell risk-low">Low Risk</div>
+                    <div class="matrix-cell risk-medium">Medium Risk</div>
+                    <div class="matrix-cell risk-high">High Risk</div>
+                    <div class="matrix-cell risk-medium">Medium Risk</div>
+                    <div class="matrix-cell risk-high">High Risk</div>
+                    <div class="matrix-cell risk-critical">Critical Risk</div>
+                </div>
+            </div>
+            
+            <p style="text-align: center; color: #a0a0a0; font-style: italic;">
+                Vertical axis: Number of protocol interactions (Low: 1-2, Medium: 3-5, High: 6+)
+            </p>
+        </div>
+        
+        <div class="section">
+            <h2>Common Attack Vectors by Assembly Complexity</h2>
+            
+            <div class="attack-vectors">
+                <div class="attack-card">
+                    <h4>
+                        Reentrancy Attacks
+                        <span class="risk-level risk-high">AI: 50K-150K</span>
+                    </h4>
+                    <p>Most common in medium-complexity protocols where state changes interact with external calls. Assembly theory shows these emerge at specific complexity thresholds.</p>
+                    <ul style="color: #a0a0a0; margin-top: 10px;">
+                        <li>Common in lending protocols</li>
+                        <li>Exploits state synchronization gaps</li>
+                        <li>Risk increases with callback complexity</li>
+                    </ul>
+                </div>
+                
+                <div class="attack-card">
+                    <h4>
+                        Flash Loan Attacks
+                        <span class="risk-level risk-critical">AI: 150K+</span>
+                    </h4>
+                    <p>Occur in high-complexity compositions where multiple protocols interact within a single transaction. Assembly index predicts attack feasibility.</p>
+                    <ul style="color: #a0a0a0; margin-top: 10px;">
+                        <li>Targets price oracle manipulation</li>
+                        <li>Exploits temporary state inconsistencies</li>
+                        <li>Risk scales with protocol depth</li>
+                    </ul>
+                </div>
+                
+                <div class="attack-card">
+                    <h4>
+                        Oracle Manipulation
+                        <span class="risk-level risk-high">AI: 100K-200K</span>
+                    </h4>
+                    <p>Emerges when protocols rely on external data sources. Higher assembly indices indicate more complex dependency chains.</p>
+                    <ul style="color: #a0a0a0; margin-top: 10px;">
+                        <li>Affects price-dependent protocols</li>
+                        <li>Amplified by DEX integrations</li>
+                        <li>Chainlink reduces but doesn't eliminate</li>
+                    </ul>
+                </div>
+                
+                <div class="attack-card">
+                    <h4>
+                        Governance Attacks
+                        <span class="risk-level risk-medium">AI: 75K-125K</span>
+                    </h4>
+                    <p>Target the decision-making layer of protocols. Assembly complexity in governance creates attack surfaces.</p>
+                    <ul style="color: #a0a0a0; margin-top: 10px;">
+                        <li>Vote buying and manipulation</li>
+                        <li>Time-delay exploits</li>
+                        <li>Cross-protocol governance risks</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Case Study: Compositional Risk in Action</h2>
+            
+            <div class="case-study">
+                <h4>The Cream Finance Hack (2021) - Assembly Theory Analysis</h4>
+                
+                <p>This $130M hack perfectly illustrates compositional risk multiplication:</p>
+                
+                <div class="protocol-stack">
+                    <div class="protocol-layer">
+                        <span class="layer-name">Cream Finance (Lending)</span>
+                        <span class="layer-ai">AI: ~100,000</span>
+                    </div>
+                    <div class="protocol-layer">
+                        <span class="layer-name">Alpha Homora (Leverage)</span>
+                        <span class="layer-ai">AI: ~80,000</span>
+                    </div>
+                    <div class="protocol-layer">
+                        <span class="layer-name">Iron Bank (Cross-collateral)</span>
+                        <span class="layer-ai">AI: ~120,000</span>
+                    </div>
+                    <div class="protocol-layer">
+                        <span class="layer-name">Custom Oracles</span>
+                        <span class="layer-ai">AI: ~50,000</span>
+                    </div>
+                </div>
+                
+                <div class="risk-score">
+                    <h4>Combined Assembly Index</h4>
+                    <div class="score-display">~450,000</div>
+                    <p style="color: #e74c3c;">Critical Risk Territory</p>
+                </div>
+                
+                <p>The hack exploited the interaction between these protocols, not any single protocol's vulnerability. The extreme assembly index (450K+) predicted this risk.</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Risk Mitigation Through Assembly Theory</h2>
+            
+            <div class="mitigation-strategies">
+                <h4>1. Modular Isolation</h4>
+                <p>Design protocols with clear boundaries and minimal cross-dependencies. Each module should have a low individual AI to reduce compositional complexity.</p>
+            </div>
+            
+            <div class="mitigation-strategies">
+                <h4>2. Assembly Index Limits</h4>
+                <p>Set maximum AI thresholds for protocol integrations. Refuse compositions that exceed critical complexity levels (e.g., combined AI > 300,000).</p>
+            </div>
+            
+            <div class="mitigation-strategies">
+                <h4>3. Progressive Decoupling</h4>
+                <p>As protocols grow in complexity, actively work to decouple components. This reduces the multiplication effect of compositional risks.</p>
+            </div>
+            
+            <div class="mitigation-strategies">
+                <h4>4. Risk-Weighted Audits</h4>
+                <p>Allocate security resources based on assembly indices. High-AI interaction points deserve exponentially more scrutiny than low-AI components.</p>
+            </div>
+            
+            <h3>Quantitative Risk Scoring</h3>
+            <p>Assembly theory enables precise risk quantification for DeFi compositions:</p>
+            
+            <div class="risk-formula">
+                <h4>DeFi Risk Score Calculation</h4>
+                <div class="formula">
+                    Risk_Score = log(Combined_AI) × Interaction_Count × External_Dependencies
+                </div>
+                <p style="color: #a0a0a0; margin-top: 15px;">
+                    Score ranges: 0-50 (Low), 50-100 (Medium), 100-200 (High), 200+ (Critical)
+                </p>
+            </div>
+            
+            <p>This quantitative approach transforms risk assessment from subjective analysis to objective measurement, enabling better decision-making for both developers and users.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -31,7 +31,7 @@ class AssemblyTheoryApp {
         
         // Parse domains
         if (params.has('domains')) {
-            const validDomains = ['ethereum'];
+            const validDomains = ['cosmic', 'geological', 'biological', 'cognitive', 'technological', 'ethereum'];
             const domains = params.get('domains').split(',').filter(d => validDomains.includes(d));
             if (domains.length > 0) {
                 this.currentFilters.domains = domains;
@@ -133,7 +133,7 @@ class AssemblyTheoryApp {
         document.getElementById('ai-max-value').textContent = getTierLabel(aiRangeMax.value);
         
         // Apply domain checkboxes
-        const allDomains = ['cosmic', 'geological', 'biological', 'cognitive', 'technological'];
+        const allDomains = ['cosmic', 'geological', 'biological', 'cognitive', 'technological', 'ethereum'];
         allDomains.forEach(domain => {
             const checkbox = document.querySelector(`[data-domain="${domain}"]`);
             if (checkbox) {

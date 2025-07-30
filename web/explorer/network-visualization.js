@@ -29,7 +29,7 @@ class NetworkVisualization {
             .force('link', d3.forceLink().id(d => d.id).distance(100))
             .force('charge', d3.forceManyBody().strength(-300))
             .force('center', d3.forceCenter(this.width / 2, this.height / 2))
-            .force('collision', d3.forceCollide().radius(d => d.radius + 5));
+            .force('collision', d3.forceCollide().radius(d => d.radius + 20));
         
         // Bind resize event
         window.addEventListener('resize', () => this.onResize());
@@ -281,6 +281,11 @@ class NetworkVisualization {
     applyLayout(layoutType) {
         this.currentLayout = layoutType;
         
+        // Clear timeline axis if switching away from timeline layout
+        if (layoutType !== 'timeline') {
+            this.svg.selectAll('.timeline-axis').remove();
+        }
+        
         switch (layoutType) {
             case 'force':
                 this.applyForceLayout();
@@ -332,9 +337,9 @@ class NetworkVisualization {
             .force('y', d3.forceY(d => {
                 // Invert so simple assemblies (tier 1) are at bottom, complex (tier 8) at top
                 const normalizedTier = (d.tier - 1) / 7; // 0 to 1
-                return this.height * 0.1 + normalizedTier * this.height * 0.8;
+                return this.height * 0.05 + normalizedTier * this.height * 0.9;
             }).strength(0.9))
-            .force('collision', d3.forceCollide().radius(d => d.radius + 10));
+            .force('collision', d3.forceCollide().radius(d => d.radius + 30));
     }
     
     applyRadialLayout() {
@@ -360,9 +365,9 @@ class NetworkVisualization {
             }).strength(0.9))
             .force('y', d3.forceY(d => {
                 const tierPosition = (d.tier - 1) / 7; // 0 to 1
-                return this.height * 0.1 + tierPosition * this.height * 0.8;
+                return this.height * 0.05 + tierPosition * this.height * 0.9;
             }).strength(0.9))
-            .force('collision', d3.forceCollide().radius(d => d.radius + 5));
+            .force('collision', d3.forceCollide().radius(d => d.radius + 25));
     }
     
     applyCircularLayout() {
@@ -397,9 +402,9 @@ class NetworkVisualization {
             .force('y', d3.forceY(d => {
                 // Vertical position based on complexity tier
                 const tierPosition = (d.tier - 1) / 7;
-                return this.height * 0.1 + tierPosition * this.height * 0.8;
+                return this.height * 0.05 + tierPosition * this.height * 0.9;
             }).strength(0.8))
-            .force('collision', d3.forceCollide().radius(d => d.radius + 8));
+            .force('collision', d3.forceCollide().radius(d => d.radius + 25));
     }
     
     applyClusterLayout() {
@@ -421,7 +426,7 @@ class NetworkVisualization {
                 const domainIndex = domains.indexOf(d.domain) || 0;
                 return clusterCenters[domainIndex].y;
             }).strength(0.3))
-            .force('collision', d3.forceCollide().radius(d => d.radius + 8));
+            .force('collision', d3.forceCollide().radius(d => d.radius + 30));
     }
     
     applySpiralLayout() {
@@ -450,15 +455,116 @@ class NetworkVisualization {
     
     applyTimelineLayout() {
         // Timeline layout: arrange nodes horizontally by time of origin
+        // For Ethereum nodes, use 2015-2025 scale
         this.simulation
-            .force('charge', d3.forceManyBody().strength(-50))
+            .force('charge', d3.forceManyBody().strength(-100))
             .force('center', null)
             .force('x', d3.forceX(d => {
+                // For Ethereum domain, use specialized positioning
+                if (d.domain === 'ethereum') {
+                    const timePos = this.getEthereumTimePosition(d.time_origin || d.timeOrigin || '');
+                    return this.width * 0.1 + timePos * this.width * 0.8;
+                }
+                // For other domains, use standard positioning
                 const timePos = this.getTimePosition(d.time_origin || d.timeOrigin || '', d.domain);
                 return this.width * 0.1 + timePos * this.width * 0.8;
             }).strength(0.9))
-            .force('y', d3.forceY(this.height / 2).strength(0.1))
-            .force('collision', d3.forceCollide().radius(d => d.radius + 8));
+            .force('y', d3.forceY(d => {
+                // Add vertical spreading based on tier with some randomness
+                const baseY = this.height / 2;
+                const tierOffset = ((d.tier - 4.5) / 3.5) * this.height * 0.3;
+                const randomOffset = (Math.random() - 0.5) * 50;
+                return baseY + tierOffset + randomOffset;
+            }).strength(0.3))
+            .force('collision', d3.forceCollide().radius(d => d.radius + 30));
+        
+        // Draw timeline axis for Ethereum view
+        if (this.nodes && this.nodes.data().some(d => d.domain === 'ethereum')) {
+            this.drawTimelineAxis();
+        }
+    }
+    
+    drawTimelineAxis() {
+        // Remove any existing axis
+        this.svg.selectAll('.timeline-axis').remove();
+        
+        // Create axis group
+        const axisGroup = this.svg.append('g')
+            .attr('class', 'timeline-axis')
+            .attr('transform', `translate(0, ${this.height - 40})`);
+        
+        // Draw axis line
+        axisGroup.append('line')
+            .attr('x1', this.width * 0.1)
+            .attr('x2', this.width * 0.9)
+            .attr('y1', 0)
+            .attr('y2', 0)
+            .style('stroke', '#666')
+            .style('stroke-width', 2);
+        
+        // Add year markers for 2015-2025
+        const years = [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025];
+        years.forEach(year => {
+            const position = (year - 2015) / 10; // 0 to 1
+            const x = this.width * 0.1 + position * this.width * 0.8;
+            
+            // Year tick
+            axisGroup.append('line')
+                .attr('x1', x)
+                .attr('x2', x)
+                .attr('y1', 0)
+                .attr('y2', 5)
+                .style('stroke', '#666')
+                .style('stroke-width', 1);
+            
+            // Year label
+            axisGroup.append('text')
+                .attr('x', x)
+                .attr('y', 20)
+                .attr('text-anchor', 'middle')
+                .style('font-size', '12px')
+                .style('fill', '#666')
+                .text(year);
+        });
+        
+        // Add axis title
+        axisGroup.append('text')
+            .attr('x', this.width / 2)
+            .attr('y', 35)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '14px')
+            .style('fill', '#888')
+            .text('Ethereum Standards Timeline (2015-2025)');
+    }
+    
+    getEthereumTimePosition(timeOrigin) {
+        if (!timeOrigin || timeOrigin === 'unknown') {
+            return 0.5; // Middle of timeline if no date
+        }
+        
+        const timeStr = timeOrigin.toLowerCase();
+        
+        // Parse YYYY-MM-DD or YYYY-MM format
+        const dateMatch = timeStr.match(/(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?/);
+        if (dateMatch) {
+            const year = parseInt(dateMatch[1]);
+            const month = dateMatch[2] ? parseInt(dateMatch[2]) : 6; // Default to June
+            const day = dateMatch[3] ? parseInt(dateMatch[3]) : 15; // Default to middle of month
+            
+            // Convert to decimal year
+            const decimalYear = year + (month - 1) / 12 + (day - 1) / 365.25;
+            
+            // Map to 0-1 range where 2015 = 0, 2025 = 1
+            const startYear = 2015;
+            const endYear = 2025;
+            const position = (decimalYear - startYear) / (endYear - startYear);
+            
+            // Clamp to 0-1 range
+            return Math.max(0, Math.min(1, position));
+        }
+        
+        // Fallback for non-standard formats
+        return 0.5;
     }
     
     getTimePosition(timeOrigin, domain) {
@@ -549,6 +655,36 @@ class NetworkVisualization {
         if (timeStr.includes('industrial')) return 0.94;
         if (timeStr.includes('digital')) return 0.96;
         if (timeStr.includes('modern') || timeStr.includes('present') || timeStr.includes('current')) return 0.98;
+        
+        // Handle YYYY-MM-DD and YYYY-MM formats (common in Ethereum standards)
+        const dateMatch = timeStr.match(/(\d{4})-(\d{2})(?:-(\d{2}))?/);
+        if (dateMatch) {
+            const year = parseInt(dateMatch[1]);
+            const month = parseInt(dateMatch[2]);
+            const day = dateMatch[3] ? parseInt(dateMatch[3]) : 15; // Default to middle of month
+            const currentYear = 2024;
+            const currentMonth = 7; // July 2024
+            const currentDay = 30;
+            
+            // Calculate years ago with day precision
+            const yearsAgo = currentYear - year + (currentMonth - month) / 12 + (currentDay - day) / 365.25;
+            
+            // For recent history (last 50 years), use very precise positioning
+            if (year >= 1970 && year <= currentYear) {
+                // Spread last 50 years across rightmost 5% of timeline
+                const recentYearsSpan = 50;
+                const recentPosition = 0.95 + (0.05 * (recentYearsSpan - yearsAgo) / recentYearsSpan);
+                return Math.min(0.999, Math.max(0.95, recentPosition));
+            }
+            
+            // For older years in recorded history
+            if (year >= 1000 && year < 1970) {
+                // Spread 1000-1970 across 90-95% of timeline
+                const historicalSpan = 970;
+                const historicalPosition = 0.90 + (0.05 * (year - 1000) / historicalSpan);
+                return historicalPosition;
+            }
+        }
         
         // Handle specific years (1800s, 1900s, 2000s)
         const yearMatch = timeStr.match(/(\d{4})/);

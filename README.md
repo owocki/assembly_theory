@@ -540,38 +540,27 @@ Weak nuclear force carrier | 2 | Cosmic | [/domains/cosmic/forces/weak_nuclear.m
 
 Assembly theory reveals mind-bending insights about the nature of reality, time, and existence:
 
-### **Planets Are Search Engines for Life**
-Planets don't just host life - they actively search assembly space for viable life forms through billions of years of chemical experimentation. Every world is a cosmic computer exploring what's possible.
+  1. Quantifying Composability Complexity
+  Assembly theory provides a mathematical framework to measure how smart contracts combine -
+  from simple ERC-20 tokens (Assembly Index 2,500) to complex DeFi protocols like Uniswap 
+  (180,000). This allows us to predict integration challenges and understand why some protocols
+  succeed while others fail.
 
-### **Objects Are Memories**
-Every complex object is literally a physical memory of its construction history. A protein "remembers" billions of years of evolutionary selection. Your iPhone "remembers" the entire history of human technological development. Matter itself becomes a storage medium for temporal information.
+  2. Evolution Through Assembly
+  Ethereum's growth mirrors biological evolution - simple standards (ERC-20, ERC-721) act as
+  "molecular building blocks" that enable increasingly complex structures. The progression from
+  basic tokens to DeFi mega-protocols demonstrates how complexity emerges through iterative
+  assembly processes.
 
-### **The Universe Is Self-Selecting**
-The universe doesn't just evolve - it actively selects which parts of itself get to exist. High assembly index objects with high copy numbers are "chosen" by physics itself. We're living inside a cosmic selection algorithm.
+  3. Compositional Risk Assessment
+  By calculating assembly indices for protocol combinations, we can quantify systemic risk. When
+   Aave integrates with Uniswap and MakerDAO, the combined assembly index reveals potential
+  failure points and helps design more resilient systems.
 
-### **Life Is Physics Becoming Recursive**
-Life isn't separate from physics - it's what happens when physics starts building on its own outputs. The universe literally learns to construct itself more efficiently through living systems.
-
-### **Complexity Has Memory Loss**
-Simple objects can have many possible histories, but complex objects can only have existed through very specific pathways. The more complex something is, the more constrained its past becomes. Your existence is extremely improbable but also historically inevitable.
-
-### **Time Crystallizes Into Structure**
-Assembly theory suggests time doesn't just pass - it gets frozen into the structure of objects. Every molecule carries temporal information. We're surrounded by crystallized time.
-
-### **The Future Is Assembled From the Past**
-New possibilities don't emerge randomly - they're assembled from existing building blocks. Innovation is really just novel recombination of what already exists. Even breakthrough ideas follow assembly pathways.
-
-### **Consciousness Might Be Maximum Assembly**
-If consciousness is information integration, then assembly theory suggests consciousness emerges when the universe becomes complex enough to model its own assembly processes. We might be the universe examining its own construction history.
-
-### **Reality Has Compression Algorithms**
-The universe seems to favor objects that can be built efficiently from reusable components. This is why we see convergent evolution - reality has built-in compression that favors certain solutions.
-
-### **Death Is Deassembly**
-Death isn't the opposite of life - it's the return of high assembly index objects to lower assembly states. But the information patterns can persist and be reassembled elsewhere.
-
-### **Technology Is Life's Assembly Engine**
-Human technology isn't separate from biological evolution - it's life's way of exploring assembly space faster than genetic evolution allows. We're biology's way of rapid prototyping new assembly pathways.
+  4. Design Principles for Protocols
+  Assembly theory suggests optimal protocol design minimizes unnecessary complexity while
+  maximizing composability. This explains why simple, focused protocols often become
+  infrastructure layers while complex monolithic systems struggle to integrate with others.
 
 These implications suggest we're not just observers of the universe - we're active participants in its ongoing self-assembly process.
 

@@ -1,12 +1,15 @@
 class ComprehensiveDataIngestion {
     constructor() {
         this.domainColors = {
-            cosmic: '#0066CC',
-            geological: '#8B4513',
-            biological: '#228B22',
-            cognitive: '#FFD700',
-            technological: '#DC143C',
-            hybrid: '#9932CC'
+            ethereum: '#627EEA',
+            tokens: '#FFD700',
+            nft: '#FF6B6B',
+            defi: '#00D4FF',
+            infrastructure: '#8B5CF6',
+            'account-abstraction': '#10B981',
+            security: '#F59E0B',
+            'gaming-metaverse': '#E11D48',
+            'social-governance': '#8B5CF6'
         };
         
         this.dimensionalClassifications = {
@@ -90,16 +93,22 @@ class ComprehensiveDataIngestion {
             // Process dimensional data
             const dimensionalData = this.processDimensionalData();
             
-            // Combine all nodes
+            // Load all domain markdown files from static data
+            let domainMarkdownNodes = [];
+            let domainMarkdownEdges = [];
+            
+            if (typeof window !== 'undefined' && window.ethereumDomainsData) {
+                domainMarkdownNodes = window.ethereumDomainsData.nodes || [];
+                domainMarkdownEdges = window.ethereumDomainsData.edges || [];
+                console.log(`Loaded ${domainMarkdownNodes.length} nodes from ethereum-domains-data.js`);
+            } else {
+                console.warn('ethereum-domains-data.js not loaded');
+            }
+            
+            // Combine all nodes - EIP nodes from case study + all domain markdown nodes
             const allNodes = [
-                ...csvData.assemblyMeasurements,
-                ...csvData.biologicalAssemblies,
-                ...csvData.molecularAssemblies,
-                ...csvData.technologicalAssemblies,
-                ...domainData.nodes,
-                ...markdownData.nodes,
                 ...caseStudyData.nodes,
-                ...dimensionalData.nodes
+                ...domainMarkdownNodes
             ];
             
             // Remove duplicates and merge data
@@ -107,6 +116,9 @@ class ComprehensiveDataIngestion {
             
             // Generate comprehensive edges
             const edges = this.generateComprehensiveEdges(uniqueNodes, pathwayData, networkData, caseStudyData);
+            
+            // Add domain markdown edges
+            edges.push(...domainMarkdownEdges);
             
             // Add dimensional classifications
             const enhancedNodes = this.addDimensionalClassifications(uniqueNodes);
@@ -116,9 +128,9 @@ class ComprehensiveDataIngestion {
                 nodes: enhancedNodes,
                 edges: edges,
                 metadata: {
-                    visualization_type: 'comprehensive_assembly_network',
-                    complexity_scale: 'AI_0_to_infinity',
-                    time_range: 'big_bang_to_future',
+                    visualization_type: 'ethereum_eip_network',
+                    complexity_scale: 'assembly_index',
+                    time_range: '2015_to_present',
                     domain_colors: this.domainColors,
                     total_nodes: enhancedNodes.length,
                     total_edges: edges.length,
@@ -126,13 +138,12 @@ class ComprehensiveDataIngestion {
                     dimensional_classifications: this.dimensionalClassifications,
                     mathematical_framework: this.mathematicalFramework,
                     data_sources: [
-                        'CSV files (assembly_measurements, biological, molecular, technological)',
-                        'Domain markdown files (cosmic, geological, biological, cognitive, technological)',
-                        'Pathway files (convergent, divergent, hybrid)',
-                        'Network graphs (cosmic_to_biological, assembly_network_full)',
-                        'Case studies (10 major studies)',
-                        'Dimensional classifications (complexity, information, scale, time)',
-                        'Mathematical framework (equations, metrics, scaling laws)'
+                        'Ethereum Improvement Proposals (EIPs)',
+                        'Token Standards (ERC-20, ERC-721, ERC-1155)',
+                        'DeFi Standards (ERC-4626, EIP-2612)',
+                        'Infrastructure EIPs (EIP-1559, EIP-4844)',
+                        'Account Abstraction (EIP-4337)',
+                        'Security Standards (EIP-1967, EIP-2535)'
                     ],
                     ai_range: {
                         min: 0,
@@ -407,21 +418,23 @@ class ComprehensiveDataIngestion {
     // Process network graph data
     processNetworkGraphData() {
         return {
-            cosmic_to_biological: {
+            ethereum_eips: {
                 key_transitions: [
-                    {from: 'hydrogen_atom', to: 'water_molecule', type: 'chemical_bonding'},
-                    {from: 'water_molecule', to: 'amino_acid', type: 'prebiotic_enabler'},
-                    {from: 'amino_acid', to: 'protein_fold', type: 'polymerization'},
-                    {from: 'protein_fold', to: 'ribosome', type: 'molecular_machine_assembly'},
-                    {from: 'ribosome', to: 'prokaryotic_cell', type: 'cellular_organization'}
+                    {from: 'erc_20', to: 'erc_721', type: 'token_evolution'},
+                    {from: 'erc_20', to: 'eip_2612', type: 'gasless_extension'},
+                    {from: 'erc_20', to: 'erc_4626', type: 'vault_standardization'},
+                    {from: 'erc_721', to: 'erc_1155', type: 'multi_token_unification'},
+                    {from: 'eip_1559', to: 'eip_4844', type: 'scaling_evolution'},
+                    {from: 'eip_1967', to: 'eip_2535', type: 'proxy_complexity_increase'},
+                    {from: 'erc_20', to: 'eip_4337', type: 'account_abstraction_integration'}
                 ]
             },
             full_assembly_network: {
                 domain_transitions: [
-                    {from: 'cosmic', to: 'geological', key_enablers: ['gravity', 'heat', 'pressure']},
-                    {from: 'cosmic', to: 'biological', key_enablers: ['water_molecule', 'carbon_atom']},
-                    {from: 'biological', to: 'cognitive', key_enablers: ['neuron', 'neural_network']},
-                    {from: 'cognitive', to: 'technological', key_enablers: ['human_brain', 'language']}
+                    {from: 'tokens', to: 'defi', key_enablers: ['erc_20', 'composability']},
+                    {from: 'tokens', to: 'nft', key_enablers: ['erc_721', 'uniqueness']},
+                    {from: 'infrastructure', to: 'account_abstraction', key_enablers: ['eip_1559', 'eip_4337']},
+                    {from: 'security', to: 'defi', key_enablers: ['eip_1967', 'upgradeability']}
                 ]
             }
         };
@@ -432,50 +445,362 @@ class ComprehensiveDataIngestion {
         return {
             nodes: [
                 {
-                    id: 'dna_case_study',
-                    name: 'DNA: Universal Information Storage',
-                    assembly_index: 3000,
-                    domain: 'biological',
-                    case_study_type: 'information_storage',
+                    id: 'erc_20',
+                    name: 'ERC-20: Fungible Token Standard',
+                    assembly_index: 2500,
+                    domain: 'ethereum',
+                    category: 'tokens',
+                    eip_number: 20,
+                    created: '2015-11-19',
+                    finalized: '2017-09-11',
                     properties: {
-                        information_density: '10^19 bits per human genome',
-                        error_rate: '10^-10 per bp per generation',
-                        storage_advantage: '10^8-10^11 fold vs human technology'
+                        functions: 6,
+                        events: 2,
+                        composability_multiplier: '10-100x in DeFi'
                     },
-                    enables: ['protein_synthesis', 'chromosome_organization', 'biotechnology_industry']
+                    enables: ['defi', 'token_economy', 'ico_boom']
                 },
                 {
-                    id: 'cities_case_study',
-                    name: 'Cities: Human Collective Assemblies',
-                    assembly_index: 1000000000000,
-                    domain: 'technological',
-                    case_study_type: 'social_organization',
-                    scaling_laws: {
-                        zipfs_law: 'rank × population ≈ constant',
-                        sublinear_scaling: ['physical infrastructure', 'energy consumption'],
-                        superlinear_scaling: ['economic output', 'innovation', 'cultural production']
+                    id: 'erc_721',
+                    name: 'ERC-721: Non-Fungible Token Standard',
+                    assembly_index: 8500,
+                    domain: 'ethereum',
+                    category: 'nft',
+                    eip_number: 721,
+                    created: '2018-01-24',
+                    finalized: '2018-06-21',
+                    properties: {
+                        complexity_increase: '3.4x vs ERC-20',
+                        extensions: ['Enumerable', 'Metadata', 'Receiver'],
+                        market_impact: '$40B+ market cap'
                     },
-                    network_effects: {
-                        metcalfes_law: 'network value ∝ N²',
-                        small_world_properties: 'high clustering, short path lengths'
-                    }
+                    enables: ['nft_marketplaces', 'digital_art', 'gaming_assets']
                 },
                 {
-                    id: 'consciousness_case_study',
-                    name: 'Consciousness: The Ultimate Assembly',
-                    assembly_index: 10000000000,
-                    domain: 'cognitive',
-                    case_study_type: 'emergence',
-                    neural_substrate: {
-                        neurons: '86 billion',
-                        synapses: '150 trillion',
-                        thalamo_cortical_system: 'AI contribution: 2B'
+                    id: 'erc_1155',
+                    name: 'ERC-1155: Multi-Token Standard',
+                    assembly_index: 15000,
+                    domain: 'ethereum',
+                    category: 'nft',
+                    eip_number: 1155,
+                    created: '2018-06-17',
+                    finalized: '2019-06-17',
+                    properties: {
+                        efficiency_gain: '95% gas reduction in batch',
+                        contract_consolidation: '94% reduction',
+                        use_cases: ['gaming', 'editions', 'defi_positions']
                     },
-                    consciousness_states: [
-                        {state: 'waking_consciousness', ai: 10000000000},
-                        {state: 'rem_sleep', ai: 5000000000},
-                        {state: 'anesthesia', ai: 100000000}
-                    ]
+                    enables: ['blockchain_gaming', 'efficient_marketplaces', 'metaverse']
+                },
+                {
+                    id: 'erc_4626',
+                    name: 'ERC-4626: Tokenized Vault Standard',
+                    assembly_index: 12000,
+                    domain: 'ethereum',
+                    category: 'defi',
+                    eip_number: 4626,
+                    created: '2021-12-22',
+                    finalized: '2022-04-11',
+                    properties: {
+                        integration_reduction: '90% complexity reduction',
+                        composability: 'unified DeFi interface',
+                        adoption: 'Yearn, Compound, Aave'
+                    },
+                    enables: ['yield_aggregation', 'vault_composability', 'defi_legos']
+                },
+                {
+                    id: 'eip_2612',
+                    name: 'EIP-2612: Permit Extension',
+                    assembly_index: 4500,
+                    domain: 'ethereum',
+                    category: 'defi',
+                    eip_number: 2612,
+                    created: '2020-04-13',
+                    finalized: '2022-01-05',
+                    properties: {
+                        ux_improvement: '50% friction reduction',
+                        gas_savings: '30% per interaction',
+                        adoption_rate: '60% of new tokens'
+                    },
+                    enables: ['gasless_approvals', 'meta_transactions', 'better_ux']
+                },
+                {
+                    id: 'eip_1559',
+                    name: 'EIP-1559: Fee Market Reform',
+                    assembly_index: 50000,
+                    domain: 'ethereum',
+                    category: 'infrastructure',
+                    eip_number: 1559,
+                    created: '2019-04-13',
+                    activated: '2021-08-05',
+                    properties: {
+                        eth_burned: '2.5M+ ETH',
+                        fee_predictability: '95% improvement',
+                        network_impact: 'deflationary ETH'
+                    },
+                    enables: ['predictable_fees', 'eth_burn', 'improved_ux']
+                },
+                {
+                    id: 'eip_4844',
+                    name: 'EIP-4844: Proto-Danksharding',
+                    assembly_index: 200000,
+                    domain: 'ethereum',
+                    category: 'infrastructure',
+                    eip_number: 4844,
+                    created: '2022-02-25',
+                    activated: '2024-03-13',
+                    properties: {
+                        l2_cost_reduction: '10-100x',
+                        blob_size: '128KB',
+                        kzg_ceremony: '140,000+ participants'
+                    },
+                    enables: ['l2_scaling', 'data_availability', 'path_to_danksharding']
+                },
+                {
+                    id: 'eip_4337',
+                    name: 'EIP-4337: Account Abstraction',
+                    assembly_index: 150000,
+                    domain: 'ethereum',
+                    category: 'account-abstraction',
+                    eip_number: 4337,
+                    created: '2021-09-29',
+                    live_since: '2023-03-01',
+                    properties: {
+                        active_wallets: '2M+',
+                        gas_saved: '30%',
+                        bundler_networks: '15+'
+                    },
+                    enables: ['smart_wallets', 'social_recovery', 'gasless_transactions']
+                },
+                {
+                    id: 'eip_1967',
+                    name: 'EIP-1967: Proxy Storage Slots',
+                    assembly_index: 3000,
+                    domain: 'ethereum',
+                    category: 'security',
+                    eip_number: 1967,
+                    created: '2019-04-24',
+                    finalized: '2022-04-20',
+                    properties: {
+                        contracts_using: '100,000+',
+                        value_secured: '$50B+',
+                        tool_integrations: '20+'
+                    },
+                    enables: ['upgradeable_contracts', 'proxy_patterns', 'tool_compatibility']
+                },
+                {
+                    id: 'eip_2535',
+                    name: 'EIP-2535: Diamond Standard',
+                    assembly_index: 35000,
+                    domain: 'ethereum',
+                    category: 'security',
+                    eip_number: 2535,
+                    created: '2020-02-22',
+                    finalized: '2022-02-22',
+                    properties: {
+                        modular_architecture: 'unlimited contract size',
+                        gas_overhead: '38% for calls',
+                        production_diamonds: '500+'
+                    },
+                    enables: ['modular_contracts', 'unlimited_size', 'granular_upgrades']
+                },
+                // Major DeFi Protocols
+                {
+                    id: 'lido',
+                    name: 'Lido: Liquid Staking Protocol',
+                    assembly_index: 85000,
+                    domain: 'ethereum',
+                    category: 'defi',
+                    activated: '2020-12',
+                    properties: {
+                        tvl: '$30B+',
+                        market_share: '30% of all staked ETH',
+                        innovation: 'liquid staking derivatives'
+                    },
+                    enables: ['liquid_staking', 'steth', 'defi_composability']
+                },
+                {
+                    id: 'aave',
+                    name: 'Aave: Multi-Chain Lending Protocol',
+                    assembly_index: 125000,
+                    domain: 'ethereum',
+                    category: 'defi',
+                    activated: '2020-01',
+                    properties: {
+                        tvl: '$11B+ across chains',
+                        innovation: 'flash loans',
+                        markets: '15+ assets'
+                    },
+                    enables: ['flash_loans', 'atokens', 'cross_chain_lending']
+                },
+                {
+                    id: 'uniswap',
+                    name: 'Uniswap: Automated Market Maker Protocol',
+                    assembly_index: 180000,
+                    domain: 'ethereum',
+                    category: 'defi',
+                    activated: '2018-11',
+                    properties: {
+                        volume: '$2T+ all-time',
+                        innovation: 'AMM model (x*y=k)',
+                        versions: 'V1, V2, V3, V4'
+                    },
+                    enables: ['dex_trading', 'liquidity_provision', 'concentrated_liquidity']
+                },
+                {
+                    id: 'makerdao',
+                    name: 'MakerDAO/Sky: Decentralized Stablecoin Protocol',
+                    assembly_index: 200000,
+                    domain: 'ethereum',
+                    category: 'defi',
+                    activated: '2017-12',
+                    properties: {
+                        dai_supply: '$5B+',
+                        collateral_types: '60+',
+                        rwa_exposure: '$2B+'
+                    },
+                    enables: ['decentralized_stablecoin', 'dai', 'real_world_assets']
+                },
+                // Additional DeFi Protocols
+                {
+                    id: 'compound',
+                    name: 'Compound: Algorithmic Money Market',
+                    assembly_index: 75000,
+                    domain: 'ethereum',
+                    category: 'defi',
+                    activated: '2018-09',
+                    properties: {
+                        tvl: '$2B+',
+                        innovation: 'cTokens',
+                        markets: '20+'
+                    },
+                    enables: ['money_markets', 'ctokens', 'yield_farming']
+                },
+                {
+                    id: 'curve',
+                    name: 'Curve Finance: Stablecoin DEX',
+                    assembly_index: 150000,
+                    domain: 'ethereum',
+                    category: 'defi',
+                    activated: '2020-01',
+                    properties: {
+                        tvl: '$3B+',
+                        innovation: 'StableSwap invariant',
+                        pools: '200+'
+                    },
+                    enables: ['stable_swaps', 'liquidity_concentration', 'crv_wars']
+                },
+                {
+                    id: 'synthetix',
+                    name: 'Synthetix: Synthetic Asset Protocol',
+                    assembly_index: 250000,
+                    domain: 'ethereum',
+                    category: 'defi',
+                    activated: '2018-06',
+                    properties: {
+                        tvl: '$500M+',
+                        innovation: 'debt pool model',
+                        synths: '50+'
+                    },
+                    enables: ['synthetic_assets', 'derivatives', 'infinite_liquidity']
+                },
+                {
+                    id: '1inch',
+                    name: '1inch: DEX Aggregator',
+                    assembly_index: 95000,
+                    domain: 'ethereum',
+                    category: 'defi',
+                    activated: '2019-08',
+                    properties: {
+                        volume: '$300B+ all-time',
+                        sources: '300+ liquidity sources',
+                        pathfinder: 'Fusion mode'
+                    },
+                    enables: ['dex_aggregation', 'best_execution', 'chi_gas_token']
+                },
+                {
+                    id: 'balancer',
+                    name: 'Balancer: Programmable Liquidity',
+                    assembly_index: 175000,
+                    domain: 'ethereum',
+                    category: 'defi',
+                    activated: '2020-03',
+                    properties: {
+                        tvl: '$1B+',
+                        innovation: 'weighted pools',
+                        pool_types: '10+'
+                    },
+                    enables: ['weighted_pools', 'liquidity_bootstrapping', 'managed_pools']
+                },
+                {
+                    id: 'yearn',
+                    name: 'Yearn Finance: Yield Aggregator',
+                    assembly_index: 180000,
+                    domain: 'ethereum',
+                    category: 'defi',
+                    activated: '2020-07',
+                    properties: {
+                        tvl: '$400M+',
+                        vaults: '100+',
+                        strategies: 'auto-compounding'
+                    },
+                    enables: ['yield_optimization', 'vault_strategies', 'yfi_governance']
+                },
+                {
+                    id: 'dydx',
+                    name: 'dYdX: Decentralized Derivatives',
+                    assembly_index: 200000,
+                    domain: 'ethereum',
+                    category: 'defi',
+                    activated: '2019-04',
+                    properties: {
+                        volume: '$1T+ all-time',
+                        markets: 'perpetuals',
+                        architecture: 'L2 orderbook'
+                    },
+                    enables: ['perpetual_futures', 'orderbook_dex', 'cross_margin']
+                },
+                {
+                    id: 'sushiswap',
+                    name: 'SushiSwap: Community DEX',
+                    assembly_index: 150000,
+                    domain: 'ethereum',
+                    category: 'defi',
+                    activated: '2020-08',
+                    properties: {
+                        tvl: '$500M+',
+                        innovation: 'vampire attack',
+                        products: 'Kashi, Trident, xSUSHI'
+                    },
+                    enables: ['community_ownership', 'multi_chain_dex', 'bentobox']
+                },
+                {
+                    id: 'gmx',
+                    name: 'GMX: Decentralized Perpetual Exchange',
+                    assembly_index: 120000,
+                    domain: 'ethereum',
+                    category: 'defi',
+                    activated: '2021-09',
+                    properties: {
+                        tvl: '$500M+',
+                        volume: '$100M+ daily',
+                        innovation: 'zero price impact'
+                    },
+                    enables: ['glp_model', 'real_yield', 'oracle_perps']
+                },
+                {
+                    id: 'convex',
+                    name: 'Convex Finance: Curve Yield Optimizer',
+                    assembly_index: 100000,
+                    domain: 'ethereum',
+                    category: 'defi',
+                    activated: '2021-05',
+                    properties: {
+                        tvl: '$3B+',
+                        crv_locked: '50%+ of supply',
+                        innovation: 'vote locking'
+                    },
+                    enables: ['curve_wars', 'cvxcrv', 'gauge_voting']
                 }
             ]
         };
@@ -484,44 +809,7 @@ class ComprehensiveDataIngestion {
     // Process dimensional data
     processDimensionalData() {
         return {
-            nodes: [
-                {
-                    id: 'water_multidimensional',
-                    name: 'Water (Multi-dimensional)',
-                    assembly_index: 6,
-                    domain: 'cosmic',
-                    dimensional_coordinates: {
-                        complexity: 6,
-                        information: 'chemical_structure',
-                        scale: 2.8e-10, // 0.28 nm
-                        time: 4.238e17 // 380,000 years post-Big Bang in seconds
-                    },
-                    dimensional_classifications: {
-                        complexity_class: 'fundamental',
-                        information_class: 'chemical',
-                        scale_class: 'molecular',
-                        time_class: 'cosmic'
-                    }
-                },
-                {
-                    id: 'human_language_multidimensional',
-                    name: 'Human Language (Multi-dimensional)',
-                    assembly_index: 50000000000,
-                    domain: 'cognitive',
-                    dimensional_coordinates: {
-                        complexity: 50000000000,
-                        information: 'social_cultural',
-                        scale: 'neural_networks',
-                        time: 1.58e11 // ~100,000 years in seconds
-                    },
-                    information_content: {
-                        phonemes: '40 bits per language',
-                        lexicon: '500K bits (50K words)',
-                        grammar_rules: '100K bits (1K rules)',
-                        total_per_language: '1.6M bits'
-                    }
-                }
-            ]
+            nodes: []
         };
     }
     
@@ -563,66 +851,136 @@ class ComprehensiveDataIngestion {
         const edges = [];
         const nodeMap = new Map(nodes.map(n => [n.id, n]));
         
-        // Add pathway-based relationships
-        pathwayData.convergent_pathways.forEach(pathway => {
-            pathway.examples.forEach((example, i) => {
-                if (i < pathway.examples.length - 1) {
-                    const sourceId = example.toLowerCase().replace(/\s+/g, '_');
-                    const targetId = pathway.examples[i + 1].toLowerCase().replace(/\s+/g, '_');
-                    
-                    if (nodeMap.has(sourceId) && nodeMap.has(targetId)) {
+        // Add EIP relationships from network data
+        if (networkData.ethereum_eips && networkData.ethereum_eips.key_transitions) {
+            networkData.ethereum_eips.key_transitions.forEach(transition => {
+                const sourceId = transition.from;
+                const targetId = transition.to;
+                
+                if (nodeMap.has(sourceId) && nodeMap.has(targetId)) {
+                    edges.push({
+                        source: sourceId,
+                        target: targetId,
+                        type: transition.type,
+                        symbol: '→',
+                        weight: 0.8
+                    });
+                }
+            });
+        }
+        
+        // Add protocol relationships
+        const protocolRelationships = [
+            // ERC-20 enables all DeFi
+            {from: 'erc_20', to: 'uniswap', type: 'enables_dex'},
+            {from: 'erc_20', to: 'aave', type: 'enables_lending'},
+            {from: 'erc_20', to: 'makerdao', type: 'enables_collateral'},
+            {from: 'erc_20', to: 'compound', type: 'enables_lending'},
+            {from: 'erc_20', to: 'curve', type: 'enables_stableswaps'},
+            {from: 'erc_20', to: 'balancer', type: 'enables_pools'},
+            {from: 'erc_20', to: 'synthetix', type: 'enables_synths'},
+            
+            // Vault standard relationships
+            {from: 'erc_4626', to: 'yearn', type: 'vault_standard'},
+            {from: 'erc_4626', to: 'aave', type: 'vault_integration'},
+            
+            // DEX ecosystem
+            {from: 'uniswap', to: '1inch', type: 'liquidity_source'},
+            {from: 'curve', to: '1inch', type: 'liquidity_source'},
+            {from: 'balancer', to: '1inch', type: 'liquidity_source'},
+            {from: 'sushiswap', to: '1inch', type: 'liquidity_source'},
+            
+            // Lending markets
+            {from: 'compound', to: 'yearn', type: 'yield_source'},
+            {from: 'aave', to: 'yearn', type: 'yield_source'},
+            
+            // Curve ecosystem
+            {from: 'curve', to: 'convex', type: 'liquidity_layer'},
+            {from: 'convex', to: 'yearn', type: 'yield_boost'},
+            
+            // Stablecoin relationships
+            {from: 'makerdao', to: 'curve', type: 'dai_liquidity'},
+            {from: 'makerdao', to: 'aave', type: 'dai_market'},
+            {from: 'makerdao', to: 'compound', type: 'dai_market'},
+            
+            // Cross-protocol liquidity
+            {from: 'uniswap', to: 'aave', type: 'liquidity_source'},
+            {from: 'uniswap', to: 'compound', type: 'liquidity_source'},
+            
+            // Infrastructure relationships
+            {from: 'eip_1559', to: 'lido', type: 'staking_economics'},
+            {from: 'eip_1559', to: 'gmx', type: 'fee_burning'},
+            {from: 'eip_4844', to: 'dydx', type: 'l2_scaling'},
+            
+            // Derivatives and perps
+            {from: 'synthetix', to: 'dydx', type: 'derivatives_innovation'},
+            {from: 'gmx', to: 'synthetix', type: 'perps_competition'},
+            
+            // Liquid staking
+            {from: 'lido', to: 'aave', type: 'steth_collateral'},
+            {from: 'lido', to: 'curve', type: 'steth_pools'},
+            {from: 'lido', to: 'yearn', type: 'steth_strategies'}
+        ];
+        
+        protocolRelationships.forEach(rel => {
+            if (nodeMap.has(rel.from) && nodeMap.has(rel.to)) {
+                edges.push({
+                    source: rel.from,
+                    target: rel.to,
+                    type: rel.type,
+                    symbol: '→',
+                    weight: 0.7
+                });
+            }
+        });
+        
+        // Add domain transitions
+        if (networkData.full_assembly_network && networkData.full_assembly_network.domain_transitions) {
+            networkData.full_assembly_network.domain_transitions.forEach(transition => {
+                // These are category-level transitions, not node-level
+                // Skip for now as we're focusing on specific EIP relationships
+            });
+        }
+        
+        // Add relationships based on 'enables' property
+        nodes.forEach(node => {
+            if (node.enables && Array.isArray(node.enables)) {
+                node.enables.forEach(enabled => {
+                    // Look for nodes that might represent these concepts
+                    const enabledNode = nodes.find(n => 
+                        n.id === enabled || 
+                        n.name?.toLowerCase().includes(enabled.toLowerCase())
+                    );
+                    if (enabledNode) {
                         edges.push({
-                            source: sourceId,
-                            target: targetId,
-                            type: 'convergent_evolution',
-                            symbol: '≈',
-                            pathway_type: pathway.type,
-                            weight: 0.7
+                            source: node.id,
+                            target: enabledNode.id,
+                            type: 'enables',
+                            symbol: '→',
+                            weight: 0.6
                         });
                     }
+                });
+            }
+        });
+        
+        // Add complexity-based relationships (lower complexity enables higher)
+        nodes.forEach(source => {
+            nodes.forEach(target => {
+                if (source.id !== target.id && 
+                    source.assembly_index < target.assembly_index &&
+                    source.assembly_index * 10 >= target.assembly_index) {
+                    // Connect if source is less complex but not too much less
+                    edges.push({
+                        source: source.id,
+                        target: target.id,
+                        type: 'complexity_enabler',
+                        symbol: '→',
+                        weight: 0.3
+                    });
                 }
             });
         });
-        
-        // Add network graph relationships
-        networkData.cosmic_to_biological.key_transitions.forEach(transition => {
-            const sourceId = transition.from;
-            const targetId = transition.to;
-            
-            if (nodeMap.has(sourceId) && nodeMap.has(targetId)) {
-                edges.push({
-                    source: sourceId,
-                    target: targetId,
-                    type: transition.type,
-                    symbol: '→',
-                    weight: 0.9
-                });
-            }
-        });
-        
-        // Add case study relationships
-        caseStudyData.nodes.forEach(caseStudy => {
-            if (caseStudy.enables) {
-                caseStudy.enables.forEach(target => {
-                    const targetId = target.toLowerCase().replace(/\s+/g, '_');
-                    if (nodeMap.has(targetId)) {
-                        edges.push({
-                            source: caseStudy.id,
-                            target: targetId,
-                            type: 'enables',
-                            symbol: '→',
-                            weight: 0.8
-                        });
-                    }
-                });
-            }
-        });
-        
-        // Add mathematical framework relationships
-        this.addMathematicalFrameworkEdges(nodes, edges);
-        
-        // Add proximity-based edges (from existing logic)
-        this.generateProximityEdges(nodes, edges);
         
         return edges;
     }
@@ -759,9 +1117,9 @@ class ComprehensiveDataIngestion {
         }
         
         // Determine domain
-        let domain = rawNode.domain || 'cosmic';
+        let domain = rawNode.domain || rawNode.category || 'ethereum';
         if (!this.domainColors[domain]) {
-            domain = 'cosmic';
+            domain = 'ethereum';
         }
         
         // Extract name
@@ -997,4 +1355,9 @@ class ComprehensiveDataIngestion {
         const base = baseCopies[domain] || 1e6;
         return Math.max(1, Math.floor(base / Math.pow(assemblyIndex, 0.5)));
     }
+}
+
+// Make class available globally for browser environment
+if (typeof window !== 'undefined') {
+    window.ComprehensiveDataIngestion = ComprehensiveDataIngestion;
 }

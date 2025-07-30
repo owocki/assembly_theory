@@ -24,11 +24,16 @@ This directory contains assembly theory analyses of significant Ethereum Improve
 - **EIP-4337**: Account abstraction without consensus changes (Assembly Index: ~150,000)
 
 ### 📁 security/
+- **EIP-155**: Simple replay attack protection via Chain ID (Assembly Index: ~3,500)
+- **EIP-712**: Typed structured data hashing and signing (Assembly Index: ~8,500)
 - **EIP-1967**: Proxy storage slots standard (Assembly Index: ~3,000)
 - **EIP-2535**: Diamond standard for modular contracts (Assembly Index: ~35,000)
 
+### 📁 core/
+- **EIP-3675**: Upgrade consensus to Proof-of-Stake (The Merge) - Historic consensus transition (Assembly Index: ~2,000,000)
+
 ### 📁 governance/
-- Coming soon...
+- **EIP-1**: EIP Purpose and Guidelines - The foundational governance framework (Assembly Index: ~5,000)
 
 ## Assembly Index Methodology
 
@@ -43,7 +48,9 @@ Each EIP's assembly index considers:
 
 ### Complexity Evolution
 - Simple standards (ERC-20): ~2,500 assembly index
+- Infrastructure standards (EIP-1559): ~50,000 assembly index
 - Complex standards (EIP-4844): ~200,000 assembly index
+- Protocol upgrades (EIP-3675 The Merge): ~2,000,000 assembly index
 - Ecosystem-wide changes can reach billions in total assembly
 
 ### Composability Patterns
@@ -52,9 +59,13 @@ Each EIP's assembly index considers:
 - Modular patterns (Diamonds) enable unlimited growth
 
 ### Historical Impact
+- EIP-1 (2015): Established governance framework
+- EIP-155 (2016): Enabled multi-chain security
 - ERC-20 (2015): Enabled the token economy
+- EIP-712 (2017): Secured off-chain interactions
 - ERC-721 (2018): Created the NFT market
 - EIP-1559 (2021): Reformed Ethereum economics
+- EIP-3675 (2022): The Merge - PoW to PoS transition
 - EIP-4844 (2024): Scaled L2s by 10-100x
 
 ## Navigation Guide

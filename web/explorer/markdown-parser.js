@@ -347,3 +347,8 @@ class MarkdownAssemblyParser {
         return Math.max(1, Math.floor(base / Math.pow(assemblyIndex, 0.5)));
     }
 }
+
+// Make class available globally for browser environment
+if (typeof window !== 'undefined') {
+    window.MarkdownAssemblyParser = MarkdownAssemblyParser;
+}
