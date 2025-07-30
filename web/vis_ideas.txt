@@ -85,3 +85,8 @@
 
   The visualization methods range from simple 2D plots suitable for publications to complex VR environments for deep exploration. The choice
   depends on your audience, data complexity, and specific questions about convergent evolution you're trying to answer.
+
+
+  -- 
+
+  exploration of crypto/web3 smart contracts assembly index
