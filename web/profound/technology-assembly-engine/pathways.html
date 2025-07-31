@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assembly Pathways - Biological to Technological Evolution</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: radial-gradient(ellipse at center, #0a0a0a 0%, #000000 100%);
+            color: #fff;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        .interface {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .interface > * {
+            pointer-events: auto;
+        }
+
+        .header {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px 40px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header h1 {
+            font-size: 1.8em;
+            font-weight: 300;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #4caf50, #2196f3, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .control-btn.active {
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            border-color: #00d4ff;
+        }
+
+        .info-box {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 250px;
+        }
+
+        .pathway-stat {
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        .pathway-stat .label {
+            color: #888;
+        }
+
+        .pathway-stat .value {
+            color: #00d4ff;
+            float: right;
+            font-weight: bold;
+        }
+
+        .legend {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .back-link {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <canvas id="pathwayCanvas"></canvas>
+    
+    <div class="interface">
+        <div class="header">
+            <h1>Assembly Pathways Visualization</h1>
+            <p>Watch complexity flow from biological to technological systems</p>
+        </div>
+        
+        <div class="legend">
+            <h3>Pathway Types</h3>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #4caf50;"></div>
+                <span>Biological Assembly</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #2196f3;"></div>
+                <span>Hybrid Systems</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #00d4ff;"></div>
+                <span>Technological Assembly</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #ff6b6b;"></div>
+                <span>Energy Nodes</span>
+            </div>
+        </div>
+        
+        <div class="info-box">
+            <h3>Assembly Metrics</h3>
+            <div class="pathway-stat">
+                <span class="label">Active Pathways:</span>
+                <span class="value" id="activePathways">0</span>
+            </div>
+            <div class="pathway-stat">
+                <span class="label">Assembly Rate:</span>
+                <span class="value" id="assemblyRate">0/s</span>
+            </div>
+            <div class="pathway-stat">
+                <span class="label">Complexity Level:</span>
+                <span class="value" id="complexityLevel">0</span>
+            </div>
+            <div class="pathway-stat">
+                <span class="label">Energy Flow:</span>
+                <span class="value" id="energyFlow">0</span>
+            </div>
+            <div class="pathway-stat">
+                <span class="label">Tech Ratio:</span>
+                <span class="value" id="techRatio">0%</span>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button class="control-btn active" onclick="setVisualization('flow')">Flow View</button>
+            <button class="control-btn" onclick="setVisualization('network')">Network View</button>
+            <button class="control-btn" onclick="setVisualization('spiral')">Spiral View</button>
+            <button class="control-btn" onclick="setSpeed('slow')">Slow</button>
+            <button class="control-btn active" onclick="setSpeed('normal')">Normal</button>
+            <button class="control-btn" onclick="setSpeed('fast')">Fast</button>
+            <button class="control-btn" onclick="togglePause()">⏸ Pause</button>
+        </div>
+        
+        <a href="index.html" class="back-link">← Back</a>
+    </div>
+    
+    <script>
+        const canvas = document.getElementById('pathwayCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+        
+        // Particle system
+        class Particle {
+            constructor(x, y, type = 'biological') {
+                this.x = x;
+                this.y = y;
+                this.vx = (Math.random() - 0.5) * 2;
+                this.vy = (Math.random() - 0.5) * 2;
+                this.type = type;
+                this.age = 0;
+                this.maxAge = 500 + Math.random() * 500;
+                this.size = 2 + Math.random() * 3;
+                this.connections = [];
+                this.energy = 1;
+                
+                // Set color based on type
+                this.setTypeProperties();
+            }
+            
+            setTypeProperties() {
+                switch(this.type) {
+                    case 'biological':
+                        this.color = '#4caf50';
+                        this.speed = 0.5;
+                        this.connectionRadius = 50;
+                        break;
+                    case 'technological':
+                        this.color = '#00d4ff';
+                        this.speed = 2;
+                        this.connectionRadius = 100;
+                        break;
+                    case 'hybrid':
+                        this.color = '#2196f3';
+                        this.speed = 1;
+                        this.connectionRadius = 75;
+                        break;
+                    case 'energy':
+                        this.color = '#ff6b6b';
+                        this.speed = 3;
+                        this.connectionRadius = 150;
+                        break;
+                }
+            }
+            
+            update() {
+                // Age and evolution
+                this.age++;
+                
+                // Evolve from biological to technological
+                if (this.type === 'biological' && this.age > 200 && Math.random() < 0.01) {
+                    this.type = 'hybrid';
+                    this.setTypeProperties();
+                }
+                
+                if (this.type === 'hybrid' && this.age > 400 && Math.random() < 0.01) {
+                    this.type = 'technological';
+                    this.setTypeProperties();
+                }
+                
+                // Movement
+                this.x += this.vx * this.speed * speedMultiplier;
+                this.y += this.vy * this.speed * speedMultiplier;
+                
+                // Apply visualization mode
+                if (visualizationMode === 'spiral') {
+                    const angle = this.age * 0.02;
+                    const radius = this.age * 0.1;
+                    this.x = width/2 + Math.cos(angle) * radius;
+                    this.y = height/2 + Math.sin(angle) * radius;
+                } else if (visualizationMode === 'network') {
+                    // Attract to center of mass of connections
+                    if (this.connections.length > 0) {
+                        let centerX = 0, centerY = 0;
+                        this.connections.forEach(other => {
+                            centerX += other.x;
+                            centerY += other.y;
+                        });
+                        centerX /= this.connections.length;
+                        centerY /= this.connections.length;
+                        
+                        this.vx += (centerX - this.x) * 0.001;
+                        this.vy += (centerY - this.y) * 0.001;
+                    }
+                }
+                
+                // Boundary bounce
+                if (this.x < 0 || this.x > width) this.vx *= -0.8;
+                if (this.y < 0 || this.y > height) this.vy *= -0.8;
+                
+                // Keep in bounds
+                this.x = Math.max(0, Math.min(width, this.x));
+                this.y = Math.max(0, Math.min(height, this.y));
+                
+                // Energy decay
+                this.energy *= 0.99;
+                
+                // Size based on connections
+                this.size = 2 + this.connections.length * 0.5;
+            }
+            
+            draw() {
+                // Draw connections first
+                this.connections.forEach(other => {
+                    ctx.beginPath();
+                    ctx.moveTo(this.x, this.y);
+                    
+                    // Curved connection
+                    const dx = other.x - this.x;
+                    const dy = other.y - this.y;
+                    const cx = this.x + dx/2 + dy/4;
+                    const cy = this.y + dy/2 - dx/4;
+                    
+                    ctx.quadraticCurveTo(cx, cy, other.x, other.y);
+                    
+                    // Gradient line
+                    const gradient = ctx.createLinearGradient(this.x, this.y, other.x, other.y);
+                    gradient.addColorStop(0, this.color + '33');
+                    gradient.addColorStop(0.5, this.color + '66');
+                    gradient.addColorStop(1, other.color + '33');
+                    
+                    ctx.strokeStyle = gradient;
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                });
+                
+                // Draw particle
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                
+                // Gradient fill
+                const gradient = ctx.createRadialGradient(
+                    this.x, this.y, 0,
+                    this.x, this.y, this.size * 2
+                );
+                gradient.addColorStop(0, this.color);
+                gradient.addColorStop(0.5, this.color + '88');
+                gradient.addColorStop(1, this.color + '00');
+                
+                ctx.fillStyle = gradient;
+                ctx.fill();
+                
+                // Glow effect
+                ctx.shadowBlur = 20;
+                ctx.shadowColor = this.color;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
+        }
+        
+        // System variables
+        const particles = [];
+        let visualizationMode = 'flow';
+        let speedMultiplier = 1;
+        let isPaused = false;
+        let frameCount = 0;
+        
+        // Initialize particles
+        function init() {
+            for (let i = 0; i < 100; i++) {
+                const type = Math.random() < 0.7 ? 'biological' : 
+                            Math.random() < 0.9 ? 'hybrid' : 'technological';
+                particles.push(new Particle(
+                    Math.random() * width,
+                    Math.random() * height,
+                    type
+                ));
+            }
+            
+            // Add some energy nodes
+            for (let i = 0; i < 5; i++) {
+                particles.push(new Particle(
+                    Math.random() * width,
+                    Math.random() * height,
+                    'energy'
+                ));
+            }
+        }
+        
+        // Main animation loop
+        function animate() {
+            if (!isPaused) {
+                // Clear with trail effect
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                ctx.fillRect(0, 0, width, height);
+                
+                // Update and draw particles
+                particles.forEach((particle, i) => {
+                    particle.update();
+                    
+                    // Remove old particles
+                    if (particle.age > particle.maxAge) {
+                        particles.splice(i, 1);
+                        // Add new particle
+                        const type = Math.random() < 0.3 ? 'biological' : 
+                                    Math.random() < 0.7 ? 'hybrid' : 'technological';
+                        particles.push(new Particle(
+                            Math.random() * width,
+                            Math.random() * height,
+                            type
+                        ));
+                    }
+                    
+                    // Find connections
+                    particle.connections = [];
+                    particles.forEach((other, j) => {
+                        if (i !== j) {
+                            const dx = particle.x - other.x;
+                            const dy = particle.y - other.y;
+                            const distance = Math.sqrt(dx * dx + dy * dy);
+                            
+                            if (distance < particle.connectionRadius) {
+                                particle.connections.push(other);
+                                
+                                // Energy transfer
+                                if (other.type === 'energy') {
+                                    particle.energy = Math.min(1, particle.energy + 0.01);
+                                }
+                            }
+                        }
+                    });
+                });
+                
+                // Draw all particles
+                particles.forEach(particle => {
+                    particle.draw();
+                });
+                
+                // Update stats
+                updateStats();
+                
+                frameCount++;
+            }
+            
+            requestAnimationFrame(animate);
+        }
+        
+        // Update statistics
+        function updateStats() {
+            if (frameCount % 30 === 0) { // Update every 30 frames
+                const activePathways = particles.reduce((sum, p) => sum + p.connections.length, 0);
+                document.getElementById('activePathways').textContent = activePathways;
+                
+                const assemblyRate = particles.filter(p => p.age < 10).length;
+                document.getElementById('assemblyRate').textContent = assemblyRate + '/s';
+                
+                const avgConnections = activePathways / particles.length;
+                document.getElementById('complexityLevel').textContent = Math.floor(avgConnections * 10);
+                
+                const totalEnergy = particles.reduce((sum, p) => sum + p.energy, 0);
+                document.getElementById('energyFlow').textContent = Math.floor(totalEnergy);
+                
+                const techCount = particles.filter(p => p.type === 'technological').length;
+                const techRatio = (techCount / particles.length * 100).toFixed(1);
+                document.getElementById('techRatio').textContent = techRatio + '%';
+            }
+        }
+        
+        // Control functions
+        window.setVisualization = (mode) => {
+            visualizationMode = mode;
+            document.querySelectorAll('.control-btn').forEach(btn => {
+                if (btn.textContent.toLowerCase().includes(mode)) {
+                    btn.classList.add('active');
+                } else if (['flow', 'network', 'spiral'].some(m => 
+                    btn.textContent.toLowerCase().includes(m))) {
+                    btn.classList.remove('active');
+                }
+            });
+        };
+        
+        window.setSpeed = (speed) => {
+            speedMultiplier = speed === 'slow' ? 0.5 : speed === 'fast' ? 2 : 1;
+            document.querySelectorAll('.control-btn').forEach(btn => {
+                if (btn.textContent.toLowerCase() === speed) {
+                    btn.classList.add('active');
+                } else if (['slow', 'normal', 'fast'].includes(
+                    btn.textContent.toLowerCase())) {
+                    btn.classList.remove('active');
+                }
+            });
+        };
+        
+        window.togglePause = () => {
+            isPaused = !isPaused;
+            const btn = document.querySelector('.control-btn:last-child');
+            btn.textContent = isPaused ? '▶ Play' : '⏸ Pause';
+        };
+        
+        // Handle resize
+        window.addEventListener('resize', () => {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+        });
+        
+        // Start
+        init();
+        animate();
+    </script>
+</body>
+</html>

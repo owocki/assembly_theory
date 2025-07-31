@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assembly Speed Comparison - Biological vs Technological</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            font-weight: 300;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #4caf50, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .assembly-system {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .biological-system {
+            border-color: rgba(76, 175, 80, 0.5);
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.05), rgba(76, 175, 80, 0.02));
+        }
+
+        .technological-system {
+            border-color: rgba(0, 212, 255, 0.5);
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(0, 212, 255, 0.02));
+        }
+
+        .system-title {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .biological-system .system-title {
+            color: #4caf50;
+        }
+
+        .technological-system .system-title {
+            color: #00d4ff;
+        }
+
+        .progress-bars {
+            margin: 30px 0;
+        }
+
+        .progress-item {
+            margin: 20px 0;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #b0bec5;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .biological-fill {
+            background: linear-gradient(90deg, #2e7d32, #4caf50);
+        }
+
+        .technological-fill {
+            background: linear-gradient(90deg, #0099cc, #00d4ff);
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            100% { left: 100%; }
+        }
+
+        .visualization-area {
+            height: 300px;
+            margin: 30px 0;
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .canvas-container {
+            width: 100%;
+            height: 100%;
+        }
+
+        .speed-comparison {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .speed-meters {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 40px 0;
+        }
+
+        .speed-meter {
+            text-align: center;
+        }
+
+        .speedometer {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .speedometer-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .speedometer-needle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 2px;
+            height: 80px;
+            transform-origin: bottom center;
+            transition: transform 0.5s ease;
+        }
+
+        .biological-needle {
+            background: #4caf50;
+            box-shadow: 0 0 10px #4caf50;
+        }
+
+        .technological-needle {
+            background: #00d4ff;
+            box-shadow: 0 0 10px #00d4ff;
+        }
+
+        .speed-value {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        .speed-label {
+            margin-top: 20px;
+            font-size: 1.2em;
+            opacity: 0.8;
+        }
+
+        .timeline-comparison {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+
+        .timeline-track {
+            height: 60px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 30px;
+            position: relative;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .timeline-item {
+            position: absolute;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            color: #000;
+            font-weight: 500;
+            transition: all 0.5s ease;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .control-btn.active {
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            border-color: #00d4ff;
+        }
+
+        .back-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-top: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 212, 255, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .comparison-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .speed-meters {
+                flex-direction: column;
+                gap: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Assembly Speed Comparison</h1>
+            <p>Real-time visualization of biological vs technological assembly rates</p>
+        </div>
+        
+        <div class="comparison-container">
+            <div class="assembly-system biological-system">
+                <h2 class="system-title">🧬 Biological Assembly</h2>
+                
+                <div class="visualization-area">
+                    <canvas id="biologicalCanvas" class="canvas-container"></canvas>
+                </div>
+                
+                <div class="progress-bars">
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>DNA Replication</span>
+                            <span id="dnaSpeed">0 bp/s</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill biological-fill" id="dnaProgress" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>Protein Synthesis</span>
+                            <span id="proteinSpeed">0 aa/s</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill biological-fill" id="proteinProgress" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>Cell Division</span>
+                            <span id="cellSpeed">0 hr</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill biological-fill" id="cellProgress" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>Evolution Cycle</span>
+                            <span id="evolutionSpeed">0 gen</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill biological-fill" id="evolutionProgress" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="assembly-system technological-system">
+                <h2 class="system-title">🔧 Technological Assembly</h2>
+                
+                <div class="visualization-area">
+                    <canvas id="technologicalCanvas" class="canvas-container"></canvas>
+                </div>
+                
+                <div class="progress-bars">
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>3D Printing</span>
+                            <span id="printSpeed">0 mm/s</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill technological-fill" id="printProgress" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>Circuit Fabrication</span>
+                            <span id="circuitSpeed">0 nm/s</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill technological-fill" id="circuitProgress" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>Assembly Line</span>
+                            <span id="assemblySpeed">0 units/hr</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill technological-fill" id="assemblyProgress" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>Design Iteration</span>
+                            <span id="designSpeed">0 days</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill technological-fill" id="designProgress" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="speed-comparison">
+            <h2>Relative Speed Comparison</h2>
+            <div class="speed-meters">
+                <div class="speed-meter">
+                    <div class="speedometer">
+                        <div class="speedometer-circle"></div>
+                        <div class="speedometer-needle biological-needle" id="bioNeedle"></div>
+                        <div class="speed-value" style="color: #4caf50;" id="bioSpeedValue">1x</div>
+                    </div>
+                    <div class="speed-label">Biological Speed</div>
+                </div>
+                
+                <div class="speed-meter">
+                    <div class="speedometer">
+                        <div class="speedometer-circle"></div>
+                        <div class="speedometer-needle technological-needle" id="techNeedle"></div>
+                        <div class="speed-value" style="color: #00d4ff;" id="techSpeedValue">1000x</div>
+                    </div>
+                    <div class="speed-label">Technological Speed</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="timeline-comparison">
+            <h2>Time Scale Comparison</h2>
+            <p style="margin-bottom: 30px; opacity: 0.8;">How long different assembly processes take</p>
+            
+            <div class="timeline-track">
+                <div class="timeline-item" style="left: 0%; width: 5%; background: #4caf50;">
+                    Protein Fold
+                </div>
+                <div class="timeline-item" style="left: 10%; width: 10%; background: #66bb6a;">
+                    Cell Divide
+                </div>
+                <div class="timeline-item" style="left: 30%; width: 20%; background: #81c784;">
+                    Organism Grow
+                </div>
+                <div class="timeline-item" style="left: 60%; width: 40%; background: #a5d6a7;">
+                    Species Evolve
+                </div>
+            </div>
+            
+            <div class="timeline-track" style="margin-top: 10px;">
+                <div class="timeline-item" style="left: 0%; width: 1%; background: #00d4ff;">
+                    CPU Cycle
+                </div>
+                <div class="timeline-item" style="left: 2%; width: 3%; background: #29b6f6;">
+                    3D Print
+                </div>
+                <div class="timeline-item" style="left: 8%; width: 7%; background: #4fc3f7;">
+                    Manufacture
+                </div>
+                <div class="timeline-item" style="left: 20%; width: 10%; background: #81d4fa;">
+                    Iterate Design
+                </div>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; margin-top: 20px; font-size: 12px; opacity: 0.6;">
+                <span>Microseconds</span>
+                <span>Seconds</span>
+                <span>Hours</span>
+                <span>Days</span>
+                <span>Years</span>
+                <span>Millennia</span>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button class="control-btn active" onclick="setSimulation('realtime')">Real-time</button>
+            <button class="control-btn" onclick="setSimulation('accelerated')">Accelerated</button>
+            <button class="control-btn" onclick="setSimulation('comparison')">Side-by-side</button>
+            <button class="control-btn" onclick="toggleAnimation()">⏸ Pause</button>
+        </div>
+        
+        <div style="text-align: center;">
+            <a href="index.html" class="back-link">← Back</a>
+        </div>
+    </div>
+    
+    <script>
+        // Canvas setup
+        const bioCanvas = document.getElementById('biologicalCanvas');
+        const techCanvas = document.getElementById('technologicalCanvas');
+        const bioCtx = bioCanvas.getContext('2d');
+        const techCtx = techCanvas.getContext('2d');
+        
+        // Set canvas sizes
+        function resizeCanvases() {
+            const rect = bioCanvas.parentElement.getBoundingClientRect();
+            bioCanvas.width = rect.width;
+            bioCanvas.height = rect.height;
+            techCanvas.width = rect.width;
+            techCanvas.height = rect.height;
+        }
+        resizeCanvases();
+        window.addEventListener('resize', resizeCanvases);
+        
+        // Animation variables
+        let animationMode = 'realtime';
+        let isAnimating = true;
+        let frame = 0;
+        
+        // Assembly visualizations
+        class AssemblyVisualization {
+            constructor(ctx, type) {
+                this.ctx = ctx;
+                this.type = type;
+                this.particles = [];
+                this.structures = [];
+                
+                // Initialize particles
+                for (let i = 0; i < 50; i++) {
+                    this.particles.push({
+                        x: Math.random() * ctx.canvas.width,
+                        y: Math.random() * ctx.canvas.height,
+                        vx: (Math.random() - 0.5) * 2,
+                        vy: (Math.random() - 0.5) * 2,
+                        size: 2 + Math.random() * 3,
+                        age: 0
+                    });
+                }
+            }
+            
+            update() {
+                const speed = this.type === 'biological' ? 0.5 : 5;
+                
+                this.particles.forEach(particle => {
+                    particle.x += particle.vx * speed;
+                    particle.y += particle.vy * speed;
+                    particle.age++;
+                    
+                    // Boundary bounce
+                    if (particle.x < 0 || particle.x > this.ctx.canvas.width) {
+                        particle.vx *= -1;
+                    }
+                    if (particle.y < 0 || particle.y > this.ctx.canvas.height) {
+                        particle.vy *= -1;
+                    }
+                    
+                    // Assembly behavior
+                    if (particle.age > 100 && Math.random() < 0.01) {
+                        // Create structure
+                        this.structures.push({
+                            x: particle.x,
+                            y: particle.y,
+                            size: 10 + Math.random() * 20,
+                            age: 0
+                        });
+                        
+                        // Reset particle
+                        particle.age = 0;
+                        particle.x = Math.random() * this.ctx.canvas.width;
+                        particle.y = Math.random() * this.ctx.canvas.height;
+                    }
+                });
+                
+                // Age structures
+                this.structures = this.structures.filter(s => {
+                    s.age++;
+                    return s.age < 200;
+                });
+            }
+            
+            draw() {
+                // Clear canvas
+                this.ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+                this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+                
+                // Draw structures
+                this.structures.forEach(structure => {
+                    const opacity = 1 - structure.age / 200;
+                    this.ctx.beginPath();
+                    this.ctx.arc(structure.x, structure.y, structure.size, 0, Math.PI * 2);
+                    this.ctx.fillStyle = this.type === 'biological' ? 
+                        `rgba(76, 175, 80, ${opacity * 0.3})` : 
+                        `rgba(0, 212, 255, ${opacity * 0.3})`;
+                    this.ctx.fill();
+                });
+                
+                // Draw particles
+                this.particles.forEach(particle => {
+                    this.ctx.beginPath();
+                    this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                    this.ctx.fillStyle = this.type === 'biological' ? '#4caf50' : '#00d4ff';
+                    this.ctx.fill();
+                });
+            }
+        }
+        
+        const bioViz = new AssemblyVisualization(bioCtx, 'biological');
+        const techViz = new AssemblyVisualization(techCtx, 'technological');
+        
+        // Progress animation
+        function updateProgress() {
+            // Biological progress
+            const dnaProgress = (Math.sin(frame * 0.01) + 1) * 50;
+            const proteinProgress = (Math.sin(frame * 0.008) + 1) * 50;
+            const cellProgress = (Math.sin(frame * 0.002) + 1) * 50;
+            const evolutionProgress = (Math.sin(frame * 0.0001) + 1) * 50;
+            
+            document.getElementById('dnaProgress').style.width = dnaProgress + '%';
+            document.getElementById('proteinProgress').style.width = proteinProgress + '%';
+            document.getElementById('cellProgress').style.width = cellProgress + '%';
+            document.getElementById('evolutionProgress').style.width = evolutionProgress + '%';
+            
+            document.getElementById('dnaSpeed').textContent = Math.floor(dnaProgress * 10) + ' bp/s';
+            document.getElementById('proteinSpeed').textContent = Math.floor(proteinProgress * 2) + ' aa/s';
+            document.getElementById('cellSpeed').textContent = (20 - Math.floor(cellProgress / 5)) + ' hr';
+            document.getElementById('evolutionSpeed').textContent = Math.floor(evolutionProgress * 100) + ' gen';
+            
+            // Technological progress
+            const printProgress = (Math.sin(frame * 0.1) + 1) * 50;
+            const circuitProgress = (Math.sin(frame * 0.2) + 1) * 50;
+            const assemblyProgress = (Math.sin(frame * 0.05) + 1) * 50;
+            const designProgress = (Math.sin(frame * 0.02) + 1) * 50;
+            
+            document.getElementById('printProgress').style.width = printProgress + '%';
+            document.getElementById('circuitProgress').style.width = circuitProgress + '%';
+            document.getElementById('assemblyProgress').style.width = assemblyProgress + '%';
+            document.getElementById('designProgress').style.width = designProgress + '%';
+            
+            document.getElementById('printSpeed').textContent = Math.floor(printProgress * 5) + ' mm/s';
+            document.getElementById('circuitSpeed').textContent = Math.floor(circuitProgress * 100) + ' nm/s';
+            document.getElementById('assemblySpeed').textContent = Math.floor(assemblyProgress * 50) + ' units/hr';
+            document.getElementById('designSpeed').textContent = Math.floor(10 - designProgress / 10) + ' days';
+            
+            // Update speedometers
+            const bioSpeed = 1;
+            const techSpeed = 1000 * (1 + Math.sin(frame * 0.01));
+            
+            document.getElementById('bioNeedle').style.transform = 
+                `translate(-50%, -100%) rotate(${bioSpeed * 1.8 - 90}deg)`;
+            document.getElementById('techNeedle').style.transform = 
+                `translate(-50%, -100%) rotate(${Math.log10(techSpeed) * 60 - 90}deg)`;
+            
+            document.getElementById('bioSpeedValue').textContent = bioSpeed + 'x';
+            document.getElementById('techSpeedValue').textContent = Math.floor(techSpeed) + 'x';
+        }
+        
+        // Animation loop
+        function animate() {
+            if (isAnimating) {
+                frame++;
+                
+                bioViz.update();
+                bioViz.draw();
+                
+                techViz.update();
+                techViz.draw();
+                
+                updateProgress();
+            }
+            
+            requestAnimationFrame(animate);
+        }
+        
+        // Control functions
+        window.setSimulation = (mode) => {
+            animationMode = mode;
+            document.querySelectorAll('.control-btn').forEach(btn => {
+                if (btn.textContent.toLowerCase().includes(mode)) {
+                    btn.classList.add('active');
+                } else if (!btn.textContent.includes('⏸') && !btn.textContent.includes('▶')) {
+                    btn.classList.remove('active');
+                }
+            });
+        };
+        
+        window.toggleAnimation = () => {
+            isAnimating = !isAnimating;
+            const btn = document.querySelector('.control-btn:last-child');
+            btn.textContent = isAnimating ? '⏸ Pause' : '▶ Play';
+        };
+        
+        // Start animation
+        animate();
+    </script>
+</body>
+</html>

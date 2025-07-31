@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deassembly Simulator - Assembly Theory</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: #000;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .simulator-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .control-panel {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            min-width: 300px;
+        }
+
+        .info-panel {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            max-width: 350px;
+        }
+
+        .timeline-panel {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            width: 80%;
+            max-width: 800px;
+        }
+
+        h1 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #4caf50, #757575);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            color: #bbb;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        button {
+            background: linear-gradient(135deg, #2c2c2c, #3a3a3a);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button.active {
+            background: linear-gradient(135deg, #4caf50, #2e7d32);
+            border-color: #4caf50;
+        }
+
+        .slider-container {
+            margin: 20px 0;
+        }
+
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #bbb;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+            border-radius: 3px;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #4caf50;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #4caf50;
+            margin-top: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.85em;
+            color: #888;
+        }
+
+        .timeline {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+        }
+
+        .timeline-stage {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .timeline-stage:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .timeline-stage.active {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid #4caf50;
+        }
+
+        .timeline-stage.passed {
+            opacity: 0.5;
+        }
+
+        .stage-icon {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .stage-name {
+            font-size: 12px;
+            color: #bbb;
+        }
+
+        #canvas {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .legend {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 8px 0;
+            font-size: 14px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #757575, #424242);
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 20px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .back-button:hover {
+            transform: translateX(-50%) translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .control-panel, .info-panel {
+                position: relative;
+                width: calc(100% - 40px);
+                margin: 20px;
+            }
+            
+            .timeline-panel {
+                width: calc(100% - 40px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="simulator-container">
+        <a href="index.html" class="back-button">← Back to Death Is Deassembly</a>
+        
+        <canvas id="canvas"></canvas>
+        
+        <div class="control-panel">
+            <h1>Deassembly Simulator</h1>
+            
+            <div class="button-group">
+                <button id="startBtn" onclick="startSimulation()">Start Deassembly</button>
+                <button id="pauseBtn" onclick="pauseSimulation()">Pause</button>
+                <button id="resetBtn" onclick="resetSimulation()">Reset</button>
+                <button id="recycleBtn" onclick="showRecycling()">Show Recycling</button>
+            </div>
+            
+            <div class="slider-container">
+                <div class="slider-label">
+                    <span>Deassembly Speed</span>
+                    <span id="speedValue">1x</span>
+                </div>
+                <input type="range" id="speedSlider" min="0.1" max="5" step="0.1" value="1" 
+                       oninput="updateSpeed(this.value)">
+            </div>
+            
+            <div class="slider-container">
+                <div class="slider-label">
+                    <span>Particle Count</span>
+                    <span id="particleValue">1000</span>
+                </div>
+                <input type="range" id="particleSlider" min="100" max="5000" step="100" value="1000" 
+                       oninput="updateParticleCount(this.value)">
+            </div>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-label">Assembly Index</div>
+                    <div class="stat-value" id="assemblyIndex">10²⁰</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Complexity</div>
+                    <div class="stat-value" id="complexity">100%</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Energy</div>
+                    <div class="stat-value" id="energy">100%</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Time</div>
+                    <div class="stat-value" id="timeElapsed">0s</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="info-panel">
+            <h2>Current Process</h2>
+            <p id="processDescription">Living system maintaining maximum complexity through continuous energy input and molecular repair.</p>
+            
+            <div class="legend">
+                <h3 style="font-size: 1.1em; margin-bottom: 10px;">Particle Types</h3>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #4caf50;"></div>
+                    <span>Complex Molecules (Proteins, DNA)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #ffc107;"></div>
+                    <span>Intermediate Compounds</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #ff5722;"></div>
+                    <span>Simple Molecules</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #9e9e9e;"></div>
+                    <span>Basic Elements</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="timeline-panel">
+            <div class="timeline">
+                <div class="timeline-stage active" data-stage="0">
+                    <div class="stage-icon">🌟</div>
+                    <div class="stage-name">Living</div>
+                </div>
+                <div class="timeline-stage" data-stage="1">
+                    <div class="stage-icon">⚡</div>
+                    <div class="stage-name">Energy Loss</div>
+                </div>
+                <div class="timeline-stage" data-stage="2">
+                    <div class="stage-icon">🔗</div>
+                    <div class="stage-name">Breaking</div>
+                </div>
+                <div class="timeline-stage" data-stage="3">
+                    <div class="stage-icon">🧪</div>
+                    <div class="stage-name">Simplifying</div>
+                </div>
+                <div class="timeline-stage" data-stage="4">
+                    <div class="stage-icon">⚛️</div>
+                    <div class="stage-name">Elements</div>
+                </div>
+                <div class="timeline-stage" data-stage="5">
+                    <div class="stage-icon">♻️</div>
+                    <div class="stage-name">Recycling</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Canvas setup
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        
+        function resizeCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        
+        // Simulation state
+        let particles = [];
+        let animationId;
+        let isPaused = false;
+        let simulationSpeed = 1;
+        let particleCount = 1000;
+        let currentStage = 0;
+        let stageProgress = 0;
+        let timeElapsed = 0;
+        let lastTime = Date.now();
+        
+        // Particle types
+        const PARTICLE_TYPES = {
+            COMPLEX: { color: '#4caf50', size: 8, bonds: 4 },
+            INTERMEDIATE: { color: '#ffc107', size: 6, bonds: 2 },
+            SIMPLE: { color: '#ff5722', size: 4, bonds: 1 },
+            ELEMENT: { color: '#9e9e9e', size: 3, bonds: 0 }
+        };
+        
+        // Stage definitions
+        const STAGES = [
+            {
+                name: "Living System",
+                description: "Living system maintaining maximum complexity through continuous energy input and molecular repair.",
+                particleDistribution: { COMPLEX: 0.7, INTERMEDIATE: 0.2, SIMPLE: 0.1, ELEMENT: 0 },
+                assemblyIndex: "10²⁰",
+                complexity: 100,
+                energy: 100
+            },
+            {
+                name: "Energy Depletion",
+                description: "ATP production ceases. Energy gradients collapse. Maintenance systems begin to fail.",
+                particleDistribution: { COMPLEX: 0.5, INTERMEDIATE: 0.3, SIMPLE: 0.2, ELEMENT: 0 },
+                assemblyIndex: "10¹⁸",
+                complexity: 85,
+                energy: 50
+            },
+            {
+                name: "Molecular Breakdown",
+                description: "Proteins unfold, DNA fragments, cell membranes dissolve. Complex structures disintegrate.",
+                particleDistribution: { COMPLEX: 0.2, INTERMEDIATE: 0.4, SIMPLE: 0.3, ELEMENT: 0.1 },
+                assemblyIndex: "10¹⁵",
+                complexity: 60,
+                energy: 20
+            },
+            {
+                name: "Chemical Simplification",
+                description: "Organic molecules break into inorganic compounds. Complexity rapidly decreases.",
+                particleDistribution: { COMPLEX: 0.05, INTERMEDIATE: 0.2, SIMPLE: 0.5, ELEMENT: 0.25 },
+                assemblyIndex: "10¹⁰",
+                complexity: 30,
+                energy: 5
+            },
+            {
+                name: "Elemental State",
+                description: "Only basic elements remain. Atoms that once formed life return to their simplest state.",
+                particleDistribution: { COMPLEX: 0, INTERMEDIATE: 0.05, SIMPLE: 0.2, ELEMENT: 0.75 },
+                assemblyIndex: "10⁵",
+                complexity: 10,
+                energy: 0
+            },
+            {
+                name: "Cosmic Recycling",
+                description: "Elements rejoin Earth's biogeochemical cycles, ready to be assembled into new life.",
+                particleDistribution: { COMPLEX: 0, INTERMEDIATE: 0, SIMPLE: 0.1, ELEMENT: 0.9 },
+                assemblyIndex: "10³",
+                complexity: 5,
+                energy: 0
+            }
+        ];
+        
+        // Particle class
+        class Particle {
+            constructor(x, y, type) {
+                this.x = x;
+                this.y = y;
+                this.type = type;
+                this.vx = (Math.random() - 0.5) * 2;
+                this.vy = (Math.random() - 0.5) * 2;
+                this.targetX = x;
+                this.targetY = y;
+                this.bonds = [];
+                this.decay = 1;
+            }
+            
+            update() {
+                // Add some randomness
+                this.vx += (Math.random() - 0.5) * 0.5;
+                this.vy += (Math.random() - 0.5) * 0.5;
+                
+                // Move towards target
+                const dx = this.targetX - this.x;
+                const dy = this.targetY - this.y;
+                this.vx += dx * 0.01;
+                this.vy += dy * 0.01;
+                
+                // Apply friction
+                this.vx *= 0.95;
+                this.vy *= 0.95;
+                
+                // Update position
+                this.x += this.vx * simulationSpeed;
+                this.y += this.vy * simulationSpeed;
+                
+                // Boundary check
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+                
+                this.x = Math.max(0, Math.min(width, this.x));
+                this.y = Math.max(0, Math.min(height, this.y));
+            }
+            
+            draw() {
+                const typeInfo = PARTICLE_TYPES[this.type];
+                ctx.globalAlpha = this.decay;
+                ctx.fillStyle = typeInfo.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, typeInfo.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.globalAlpha = 1;
+            }
+            
+            drawBonds() {
+                this.bonds.forEach(bond => {
+                    ctx.globalAlpha = 0.2 * this.decay;
+                    ctx.strokeStyle = PARTICLE_TYPES[this.type].color;
+                    ctx.beginPath();
+                    ctx.moveTo(this.x, this.y);
+                    ctx.lineTo(bond.x, bond.y);
+                    ctx.stroke();
+                    ctx.globalAlpha = 1;
+                });
+            }
+        }
+        
+        // Initialize particles
+        function initParticles() {
+            particles = [];
+            const distribution = STAGES[0].particleDistribution;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const rand = Math.random();
+                let type;
+                let cumulative = 0;
+                
+                for (const [t, prob] of Object.entries(distribution)) {
+                    cumulative += prob;
+                    if (rand <= cumulative) {
+                        type = t;
+                        break;
+                    }
+                }
+                
+                const x = width / 2 + (Math.random() - 0.5) * 300;
+                const y = height / 2 + (Math.random() - 0.5) * 300;
+                particles.push(new Particle(x, y, type));
+            }
+            
+            // Create initial bonds for complex particles
+            updateBonds();
+        }
+        
+        function updateBonds() {
+            particles.forEach(p => p.bonds = []);
+            
+            particles.forEach((p1, i) => {
+                const maxBonds = PARTICLE_TYPES[p1.type].bonds;
+                if (maxBonds === 0) return;
+                
+                let bondCount = 0;
+                particles.forEach((p2, j) => {
+                    if (i === j || bondCount >= maxBonds) return;
+                    
+                    const dist = Math.hypot(p2.x - p1.x, p2.y - p1.y);
+                    if (dist < 100 && Math.random() < 0.1) {
+                        p1.bonds.push(p2);
+                        bondCount++;
+                    }
+                });
+            });
+        }
+        
+        // Update particle types based on stage
+        function updateParticleTypes() {
+            const targetDistribution = STAGES[currentStage].particleDistribution;
+            const types = Object.keys(PARTICLE_TYPES);
+            
+            particles.forEach(particle => {
+                const rand = Math.random();
+                let newType;
+                let cumulative = 0;
+                
+                for (const [t, prob] of Object.entries(targetDistribution)) {
+                    cumulative += prob;
+                    if (rand <= cumulative) {
+                        newType = t;
+                        break;
+                    }
+                }
+                
+                // Gradual transition
+                if (newType !== particle.type && Math.random() < 0.02 * simulationSpeed) {
+                    particle.type = newType;
+                    particle.decay = 0.5;
+                }
+                
+                particle.decay = Math.min(1, particle.decay + 0.01);
+            });
+        }
+        
+        // Animation loop
+        function animate() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, width, height);
+            
+            // Update simulation
+            if (!isPaused) {
+                const now = Date.now();
+                const deltaTime = (now - lastTime) / 1000;
+                lastTime = now;
+                
+                timeElapsed += deltaTime * simulationSpeed;
+                document.getElementById('timeElapsed').textContent = Math.floor(timeElapsed) + 's';
+                
+                // Progress through stages
+                stageProgress += deltaTime * simulationSpeed * 0.1;
+                if (stageProgress >= 1 && currentStage < STAGES.length - 1) {
+                    currentStage++;
+                    stageProgress = 0;
+                    updateStageDisplay();
+                }
+                
+                updateParticleTypes();
+                
+                // Update particles
+                particles.forEach(particle => {
+                    particle.update();
+                });
+                
+                // Update bonds occasionally
+                if (Math.random() < 0.01) {
+                    updateBonds();
+                }
+                
+                // Update stats
+                const stage = STAGES[currentStage];
+                const progress = stageProgress;
+                const nextStage = STAGES[Math.min(currentStage + 1, STAGES.length - 1)];
+                
+                const complexity = stage.complexity + (nextStage.complexity - stage.complexity) * progress;
+                const energy = stage.energy + (nextStage.energy - stage.energy) * progress;
+                
+                document.getElementById('complexity').textContent = Math.round(complexity) + '%';
+                document.getElementById('energy').textContent = Math.round(energy) + '%';
+            }
+            
+            // Draw bonds
+            particles.forEach(particle => {
+                particle.drawBonds();
+            });
+            
+            // Draw particles
+            particles.forEach(particle => {
+                particle.draw();
+            });
+            
+            animationId = requestAnimationFrame(animate);
+        }
+        
+        // Update stage display
+        function updateStageDisplay() {
+            const stage = STAGES[currentStage];
+            document.getElementById('processDescription').textContent = stage.description;
+            document.getElementById('assemblyIndex').textContent = stage.assemblyIndex;
+            
+            // Update timeline
+            document.querySelectorAll('.timeline-stage').forEach((el, i) => {
+                el.classList.remove('active', 'passed');
+                if (i < currentStage) el.classList.add('passed');
+                if (i === currentStage) el.classList.add('active');
+            });
+        }
+        
+        // Control functions
+        function startSimulation() {
+            isPaused = false;
+            document.getElementById('startBtn').textContent = 'Resume';
+        }
+        
+        function pauseSimulation() {
+            isPaused = true;
+            document.getElementById('startBtn').textContent = 'Resume';
+        }
+        
+        function resetSimulation() {
+            currentStage = 0;
+            stageProgress = 0;
+            timeElapsed = 0;
+            lastTime = Date.now();
+            isPaused = true;
+            document.getElementById('startBtn').textContent = 'Start Deassembly';
+            updateStageDisplay();
+            initParticles();
+        }
+        
+        function showRecycling() {
+            // Move particles to show recycling pattern
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const radius = Math.min(width, height) * 0.3;
+            
+            particles.forEach((particle, i) => {
+                const angle = (i / particles.length) * Math.PI * 2;
+                particle.targetX = centerX + Math.cos(angle) * radius;
+                particle.targetY = centerY + Math.sin(angle) * radius;
+                particle.type = 'ELEMENT';
+            });
+            
+            document.getElementById('processDescription').textContent = 
+                "The cosmic cycle: Your atoms will become part of new life. " +
+                "Carbon becomes trees, oxygen returns to air, hydrogen to water. " +
+                "Death is not an end but a transformation.";
+        }
+        
+        function updateSpeed(value) {
+            simulationSpeed = parseFloat(value);
+            document.getElementById('speedValue').textContent = value + 'x';
+        }
+        
+        function updateParticleCount(value) {
+            particleCount = parseInt(value);
+            document.getElementById('particleValue').textContent = value;
+            initParticles();
+        }
+        
+        // Timeline stage click
+        document.querySelectorAll('.timeline-stage').forEach(el => {
+            el.addEventListener('click', function() {
+                const stage = parseInt(this.dataset.stage);
+                currentStage = stage;
+                stageProgress = 0;
+                updateStageDisplay();
+            });
+        });
+        
+        // Initialize
+        initParticles();
+        animate();
+    </script>
+</body>
+</html>

@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technology Assembly Engine - Advanced Visualization</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: #000;
+            color: #fff;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .ui-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .ui-overlay > * {
+            pointer-events: auto;
+        }
+
+        /* Central Display */
+        .central-display {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            pointer-events: none;
+        }
+
+        .assembly-core {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+        }
+
+        .core-info {
+            text-align: center;
+            z-index: 1;
+        }
+
+        .assembly-index {
+            font-size: 48px;
+            font-weight: 200;
+            color: #00d4ff;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
+        }
+
+        .assembly-label {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 10px;
+        }
+
+        /* Evolution Timeline */
+        .evolution-timeline {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1000px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .timeline-container {
+            position: relative;
+            height: 60px;
+            margin-top: 20px;
+        }
+
+        .timeline-track {
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            top: 50%;
+            transform: translateY(-50%);
+            border-radius: 2px;
+        }
+
+        .timeline-progress {
+            position: absolute;
+            height: 4px;
+            background: linear-gradient(90deg, #4caf50, #2196f3, #00d4ff);
+            top: 50%;
+            transform: translateY(-50%);
+            border-radius: 2px;
+            width: 0%;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
+        }
+
+        .timeline-stages {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            height: 100%;
+        }
+
+        .timeline-stage {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            padding: 0 10px;
+        }
+
+        .stage-marker {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 0 auto 10px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .stage-marker.active {
+            background: #00d4ff;
+            border-color: #00d4ff;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
+            transform: scale(1.2);
+        }
+
+        .stage-label {
+            font-size: 12px;
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
+
+        .timeline-stage.active .stage-label {
+            opacity: 1;
+            color: #00d4ff;
+        }
+
+        /* Control Panel */
+        .control-panel {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 300px;
+        }
+
+        .panel-title {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #00d4ff;
+        }
+
+        .control-group {
+            margin-bottom: 20px;
+        }
+
+        .control-label {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .control-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .control-btn {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            color: #fff;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .control-btn.active {
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            border-color: #00d4ff;
+        }
+
+        /* Stats Panel */
+        .stats-panel {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 250px;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .stat-value {
+            font-size: 16px;
+            color: #00d4ff;
+            font-weight: bold;
+        }
+
+        .stat-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+
+        .stat-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4caf50, #00d4ff);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        /* Assembly Types Legend */
+        .legend {
+            position: absolute;
+            bottom: 150px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 12px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+            position: relative;
+        }
+
+        .legend-color::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: inherit;
+            filter: brightness(1.5);
+        }
+
+        /* Speed Indicator */
+        .speed-indicator {
+            position: absolute;
+            bottom: 150px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .speed-display {
+            font-size: 36px;
+            font-weight: 200;
+            color: #00d4ff;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
+        }
+
+        .speed-label {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
+        /* Notifications */
+        .notification {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            padding: 20px 40px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 212, 255, 0.5);
+            font-size: 18px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .notification.show {
+            opacity: 1;
+        }
+
+        .back-link {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-content {
+            text-align: center;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(0, 212, 255, 0.3);
+            border-top-color: #00d4ff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .control-panel, .stats-panel {
+                position: static;
+                margin: 10px;
+                width: calc(100% - 20px);
+            }
+            
+            .central-display {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .assembly-index {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p>Initializing Assembly Engine...</p>
+        </div>
+    </div>
+
+    <canvas id="canvas"></canvas>
+    
+    <div class="ui-overlay">
+        <!-- Central Display -->
+        <div class="central-display">
+            <div class="assembly-core">
+                <div class="core-info">
+                    <div class="assembly-index" id="assemblyIndex">0</div>
+                    <div class="assembly-label">Assembly Index</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Control Panel -->
+        <div class="control-panel">
+            <h3 class="panel-title">Assembly Controls</h3>
+            
+            <div class="control-group">
+                <label class="control-label">Assembly Mode</label>
+                <div class="control-buttons">
+                    <button class="control-btn active" onclick="setMode('evolution')">Evolution</button>
+                    <button class="control-btn" onclick="setMode('comparison')">Comparison</button>
+                    <button class="control-btn" onclick="setMode('fusion')">Fusion</button>
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label">Visualization</label>
+                <div class="control-buttons">
+                    <button class="control-btn active" onclick="setVisualization('particles')">Particles</button>
+                    <button class="control-btn" onclick="setVisualization('networks')">Networks</button>
+                    <button class="control-btn" onclick="setVisualization('waves')">Waves</button>
+                    <button class="control-btn" onclick="setVisualization('hybrid')">Hybrid</button>
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label">Time Scale</label>
+                <div class="control-buttons">
+                    <button class="control-btn" onclick="setTimeScale(0.1)">0.1x</button>
+                    <button class="control-btn active" onclick="setTimeScale(1)">1x</button>
+                    <button class="control-btn" onclick="setTimeScale(10)">10x</button>
+                    <button class="control-btn" onclick="setTimeScale(100)">100x</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Stats Panel -->
+        <div class="stats-panel">
+            <h3 class="panel-title">Assembly Metrics</h3>
+            
+            <div class="stat-item">
+                <span class="stat-label">Biological Units</span>
+                <span class="stat-value" id="bioUnits">0</span>
+            </div>
+            <div class="stat-bar">
+                <div class="stat-fill" id="bioBar" style="background: #4caf50;"></div>
+            </div>
+            
+            <div class="stat-item">
+                <span class="stat-label">Technological Units</span>
+                <span class="stat-value" id="techUnits">0</span>
+            </div>
+            <div class="stat-bar">
+                <div class="stat-fill" id="techBar" style="background: #00d4ff;"></div>
+            </div>
+            
+            <div class="stat-item">
+                <span class="stat-label">Hybrid Systems</span>
+                <span class="stat-value" id="hybridUnits">0</span>
+            </div>
+            <div class="stat-bar">
+                <div class="stat-fill" id="hybridBar" style="background: #2196f3;"></div>
+            </div>
+            
+            <div class="stat-item">
+                <span class="stat-label">Assembly Rate</span>
+                <span class="stat-value" id="assemblyRate">0/s</span>
+            </div>
+            
+            <div class="stat-item">
+                <span class="stat-label">Complexity</span>
+                <span class="stat-value" id="complexity">0</span>
+            </div>
+        </div>
+        
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background: radial-gradient(circle, #4caf50, #2e7d32);"></div>
+                <span>Biological Assembly</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: radial-gradient(circle, #00d4ff, #0099cc);"></div>
+                <span>Technological Assembly</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: radial-gradient(circle, #2196f3, #1976d2);"></div>
+                <span>Hybrid Systems</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: radial-gradient(circle, #ff6b6b, #d32f2f);"></div>
+                <span>Energy Nodes</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: radial-gradient(circle, #ffd93d, #f9a825);"></div>
+                <span>Innovation Points</span>
+            </div>
+        </div>
+        
+        <!-- Speed Indicator -->
+        <div class="speed-indicator">
+            <div class="speed-display" id="speedDisplay">1x</div>
+            <div class="speed-label">Assembly Speed</div>
+        </div>
+        
+        <!-- Evolution Timeline -->
+        <div class="evolution-timeline">
+            <h3 style="margin-bottom: 10px; font-size: 16px; font-weight: 300;">Evolution Progress</h3>
+            <div class="timeline-container">
+                <div class="timeline-track"></div>
+                <div class="timeline-progress" id="timelineProgress"></div>
+                <div class="timeline-stages">
+                    <div class="timeline-stage" data-stage="chemical">
+                        <div class="stage-marker"></div>
+                        <div class="stage-label">Chemical</div>
+                    </div>
+                    <div class="timeline-stage" data-stage="biological">
+                        <div class="stage-marker"></div>
+                        <div class="stage-label">Biological</div>
+                    </div>
+                    <div class="timeline-stage" data-stage="neural">
+                        <div class="stage-marker"></div>
+                        <div class="stage-label">Neural</div>
+                    </div>
+                    <div class="timeline-stage" data-stage="cultural">
+                        <div class="stage-marker"></div>
+                        <div class="stage-label">Cultural</div>
+                    </div>
+                    <div class="timeline-stage" data-stage="technological">
+                        <div class="stage-marker"></div>
+                        <div class="stage-label">Technological</div>
+                    </div>
+                    <div class="timeline-stage" data-stage="digital">
+                        <div class="stage-marker"></div>
+                        <div class="stage-label">Digital</div>
+                    </div>
+                    <div class="timeline-stage" data-stage="ai">
+                        <div class="stage-marker"></div>
+                        <div class="stage-label">AI</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Notification -->
+        <div class="notification" id="notification"></div>
+        
+        <a href="index.html" class="back-link">← Back</a>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Global variables
+        let scene, camera, renderer;
+        let particles = [];
+        let connections = [];
+        let assemblyMode = 'evolution';
+        let visualizationMode = 'particles';
+        let timeScale = 1;
+        let evolutionProgress = 0;
+        let assemblyIndex = 0;
+        let stats = {
+            biological: 0,
+            technological: 0,
+            hybrid: 0,
+            assemblyRate: 0,
+            complexity: 0
+        };
+        
+        // Particle class
+        class AssemblyParticle {
+            constructor(type = 'biological') {
+                this.type = type;
+                this.mesh = this.createMesh();
+                this.velocity = new THREE.Vector3(
+                    (Math.random() - 0.5) * 0.5,
+                    (Math.random() - 0.5) * 0.5,
+                    (Math.random() - 0.5) * 0.5
+                );
+                this.age = 0;
+                this.energy = 1;
+                this.connections = [];
+                this.assemblyPower = type === 'biological' ? 1 : 
+                                   type === 'technological' ? 10 : 5;
+                
+                // Random position
+                const radius = 50;
+                const theta = Math.random() * Math.PI * 2;
+                const phi = Math.acos(2 * Math.random() - 1);
+                
+                this.mesh.position.x = radius * Math.sin(phi) * Math.cos(theta);
+                this.mesh.position.y = radius * Math.sin(phi) * Math.sin(theta);
+                this.mesh.position.z = radius * Math.cos(phi);
+                
+                scene.add(this.mesh);
+            }
+            
+            createMesh() {
+                const geometry = new THREE.SphereGeometry(0.5, 16, 16);
+                let material;
+                
+                switch(this.type) {
+                    case 'biological':
+                        material = new THREE.MeshPhongMaterial({
+                            color: 0x4caf50,
+                            emissive: 0x2e7d32,
+                            emissiveIntensity: 0.5
+                        });
+                        break;
+                    case 'technological':
+                        material = new THREE.MeshPhongMaterial({
+                            color: 0x00d4ff,
+                            emissive: 0x0099cc,
+                            emissiveIntensity: 0.8
+                        });
+                        break;
+                    case 'hybrid':
+                        material = new THREE.MeshPhongMaterial({
+                            color: 0x2196f3,
+                            emissive: 0x1976d2,
+                            emissiveIntensity: 0.6
+                        });
+                        break;
+                    case 'energy':
+                        material = new THREE.MeshPhongMaterial({
+                            color: 0xff6b6b,
+                            emissive: 0xff0000,
+                            emissiveIntensity: 1
+                        });
+                        break;
+                    case 'innovation':
+                        material = new THREE.MeshPhongMaterial({
+                            color: 0xffd93d,
+                            emissive: 0xffa000,
+                            emissiveIntensity: 1
+                        });
+                        break;
+                }
+                
+                return new THREE.Mesh(geometry, material);
+            }
+            
+            update() {
+                // Age particle
+                this.age += timeScale;
+                
+                // Apply movement
+                this.mesh.position.add(this.velocity.clone().multiplyScalar(timeScale));
+                
+                // Evolution logic
+                if (assemblyMode === 'evolution') {
+                    // Biological to hybrid transition
+                    if (this.type === 'biological' && this.age > 100 && Math.random() < 0.01 * timeScale) {
+                        this.evolve('hybrid');
+                    }
+                    
+                    // Hybrid to technological transition
+                    if (this.type === 'hybrid' && this.age > 200 && Math.random() < 0.01 * timeScale) {
+                        this.evolve('technological');
+                    }
+                }
+                
+                // Attraction to center
+                const centerForce = this.mesh.position.clone().negate().multiplyScalar(0.001);
+                this.velocity.add(centerForce);
+                
+                // Visualization-specific behavior
+                if (visualizationMode === 'networks') {
+                    this.networkBehavior();
+                } else if (visualizationMode === 'waves') {
+                    this.waveBehavior();
+                }
+                
+                // Update visual properties
+                this.mesh.rotation.x += 0.01 * timeScale;
+                this.mesh.rotation.y += 0.01 * timeScale;
+                
+                // Pulse effect
+                const pulse = 1 + Math.sin(this.age * 0.05) * 0.1;
+                this.mesh.scale.setScalar(pulse);
+                
+                // Energy decay
+                this.energy *= 0.995;
+            }
+            
+            evolve(newType) {
+                this.type = newType;
+                scene.remove(this.mesh);
+                this.mesh = this.createMesh();
+                this.mesh.position.copy(this.mesh.position);
+                scene.add(this.mesh);
+                
+                // Evolution effect
+                this.createEvolutionEffect();
+            }
+            
+            createEvolutionEffect() {
+                const particleCount = 20;
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = new THREE.Mesh(
+                        new THREE.SphereGeometry(0.1, 8, 8),
+                        new THREE.MeshBasicMaterial({
+                            color: this.mesh.material.color,
+                            transparent: true,
+                            opacity: 1
+                        })
+                    );
+                    
+                    particle.position.copy(this.mesh.position);
+                    scene.add(particle);
+                    
+                    // Animate outward
+                    const direction = new THREE.Vector3(
+                        Math.random() - 0.5,
+                        Math.random() - 0.5,
+                        Math.random() - 0.5
+                    ).normalize();
+                    
+                    const animate = () => {
+                        particle.position.add(direction.clone().multiplyScalar(0.5));
+                        particle.material.opacity -= 0.02;
+                        particle.scale.multiplyScalar(1.05);
+                        
+                        if (particle.material.opacity > 0) {
+                            requestAnimationFrame(animate);
+                        } else {
+                            scene.remove(particle);
+                        }
+                    };
+                    animate();
+                }
+            }
+            
+            networkBehavior() {
+                // Attract to connected particles
+                this.connections.forEach(other => {
+                    const force = other.mesh.position.clone()
+                        .sub(this.mesh.position)
+                        .multiplyScalar(0.001);
+                    this.velocity.add(force);
+                });
+            }
+            
+            waveBehavior() {
+                // Wave motion
+                const time = Date.now() * 0.001;
+                const waveHeight = Math.sin(time + this.mesh.position.x * 0.1) * 5;
+                this.mesh.position.y += (waveHeight - this.mesh.position.y) * 0.1;
+            }
+        }
+        
+        // Connection class
+        class Connection {
+            constructor(particle1, particle2) {
+                this.particle1 = particle1;
+                this.particle2 = particle2;
+                
+                const material = new THREE.LineBasicMaterial({
+                    color: 0xffffff,
+                    opacity: 0.3,
+                    transparent: true
+                });
+                
+                const geometry = new THREE.BufferGeometry();
+                const positions = new Float32Array(6);
+                geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+                
+                this.line = new THREE.Line(geometry, material);
+                scene.add(this.line);
+                
+                particle1.connections.push(particle2);
+                particle2.connections.push(particle1);
+            }
+            
+            update() {
+                const positions = this.line.geometry.attributes.position.array;
+                positions[0] = this.particle1.mesh.position.x;
+                positions[1] = this.particle1.mesh.position.y;
+                positions[2] = this.particle1.mesh.position.z;
+                positions[3] = this.particle2.mesh.position.x;
+                positions[4] = this.particle2.mesh.position.y;
+                positions[5] = this.particle2.mesh.position.z;
+                this.line.geometry.attributes.position.needsUpdate = true;
+                
+                // Update opacity based on distance
+                const distance = this.particle1.mesh.position.distanceTo(this.particle2.mesh.position);
+                this.line.material.opacity = Math.max(0, 0.5 - distance / 50);
+            }
+            
+            shouldRemove() {
+                const distance = this.particle1.mesh.position.distanceTo(this.particle2.mesh.position);
+                return distance > 30;
+            }
+        }
+        
+        // Initialize Three.js
+        function init() {
+            // Scene
+            scene = new THREE.Scene();
+            scene.fog = new THREE.Fog(0x000000, 50, 200);
+            
+            // Camera
+            camera = new THREE.PerspectiveCamera(
+                75,
+                window.innerWidth / window.innerHeight,
+                0.1,
+                1000
+            );
+            camera.position.set(0, 20, 80);
+            camera.lookAt(0, 0, 0);
+            
+            // Renderer
+            renderer = new THREE.WebGLRenderer({
+                canvas: document.getElementById('canvas'),
+                antialias: true
+            });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            
+            // Lighting
+            const ambientLight = new THREE.AmbientLight(0x404040, 1);
+            scene.add(ambientLight);
+            
+            const pointLight1 = new THREE.PointLight(0x00d4ff, 2, 100);
+            pointLight1.position.set(50, 50, 50);
+            scene.add(pointLight1);
+            
+            const pointLight2 = new THREE.PointLight(0x4caf50, 2, 100);
+            pointLight2.position.set(-50, -50, -50);
+            scene.add(pointLight2);
+            
+            // Add central glow
+            const centralGlow = new THREE.PointLight(0xffffff, 1, 50);
+            centralGlow.position.set(0, 0, 0);
+            scene.add(centralGlow);
+            
+            // Initialize particles
+            initializeParticles();
+            
+            // Hide loading screen
+            setTimeout(() => {
+                document.getElementById('loadingScreen').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loadingScreen').style.display = 'none';
+                }, 500);
+            }, 1000);
+        }
+        
+        // Initialize particles
+        function initializeParticles() {
+            // Create initial particles
+            for (let i = 0; i < 30; i++) {
+                particles.push(new AssemblyParticle('biological'));
+            }
+            
+            for (let i = 0; i < 10; i++) {
+                particles.push(new AssemblyParticle('technological'));
+            }
+            
+            for (let i = 0; i < 5; i++) {
+                particles.push(new AssemblyParticle('energy'));
+            }
+            
+            for (let i = 0; i < 3; i++) {
+                particles.push(new AssemblyParticle('innovation'));
+            }
+        }
+        
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // Update evolution progress
+            evolutionProgress += 0.0001 * timeScale;
+            if (evolutionProgress > 1) evolutionProgress = 0;
+            
+            // Update timeline
+            updateTimeline();
+            
+            // Update particles
+            particles.forEach(particle => {
+                particle.update();
+            });
+            
+            // Manage connections
+            updateConnections();
+            
+            // Add new particles occasionally
+            if (Math.random() < 0.02 * timeScale && particles.length < 100) {
+                const types = ['biological', 'technological', 'hybrid'];
+                const type = types[Math.floor(Math.random() * types.length)];
+                particles.push(new AssemblyParticle(type));
+            }
+            
+            // Update stats
+            updateStats();
+            
+            // Camera movement
+            const time = Date.now() * 0.0001;
+            camera.position.x = Math.sin(time) * 80;
+            camera.position.z = Math.cos(time) * 80;
+            camera.position.y = 20 + Math.sin(time * 2) * 10;
+            camera.lookAt(0, 0, 0);
+            
+            // Render
+            renderer.render(scene, camera);
+        }
+        
+        // Update connections between particles
+        function updateConnections() {
+            // Remove distant connections
+            connections = connections.filter(connection => {
+                if (connection.shouldRemove()) {
+                    scene.remove(connection.line);
+                    return false;
+                }
+                connection.update();
+                return true;
+            });
+            
+            // Create new connections
+            particles.forEach((particle1, i) => {
+                particles.forEach((particle2, j) => {
+                    if (i < j) {
+                        const distance = particle1.mesh.position.distanceTo(particle2.mesh.position);
+                        
+                        if (distance < 15 && !particle1.connections.includes(particle2)) {
+                            if (Math.random() < 0.1) {
+                                connections.push(new Connection(particle1, particle2));
+                            }
+                        }
+                    }
+                });
+            });
+        }
+        
+        // Update timeline display
+        function updateTimeline() {
+            const progress = evolutionProgress * 100;
+            document.getElementById('timelineProgress').style.width = progress + '%';
+            
+            // Update stage markers
+            const stages = ['chemical', 'biological', 'neural', 'cultural', 'technological', 'digital', 'ai'];
+            const currentStageIndex = Math.floor(evolutionProgress * stages.length);
+            
+            stages.forEach((stage, index) => {
+                const stageElement = document.querySelector(`[data-stage="${stage}"]`);
+                const marker = stageElement.querySelector('.stage-marker');
+                
+                if (index <= currentStageIndex) {
+                    stageElement.classList.add('active');
+                    marker.classList.add('active');
+                } else {
+                    stageElement.classList.remove('active');
+                    marker.classList.remove('active');
+                }
+            });
+        }
+        
+        // Update statistics
+        function updateStats() {
+            // Count particle types
+            stats.biological = particles.filter(p => p.type === 'biological').length;
+            stats.technological = particles.filter(p => p.type === 'technological').length;
+            stats.hybrid = particles.filter(p => p.type === 'hybrid').length;
+            
+            // Calculate assembly rate
+            stats.assemblyRate = Math.floor((stats.technological + stats.hybrid * 0.5) * timeScale);
+            
+            // Calculate complexity
+            stats.complexity = Math.floor(connections.length * 2 + particles.length);
+            
+            // Update assembly index
+            assemblyIndex = Math.floor(
+                stats.biological + 
+                stats.hybrid * 5 + 
+                stats.technological * 10 + 
+                connections.length * 2
+            );
+            
+            // Update displays
+            document.getElementById('bioUnits').textContent = stats.biological;
+            document.getElementById('techUnits').textContent = stats.technological;
+            document.getElementById('hybridUnits').textContent = stats.hybrid;
+            document.getElementById('assemblyRate').textContent = stats.assemblyRate + '/s';
+            document.getElementById('complexity').textContent = stats.complexity;
+            document.getElementById('assemblyIndex').textContent = assemblyIndex;
+            
+            // Update bars
+            const total = stats.biological + stats.technological + stats.hybrid;
+            document.getElementById('bioBar').style.width = (stats.biological / total * 100) + '%';
+            document.getElementById('techBar').style.width = (stats.technological / total * 100) + '%';
+            document.getElementById('hybridBar').style.width = (stats.hybrid / total * 100) + '%';
+            
+            // Update speed display
+            const speedMultiplier = stats.technological > stats.biological ? 
+                Math.pow(10, stats.technological / 10) : 1;
+            document.getElementById('speedDisplay').textContent = 
+                speedMultiplier > 1000 ? speedMultiplier.toExponential(1) : speedMultiplier.toFixed(0) + 'x';
+        }
+        
+        // Control functions
+        window.setMode = (mode) => {
+            assemblyMode = mode;
+            updateControlButtons('mode', mode);
+            showNotification(`Assembly mode: ${mode}`);
+        };
+        
+        window.setVisualization = (mode) => {
+            visualizationMode = mode;
+            updateControlButtons('visualization', mode);
+            
+            if (mode === 'waves') {
+                particles.forEach(p => p.velocity.y = 0);
+            }
+        };
+        
+        window.setTimeScale = (scale) => {
+            timeScale = scale;
+            updateControlButtons('timeScale', scale);
+        };
+        
+        function updateControlButtons(group, value) {
+            let buttons;
+            if (group === 'mode') {
+                buttons = document.querySelectorAll('.control-group:nth-child(1) .control-btn');
+            } else if (group === 'visualization') {
+                buttons = document.querySelectorAll('.control-group:nth-child(2) .control-btn');
+            } else if (group === 'timeScale') {
+                buttons = document.querySelectorAll('.control-group:nth-child(3) .control-btn');
+            }
+            
+            buttons.forEach(btn => {
+                if (btn.textContent.toLowerCase().includes(value.toString()) || 
+                    btn.textContent === value + 'x') {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+        
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 2000);
+        }
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        
+        // Initialize and start
+        init();
+        animate();
+    </script>
+</body>
+</html>

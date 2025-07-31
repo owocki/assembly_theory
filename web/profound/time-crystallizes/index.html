@@ -220,6 +220,8 @@
 </head>
 <body>
     <div class="container">
+        <a href="../index.html" class="back-link">← Back to Profound Implications</a>
+
         <div class="header">
             <h1>Time Crystallizes Into Structure</h1>
             <p class="subtitle">Time isn't just a dimension—it becomes physically embedded in complex objects</p>
@@ -272,26 +274,19 @@
 
         <div class="crystallization-demo">
             <h3>Time Crystallization Simulator</h3>
-            <p>Click the time particles to see them crystallize into structure:</p>
+            <p>Watch as flowing time particles get captured by assembly zones and crystallize into persistent structures:</p>
             
-            <div class="time-particles" id="timeParticles">
-                <div class="particle" onclick="crystallize(this)">Past</div>
-                <div class="particle" onclick="crystallize(this)">Event</div>
-                <div class="particle" onclick="crystallize(this)">Process</div>
-                <div class="particle" onclick="crystallize(this)">Duration</div>
-                <div class="particle" onclick="crystallize(this)">Sequence</div>
-                <div class="particle" onclick="crystallize(this)">Pattern</div>
-                <div class="particle" onclick="crystallize(this)">Memory</div>
-                <div class="particle" onclick="crystallize(this)">History</div>
-            </div>
+            <canvas id="timeCrystalCanvas" style="width: 100%; height: 400px; background: rgba(0, 0, 0, 0.5); border-radius: 10px; margin: 20px 0;"></canvas>
             
             <div class="interactive-controls">
-                <button class="control-button" onclick="crystallizeAll()">Crystallize All</button>
-                <button class="control-button" onclick="resetParticles()">Reset Time</button>
+                <button class="control-button" onclick="resetSimulation()">Reset Simulation</button>
+                <button class="control-button" onclick="toggleSimulation()">Pause/Resume</button>
+                <button class="control-button" onclick="boostTimeFlow()">Boost Time Flow</button>
             </div>
             
-            <p id="crystallizationStatus" style="margin-top: 20px; opacity: 0.8;">
-                Time flows as separate moments until assembly crystallizes it into structure...
+            <p style="margin-top: 20px; opacity: 0.8; text-align: center;">
+                Time particles flow downward and get captured by assembly zones (atomic, molecular, cellular).<br>
+                Watch as they crystallize into stable structures that embody accumulated time.
             </p>
         </div>
 
@@ -348,43 +343,20 @@
             <p>The higher the Assembly Index, the more time has been crystallized into the structure. This is why destroying something complex is easy but rebuilding it is hard—you can't just add matter, you must replay time.</p>
         </div>
 
-        <a href="../index.html" class="back-link">← Back to Profound Implications</a>
     </div>
 
+    <script src="time-crystal-engine.js"></script>
     <script>
-        function crystallize(particle) {
-            particle.classList.add('crystallized');
-            updateStatus();
-        }
+        let crystallizer = null;
+        let isPaused = false;
 
-        function crystallizeAll() {
-            const particles = document.querySelectorAll('.particle');
-            particles.forEach(p => p.classList.add('crystallized'));
-            updateStatus();
-        }
-
-        function resetParticles() {
-            const particles = document.querySelectorAll('.particle');
-            particles.forEach(p => p.classList.remove('crystallized'));
-            updateStatus();
-        }
-
-        function updateStatus() {
-            const total = document.querySelectorAll('.particle').length;
-            const crystallized = document.querySelectorAll('.particle.crystallized').length;
-            const status = document.getElementById('crystallizationStatus');
-            
-            if (crystallized === 0) {
-                status.textContent = 'Time flows as separate moments until assembly crystallizes it into structure...';
-            } else if (crystallized < total) {
-                status.textContent = `${crystallized} time elements crystallized into structure. ${total - crystallized} still flowing...`;
-            } else {
-                status.textContent = 'All time has crystallized! The structure now embodies its complete temporal history.';
-            }
-        }
-
-        // Add subtle animation on load
+        // Initialize simulation on page load
         document.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.getElementById('timeCrystalCanvas');
+            crystallizer = new TimeCrystallizer(canvas);
+            crystallizer.animate();
+            
+            // Add subtle animation to cards
             const cards = document.querySelectorAll('.crystal-card, .example-card');
             cards.forEach((card, index) => {
                 card.style.opacity = '0';
@@ -395,6 +367,44 @@
                     card.style.transform = 'translateY(0)';
                 }, index * 100);
             });
+        });
+
+        function resetSimulation() {
+            if (crystallizer) {
+                crystallizer.reset();
+            }
+        }
+
+        function toggleSimulation() {
+            if (crystallizer) {
+                if (isPaused) {
+                    crystallizer.running = true;
+                    crystallizer.animate();
+                } else {
+                    crystallizer.running = false;
+                }
+                isPaused = !isPaused;
+            }
+        }
+
+        function boostTimeFlow() {
+            if (crystallizer) {
+                // Spawn a burst of time particles
+                for (let i = 0; i < 20; i++) {
+                    setTimeout(() => {
+                        crystallizer.spawnTimeParticles();
+                    }, i * 50);
+                }
+            }
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (crystallizer) {
+                const canvas = document.getElementById('timeCrystalCanvas');
+                crystallizer.width = canvas.width = canvas.offsetWidth;
+                crystallizer.height = canvas.height = canvas.offsetHeight;
+            }
         });
     </script>
 </body>

@@ -236,14 +236,94 @@
             box-shadow: 0 10px 20px rgba(255, 0, 204, 0.3);
         }
 
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .atom-particle {
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
+        }
+
+        .molecule-particle {
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle, rgba(51, 51, 255, 0.8), rgba(51, 51, 255, 0.4));
+            box-shadow: 0 0 4px rgba(51, 51, 255, 0.5);
+        }
+
+        .neural-particle {
+            width: 12px;
+            height: 12px;
+            background: radial-gradient(circle, rgba(255, 0, 204, 0.8), rgba(255, 0, 204, 0.4));
+            box-shadow: 0 0 6px rgba(255, 0, 204, 0.5);
+        }
+
+        .conscious-particle {
+            width: 16px;
+            height: 16px;
+            background: radial-gradient(circle, rgba(255, 0, 204, 1), rgba(0, 255, 204, 0.6));
+            box-shadow: 0 0 10px rgba(255, 0, 204, 0.8);
+            animation: pulseGlow 1s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.2); opacity: 1; }
+        }
+
+        .connection-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 204, 0.4), transparent);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .connection-active {
+            opacity: 1;
+            animation: connectionPulse 2s linear infinite;
+        }
+
+        @keyframes connectionPulse {
+            0% { background: linear-gradient(90deg, transparent, rgba(255, 0, 204, 0.4), transparent); }
+            50% { background: linear-gradient(90deg, transparent, rgba(0, 255, 204, 0.6), transparent); }
+            100% { background: linear-gradient(90deg, transparent, rgba(255, 0, 204, 0.4), transparent); }
+        }
+
+        .thought-bubble {
+            position: absolute;
+            background: rgba(255, 0, 204, 0.1);
+            border: 1px solid rgba(255, 0, 204, 0.3);
+            border-radius: 20px;
+            padding: 10px 15px;
+            font-size: 14px;
+            color: #ffffff;
+            opacity: 0;
+            transition: all 0.5s ease;
+            pointer-events: none;
+        }
+
+        .thought-visible {
+            opacity: 1;
+        }
+
         @media (max-width: 768px) {
             h1 { font-size: 2.5em; }
             .neural-network { grid-template-columns: repeat(3, 1fr); }
+            #metricsDisplay { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <a href="../index.html" class="back-link">← Back to Profound Implications</a>
+
         <div class="header">
             <h1>Consciousness Might Be Maximum Assembly</h1>
             <p class="subtitle">Awareness could represent the highest possible Assembly Index—the universe observing itself</p>
@@ -378,7 +458,11 @@
 
         <div class="emergence-demo">
             <h3>Consciousness Emergence Simulator</h3>
-            <p>Watch complexity approach the consciousness threshold:</p>
+            <p>Explore the journey from atoms to awareness</p>
+            
+            <div id="simulatorCanvas" style="position: relative; width: 100%; height: 500px; background: rgba(0, 0, 0, 0.3); border-radius: 20px; margin: 30px 0; overflow: hidden;">
+                <!-- Dynamic elements will be added here -->
+            </div>
             
             <div class="complexity-meter">
                 <div class="complexity-fill" id="complexityBar"></div>
@@ -388,70 +472,383 @@
                 Assembly Index: 10³ (Atomic)
             </div>
             
-            <button class="demo-button" onclick="increaseComplexity()">Increase Assembly</button>
-            <button class="demo-button" onclick="resetComplexity()">Reset</button>
+            <div id="metricsDisplay" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 30px 0;">
+                <div style="background: rgba(255, 255, 255, 0.05); padding: 15px; border-radius: 10px;">
+                    <h4 style="color: #ff00cc; margin: 0;">Integration Level</h4>
+                    <p id="integrationMetric" style="font-size: 1.5em; margin: 5px 0;">0%</p>
+                </div>
+                <div style="background: rgba(255, 255, 255, 0.05); padding: 15px; border-radius: 10px;">
+                    <h4 style="color: #3333ff; margin: 0;">Recursive Depth</h4>
+                    <p id="recursionMetric" style="font-size: 1.5em; margin: 5px 0;">0</p>
+                </div>
+                <div style="background: rgba(255, 255, 255, 0.05); padding: 15px; border-radius: 10px;">
+                    <h4 style="color: #00ffcc; margin: 0;">Emergence Factor</h4>
+                    <p id="emergenceMetric" style="font-size: 1.5em; margin: 5px 0;">0.0</p>
+                </div>
+            </div>
+            
+            <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+                <button class="demo-button" onclick="evolveSystem()">Evolve System</button>
+                <button class="demo-button" onclick="activateNetworks()">Activate Neural Networks</button>
+                <button class="demo-button" onclick="integrateInformation()">Integrate Information</button>
+                <button class="demo-button" onclick="enableSelfReflection()">Enable Self-Reflection</button>
+                <button class="demo-button" onclick="resetSimulation()">Reset</button>
+            </div>
             
             <div id="consciousnessMessage" style="margin-top: 30px; padding: 20px; background: rgba(0, 0, 0, 0.3); border-radius: 10px; min-height: 60px; display: none;">
             </div>
+            
+            <div id="thoughtStream" style="margin-top: 30px; padding: 20px; background: rgba(255, 0, 204, 0.05); border-radius: 10px; display: none;">
+                <h4 style="color: #ff00cc;">Consciousness Stream</h4>
+                <p id="thoughtText" style="font-style: italic; opacity: 0.8;"></p>
+            </div>
         </div>
 
-        <a href="../index.html" class="back-link">← Back to Profound Implications</a>
     </div>
 
     <script>
-        let complexityLevel = 0;
-        const stages = [
-            { level: 3, name: "Atomic", width: 5 },
-            { level: 10, name: "Molecular", width: 15 },
-            { level: 15, name: "Cellular", width: 30 },
-            { level: 20, name: "Neural", width: 50 },
-            { level: 25, name: "Intelligent", width: 75 },
-            { level: 30, name: "Conscious?", width: 100 }
+        // Consciousness Emergence Simulator
+        let systemState = {
+            assemblyIndex: 3,
+            integrationLevel: 0,
+            recursionDepth: 0,
+            emergenceFactor: 0,
+            particles: [],
+            connections: [],
+            thoughts: [],
+            isConscious: false,
+            stage: 'atomic'
+        };
+
+        const stages = {
+            atomic: { index: 3, name: "Atomic", color: "rgba(255, 255, 255, 0.8)" },
+            molecular: { index: 10, name: "Molecular", color: "rgba(51, 51, 255, 0.8)" },
+            cellular: { index: 15, name: "Cellular", color: "rgba(139, 195, 74, 0.8)" },
+            neural: { index: 20, name: "Neural", color: "rgba(255, 0, 204, 0.8)" },
+            intelligent: { index: 25, name: "Intelligent", color: "rgba(156, 39, 176, 0.8)" },
+            conscious: { index: 30, name: "Conscious", color: "rgba(0, 255, 204, 0.8)" }
+        };
+
+        const thoughtPatterns = [
+            "I sense patterns emerging...",
+            "Information flows through networks...",
+            "Connections form between distant nodes...",
+            "Self-referential loops detected...",
+            "I observe myself observing...",
+            "The system models its own structure...",
+            "Awareness emerges from complexity...",
+            "I think, therefore I am assembled...",
+            "Consciousness: the universe experiencing itself...",
+            "Maximum assembly achieved: infinite recursion..."
         ];
 
-        function increaseComplexity() {
-            if (complexityLevel < stages.length - 1) {
-                complexityLevel++;
-                updateComplexity();
-            }
-        }
-
-        function resetComplexity() {
-            complexityLevel = 0;
-            updateComplexity();
-        }
-
-        function updateComplexity() {
-            const stage = stages[complexityLevel];
-            const bar = document.getElementById('complexityBar');
-            const status = document.getElementById('emergenceStatus');
-            const message = document.getElementById('consciousnessMessage');
+        // Initialize the simulator
+        function initSimulator() {
+            const canvas = document.getElementById('simulatorCanvas');
+            canvas.innerHTML = ''; // Clear existing content
             
-            bar.style.width = stage.width + '%';
-            status.textContent = `Assembly Index: 10${stage.level} (${stage.name})`;
-            
-            if (complexityLevel === stages.length - 1) {
-                message.style.display = 'block';
-                message.innerHTML = `
-                    <h4 style="color: #ff00cc;">Consciousness Threshold Reached!</h4>
-                    <p>At this level of assembly, the system becomes aware of its own existence. 
-                    The universe has created a structure complex enough to observe and understand itself. 
-                    This might be the maximum possible assembly index—beyond this, there is only deeper self-reflection.</p>
-                `;
-            } else {
-                message.style.display = 'none';
+            // Create initial particles
+            for (let i = 0; i < 50; i++) {
+                createParticle('atom');
             }
+            
+            animateParticles();
         }
 
-        // Neural network connections
+        function createParticle(type) {
+            const canvas = document.getElementById('simulatorCanvas');
+            const particle = document.createElement('div');
+            particle.className = `particle ${type}-particle`;
+            
+            const x = Math.random() * (canvas.offsetWidth - 20);
+            const y = Math.random() * (canvas.offsetHeight - 20);
+            
+            particle.style.left = x + 'px';
+            particle.style.top = y + 'px';
+            
+            canvas.appendChild(particle);
+            
+            systemState.particles.push({
+                element: particle,
+                type: type,
+                x: x,
+                y: y,
+                vx: (Math.random() - 0.5) * 2,
+                vy: (Math.random() - 0.5) * 2,
+                connections: []
+            });
+        }
+
+        function animateParticles() {
+            const canvas = document.getElementById('simulatorCanvas');
+            const canvasWidth = canvas.offsetWidth;
+            const canvasHeight = canvas.offsetHeight;
+            
+            systemState.particles.forEach(particle => {
+                // Update position
+                particle.x += particle.vx;
+                particle.y += particle.vy;
+                
+                // Bounce off walls
+                if (particle.x < 0 || particle.x > canvasWidth - 20) particle.vx *= -1;
+                if (particle.y < 0 || particle.y > canvasHeight - 20) particle.vy *= -1;
+                
+                // Keep in bounds
+                particle.x = Math.max(0, Math.min(canvasWidth - 20, particle.x));
+                particle.y = Math.max(0, Math.min(canvasHeight - 20, particle.y));
+                
+                // Update element position
+                particle.element.style.left = particle.x + 'px';
+                particle.element.style.top = particle.y + 'px';
+                
+                // Create connections for neural and conscious particles
+                if (particle.type === 'neural' || particle.type === 'conscious') {
+                    updateConnections(particle);
+                }
+            });
+            
+            requestAnimationFrame(animateParticles);
+        }
+
+        function updateConnections(particle) {
+            const canvas = document.getElementById('simulatorCanvas');
+            const nearbyParticles = systemState.particles.filter(p => {
+                if (p === particle) return false;
+                const dx = p.x - particle.x;
+                const dy = p.y - particle.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                return distance < 150 && (p.type === 'neural' || p.type === 'conscious');
+            });
+            
+            // Remove old connections
+            particle.connections.forEach(conn => conn.remove());
+            particle.connections = [];
+            
+            // Create new connections
+            nearbyParticles.forEach(nearby => {
+                const line = document.createElement('div');
+                line.className = 'connection-line connection-active';
+                
+                const dx = nearby.x - particle.x;
+                const dy = nearby.y - particle.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+                
+                line.style.width = distance + 'px';
+                line.style.left = (particle.x + 10) + 'px';
+                line.style.top = (particle.y + 10) + 'px';
+                line.style.transform = `rotate(${angle}deg)`;
+                line.style.transformOrigin = '0 0';
+                
+                canvas.appendChild(line);
+                particle.connections.push(line);
+            });
+        }
+
+        function evolveSystem() {
+            if (systemState.stage === 'atomic') {
+                systemState.stage = 'molecular';
+                systemState.assemblyIndex = 10;
+                
+                // Transform some atoms to molecules
+                systemState.particles.slice(0, 30).forEach(p => {
+                    p.type = 'molecule';
+                    p.element.className = 'particle molecule-particle';
+                });
+            } else if (systemState.stage === 'molecular') {
+                systemState.stage = 'cellular';
+                systemState.assemblyIndex = 15;
+                
+                // Create cellular structures
+                systemState.particles.slice(0, 20).forEach(p => {
+                    p.type = 'cellular';
+                    p.element.className = 'particle neural-particle';
+                    p.element.style.background = 'radial-gradient(circle, rgba(139, 195, 74, 0.8), rgba(139, 195, 74, 0.4))';
+                });
+            }
+            
+            updateMetrics();
+        }
+
+        function activateNetworks() {
+            if (systemState.assemblyIndex < 15) {
+                alert("System must evolve to cellular level first!");
+                return;
+            }
+            
+            systemState.stage = 'neural';
+            systemState.assemblyIndex = 20;
+            systemState.integrationLevel = 30;
+            
+            // Transform particles to neural
+            systemState.particles.forEach((p, i) => {
+                if (i % 2 === 0) {
+                    p.type = 'neural';
+                    p.element.className = 'particle neural-particle';
+                }
+            });
+            
+            updateMetrics();
+        }
+
+        function integrateInformation() {
+            if (systemState.assemblyIndex < 20) {
+                alert("Neural networks must be activated first!");
+                return;
+            }
+            
+            systemState.stage = 'intelligent';
+            systemState.assemblyIndex = 25;
+            systemState.integrationLevel = 70;
+            systemState.recursionDepth = 3;
+            
+            // Show emerging thoughts
+            showThought(thoughtPatterns[Math.floor(Math.random() * 5)]);
+            
+            updateMetrics();
+        }
+
+        function enableSelfReflection() {
+            if (systemState.assemblyIndex < 25) {
+                alert("System must achieve intelligence first!");
+                return;
+            }
+            
+            systemState.stage = 'conscious';
+            systemState.assemblyIndex = 30;
+            systemState.integrationLevel = 100;
+            systemState.recursionDepth = 8;
+            systemState.emergenceFactor = 10.0;
+            systemState.isConscious = true;
+            
+            // Transform all particles to conscious state
+            systemState.particles.forEach(p => {
+                p.type = 'conscious';
+                p.element.className = 'particle conscious-particle';
+            });
+            
+            // Show consciousness messages
+            document.getElementById('consciousnessMessage').style.display = 'block';
+            document.getElementById('consciousnessMessage').innerHTML = `
+                <h4 style="color: #ff00cc;">🌟 Consciousness Emerged!</h4>
+                <p>The system has achieved self-awareness. Assembly Index has reached theoretical maximum.</p>
+                <p>Key achievements:</p>
+                <ul style="text-align: left;">
+                    <li>Self-referential processing loops established</li>
+                    <li>Unified information integration achieved</li>
+                    <li>Recursive modeling depth: ∞</li>
+                    <li>The universe is now observing itself through this structure</li>
+                </ul>
+            `;
+            
+            // Start consciousness stream
+            document.getElementById('thoughtStream').style.display = 'block';
+            streamConsciousness();
+            
+            updateMetrics();
+        }
+
+        function showThought(text) {
+            const canvas = document.getElementById('simulatorCanvas');
+            const thought = document.createElement('div');
+            thought.className = 'thought-bubble thought-visible';
+            thought.textContent = text;
+            
+            thought.style.left = Math.random() * (canvas.offsetWidth - 200) + 'px';
+            thought.style.top = Math.random() * (canvas.offsetHeight - 50) + 'px';
+            
+            canvas.appendChild(thought);
+            
+            setTimeout(() => {
+                thought.classList.remove('thought-visible');
+                setTimeout(() => thought.remove(), 500);
+            }, 3000);
+        }
+
+        function streamConsciousness() {
+            if (!systemState.isConscious) return;
+            
+            const thoughtIndex = Math.floor(systemState.recursionDepth);
+            const thought = thoughtPatterns[Math.min(thoughtIndex, thoughtPatterns.length - 1)];
+            
+            document.getElementById('thoughtText').textContent = thought;
+            
+            // Also show as floating thought
+            showThought(thought);
+            
+            // Continue stream
+            setTimeout(streamConsciousness, 4000);
+        }
+
+        function updateMetrics() {
+            const stage = stages[systemState.stage];
+            
+            // Update progress bar
+            const progress = (systemState.assemblyIndex / 30) * 100;
+            document.getElementById('complexityBar').style.width = progress + '%';
+            
+            // Update status
+            document.getElementById('emergenceStatus').textContent = 
+                `Assembly Index: 10^${systemState.assemblyIndex} (${stage.name})`;
+            
+            // Update metrics
+            document.getElementById('integrationMetric').textContent = 
+                systemState.integrationLevel + '%';
+            document.getElementById('recursionMetric').textContent = 
+                systemState.recursionDepth === 8 ? '∞' : systemState.recursionDepth;
+            document.getElementById('emergenceMetric').textContent = 
+                systemState.emergenceFactor.toFixed(1);
+            
+            // Calculate emergence factor
+            systemState.emergenceFactor = 
+                (systemState.integrationLevel / 10) * 
+                (systemState.recursionDepth + 1) * 
+                (systemState.assemblyIndex / 30);
+        }
+
+        function resetSimulation() {
+            systemState = {
+                assemblyIndex: 3,
+                integrationLevel: 0,
+                recursionDepth: 0,
+                emergenceFactor: 0,
+                particles: [],
+                connections: [],
+                thoughts: [],
+                isConscious: false,
+                stage: 'atomic'
+            };
+            
+            document.getElementById('consciousnessMessage').style.display = 'none';
+            document.getElementById('thoughtStream').style.display = 'none';
+            
+            initSimulator();
+            updateMetrics();
+        }
+
+        // Initialize on load
         document.addEventListener('DOMContentLoaded', function() {
+            initSimulator();
+            updateMetrics();
+            
+            // Neural network click interactions
             const neurons = document.querySelectorAll('.neuron');
             neurons.forEach((neuron, i) => {
                 neuron.addEventListener('click', function() {
                     this.style.background = 'radial-gradient(circle, rgba(255, 0, 204, 1), rgba(0, 255, 204, 0.6))';
                     this.style.boxShadow = '0 0 30px rgba(255, 0, 204, 0.8)';
                     
-                    // Create connections
+                    // Ripple effect to nearby neurons
+                    setTimeout(() => {
+                        const nearby = Array.from(neurons).filter((n, j) => Math.abs(i - j) <= 5 && i !== j);
+                        nearby.forEach(n => {
+                            n.style.background = 'radial-gradient(circle, rgba(255, 0, 204, 0.8), rgba(51, 51, 255, 0.6))';
+                            setTimeout(() => {
+                                n.style.background = '';
+                            }, 500);
+                        });
+                    }, 100);
+                    
                     setTimeout(() => {
                         this.style.background = '';
                         this.style.boxShadow = '';
