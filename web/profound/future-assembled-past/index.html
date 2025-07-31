@@ -474,6 +474,31 @@
         </div>
 
 
+        <div class="assembly-chain-simulator">
+            <h3 style="text-align: center; color: #f093fb; margin-bottom: 30px;">Assembly Chain Reaction</h3>
+            <p style="text-align: center; color: #b0bec5; margin-bottom: 30px;">Click any past assembly to see how it constrains and enables the future</p>
+            
+            <div id="chainCanvas" style="position: relative; width: 100%; height: 500px; background: rgba(0, 0, 0, 0.3); border-radius: 20px; overflow: hidden;">
+                <canvas id="assemblyChainCanvas" style="width: 100%; height: 100%;"></canvas>
+                
+                <div style="position: absolute; bottom: 20px; left: 20px; background: rgba(0, 0, 0, 0.7); padding: 15px; border-radius: 10px;">
+                    <div style="color: #667eea; margin-bottom: 5px;">● Past (Click to explore)</div>
+                    <div style="color: #f093fb; margin-bottom: 5px;">● Present (Active now)</div>
+                    <div style="color: #4facfe; opacity: 0.6;">● Future (Possible paths)</div>
+                </div>
+                
+                <div id="nodeInfo" style="position: absolute; top: 20px; right: 20px; background: rgba(0, 0, 0, 0.8); padding: 15px; border-radius: 10px; display: none; max-width: 250px;">
+                    <h4 style="margin: 0 0 10px 0; color: #f093fb;" id="nodeTitle">Node</h4>
+                    <p style="margin: 0; font-size: 14px;" id="nodeDescription">Description</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="demo-button" onclick="resetChainSimulation()">Reset</button>
+                <button class="demo-button" onclick="showAllPaths()">Show All Paths</button>
+            </div>
+        </div>
+
     </div>
 
     <script>
@@ -487,6 +512,360 @@
                     item.style.opacity = '1';
                 }, index * 200);
             });
+            
+            // Initialize chain simulator
+            initChainSimulator();
+        });
+        
+        // Assembly Chain Reaction Simulator
+        let chainCanvas, chainCtx;
+        let chainNodes = [];
+        let chainConnections = [];
+        let particles = [];
+        let selectedNode = null;
+        let animationFrame = null;
+        
+        const assemblies = {
+            'atom': {
+                name: 'Atoms',
+                enables: ['molecule', 'star'],
+                color: '#667eea',
+                x: 100,
+                y: 250,
+                type: 'past',
+                description: 'Fundamental building blocks forged in stellar cores',
+                futures: ['Complex Chemistry', 'Nuclear Fusion', 'Heavy Elements']
+            },
+            'molecule': {
+                name: 'Molecules',
+                enables: ['life', 'crystal'],
+                color: '#764ba2',
+                x: 100,
+                y: 150,
+                type: 'past',
+                description: 'Chemical bonds creating new properties',
+                futures: ['Organic Chemistry', 'Polymers', 'Self-Assembly']
+            },
+            'star': {
+                name: 'Stars',
+                enables: ['planet', 'elements'],
+                color: '#667eea',
+                x: 100,
+                y: 350,
+                type: 'past',
+                description: 'Nuclear furnaces creating heavy elements',
+                futures: ['Planetary Systems', 'Supernovae', 'Black Holes']
+            },
+            'life': {
+                name: 'Life',
+                enables: ['brain', 'ecosystem'],
+                color: '#f093fb',
+                x: 300,
+                y: 200,
+                type: 'present',
+                description: 'Self-replicating information systems',
+                futures: ['Intelligence', 'Biodiversity', 'Symbiosis']
+            },
+            'crystal': {
+                name: 'Crystals',
+                enables: ['semiconductor', 'mineral'],
+                color: '#f093fb',
+                x: 300,
+                y: 100,
+                type: 'present',
+                description: 'Ordered atomic structures',
+                futures: ['Electronics', 'Photonics', 'Quantum Devices']
+            },
+            'planet': {
+                name: 'Planets',
+                enables: ['atmosphere', 'geology'],
+                color: '#f093fb',
+                x: 300,
+                y: 350,
+                type: 'present',
+                description: 'Gravitationally bound matter',
+                futures: ['Habitable Worlds', 'Terraforming', 'Space Resources']
+            },
+            'brain': {
+                name: 'Brains',
+                enables: ['consciousness', 'technology'],
+                color: '#4facfe',
+                x: 500,
+                y: 150,
+                type: 'future',
+                description: 'Information processing organs',
+                futures: ['AI', 'Collective Intelligence', 'Mind Upload']
+            },
+            'ecosystem': {
+                name: 'Ecosystems',
+                enables: ['biosphere', 'civilization'],
+                color: '#4facfe',
+                x: 500,
+                y: 250,
+                type: 'future',
+                description: 'Interconnected living systems',
+                futures: ['Global Consciousness', 'Synthetic Biology', 'Gaia']
+            },
+            'technology': {
+                name: 'Technology',
+                enables: ['ai', 'space'],
+                color: '#00f2fe',
+                x: 700,
+                y: 200,
+                type: 'future',
+                description: 'Tools extending biological capabilities',
+                futures: ['Singularity', 'Post-Human', 'Cosmic Engineering']
+            }
+        };
+        
+        function initChainSimulator() {
+            chainCanvas = document.getElementById('assemblyChainCanvas');
+            chainCtx = chainCanvas.getContext('2d');
+            
+            // Set canvas size
+            chainCanvas.width = chainCanvas.offsetWidth;
+            chainCanvas.height = chainCanvas.offsetHeight;
+            
+            // Create nodes
+            for (let key in assemblies) {
+                const assembly = assemblies[key];
+                chainNodes.push({
+                    id: key,
+                    ...assembly,
+                    radius: 25,
+                    pulsePhase: Math.random() * Math.PI * 2
+                });
+            }
+            
+            // Add click handler
+            chainCanvas.addEventListener('click', handleChainClick);
+            chainCanvas.addEventListener('mousemove', handleChainHover);
+            
+            // Start animation
+            animateChain();
+        }
+        
+        function handleChainClick(e) {
+            const rect = chainCanvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            // Check if clicked on a past node
+            const clickedNode = chainNodes.find(node => {
+                const dx = x - node.x;
+                const dy = y - node.y;
+                return node.type === 'past' && Math.sqrt(dx * dx + dy * dy) < node.radius;
+            });
+            
+            if (clickedNode) {
+                selectedNode = clickedNode;
+                activateAssemblyChain(clickedNode);
+            }
+        }
+        
+        function handleChainHover(e) {
+            const rect = chainCanvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const hoveredNode = chainNodes.find(node => {
+                const dx = x - node.x;
+                const dy = y - node.y;
+                return Math.sqrt(dx * dx + dy * dy) < node.radius;
+            });
+            
+            const infoDiv = document.getElementById('nodeInfo');
+            if (hoveredNode) {
+                document.getElementById('nodeTitle').textContent = hoveredNode.name;
+                document.getElementById('nodeDescription').textContent = hoveredNode.description;
+                infoDiv.style.display = 'block';
+                chainCanvas.style.cursor = hoveredNode.type === 'past' ? 'pointer' : 'default';
+            } else {
+                infoDiv.style.display = 'none';
+                chainCanvas.style.cursor = 'default';
+            }
+        }
+        
+        function activateAssemblyChain(startNode) {
+            // Clear existing connections
+            chainConnections = [];
+            particles = [];
+            
+            // Reset all nodes
+            chainNodes.forEach(node => {
+                node.active = false;
+                node.opacity = 0.3;
+            });
+            
+            // Activate the chain
+            const queue = [startNode];
+            startNode.active = true;
+            startNode.opacity = 1;
+            
+            while (queue.length > 0) {
+                const current = queue.shift();
+                
+                if (current.enables) {
+                    current.enables.forEach(enabledId => {
+                        const enabledNode = chainNodes.find(n => n.id === enabledId);
+                        if (enabledNode && !enabledNode.active) {
+                            enabledNode.active = true;
+                            enabledNode.opacity = 1;
+                            queue.push(enabledNode);
+                            
+                            // Create connection
+                            chainConnections.push({
+                                from: current,
+                                to: enabledNode,
+                                particles: []
+                            });
+                        }
+                    });
+                }
+            }
+            
+            // Create particles for each connection
+            chainConnections.forEach(conn => {
+                for (let i = 0; i < 5; i++) {
+                    conn.particles.push({
+                        progress: i * 0.2,
+                        speed: 0.5 + Math.random() * 0.5,
+                        size: 2 + Math.random() * 2
+                    });
+                }
+            });
+        }
+        
+        function animateChain() {
+            chainCtx.clearRect(0, 0, chainCanvas.width, chainCanvas.height);
+            
+            // Draw connections
+            chainConnections.forEach(conn => {
+                chainCtx.strokeStyle = 'rgba(240, 147, 251, 0.3)';
+                chainCtx.lineWidth = 2;
+                chainCtx.beginPath();
+                chainCtx.moveTo(conn.from.x, conn.from.y);
+                chainCtx.lineTo(conn.to.x, conn.to.y);
+                chainCtx.stroke();
+                
+                // Draw particles
+                conn.particles.forEach(particle => {
+                    particle.progress += particle.speed * 0.01;
+                    if (particle.progress > 1) particle.progress = 0;
+                    
+                    const x = conn.from.x + (conn.to.x - conn.from.x) * particle.progress;
+                    const y = conn.from.y + (conn.to.y - conn.from.y) * particle.progress;
+                    
+                    chainCtx.fillStyle = 'rgba(240, 147, 251, 0.8)';
+                    chainCtx.beginPath();
+                    chainCtx.arc(x, y, particle.size, 0, Math.PI * 2);
+                    chainCtx.fill();
+                });
+            });
+            
+            // Draw nodes
+            chainNodes.forEach(node => {
+                // Update pulse
+                node.pulsePhase += 0.02;
+                const pulseFactor = node.active ? 1 + Math.sin(node.pulsePhase) * 0.1 : 1;
+                const radius = node.radius * pulseFactor;
+                
+                // Draw node
+                chainCtx.globalAlpha = node.opacity || 1;
+                chainCtx.fillStyle = node.color;
+                chainCtx.beginPath();
+                chainCtx.arc(node.x, node.y, radius, 0, Math.PI * 2);
+                chainCtx.fill();
+                
+                // Draw glow for active nodes
+                if (node.active) {
+                    chainCtx.shadowBlur = 20;
+                    chainCtx.shadowColor = node.color;
+                    chainCtx.fill();
+                    chainCtx.shadowBlur = 0;
+                }
+                
+                // Draw label
+                chainCtx.fillStyle = '#fff';
+                chainCtx.font = '12px sans-serif';
+                chainCtx.textAlign = 'center';
+                chainCtx.fillText(node.name, node.x, node.y + radius + 20);
+                
+                chainCtx.globalAlpha = 1;
+            });
+            
+            // Draw time labels
+            chainCtx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+            chainCtx.font = '16px sans-serif';
+            chainCtx.textAlign = 'center';
+            chainCtx.fillText('PAST', 100, 50);
+            chainCtx.fillText('PRESENT', chainCanvas.width / 2, 50);
+            chainCtx.fillText('FUTURE', chainCanvas.width - 100, 50);
+            
+            // Draw future possibilities for selected node
+            if (selectedNode && selectedNode.futures) {
+                chainCtx.fillStyle = 'rgba(79, 172, 254, 0.6)';
+                chainCtx.font = '11px sans-serif';
+                selectedNode.futures.forEach((future, index) => {
+                    const x = chainCanvas.width - 150;
+                    const y = 150 + index * 30;
+                    chainCtx.fillText('→ ' + future, x, y);
+                });
+            }
+            
+            animationFrame = requestAnimationFrame(animateChain);
+        }
+        
+        function resetChainSimulation() {
+            selectedNode = null;
+            chainConnections = [];
+            particles = [];
+            
+            chainNodes.forEach(node => {
+                node.active = false;
+                node.opacity = 1;
+            });
+        }
+        
+        function showAllPaths() {
+            chainConnections = [];
+            
+            chainNodes.forEach(node => {
+                node.active = true;
+                node.opacity = 1;
+                
+                if (node.enables) {
+                    node.enables.forEach(enabledId => {
+                        const enabledNode = chainNodes.find(n => n.id === enabledId);
+                        if (enabledNode) {
+                            chainConnections.push({
+                                from: node,
+                                to: enabledNode,
+                                particles: []
+                            });
+                        }
+                    });
+                }
+            });
+            
+            // Add particles
+            chainConnections.forEach(conn => {
+                for (let i = 0; i < 3; i++) {
+                    conn.particles.push({
+                        progress: Math.random(),
+                        speed: 0.3 + Math.random() * 0.3,
+                        size: 2
+                    });
+                }
+            });
+        }
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (chainCanvas) {
+                chainCanvas.width = chainCanvas.offsetWidth;
+                chainCanvas.height = chainCanvas.offsetHeight;
+            }
         });
     </script>
 </body>
