@@ -464,12 +464,14 @@ Weak nuclear force carrier | 2 | Cosmic | [/domains/cosmic/forces/weak_nuclear.m
 
 ### Convergent Assemblies
 
-| Function | Independent Origins | Locations |
-|----------|-------------------|-----------|
-| Flight | Birds, Bats, Insects, Pterosaurs, Planes | [/pathways/convergent/flight/](https://github.com/owocki/assembly_theory/tree/master/pathways/convergent/flight/) |
-| Vision | 40+ independent origins | [/pathways/convergent/vision/](https://github.com/owocki/assembly_theory/tree/master/pathways/convergent/vision/) |
-| Intelligence | Cephalopods, Mammals, Birds, AI | [/pathways/convergent/intelligence/](https://github.com/owocki/assembly_theory/tree/master/pathways/convergent/intelligence/) |
-| Networks | Neural, Fungal, Social, Digital | [/pathways/convergent/networks/](https://github.com/owocki/assembly_theory/tree/master/pathways/convergent/networks/) |
+  1. Security patterns - Zero address checks and SafeMath usage evolved independently across all
+   contracts
+  2. Token standards - ERC-20/721/1155 show parallel evolution of balance tracking, transfers,
+  and approvals
+  3. DeFi protocols - Aave/Compound and Uniswap/Sushiswap independently evolved similar
+  architectures
+  4. Layer 2 solutions - Optimism/Arbitrum and zkSync/StarkNet converged on similar designs
+  despite different approaches
 
 ## Applications
 
