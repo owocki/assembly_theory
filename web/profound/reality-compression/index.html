@@ -359,40 +359,87 @@
         </div>
 
         <div class="interactive-compressor">
-            <h3>Compression Demonstrator</h3>
-            <p>See how patterns enable compression:</p>
+            <h3>DNA: Evolution's Compression Algorithm</h3>
+            <p class="subtitle" style="color: #b0bec5; margin-bottom: 30px;">How 3 billion base pairs encode 3.8 billion years of evolution</p>
             
-            <div class="input-area" id="inputPattern">
-                ABCABCABCABC... (Pattern repeats 1000 times)
+            <div class="compression-visualization" style="margin: 40px 0;">
+                <div class="data-box">
+                    <h4>Evolutionary History</h4>
+                    <p style="font-size: 2em; color: #ffd89b; font-weight: bold;">3.8 Billion Years</p>
+                    <p>Every adaptation, survival strategy, and biological innovation</p>
+                    <p style="font-size: 1.2em; color: #ffd89b;">~10²⁴ bits</p>
+                    <p style="opacity: 0.7;">If stored uncompressed</p>
+                </div>
+                
+                <div class="arrow-compress">→</div>
+                
+                <div class="data-box">
+                    <h4>DNA Molecule</h4>
+                    <p style="font-size: 2em; color: #ffd89b; font-weight: bold;">3 Billion Base Pairs</p>
+                    <p>Complete blueprint for building and operating an organism</p>
+                    <p style="font-size: 1.2em; color: #ffd89b;">~750 MB</p>
+                    <p style="opacity: 0.7;">Actual storage size</p>
+                </div>
             </div>
             
-            <button class="compress-button" onclick="demonstrateCompression()">Apply Compression</button>
-            <button class="compress-button" onclick="showFractal()">Show Fractal</button>
-            <button class="compress-button" onclick="showSymmetry()">Show Symmetry</button>
-            <a href="dna-compression-simulator.html" class="compress-button" style="text-decoration: none; display: inline-block; text-align: center;">DNA Compression Simulator</a>
-            
-            <div class="input-area" id="outputPattern" style="display: none;">
-                Compressed: [ABC] × 1000<br>
-                Storage: 12 bits instead of 12,000 bits<br>
-                Compression ratio: 1000:1
-            </div>
-        </div>
-
-        <div class="interactive-compressor" style="margin-top: 40px;">
-            <h3>Evolution of Compression</h3>
-            <p>"The future is assembled from the past"</p>
-            
-            <div style="margin: 20px 0;">
-                <label style="color: #ffd89b;">Evolution Speed: <span id="evolutionSpeed">50</span>%</label>
-                <input type="range" id="evolutionSlider" min="0" max="100" value="50" style="width: 100%; margin: 10px 0;">
+            <div class="concept-explanation" style="margin: 30px 0;">
+                <h4>The Compression Magic</h4>
+                <p>DNA achieves a compression ratio of approximately <strong style="color: #ffd89b;">10¹⁵:1</strong> through several ingenious mechanisms:</p>
             </div>
             
-            <button class="compress-button" id="startEvolution">Start Evolution</button>
+            <div class="compression-examples" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                <div class="compression-card">
+                    <h4>🔄 Code Reuse</h4>
+                    <p><strong>99.9%</strong> of human DNA is identical across all humans</p>
+                    <p style="opacity: 0.7; font-size: 14px;">Store once, use billions of times</p>
+                </div>
+                
+                <div class="compression-card">
+                    <h4>🧬 Gene Sharing</h4>
+                    <p><strong>60%</strong> of genes shared with fruit flies</p>
+                    <p><strong>90%</strong> of genes shared with mice</p>
+                    <p style="opacity: 0.7; font-size: 14px;">Cross-species compression</p>
+                </div>
+                
+                <div class="compression-card">
+                    <h4>📦 Protein Folding</h4>
+                    <p><strong>20,000</strong> genes create <strong>80,000+</strong> proteins</p>
+                    <p style="opacity: 0.7; font-size: 14px;">1:4 amplification through folding</p>
+                </div>
+                
+                <div class="compression-card">
+                    <h4>🎯 Regulatory Switches</h4>
+                    <p><strong>98%</strong> of DNA is "non-coding"</p>
+                    <p style="opacity: 0.7; font-size: 14px;">But controls when/where genes activate</p>
+                </div>
+            </div>
             
-            <canvas id="evolutionCanvas" style="width: 100%; height: 300px; background: rgba(0, 0, 0, 0.3); border-radius: 10px; margin-top: 20px;"></canvas>
+            <div style="text-align: center; margin: 30px 0;">
+                <h4>Interactive DNA Compression Demonstration</h4>
+                <button class="compress-button" onclick="showEvolutionaryCompression()">Show Evolutionary Compression</button>
+                <button class="compress-button" onclick="showGeneReuse()">Demonstrate Gene Reuse</button>
+                <button class="compress-button" onclick="showProteinFolding()">Show Protein Folding</button>
+                <button class="compress-button" onclick="showRegulation()">Show Gene Regulation</button>
+            </div>
             
-            <div class="input-area" style="margin-top: 20px;">
-                <div id="evolutionStatus">Ready to simulate compression evolution...</div>
+            <div id="sequenceDisplay" class="input-area" style="font-family: 'Courier New', monospace; overflow-x: auto;">
+                <p style="opacity: 0.7;">Click a button above to see DNA compression in action</p>
+            </div>
+            
+            <canvas id="compressionVisual" style="width: 100%; height: 400px; background: rgba(0, 0, 0, 0.3); border-radius: 10px; margin: 20px 0;"></canvas>
+            
+            <div class="concept-explanation" style="margin-top: 30px;">
+                <h4>How DNA Compresses Information</h4>
+                
+                <p><strong>1. Hierarchical Reuse:</strong> Instead of storing instructions for every cell individually, DNA stores templates that can be reused. A single HOX gene sequence controls body segment development across countless species.</p>
+                
+                <p><strong>2. Combinatorial Explosion:</strong> With just 4 bases (A, T, G, C), DNA creates 64 different codons, which map to 20 amino acids plus stop signals. These 20 building blocks combine to create millions of different proteins.</p>
+                
+                <p><strong>3. Evolutionary Compression:</strong> Successful solutions are preserved and reused. The gene for cytochrome c (essential for cellular respiration) is virtually identical across all life forms - compressed once, used universally.</p>
+                
+                <p><strong>4. Context-Dependent Expression:</strong> The same gene can produce different outcomes based on when, where, and how strongly it's expressed. This multiplies the effective information without increasing storage.</p>
+                
+                <p><strong>5. Junk DNA Isn't Junk:</strong> Non-coding regions act as a massive regulatory network, controlling gene expression with incredible precision. This meta-information layer adds functionality without adding genes.</p>
             </div>
         </div>
 
@@ -423,226 +470,359 @@
             `;
         }
 
-        // Evolution simulation variables
-        let evolutionAnimation = null;
-        let isEvolutionRunning = false;
-        let evolutionTime = 0;
-        let compressionHistory = [];
-        let particles = [];
-
-        // Evolution canvas setup
-        const evolutionCanvas = document.getElementById('evolutionCanvas');
-        const evolutionCtx = evolutionCanvas.getContext('2d');
-
-        function resizeEvolutionCanvas() {
-            evolutionCanvas.width = evolutionCanvas.offsetWidth;
-            evolutionCanvas.height = evolutionCanvas.offsetHeight;
+        // DNA Compression Simulator variables
+        const compressionCanvas = document.getElementById('compressionVisual');
+        const compressionCtx = compressionCanvas.getContext('2d');
+        const sequenceDisplay = document.getElementById('sequenceDisplay');
+        
+        // DNA bases
+        const bases = ['A', 'T', 'G', 'C'];
+        const baseColors = {
+            'A': '#ff5555',
+            'T': '#5555ff',
+            'G': '#55ff55',
+            'C': '#ffff55'
+        };
+        
+        // Resize canvas
+        function resizeCompressionCanvas() {
+            compressionCanvas.width = compressionCanvas.offsetWidth;
+            compressionCanvas.height = compressionCanvas.offsetHeight;
         }
+        resizeCompressionCanvas();
+        window.addEventListener('resize', resizeCompressionCanvas);
 
-        // Evolution particle class
-        class EvolutionParticle {
-            constructor(x, y, generation) {
-                this.x = x;
-                this.y = y;
-                this.generation = generation;
-                this.size = 2 + Math.random() * 4;
-                this.vx = (Math.random() - 0.5) * 2;
-                this.vy = (Math.random() - 0.5) * 2;
-                this.compressed = false;
-                this.compressionLevel = 0;
-                this.color = this.getGenerationColor(generation);
-            }
-
-            getGenerationColor(gen) {
-                const colors = ['#ff0088', '#ff5500', '#ffaa00', '#ffff00', '#88ff00', '#00ff88', '#00ffff', '#0088ff'];
-                return colors[gen % colors.length];
-            }
-
-            update(speed, compressionStrength) {
-                // Apply evolution rules
-                this.x += this.vx * (speed / 50);
-                this.y += this.vy * (speed / 50);
-
-                // Compression evolution
-                if (Math.random() < compressionStrength / 1000) {
-                    this.compressed = true;
-                    this.compressionLevel = Math.min(this.compressionLevel + 0.1, 1);
-                }
-
-                // Boundary bounce
-                if (this.x <= this.size || this.x >= evolutionCanvas.width - this.size) {
-                    this.vx = -this.vx;
-                }
-                if (this.y <= this.size || this.y >= evolutionCanvas.height - this.size) {
-                    this.vy = -this.vy;
-                }
-
-                // Evolution: particles can spawn new generations
-                if (Math.random() < 0.001 && particles.length < 100) {
-                    return new EvolutionParticle(this.x, this.y, this.generation + 1);
-                }
-                return null;
-            }
-
-            draw(ctx) {
-                ctx.save();
-                
-                if (this.compressed) {
-                    // Draw compressed particle with glow
-                    ctx.shadowBlur = 10;
-                    ctx.shadowColor = this.color;
-                }
-
-                ctx.fillStyle = this.color;
-                ctx.globalAlpha = 0.8 - (this.compressionLevel * 0.3);
-                
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size * (1 - this.compressionLevel * 0.5), 0, Math.PI * 2);
-                ctx.fill();
-
-                // Draw compression rings
-                if (this.compressed) {
-                    ctx.strokeStyle = this.color;
-                    ctx.globalAlpha = 0.3;
-                    ctx.lineWidth = 1;
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size * (2 + this.compressionLevel), 0, Math.PI * 2);
-                    ctx.stroke();
-                }
-
-                ctx.restore();
-            }
+        // Generate random DNA sequence
+        function generateSequence(length) {
+            return Array(length).fill(0).map(() => bases[Math.floor(Math.random() * 4)]).join('');
         }
-
-        // Update simulation function
-        function updateSimulation() {
-            const speed = parseInt(document.getElementById('evolutionSlider').value);
-            document.getElementById('evolutionSpeed').textContent = speed;
+        
+        // Display sequence with highlighting
+        function displaySequence(sequence, highlights = []) {
+            sequenceDisplay.innerHTML = '<p style="margin-bottom: 10px; opacity: 0.7;">DNA Sequence:</p>';
+            const container = document.createElement('div');
             
-            if (isEvolutionRunning) {
-                // Update compression strength based on evolution time
-                const compressionStrength = Math.min(evolutionTime / 100, 100);
-                updateEvolutionStatus(compressionStrength);
-            }
+            sequence.split('').forEach((base, index) => {
+                const span = document.createElement('span');
+                span.style.display = 'inline-block';
+                span.style.padding = '5px 8px';
+                span.style.margin = '2px';
+                span.style.borderRadius = '4px';
+                span.style.fontWeight = 'bold';
+                span.style.transition = 'all 0.3s ease';
+                
+                // Set base color
+                switch(base) {
+                    case 'A': span.style.background = '#ff5555'; break;
+                    case 'T': span.style.background = '#5555ff'; span.style.color = '#fff'; break;
+                    case 'G': span.style.background = '#55ff55'; break;
+                    case 'C': span.style.background = '#ffff55'; span.style.color = '#000'; break;
+                }
+                
+                span.textContent = base;
+                
+                if (highlights.includes(index)) {
+                    span.style.animation = 'glow 1s ease-in-out infinite';
+                    span.style.boxShadow = '0 0 10px currentColor';
+                }
+                
+                container.appendChild(span);
+            });
+            
+            sequenceDisplay.appendChild(container);
         }
 
-        // Evolution status update
-        function updateEvolutionStatus(compressionStrength) {
-            const status = document.getElementById('evolutionStatus');
-            const generation = Math.floor(evolutionTime / 1000);
-            const efficiency = Math.round(compressionStrength);
+        // Show evolutionary compression
+        function showEvolutionaryCompression() {
+            compressionCtx.clearRect(0, 0, compressionCanvas.width, compressionCanvas.height);
             
-            status.innerHTML = `
-                Generation: ${generation}<br>
-                Compression Efficiency: ${efficiency}%<br>
-                Active Entities: ${particles.length}<br>
-                <span style="opacity: 0.7;">The future assembles from patterns of the past...</span>
+            // Generate a sequence with conserved regions
+            const sequence = generateSequence(100);
+            const conservedRegion = 'ATGGCGCTGAAG'; // Example conserved sequence
+            const fullSequence = sequence.slice(0, 30) + conservedRegion + sequence.slice(42);
+            
+            displaySequence(fullSequence, Array.from({length: conservedRegion.length}, (_, i) => i + 30));
+            
+            // Visualize compression
+            const centerX = compressionCanvas.width / 2;
+            const centerY = compressionCanvas.height / 2;
+            
+            // Draw timeline
+            compressionCtx.strokeStyle = '#444';
+            compressionCtx.lineWidth = 2;
+            compressionCtx.beginPath();
+            compressionCtx.moveTo(50, centerY);
+            compressionCtx.lineTo(compressionCanvas.width - 50, centerY);
+            compressionCtx.stroke();
+            
+            // Draw evolutionary points
+            const timePoints = [
+                { x: 100, y: centerY, label: '3.8 Bya', desc: 'First life' },
+                { x: 250, y: centerY, label: '1.5 Bya', desc: 'Eukaryotes' },
+                { x: 400, y: centerY, label: '600 Mya', desc: 'Animals' },
+                { x: 550, y: centerY, label: '500 Mya', desc: 'Vertebrates' },
+                { x: 700, y: centerY, label: 'Now', desc: 'Humans' }
+            ];
+            
+            timePoints.forEach((point, index) => {
+                // Draw point
+                compressionCtx.fillStyle = '#00ff88';
+                compressionCtx.beginPath();
+                compressionCtx.arc(point.x, point.y, 8, 0, Math.PI * 2);
+                compressionCtx.fill();
+                
+                // Draw label
+                compressionCtx.fillStyle = '#fff';
+                compressionCtx.font = '12px sans-serif';
+                compressionCtx.textAlign = 'center';
+                compressionCtx.fillText(point.label, point.x, point.y - 20);
+                compressionCtx.fillText(point.desc, point.x, point.y + 30);
+                
+                // Draw compression lines
+                if (index > 0) {
+                    compressionCtx.strokeStyle = `rgba(0, 255, 136, ${0.2 * index})`;
+                    compressionCtx.lineWidth = 1;
+                    compressionCtx.beginPath();
+                    compressionCtx.moveTo(timePoints[0].x, timePoints[0].y);
+                    compressionCtx.quadraticCurveTo(
+                        point.x - 50, point.y - 50,
+                        point.x, point.y
+                    );
+                    compressionCtx.stroke();
+                }
+            });
+            
+            // Add info text
+            compressionCtx.fillStyle = '#888';
+            compressionCtx.font = '14px sans-serif';
+            compressionCtx.textAlign = 'left';
+            compressionCtx.fillText('Conserved sequence (highlighted) present across all these organisms', 50, 50);
+            compressionCtx.fillText('3.8 billion years of evolution compressed into reusable genetic modules', 50, 70);
+        }
+
+        // Show gene reuse
+        function showGeneReuse() {
+            compressionCtx.clearRect(0, 0, compressionCanvas.width, compressionCanvas.height);
+            
+            // Create shared gene sequence
+            const sharedGene = 'ATGCGATCGCTA';
+            const humanSeq = generateSequence(20) + sharedGene + generateSequence(20);
+            const mouseSeq = generateSequence(15) + sharedGene + generateSequence(25);
+            const flySeq = generateSequence(25) + sharedGene + generateSequence(15);
+            
+            sequenceDisplay.innerHTML = `
+                <p style="opacity: 0.7; margin-bottom: 10px;">Gene Reuse Across Species:</p>
+                <div style="margin: 10px 0;">
+                    <strong style="color: #ff5555;">Human:</strong> ${humanSeq.slice(0, 20)}<span style="background: #00ff88; color: #000; padding: 2px;">${sharedGene}</span>${humanSeq.slice(32)}
+                </div>
+                <div style="margin: 10px 0;">
+                    <strong style="color: #5555ff;">Mouse:</strong> ${mouseSeq.slice(0, 15)}<span style="background: #00ff88; color: #000; padding: 2px;">${sharedGene}</span>${mouseSeq.slice(27)}
+                </div>
+                <div style="margin: 10px 0;">
+                    <strong style="color: #ffff55;">Fly:</strong> ${flySeq.slice(0, 25)}<span style="background: #00ff88; color: #000; padding: 2px;">${sharedGene}</span>${flySeq.slice(37)}
+                </div>
+                <p style="opacity: 0.7; margin-top: 10px;">Same gene (highlighted) reused across species = massive compression</p>
             `;
-        }
-
-        // Start evolution
-        function startEvolution() {
-            if (!isEvolutionRunning) {
-                isEvolutionRunning = true;
-                evolutionTime = 0;
-                particles = [];
-                compressionHistory = [];
+            
+            // Visualize connections
+            const species = [
+                { name: 'Human', x: 150, y: 100, color: '#ff5555' },
+                { name: 'Mouse', x: 150, y: 200, color: '#5555ff' },
+                { name: 'Fly', x: 150, y: 300, color: '#ffff55' }
+            ];
+            
+            const geneX = compressionCanvas.width - 200;
+            const geneY = compressionCanvas.height / 2;
+            
+            // Draw shared gene
+            compressionCtx.fillStyle = '#00ff88';
+            compressionCtx.fillRect(geneX - 60, geneY - 30, 120, 60);
+            compressionCtx.fillStyle = '#000';
+            compressionCtx.font = 'bold 16px sans-serif';
+            compressionCtx.textAlign = 'center';
+            compressionCtx.fillText('Shared Gene', geneX, geneY + 5);
+            
+            // Draw species and connections
+            species.forEach(sp => {
+                // Draw species box
+                compressionCtx.fillStyle = sp.color;
+                compressionCtx.fillRect(sp.x - 50, sp.y - 20, 100, 40);
+                compressionCtx.fillStyle = '#000';
+                compressionCtx.font = '14px sans-serif';
+                compressionCtx.fillText(sp.name, sp.x, sp.y + 5);
                 
-                // Initialize with primordial particles
-                for (let i = 0; i < 10; i++) {
-                    particles.push(new EvolutionParticle(
-                        Math.random() * evolutionCanvas.width,
-                        Math.random() * evolutionCanvas.height,
-                        0
-                    ));
-                }
+                // Draw connection
+                compressionCtx.strokeStyle = sp.color;
+                compressionCtx.lineWidth = 3;
+                compressionCtx.beginPath();
+                compressionCtx.moveTo(sp.x + 50, sp.y);
+                compressionCtx.quadraticCurveTo(
+                    (sp.x + geneX) / 2, sp.y,
+                    geneX - 60, geneY
+                );
+                compressionCtx.stroke();
+            });
+            
+            // Add statistics
+            compressionCtx.fillStyle = '#fff';
+            compressionCtx.font = '16px sans-serif';
+            compressionCtx.textAlign = 'left';
+            compressionCtx.fillText('Compression achieved:', 50, compressionCanvas.height - 80);
+            compressionCtx.fillText('• Store gene once: 12 bases', 50, compressionCanvas.height - 55);
+            compressionCtx.fillText('• Use in millions of species', 50, compressionCanvas.height - 30);
+            compressionCtx.fillStyle = '#00ff88';
+            compressionCtx.font = 'bold 18px sans-serif';
+            compressionCtx.fillText('Compression ratio: 1,000,000:1', 50, compressionCanvas.height - 5);
+        }
+
+        // Show protein folding
+        function showProteinFolding() {
+            compressionCtx.clearRect(0, 0, compressionCanvas.width, compressionCanvas.height);
+            
+            const gene = 'ATGGCGCTGAAGCCTGAA';
+            displaySequence(gene);
+            
+            sequenceDisplay.innerHTML += `
+                <p style="opacity: 0.7; margin-top: 20px;">One gene sequence → Multiple protein configurations:</p>
+            `;
+            
+            // Visualize folding amplification
+            const startX = 100;
+            const startY = compressionCanvas.height / 2;
+            
+            // Draw gene
+            compressionCtx.fillStyle = '#0088ff';
+            compressionCtx.fillRect(startX - 50, startY - 20, 100, 40);
+            compressionCtx.fillStyle = '#fff';
+            compressionCtx.font = '14px sans-serif';
+            compressionCtx.textAlign = 'center';
+            compressionCtx.fillText('Single Gene', startX, startY + 5);
+            
+            // Draw protein variants
+            const proteins = [
+                { x: 400, y: 80, name: 'Protein A', color: '#ff5555' },
+                { x: 400, y: 160, name: 'Protein B', color: '#55ff55' },
+                { x: 400, y: 240, name: 'Protein C', color: '#ffff55' },
+                { x: 400, y: 320, name: 'Protein D', color: '#ff55ff' }
+            ];
+            
+            proteins.forEach(protein => {
+                // Draw arrow
+                compressionCtx.strokeStyle = protein.color;
+                compressionCtx.lineWidth = 2;
+                compressionCtx.beginPath();
+                compressionCtx.moveTo(startX + 50, startY);
+                compressionCtx.quadraticCurveTo(
+                    250, protein.y,
+                    protein.x - 50, protein.y
+                );
+                compressionCtx.stroke();
                 
-                document.getElementById('startEvolution').textContent = 'Stop Evolution';
-                animateEvolution();
-            } else {
-                stopEvolution();
-            }
-        }
-
-        // Stop evolution
-        function stopEvolution() {
-            isEvolutionRunning = false;
-            if (evolutionAnimation) {
-                cancelAnimationFrame(evolutionAnimation);
-            }
-            document.getElementById('startEvolution').textContent = 'Start Evolution';
-        }
-
-        // Animation loop
-        function animateEvolution() {
-            if (!isEvolutionRunning) return;
-
-            // Clear with trail effect
-            evolutionCtx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-            evolutionCtx.fillRect(0, 0, evolutionCanvas.width, evolutionCanvas.height);
-
-            const speed = parseInt(document.getElementById('evolutionSlider').value);
-            const compressionStrength = Math.min(evolutionTime / 100, 100);
-
-            // Update and draw particles
-            let newParticles = [];
-            particles = particles.filter(particle => {
-                const spawn = particle.update(speed, compressionStrength);
-                if (spawn) newParticles.push(spawn);
-                particle.draw(evolutionCtx);
-                return particle.size > 0.5;
+                // Draw protein
+                compressionCtx.fillStyle = protein.color;
+                compressionCtx.beginPath();
+                compressionCtx.arc(protein.x, protein.y, 30, 0, Math.PI * 2);
+                compressionCtx.fill();
+                compressionCtx.fillStyle = '#000';
+                compressionCtx.font = '12px sans-serif';
+                compressionCtx.fillText(protein.name, protein.x, protein.y + 5);
             });
-
-            // Add new particles
-            particles = particles.concat(newParticles);
-
-            // Add history visualization
-            if (evolutionTime % 100 === 0) {
-                drawCompressionHistory();
-            }
-
-            evolutionTime += speed / 10;
-            updateEvolutionStatus(compressionStrength);
-
-            evolutionAnimation = requestAnimationFrame(animateEvolution);
+            
+            // Add explanation
+            compressionCtx.fillStyle = '#fff';
+            compressionCtx.font = '16px sans-serif';
+            compressionCtx.textAlign = 'left';
+            compressionCtx.fillText('Information amplification:', 50, 50);
+            compressionCtx.font = '14px sans-serif';
+            compressionCtx.fillStyle = '#888';
+            compressionCtx.fillText('• Alternative splicing', 70, 75);
+            compressionCtx.fillText('• Post-translational modifications', 70, 95);
+            compressionCtx.fillText('• Different folding patterns', 70, 115);
+            
+            compressionCtx.fillStyle = '#00ff88';
+            compressionCtx.font = 'bold 18px sans-serif';
+            compressionCtx.fillText('1 gene → 4+ functional proteins', compressionCanvas.width - 350, compressionCanvas.height - 20);
         }
 
-        // Draw compression history
-        function drawCompressionHistory() {
-            const width = evolutionCanvas.width;
-            const height = evolutionCanvas.height;
-            const historyHeight = 50;
+        // Show gene regulation
+        function showRegulation() {
+            compressionCtx.clearRect(0, 0, compressionCanvas.width, compressionCanvas.height);
             
-            evolutionCtx.save();
-            evolutionCtx.globalAlpha = 0.3;
-            evolutionCtx.fillStyle = '#00ff88';
+            const gene = 'ATGGCGCTGAAGCCTGAACGTACG';
+            const promoter = 'TATAAA';
+            const enhancer = 'CAAT';
             
-            const compressionRatio = particles.filter(p => p.compressed).length / particles.length;
-            compressionHistory.push(compressionRatio);
+            const fullSequence = enhancer + '...' + promoter + '...' + gene;
             
-            if (compressionHistory.length > width / 2) {
-                compressionHistory.shift();
-            }
+            sequenceDisplay.innerHTML = `
+                <p style="opacity: 0.7;">Gene Regulation Elements:</p>
+                <div style="margin: 10px 0;">
+                    <span style="background: #ff5555; color: #000; padding: 5px; margin: 2px;">${enhancer}</span>
+                    <span style="color: #444;">...regulatory region...</span>
+                    <span style="background: #5555ff; color: #fff; padding: 5px; margin: 2px;">${promoter}</span>
+                    <span style="color: #444;">...spacer...</span>
+                    <span style="background: #00ff88; color: #000; padding: 5px; margin: 2px;">${gene}</span>
+                </div>
+                <p style="opacity: 0.7; margin-top: 10px;">Same gene, different expression patterns = different cell types</p>
+            `;
             
-            evolutionCtx.beginPath();
-            evolutionCtx.moveTo(0, height);
-            compressionHistory.forEach((ratio, index) => {
-                const x = index * 2;
-                const y = height - (ratio * historyHeight);
-                evolutionCtx.lineTo(x, y);
+            // Visualize regulation
+            const centerY = 100;
+            
+            // Draw gene
+            compressionCtx.fillStyle = '#00ff88';
+            compressionCtx.fillRect(compressionCanvas.width / 2 - 100, centerY - 20, 200, 40);
+            compressionCtx.fillStyle = '#000';
+            compressionCtx.font = '14px sans-serif';
+            compressionCtx.textAlign = 'center';
+            compressionCtx.fillText('Same Gene', compressionCanvas.width / 2, centerY + 5);
+            
+            // Draw cell types
+            const cellTypes = [
+                { name: 'Skin Cell', x: 150, y: 250, expression: 10 },
+                { name: 'Nerve Cell', x: 350, y: 250, expression: 90 },
+                { name: 'Muscle Cell', x: 550, y: 250, expression: 50 },
+                { name: 'Liver Cell', x: 750, y: 250, expression: 30 }
+            ];
+            
+            cellTypes.forEach(cell => {
+                // Draw connection
+                compressionCtx.strokeStyle = `rgba(0, 255, 136, ${cell.expression / 100})`;
+                compressionCtx.lineWidth = cell.expression / 20;
+                compressionCtx.beginPath();
+                compressionCtx.moveTo(compressionCanvas.width / 2, centerY + 20);
+                compressionCtx.quadraticCurveTo(
+                    cell.x, centerY + 80,
+                    cell.x, cell.y - 40
+                );
+                compressionCtx.stroke();
+                
+                // Draw cell
+                compressionCtx.fillStyle = `rgba(0, 136, 255, ${cell.expression / 100})`;
+                compressionCtx.beginPath();
+                compressionCtx.arc(cell.x, cell.y, 35, 0, Math.PI * 2);
+                compressionCtx.fill();
+                
+                // Label
+                compressionCtx.fillStyle = '#fff';
+                compressionCtx.font = '12px sans-serif';
+                compressionCtx.fillText(cell.name, cell.x, cell.y - 5);
+                compressionCtx.fillText(`${cell.expression}%`, cell.x, cell.y + 10);
             });
-            evolutionCtx.lineTo(compressionHistory.length * 2, height);
-            evolutionCtx.closePath();
-            evolutionCtx.fill();
             
-            evolutionCtx.restore();
+            // Add explanation
+            compressionCtx.fillStyle = '#fff';
+            compressionCtx.font = '16px sans-serif';
+            compressionCtx.textAlign = 'left';
+            compressionCtx.fillText('Regulatory compression:', 50, compressionCanvas.height - 60);
+            compressionCtx.font = '14px sans-serif';
+            compressionCtx.fillText('One gene creates 200+ cell types through differential expression', 50, compressionCanvas.height - 35);
+            compressionCtx.fillStyle = '#00ff88';
+            compressionCtx.font = 'bold 18px sans-serif';
+            compressionCtx.fillText('Compression: 1:200+', 50, compressionCanvas.height - 10);
         }
 
-        // Event listeners
-        document.getElementById('evolutionSlider').addEventListener('input', updateSimulation);
-        document.getElementById('startEvolution').addEventListener('click', startEvolution);
-
-        // Add subtle animations
+        // Add subtle animations on load
         document.addEventListener('DOMContentLoaded', function() {
             const cards = document.querySelectorAll('.compression-card');
             cards.forEach((card, index) => {
@@ -654,11 +834,20 @@
                     card.style.transform = 'translateY(0)';
                 }, index * 100);
             });
-
-            // Initialize evolution canvas
-            resizeEvolutionCanvas();
-            window.addEventListener('resize', resizeEvolutionCanvas);
+            
+            // Initialize with evolutionary compression display
+            showEvolutionaryCompression();
         });
+        
+        // Add keyframe animation for glow effect
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes glow {
+                0%, 100% { box-shadow: 0 0 5px currentColor; }
+                50% { box-shadow: 0 0 20px currentColor, 0 0 30px currentColor; }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
