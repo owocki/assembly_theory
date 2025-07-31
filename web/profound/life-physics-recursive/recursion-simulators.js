@@ -32,11 +32,11 @@ class RecursionSimulator {
             this.fitnessHistory.shift();
         }
         
-        // Draw graph background
-        const graphX = this.width - 160;
-        const graphY = 10;
+        // Draw graph background - bottom right
         const graphW = 150;
-        const graphH = 60;
+        const graphH = 80;
+        const graphX = this.width - graphW - 10;
+        const graphY = this.height - graphH - 10;
         
         this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
         this.ctx.fillRect(graphX, graphY, graphW, graphH);
@@ -78,11 +78,17 @@ class RecursionSimulator {
         // Labels
         this.ctx.fillStyle = '#ffffff';
         this.ctx.font = '10px sans-serif';
-        this.ctx.fillText('Fitness', graphX + 5, graphY + 10);
+        this.ctx.fillText('Fitness Progress', graphX + 5, graphY + 10);
         this.ctx.fillStyle = '#4caf50';
         this.ctx.fillText(`Avg: ${avgFitness.toFixed(2)}`, graphX + 5, graphY + 25);
         this.ctx.fillStyle = '#ffeb3b';
         this.ctx.fillText(`Max: ${maxFitness.toFixed(2)}`, graphX + 5, graphY + 40);
+        
+        // Generation marker if available
+        if (this.generation !== undefined) {
+            this.ctx.fillStyle = '#888';
+            this.ctx.fillText(`Gen: ${this.generation}`, graphX + 5, graphY + 55);
+        }
     }
 }
 
@@ -669,6 +675,7 @@ class EvolutionSimulator extends RecursionSimulator {
         this.generation = 0;
         this.reproductionPhase = false;
         this.phaseTimer = 0;
+        this.fitnessHistory = [];
         this.initPopulation();
     }
     
@@ -731,6 +738,14 @@ class EvolutionSimulator extends RecursionSimulator {
                 org.reproducing = org.fitness > 0.6;
             });
             
+            // Track fitness history
+            if (this.frame % 30 === 0 && this.organisms.length > 0) {
+                const avgFitness = this.organisms.reduce((sum, org) => sum + org.fitness, 0) / this.organisms.length;
+                const maxFitness = Math.max(...this.organisms.map(org => org.fitness));
+                this.fitnessHistory.push({ avg: avgFitness, max: maxFitness });
+                if (this.fitnessHistory.length > 50) this.fitnessHistory.shift();
+            }
+            
             // Switch to reproduction phase
             if (this.phaseTimer > 180) {
                 this.reproductionPhase = true;
@@ -791,16 +806,23 @@ class EvolutionSimulator extends RecursionSimulator {
     draw() {
         this.clear();
         
+        // Draw selection pressure indicator
+        this.ctx.fillStyle = 'rgba(76, 175, 80, 0.1)';
+        this.ctx.fillRect(0, 0, this.width, 30);
+        this.ctx.fillStyle = '#4caf50';
+        this.ctx.font = '12px sans-serif';
+        this.ctx.fillText('SELECTION PRESSURE: Position + Speed + Size', 10, 20);
+        
         // Draw phase indicator
         this.ctx.fillStyle = '#ffffff';
         this.ctx.font = '16px sans-serif';
-        this.ctx.fillText('Genes → Organisms → Genes', 10, 25);
+        this.ctx.fillText('Genes → Organisms → Genes', 10, 50);
         this.ctx.font = '14px sans-serif';
-        this.ctx.fillText(`Generation: ${this.generation}`, 10, 45);
+        this.ctx.fillText(`Generation: ${this.generation}`, 10, 70);
         
         // Phase label
         this.ctx.fillStyle = this.reproductionPhase ? '#ffeb3b' : '#4caf50';
-        this.ctx.fillText(this.reproductionPhase ? 'REPRODUCTION PHASE' : 'ORGANISM PHASE', this.width - 180, 25);
+        this.ctx.fillText(this.reproductionPhase ? 'REPRODUCTION PHASE' : 'ORGANISM PHASE', this.width - 180, 50);
         
         if (!this.reproductionPhase) {
             // Draw fitness gradient
@@ -818,10 +840,10 @@ class EvolutionSimulator extends RecursionSimulator {
             // Fitness zone indicator
             this.ctx.strokeStyle = 'rgba(0, 255, 0, 0.3)';
             this.ctx.lineWidth = 2;
-            this.ctx.strokeRect(this.width * 0.7, 20, this.width * 0.25, this.height - 40);
+            this.ctx.strokeRect(this.width * 0.7, 50, this.width * 0.25, this.height - 85);
             this.ctx.fillStyle = 'rgba(0, 255, 0, 0.6)';
             this.ctx.font = '12px sans-serif';
-            this.ctx.fillText('High Fitness Zone', this.width * 0.72, 15);
+            this.ctx.fillText('High Fitness Zone', this.width * 0.72, 63);
         } else {
             // Draw gene transfer
             this.genes.forEach((gene, index) => {
@@ -866,6 +888,29 @@ class EvolutionSimulator extends RecursionSimulator {
                     this.ctx.stroke();
                 }
             });
+        }
+        
+        // Draw fitness graph
+        if (this.fitnessHistory.length > 1 && !this.reproductionPhase) {
+            const avgFitness = this.organisms.reduce((sum, org) => sum + org.fitness, 0) / this.organisms.length;
+            const maxFitness = Math.max(...this.organisms.map(org => org.fitness));
+            this.drawFitnessGraph(avgFitness, maxFitness);
+        }
+        
+        // Draw legend and stats
+        this.ctx.font = '10px sans-serif';
+        this.ctx.fillStyle = '#888';
+        this.ctx.fillText('Fitness: rightward position + speed + small size', 10, this.height - 25);
+        this.ctx.fillText('Top 50% survive to reproduce | Mutations can occur', 10, this.height - 10);
+        
+        // Show average traits evolution
+        if (this.organisms.length > 0 && !this.reproductionPhase) {
+            const avgSpeed = this.organisms.reduce((sum, org) => sum + org.phenotype.speed, 0) / this.organisms.length;
+            const avgSize = this.organisms.reduce((sum, org) => sum + org.phenotype.size, 0) / this.organisms.length;
+            this.ctx.fillStyle = '#ffffff';
+            this.ctx.font = '11px sans-serif';
+            this.ctx.fillText(`Avg Speed: ${avgSpeed.toFixed(2)}`, 10, 90);
+            this.ctx.fillText(`Avg Size: ${avgSize.toFixed(1)}`, 10, 105);
         }
     }
     
