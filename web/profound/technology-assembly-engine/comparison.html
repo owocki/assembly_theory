@@ -56,6 +56,11 @@
             overflow: hidden;
         }
 
+        .cosmic-system {
+            border-color: rgba(138, 43, 226, 0.5);
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.05), rgba(138, 43, 226, 0.02));
+        }
+
         .biological-system {
             border-color: rgba(76, 175, 80, 0.5);
             background: linear-gradient(135deg, rgba(76, 175, 80, 0.05), rgba(76, 175, 80, 0.02));
@@ -66,10 +71,19 @@
             background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(0, 212, 255, 0.02));
         }
 
+        .ai-system {
+            border-color: rgba(255, 152, 0, 0.5);
+            background: linear-gradient(135deg, rgba(255, 152, 0, 0.05), rgba(255, 152, 0, 0.02));
+        }
+
         .system-title {
             font-size: 1.8em;
             margin-bottom: 20px;
             font-weight: 300;
+        }
+
+        .cosmic-system .system-title {
+            color: #8a2be2;
         }
 
         .biological-system .system-title {
@@ -78,6 +92,10 @@
 
         .technological-system .system-title {
             color: #00d4ff;
+        }
+
+        .ai-system .system-title {
+            color: #ff9800;
         }
 
         .progress-bars {
@@ -112,12 +130,20 @@
             overflow: hidden;
         }
 
+        .cosmic-fill {
+            background: linear-gradient(90deg, #6a1b9a, #8a2be2);
+        }
+
         .biological-fill {
             background: linear-gradient(90deg, #2e7d32, #4caf50);
         }
 
         .technological-fill {
             background: linear-gradient(90deg, #0099cc, #00d4ff);
+        }
+
+        .ai-fill {
+            background: linear-gradient(90deg, #f57c00, #ff9800);
         }
 
         .progress-fill::after {
@@ -192,6 +218,11 @@
             transition: transform 0.5s ease;
         }
 
+        .cosmic-needle {
+            background: #8a2be2;
+            box-shadow: 0 0 10px #8a2be2;
+        }
+
         .biological-needle {
             background: #4caf50;
             box-shadow: 0 0 10px #4caf50;
@@ -200,6 +231,11 @@
         .technological-needle {
             background: #00d4ff;
             box-shadow: 0 0 10px #00d4ff;
+        }
+
+        .ai-needle {
+            background: #ff9800;
+            box-shadow: 0 0 10px #ff9800;
         }
 
         .speed-value {
@@ -307,7 +343,57 @@
             <p>Real-time visualization of biological vs technological assembly rates</p>
         </div>
         
-        <div class="comparison-container">
+        <div class="comparison-container" style="grid-template-columns: repeat(4, 1fr);">
+            <div class="assembly-system cosmic-system">
+                <h2 class="system-title">🌌 Cosmic Assembly</h2>
+                
+                <div class="visualization-area">
+                    <canvas id="cosmicCanvas" class="canvas-container"></canvas>
+                </div>
+                
+                <div class="progress-bars">
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>Star Formation</span>
+                            <span id="starSpeed">0 My</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill cosmic-fill" id="starProgress" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>Planetary Accretion</span>
+                            <span id="planetSpeed">0 My</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill cosmic-fill" id="planetProgress" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>Galaxy Evolution</span>
+                            <span id="galaxySpeed">0 Gy</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill cosmic-fill" id="galaxyProgress" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>Universe Expansion</span>
+                            <span id="universeSpeed">0 Gy</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill cosmic-fill" id="universeProgress" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <div class="assembly-system biological-system">
                 <h2 class="system-title">🧬 Biological Assembly</h2>
                 
@@ -407,11 +493,70 @@
                     </div>
                 </div>
             </div>
+            
+            <div class="assembly-system ai-system">
+                <h2 class="system-title">🤖 AI-Driven Assembly</h2>
+                
+                <div class="visualization-area">
+                    <canvas id="aiCanvas" class="canvas-container"></canvas>
+                </div>
+                
+                <div class="progress-bars">
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>Neural Processing</span>
+                            <span id="neuralSpeed">0 TFlops</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill ai-fill" id="neuralProgress" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>Algorithm Optimization</span>
+                            <span id="algorithmSpeed">0 ms</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill ai-fill" id="algorithmProgress" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>Model Training</span>
+                            <span id="modelSpeed">0 sec</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill ai-fill" id="modelProgress" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>Innovation Cycle</span>
+                            <span id="innovationSpeed">0 hrs</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill ai-fill" id="innovationProgress" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <div class="speed-comparison">
             <h2>Relative Speed Comparison</h2>
-            <div class="speed-meters">
+            <div class="speed-meters" style="grid-template-columns: repeat(4, 1fr); display: grid;">
+                <div class="speed-meter">
+                    <div class="speedometer">
+                        <div class="speedometer-circle"></div>
+                        <div class="speedometer-needle cosmic-needle" id="cosmicNeedle"></div>
+                        <div class="speed-value" style="color: #8a2be2;" id="cosmicSpeedValue">0.001x</div>
+                    </div>
+                    <div class="speed-label">Cosmic Speed</div>
+                </div>
+                
                 <div class="speed-meter">
                     <div class="speedometer">
                         <div class="speedometer-circle"></div>
@@ -429,6 +574,15 @@
                     </div>
                     <div class="speed-label">Technological Speed</div>
                 </div>
+                
+                <div class="speed-meter">
+                    <div class="speedometer">
+                        <div class="speedometer-circle"></div>
+                        <div class="speedometer-needle ai-needle" id="aiNeedle"></div>
+                        <div class="speed-value" style="color: #ff9800;" id="aiSpeedValue">1000000x</div>
+                    </div>
+                    <div class="speed-label">AI Speed</div>
+                </div>
             </div>
         </div>
         
@@ -437,42 +591,27 @@
             <p style="margin-bottom: 30px; opacity: 0.8;">How long different assembly processes take</p>
             
             <div class="timeline-track">
-                <div class="timeline-item" style="left: 0%; width: 5%; background: #4caf50;">
-                    Protein Fold
+                <div class="timeline-item" style="left: 0%; width: 20%; background: #8a2be2;">
+                    Cosmic Formation
                 </div>
-                <div class="timeline-item" style="left: 10%; width: 10%; background: #66bb6a;">
-                    Cell Divide
+                <div class="timeline-item" style="left: 20%; width: 20%; background: #4caf50;">
+                    Biological Evolution
                 </div>
-                <div class="timeline-item" style="left: 30%; width: 20%; background: #81c784;">
-                    Organism Grow
+                <div class="timeline-item" style="left: 40%; width: 25%; background: #00d4ff;">
+                    Technological Progress
                 </div>
-                <div class="timeline-item" style="left: 60%; width: 40%; background: #a5d6a7;">
-                    Species Evolve
-                </div>
-            </div>
-            
-            <div class="timeline-track" style="margin-top: 10px;">
-                <div class="timeline-item" style="left: 0%; width: 1%; background: #00d4ff;">
-                    CPU Cycle
-                </div>
-                <div class="timeline-item" style="left: 2%; width: 3%; background: #29b6f6;">
-                    3D Print
-                </div>
-                <div class="timeline-item" style="left: 8%; width: 7%; background: #4fc3f7;">
-                    Manufacture
-                </div>
-                <div class="timeline-item" style="left: 20%; width: 10%; background: #81d4fa;">
-                    Iterate Design
+                <div class="timeline-item" style="left: 65%; width: 35%; background: #ff9800;">
+                    AI Driven Progress
                 </div>
             </div>
             
             <div style="display: flex; justify-content: space-between; margin-top: 20px; font-size: 12px; opacity: 0.6;">
-                <span>Microseconds</span>
-                <span>Seconds</span>
-                <span>Hours</span>
-                <span>Days</span>
-                <span>Years</span>
                 <span>Millennia</span>
+                <span>Years</span>
+                <span>Days</span>
+                <span>Hours</span>
+                <span>Seconds</span>
+                <span>Microseconds</span>
             </div>
         </div>
         
@@ -490,18 +629,26 @@
     
     <script>
         // Canvas setup
+        const cosmicCanvas = document.getElementById('cosmicCanvas');
         const bioCanvas = document.getElementById('biologicalCanvas');
         const techCanvas = document.getElementById('technologicalCanvas');
+        const aiCanvas = document.getElementById('aiCanvas');
+        const cosmicCtx = cosmicCanvas.getContext('2d');
         const bioCtx = bioCanvas.getContext('2d');
         const techCtx = techCanvas.getContext('2d');
+        const aiCtx = aiCanvas.getContext('2d');
         
         // Set canvas sizes
         function resizeCanvases() {
             const rect = bioCanvas.parentElement.getBoundingClientRect();
+            cosmicCanvas.width = rect.width;
+            cosmicCanvas.height = rect.height;
             bioCanvas.width = rect.width;
             bioCanvas.height = rect.height;
             techCanvas.width = rect.width;
             techCanvas.height = rect.height;
+            aiCanvas.width = rect.width;
+            aiCanvas.height = rect.height;
         }
         resizeCanvases();
         window.addEventListener('resize', resizeCanvases);
@@ -533,7 +680,14 @@
             }
             
             update() {
-                const speed = this.type === 'biological' ? 0.5 : 5;
+                let speed;
+                switch(this.type) {
+                    case 'cosmic': speed = 0.01; break;
+                    case 'biological': speed = 0.5; break;
+                    case 'technological': speed = 5; break;
+                    case 'ai': speed = 50; break;
+                    default: speed = 1;
+                }
                 
                 this.particles.forEach(particle => {
                     particle.x += particle.vx * speed;
@@ -582,9 +736,14 @@
                     const opacity = 1 - structure.age / 200;
                     this.ctx.beginPath();
                     this.ctx.arc(structure.x, structure.y, structure.size, 0, Math.PI * 2);
-                    this.ctx.fillStyle = this.type === 'biological' ? 
-                        `rgba(76, 175, 80, ${opacity * 0.3})` : 
-                        `rgba(0, 212, 255, ${opacity * 0.3})`;
+                    let color;
+                    switch(this.type) {
+                        case 'cosmic': color = `rgba(138, 43, 226, ${opacity * 0.3})`; break;
+                        case 'biological': color = `rgba(76, 175, 80, ${opacity * 0.3})`; break;
+                        case 'technological': color = `rgba(0, 212, 255, ${opacity * 0.3})`; break;
+                        case 'ai': color = `rgba(255, 152, 0, ${opacity * 0.3})`; break;
+                    }
+                    this.ctx.fillStyle = color;
                     this.ctx.fill();
                 });
                 
@@ -592,17 +751,42 @@
                 this.particles.forEach(particle => {
                     this.ctx.beginPath();
                     this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-                    this.ctx.fillStyle = this.type === 'biological' ? '#4caf50' : '#00d4ff';
+                    let particleColor;
+                    switch(this.type) {
+                        case 'cosmic': particleColor = '#8a2be2'; break;
+                        case 'biological': particleColor = '#4caf50'; break;
+                        case 'technological': particleColor = '#00d4ff'; break;
+                        case 'ai': particleColor = '#ff9800'; break;
+                    }
+                    this.ctx.fillStyle = particleColor;
                     this.ctx.fill();
                 });
             }
         }
         
+        const cosmicViz = new AssemblyVisualization(cosmicCtx, 'cosmic');
         const bioViz = new AssemblyVisualization(bioCtx, 'biological');
         const techViz = new AssemblyVisualization(techCtx, 'technological');
+        const aiViz = new AssemblyVisualization(aiCtx, 'ai');
         
         // Progress animation
         function updateProgress() {
+            // Cosmic progress (very very slow)
+            const starProgress = (Math.sin(frame * 0.00001) + 1) * 50;
+            const planetProgress = (Math.sin(frame * 0.00002) + 1) * 50;
+            const galaxyProgress = (Math.sin(frame * 0.000005) + 1) * 50;
+            const universeProgress = (Math.sin(frame * 0.000001) + 1) * 50;
+            
+            document.getElementById('starProgress').style.width = starProgress + '%';
+            document.getElementById('planetProgress').style.width = planetProgress + '%';
+            document.getElementById('galaxyProgress').style.width = galaxyProgress + '%';
+            document.getElementById('universeProgress').style.width = universeProgress + '%';
+            
+            document.getElementById('starSpeed').textContent = Math.floor(starProgress * 10) + ' My';
+            document.getElementById('planetSpeed').textContent = Math.floor(planetProgress * 100) + ' My';
+            document.getElementById('galaxySpeed').textContent = Math.floor(galaxyProgress * 10) + ' Gy';
+            document.getElementById('universeSpeed').textContent = Math.floor(universeProgress * 13.8) + ' Gy';
+            
             // Biological progress
             const dnaProgress = (Math.sin(frame * 0.01) + 1) * 50;
             const proteinProgress = (Math.sin(frame * 0.008) + 1) * 50;
@@ -635,17 +819,41 @@
             document.getElementById('assemblySpeed').textContent = Math.floor(assemblyProgress * 50) + ' units/hr';
             document.getElementById('designSpeed').textContent = Math.floor(10 - designProgress / 10) + ' days';
             
+            // AI progress (very very very fast)
+            const neuralProgress = (Math.sin(frame * 1) + 1) * 50;
+            const algorithmProgress = (Math.sin(frame * 2) + 1) * 50;
+            const modelProgress = (Math.sin(frame * 0.5) + 1) * 50;
+            const innovationProgress = (Math.sin(frame * 0.2) + 1) * 50;
+            
+            document.getElementById('neuralProgress').style.width = neuralProgress + '%';
+            document.getElementById('algorithmProgress').style.width = algorithmProgress + '%';
+            document.getElementById('modelProgress').style.width = modelProgress + '%';
+            document.getElementById('innovationProgress').style.width = innovationProgress + '%';
+            
+            document.getElementById('neuralSpeed').textContent = Math.floor(neuralProgress * 1000) + ' TFlops';
+            document.getElementById('algorithmSpeed').textContent = Math.floor(algorithmProgress * 0.1) + ' ms';
+            document.getElementById('modelSpeed').textContent = Math.floor(modelProgress * 0.5) + ' sec';
+            document.getElementById('innovationSpeed').textContent = Math.floor(innovationProgress * 0.1) + ' hrs';
+            
             // Update speedometers
+            const cosmicSpeed = 0.001;
             const bioSpeed = 1;
             const techSpeed = 1000 * (1 + Math.sin(frame * 0.01));
+            const aiSpeed = 1000000 * (1 + Math.sin(frame * 0.1));
             
+            document.getElementById('cosmicNeedle').style.transform = 
+                `translate(-50%, -100%) rotate(${Math.log10(cosmicSpeed) * 30 + 90}deg)`;
             document.getElementById('bioNeedle').style.transform = 
                 `translate(-50%, -100%) rotate(${bioSpeed * 1.8 - 90}deg)`;
             document.getElementById('techNeedle').style.transform = 
                 `translate(-50%, -100%) rotate(${Math.log10(techSpeed) * 60 - 90}deg)`;
+            document.getElementById('aiNeedle').style.transform = 
+                `translate(-50%, -100%) rotate(${Math.log10(aiSpeed) * 30 - 90}deg)`;
             
+            document.getElementById('cosmicSpeedValue').textContent = cosmicSpeed + 'x';
             document.getElementById('bioSpeedValue').textContent = bioSpeed + 'x';
             document.getElementById('techSpeedValue').textContent = Math.floor(techSpeed) + 'x';
+            document.getElementById('aiSpeedValue').textContent = Math.floor(aiSpeed) + 'x';
         }
         
         // Animation loop
@@ -653,11 +861,17 @@
             if (isAnimating) {
                 frame++;
                 
+                cosmicViz.update();
+                cosmicViz.draw();
+                
                 bioViz.update();
                 bioViz.draw();
                 
                 techViz.update();
                 techViz.draw();
+                
+                aiViz.update();
+                aiViz.draw();
                 
                 updateProgress();
             }
