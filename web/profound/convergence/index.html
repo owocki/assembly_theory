@@ -13,6 +13,27 @@
             background-color: #f5f5f5;
             color: #333;
         }
+
+        .concept-card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(8, 37, 83, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .concept-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(8, 37, 83, 0.12);
+        }
+
+        .concept-card img{
+            width: 50%;
+        }
         
         .header {
             background: linear-gradient(135deg, #e74c3c 0%, #f39c12 100%);
@@ -166,6 +187,18 @@
             </svg>
             Back to Main Page
         </a>
+
+            <div class="concept-card">
+                <div class="concept-content">
+                    <h3>Convergent Evolution</h3>
+                                       <p>Assembly Theory reveals why seemingly different phenomena - like flight in insects, birds, and aircraft, or vision systems in various organisms - follow similar assembly principles.  
+                    </p><p>Despite arising through completely different pathways, they converge on similar solutions due to fundamental constraints in assembly space.</p>
+                </div>
+                <div class="concept-visual">
+                    <img src="../../img/3.png" alt="Convergent Evolution visualization">
+                </div>
+            </div>
+
         
         <div class="visualization-grid">
             <div class="viz-card">
