@@ -369,11 +369,30 @@
             <button class="compress-button" onclick="demonstrateCompression()">Apply Compression</button>
             <button class="compress-button" onclick="showFractal()">Show Fractal</button>
             <button class="compress-button" onclick="showSymmetry()">Show Symmetry</button>
+            <a href="dna-compression-simulator.html" class="compress-button" style="text-decoration: none; display: inline-block; text-align: center;">DNA Compression Simulator</a>
             
             <div class="input-area" id="outputPattern" style="display: none;">
                 Compressed: [ABC] × 1000<br>
                 Storage: 12 bits instead of 12,000 bits<br>
                 Compression ratio: 1000:1
+            </div>
+        </div>
+
+        <div class="interactive-compressor" style="margin-top: 40px;">
+            <h3>Evolution of Compression</h3>
+            <p>"The future is assembled from the past"</p>
+            
+            <div style="margin: 20px 0;">
+                <label style="color: #ffd89b;">Evolution Speed: <span id="evolutionSpeed">50</span>%</label>
+                <input type="range" id="evolutionSlider" min="0" max="100" value="50" style="width: 100%; margin: 10px 0;">
+            </div>
+            
+            <button class="compress-button" id="startEvolution">Start Evolution</button>
+            
+            <canvas id="evolutionCanvas" style="width: 100%; height: 300px; background: rgba(0, 0, 0, 0.3); border-radius: 10px; margin-top: 20px;"></canvas>
+            
+            <div class="input-area" style="margin-top: 20px;">
+                <div id="evolutionStatus">Ready to simulate compression evolution...</div>
             </div>
         </div>
 
@@ -404,6 +423,225 @@
             `;
         }
 
+        // Evolution simulation variables
+        let evolutionAnimation = null;
+        let isEvolutionRunning = false;
+        let evolutionTime = 0;
+        let compressionHistory = [];
+        let particles = [];
+
+        // Evolution canvas setup
+        const evolutionCanvas = document.getElementById('evolutionCanvas');
+        const evolutionCtx = evolutionCanvas.getContext('2d');
+
+        function resizeEvolutionCanvas() {
+            evolutionCanvas.width = evolutionCanvas.offsetWidth;
+            evolutionCanvas.height = evolutionCanvas.offsetHeight;
+        }
+
+        // Evolution particle class
+        class EvolutionParticle {
+            constructor(x, y, generation) {
+                this.x = x;
+                this.y = y;
+                this.generation = generation;
+                this.size = 2 + Math.random() * 4;
+                this.vx = (Math.random() - 0.5) * 2;
+                this.vy = (Math.random() - 0.5) * 2;
+                this.compressed = false;
+                this.compressionLevel = 0;
+                this.color = this.getGenerationColor(generation);
+            }
+
+            getGenerationColor(gen) {
+                const colors = ['#ff0088', '#ff5500', '#ffaa00', '#ffff00', '#88ff00', '#00ff88', '#00ffff', '#0088ff'];
+                return colors[gen % colors.length];
+            }
+
+            update(speed, compressionStrength) {
+                // Apply evolution rules
+                this.x += this.vx * (speed / 50);
+                this.y += this.vy * (speed / 50);
+
+                // Compression evolution
+                if (Math.random() < compressionStrength / 1000) {
+                    this.compressed = true;
+                    this.compressionLevel = Math.min(this.compressionLevel + 0.1, 1);
+                }
+
+                // Boundary bounce
+                if (this.x <= this.size || this.x >= evolutionCanvas.width - this.size) {
+                    this.vx = -this.vx;
+                }
+                if (this.y <= this.size || this.y >= evolutionCanvas.height - this.size) {
+                    this.vy = -this.vy;
+                }
+
+                // Evolution: particles can spawn new generations
+                if (Math.random() < 0.001 && particles.length < 100) {
+                    return new EvolutionParticle(this.x, this.y, this.generation + 1);
+                }
+                return null;
+            }
+
+            draw(ctx) {
+                ctx.save();
+                
+                if (this.compressed) {
+                    // Draw compressed particle with glow
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = this.color;
+                }
+
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = 0.8 - (this.compressionLevel * 0.3);
+                
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size * (1 - this.compressionLevel * 0.5), 0, Math.PI * 2);
+                ctx.fill();
+
+                // Draw compression rings
+                if (this.compressed) {
+                    ctx.strokeStyle = this.color;
+                    ctx.globalAlpha = 0.3;
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size * (2 + this.compressionLevel), 0, Math.PI * 2);
+                    ctx.stroke();
+                }
+
+                ctx.restore();
+            }
+        }
+
+        // Update simulation function
+        function updateSimulation() {
+            const speed = parseInt(document.getElementById('evolutionSlider').value);
+            document.getElementById('evolutionSpeed').textContent = speed;
+            
+            if (isEvolutionRunning) {
+                // Update compression strength based on evolution time
+                const compressionStrength = Math.min(evolutionTime / 100, 100);
+                updateEvolutionStatus(compressionStrength);
+            }
+        }
+
+        // Evolution status update
+        function updateEvolutionStatus(compressionStrength) {
+            const status = document.getElementById('evolutionStatus');
+            const generation = Math.floor(evolutionTime / 1000);
+            const efficiency = Math.round(compressionStrength);
+            
+            status.innerHTML = `
+                Generation: ${generation}<br>
+                Compression Efficiency: ${efficiency}%<br>
+                Active Entities: ${particles.length}<br>
+                <span style="opacity: 0.7;">The future assembles from patterns of the past...</span>
+            `;
+        }
+
+        // Start evolution
+        function startEvolution() {
+            if (!isEvolutionRunning) {
+                isEvolutionRunning = true;
+                evolutionTime = 0;
+                particles = [];
+                compressionHistory = [];
+                
+                // Initialize with primordial particles
+                for (let i = 0; i < 10; i++) {
+                    particles.push(new EvolutionParticle(
+                        Math.random() * evolutionCanvas.width,
+                        Math.random() * evolutionCanvas.height,
+                        0
+                    ));
+                }
+                
+                document.getElementById('startEvolution').textContent = 'Stop Evolution';
+                animateEvolution();
+            } else {
+                stopEvolution();
+            }
+        }
+
+        // Stop evolution
+        function stopEvolution() {
+            isEvolutionRunning = false;
+            if (evolutionAnimation) {
+                cancelAnimationFrame(evolutionAnimation);
+            }
+            document.getElementById('startEvolution').textContent = 'Start Evolution';
+        }
+
+        // Animation loop
+        function animateEvolution() {
+            if (!isEvolutionRunning) return;
+
+            // Clear with trail effect
+            evolutionCtx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            evolutionCtx.fillRect(0, 0, evolutionCanvas.width, evolutionCanvas.height);
+
+            const speed = parseInt(document.getElementById('evolutionSlider').value);
+            const compressionStrength = Math.min(evolutionTime / 100, 100);
+
+            // Update and draw particles
+            let newParticles = [];
+            particles = particles.filter(particle => {
+                const spawn = particle.update(speed, compressionStrength);
+                if (spawn) newParticles.push(spawn);
+                particle.draw(evolutionCtx);
+                return particle.size > 0.5;
+            });
+
+            // Add new particles
+            particles = particles.concat(newParticles);
+
+            // Add history visualization
+            if (evolutionTime % 100 === 0) {
+                drawCompressionHistory();
+            }
+
+            evolutionTime += speed / 10;
+            updateEvolutionStatus(compressionStrength);
+
+            evolutionAnimation = requestAnimationFrame(animateEvolution);
+        }
+
+        // Draw compression history
+        function drawCompressionHistory() {
+            const width = evolutionCanvas.width;
+            const height = evolutionCanvas.height;
+            const historyHeight = 50;
+            
+            evolutionCtx.save();
+            evolutionCtx.globalAlpha = 0.3;
+            evolutionCtx.fillStyle = '#00ff88';
+            
+            const compressionRatio = particles.filter(p => p.compressed).length / particles.length;
+            compressionHistory.push(compressionRatio);
+            
+            if (compressionHistory.length > width / 2) {
+                compressionHistory.shift();
+            }
+            
+            evolutionCtx.beginPath();
+            evolutionCtx.moveTo(0, height);
+            compressionHistory.forEach((ratio, index) => {
+                const x = index * 2;
+                const y = height - (ratio * historyHeight);
+                evolutionCtx.lineTo(x, y);
+            });
+            evolutionCtx.lineTo(compressionHistory.length * 2, height);
+            evolutionCtx.closePath();
+            evolutionCtx.fill();
+            
+            evolutionCtx.restore();
+        }
+
+        // Event listeners
+        document.getElementById('evolutionSlider').addEventListener('input', updateSimulation);
+        document.getElementById('startEvolution').addEventListener('click', startEvolution);
+
         // Add subtle animations
         document.addEventListener('DOMContentLoaded', function() {
             const cards = document.querySelectorAll('.compression-card');
@@ -416,6 +654,10 @@
                     card.style.transform = 'translateY(0)';
                 }, index * 100);
             });
+
+            // Initialize evolution canvas
+            resizeEvolutionCanvas();
+            window.addEventListener('resize', resizeEvolutionCanvas);
         });
     </script>
 </body>

@@ -583,7 +583,8 @@
             slider.addEventListener('input', (e) => {
                 currentTime = parseInt(e.value);
                 updateEra();
-                updateSimulation();
+                updateStats();
+                evolveSystem();
             });
             
             // Start animation
@@ -707,6 +708,12 @@
                     clearInterval(interval);
                 }
             }, 100);
+        }
+
+        function updateSimulation() {
+            // This function updates the simulation state
+            updateStats();
+            updateEra();
         }
 
         function evolveSystem() {
