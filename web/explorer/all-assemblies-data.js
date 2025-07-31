@@ -8,7 +8,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "PATHWAYS.md",
     "assemblyIndex": 0,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "The cosmic domain encompasses all assemblies from fundamental particles to galaxies. These pathways show how simple quantum fields assemble into increasingly complex structures through cosmic evolution.",
     "connections": [],
     "filePath": "domains/cosmic/PATHWAYS.md",
@@ -20,7 +20,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "quantum_fields",
     "assemblyIndex": 0,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Name**: Electromagnetic Field - **Symbol**: F_μν (field tensor) - **Assembly Index**: 0-1 (fundamental field) - **Domain**: Cosmic (Quantum Fields) - **Discovery**: Classical (Maxwell), Quantum (QED) - **Gauge Group**: U(1)",
     "connections": [
       {
@@ -49,7 +49,7 @@ const assembliesData = [
     "domain": "technological",
     "category": "PATHWAYS.md",
     "assemblyIndex": 0,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "The technological domain represents human-directed assembly processes that extend beyond biological capabilities. These pathways show accelerating complexity through tool use, cultural transmission, and designed systems that can surpass biological assembly indices.",
     "connections": [],
     "filePath": "domains/technological/PATHWAYS.md",
@@ -133,7 +133,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 1,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 1 - **Domain**: Cosmic Elements - **Origin Time**: 380,000 years after Big Bang - **Copy Number**: ~90% of all atoms in universe",
     "connections": [
       {
@@ -199,7 +199,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "particles",
     "assemblyIndex": 1,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "The muon is a fundamental particle with assembly index 1, representing a heavier cousin of the electron. Despite its brief existence, muons play crucial roles in cosmic ray interactions and high-energy physics processes.",
     "connections": [
       {
@@ -224,7 +224,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "particles",
     "assemblyIndex": 1,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "Neutrinos are fundamental particles that represent one of the earliest assemblies in the cosmic domain. With an assembly index of 1, they are among the most basic building blocks of reality, formed during the first second after the Big Bang.",
     "connections": [
       {
@@ -408,7 +408,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 2,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 2 - **Domain**: Cosmic Elements - **Origin Time**: 3 minutes after Big Bang - **Copy Number**: ~8% of all atoms in universe",
     "connections": [
       {
@@ -433,7 +433,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "forces",
     "assemblyIndex": 2,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "The strong nuclear force represents an assembly index 2 system that binds quarks into protons and neutrons, and holds atomic nuclei together. It is the strongest of the four fundamental forces but operates only over extremely short ranges.",
     "connections": [
       {
@@ -462,7 +462,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "forces",
     "assemblyIndex": 2,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "The weak nuclear force carrier (W and Z bosons) represents an assembly index 2 system that emerged during the electroweak epoch of the early universe. This force governs radioactive decay, neutrino interactions, and nuclear fusion processes.",
     "connections": [
       {
@@ -499,7 +499,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "atoms",
     "assemblyIndex": 3,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "Deuterium (heavy hydrogen) is an isotope of hydrogen with assembly index 3, consisting of one proton and one neutron bound by the strong nuclear force. It represents one of the first composite nuclei formed during Big Bang nucleosynthesis.",
     "connections": [
       {
@@ -532,7 +532,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 3,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 3 - **Domain**: Cosmic Elements - **Origin Time**: 3 minutes after Big Bang - **Copy Number**: ~10⁻¹⁰ relative to hydrogen",
     "connections": [
       {
@@ -750,7 +750,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "atoms",
     "assemblyIndex": 4,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "Tritium is a radioactive isotope of hydrogen with assembly index 4, consisting of one proton and two neutrons. It represents the most complex hydrogen isotope and demonstrates nuclear instability in simple assemblies.",
     "connections": [
       {
@@ -779,7 +779,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 4,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 4 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis era - **Copy Number**: ~10⁻¹¹ relative to hydrogen",
     "connections": [
       {
@@ -833,7 +833,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "atoms",
     "assemblyIndex": 5,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "Lithium represents the third lightest element with assembly index 5, consisting of 3 protons, 3-4 neutrons, and 3 electrons. It was one of the few elements produced during Big Bang nucleosynthesis and serves as a crucial cosmological probe.",
     "connections": [
       {
@@ -862,7 +862,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 5,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 5 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis era - **Copy Number**: ~10⁻¹⁰ relative to hydrogen",
     "connections": [
       {
@@ -969,7 +969,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 6,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 6 - **Domain**: Cosmic Elements - **Origin Time**: First stellar generations - **Copy Number**: ~10⁻⁴ relative to hydrogen",
     "connections": [
       {
@@ -994,7 +994,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 7,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 7 - **Domain**: Cosmic Elements - **Origin Time**: First stellar generations - **Copy Number**: ~10⁻⁵ relative to hydrogen",
     "connections": [
       {
@@ -1097,7 +1097,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 8,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 8 - **Domain**: Cosmic Elements - **Origin Time**: First stellar generations - **Copy Number**: ~10⁻³ relative to hydrogen",
     "connections": [
       {
@@ -1155,7 +1155,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 9,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 9 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~10⁻⁷ relative to hydrogen",
     "connections": [
       {
@@ -1217,7 +1217,7 @@ const assembliesData = [
     "domain": "biological",
     "category": "PATHWAYS.md",
     "assemblyIndex": 10,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "The biological domain represents the most diverse and complex assembly processes known, spanning from prebiotic chemistry to conscious organisms. These pathways show how life exploits and accelerates assembly through evolution, reproduction, and selection.",
     "connections": [],
     "filePath": "domains/biological/PATHWAYS.md",
@@ -1229,7 +1229,7 @@ const assembliesData = [
     "domain": "biological",
     "category": "ecosystems",
     "assemblyIndex": 10,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Name**: Coral Reef Ecosystem - **Assembly Index**: ~10¹⁶ - **Domain**: Biological (Ecosystems) - **Age**: Individual reefs: 1,000-10,000 years - **Distribution**: Tropical oceans, 25°N-25°S - **Area**: ~284,300 km² globally",
     "connections": [
       {
@@ -1323,7 +1323,7 @@ const assembliesData = [
     "domain": "cognitive",
     "category": "PATHWAYS.md",
     "assemblyIndex": 10,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "The cognitive domain encompasses all information processing and intelligence-related assemblies, from simple neural circuits to human language and artificial intelligence. These pathways show how information processing capabilities emerge and evolve across biological and technological systems.",
     "connections": [
       {
@@ -1515,7 +1515,7 @@ const assembliesData = [
     "domain": "cognitive",
     "category": "neural_networks",
     "assemblyIndex": 10,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Name**: Human Brain - **Assembly Index**: ~10 billion - **Domain**: Cognitive (Neural Networks) - **Development**: 280 days prenatal + 25 years postnatal - **Mass**: 1,400g (2% body weight, 20% energy consumption) - **Unique Features**: Language, abstract reasoning, consciousness",
     "connections": [
       {
@@ -1560,7 +1560,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 10,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 10 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~10⁻⁴ relative to hydrogen",
     "connections": [
       {
@@ -1875,7 +1875,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "stars",
     "assemblyIndex": 10,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Name**: Main Sequence Stars - **Phase**: Hydrogen burning - **Assembly Index**: ~10⁸ (typical star) - **Domain**: Cosmic (Stellar) - **Lifetime**: 10⁶ - 10¹¹ years (mass dependent) - **Examples**: Sun, Proxima Centauri, Sirius A",
     "connections": [
       {
@@ -1924,7 +1924,7 @@ const assembliesData = [
     "domain": "geological",
     "category": "planetary_systems",
     "assemblyIndex": 10,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Name**: Earth System - **Type**: Integrated planetary system - **Assembly Index**: ~10¹⁵ - **Domain**: Geological (Planetary Systems) - **Age**: 4.54 billion years - **Mass**: 5.97 × 10²⁴ kg",
     "connections": [
       {
@@ -1981,7 +1981,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 11,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 11 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~10⁻⁶ relative to hydrogen",
     "connections": [
       {
@@ -2006,7 +2006,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 12,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 12 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~10⁻⁵ relative to hydrogen",
     "connections": [
       {
@@ -2122,7 +2122,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 13,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 13 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~10⁻⁶ relative to hydrogen",
     "connections": [
       {
@@ -2147,7 +2147,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 14,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 14 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~10⁻⁵ relative to hydrogen",
     "connections": [
       {
@@ -2193,7 +2193,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 15,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 15 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~10⁻⁷ relative to hydrogen",
     "connections": [
       {
@@ -2243,7 +2243,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 16,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 16 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~10⁻⁵ relative to hydrogen",
     "connections": [
       {
@@ -2289,7 +2289,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 17,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 17 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~10⁻⁷ relative to hydrogen",
     "connections": [
       {
@@ -2314,7 +2314,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 18,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 18 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~10⁻⁵ relative to hydrogen",
     "connections": [
       {
@@ -2385,7 +2385,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 19,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 19 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~10⁻⁷ relative to hydrogen",
     "connections": [
       {
@@ -2410,7 +2410,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 20,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 20 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~10⁻⁶ relative to hydrogen",
     "connections": [
       {
@@ -2435,7 +2435,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 21,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 21 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~10⁻⁹ relative to hydrogen",
     "connections": [
       {
@@ -2460,7 +2460,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 22,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 22 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~10⁻⁷ relative to hydrogen",
     "connections": [
       {
@@ -2527,7 +2527,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 23,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 23 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~10⁻⁸ relative to hydrogen",
     "connections": [
       {
@@ -2552,7 +2552,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 24,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 24 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~10⁻⁷ relative to hydrogen",
     "connections": [
       {
@@ -2701,7 +2701,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 25,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 25 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~10⁻⁷ relative to hydrogen",
     "connections": [
       {
@@ -2771,7 +2771,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 26,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 26 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~10⁻⁶ relative to hydrogen",
     "connections": [
       {
@@ -2842,7 +2842,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 27,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 27 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~10⁻⁸ relative to hydrogen",
     "connections": [
       {
@@ -2867,7 +2867,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 28,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 28 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~10⁻⁶ relative to hydrogen",
     "connections": [
       {
@@ -2917,7 +2917,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 29,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 29 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~10⁻⁸ relative to hydrogen",
     "connections": [
       {
@@ -2963,7 +2963,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 30,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 30 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~10⁻⁷ relative to hydrogen",
     "connections": [
       {
@@ -3013,7 +3013,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 31,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 31 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~10⁻⁸ relative to hydrogen",
     "connections": [
       {
@@ -3038,7 +3038,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 32,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 32 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~10⁻⁸ relative to hydrogen",
     "connections": [
       {
@@ -3109,7 +3109,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 33,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 33 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~10⁻⁹ relative to hydrogen",
     "connections": [
       {
@@ -3134,7 +3134,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 34,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 34 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~10⁻⁹ relative to hydrogen",
     "connections": [
       {
@@ -3205,7 +3205,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 35,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 35 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~10⁻⁹ relative to hydrogen",
     "connections": [
       {
@@ -3251,7 +3251,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 36,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 36 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~10⁻¹⁰ relative to hydrogen",
     "connections": [
       {
@@ -3301,7 +3301,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 37,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 37 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~10⁻⁸ relative to hydrogen",
     "connections": [
       {
@@ -3326,7 +3326,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 38,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 38 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~10⁻⁸ relative to hydrogen",
     "connections": [
       {
@@ -3418,7 +3418,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 39,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 39 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~10⁻⁸ relative to hydrogen",
     "connections": [
       {
@@ -3489,7 +3489,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 40,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 40 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~10⁻⁷ relative to hydrogen",
     "connections": [
       {
@@ -3514,7 +3514,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 41,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 41 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~2×10⁻⁸ relative to hydrogen",
     "connections": [
       {
@@ -3539,7 +3539,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 42,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 42 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~1×10⁻⁷ relative to hydrogen",
     "connections": [
       {
@@ -3610,7 +3610,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 43,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 43 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis (temporary) - **Copy Number**: ~0 (no stable isotopes)",
     "connections": [
       {
@@ -3635,7 +3635,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 44,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 44 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~5×10⁻⁸ relative to hydrogen",
     "connections": [
       {
@@ -3738,7 +3738,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 45,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 45 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~1×10⁻⁸ relative to hydrogen",
     "connections": [
       {
@@ -3763,7 +3763,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 46,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 46 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~3×10⁻⁸ relative to hydrogen",
     "connections": [
       {
@@ -3805,7 +3805,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 47,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 47 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~8×10⁻⁹ relative to hydrogen",
     "connections": [
       {
@@ -3830,7 +3830,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 48,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 48 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~3×10⁻⁸ relative to hydrogen",
     "connections": [
       {
@@ -3876,7 +3876,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 49,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 49 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~6×10⁻⁹ relative to hydrogen",
     "connections": [
       {
@@ -3946,7 +3946,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 50,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 50 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~1×10⁻⁷ relative to hydrogen",
     "connections": [
       {
@@ -4319,7 +4319,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 51,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 51 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~1×10⁻⁸ relative to hydrogen",
     "connections": [
       {
@@ -4344,7 +4344,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 52,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 52 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~5×10⁻⁸ relative to hydrogen",
     "connections": [
       {
@@ -4390,7 +4390,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 53,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 53 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~2×10⁻⁸ relative to hydrogen",
     "connections": [
       {
@@ -4415,7 +4415,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 54,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 54 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~1×10⁻⁸ relative to hydrogen",
     "connections": [
       {
@@ -4461,7 +4461,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 55,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 55 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~8×10⁻⁹ relative to hydrogen",
     "connections": [
       {
@@ -4486,7 +4486,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 56,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 56 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~2×10⁻⁷ relative to hydrogen",
     "connections": [
       {
@@ -4532,7 +4532,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 57,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 57 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~2×10⁻⁸ relative to hydrogen",
     "connections": [
       {
@@ -4557,7 +4557,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 58,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 58 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~5×10⁻⁸ relative to hydrogen",
     "connections": [
       {
@@ -4603,7 +4603,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 59,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 59 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~6×10⁻⁹ relative to hydrogen",
     "connections": [
       {
@@ -4649,7 +4649,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 60,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 60 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~3×10⁻⁸ relative to hydrogen",
     "connections": [
       {
@@ -4674,7 +4674,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 61,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 61 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: Essentially zero (no stable isotopes)",
     "connections": [
       {
@@ -4699,7 +4699,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 62,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 62 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~2×10⁻⁸ relative to hydrogen",
     "connections": [
       {
@@ -4724,7 +4724,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 63,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 63 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~5×10⁻⁹ relative to hydrogen",
     "connections": [
       {
@@ -4749,7 +4749,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 64,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 64 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~6×10⁻⁹ relative to hydrogen",
     "connections": [
       {
@@ -4816,7 +4816,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 65,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 65 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~9×10⁻¹⁰ relative to hydrogen",
     "connections": [
       {
@@ -4866,7 +4866,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 66,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 66 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~6×10⁻⁹ relative to hydrogen",
     "connections": [
       {
@@ -4891,7 +4891,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 67,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 67 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~1.3×10⁻⁹ relative to hydrogen",
     "connections": [
       {
@@ -4916,7 +4916,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 68,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 68 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~3.5×10⁻⁹ relative to hydrogen",
     "connections": [
       {
@@ -4962,7 +4962,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 69,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 69 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~5×10⁻¹⁰ relative to hydrogen",
     "connections": [
       {
@@ -5008,7 +5008,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 70,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 70 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~3×10⁻⁹ relative to hydrogen",
     "connections": [
       {
@@ -5033,7 +5033,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 71,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 71 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~5×10⁻¹⁰ relative to hydrogen",
     "connections": [
       {
@@ -5058,7 +5058,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 72,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 72 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~7×10⁻¹⁰ relative to hydrogen",
     "connections": [
       {
@@ -5104,7 +5104,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 73,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 73 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~2×10⁻¹¹ relative to hydrogen",
     "connections": [
       {
@@ -5129,7 +5129,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 74,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 74 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~1.3×10⁻¹⁰ relative to hydrogen",
     "connections": [
       {
@@ -5179,7 +5179,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 75,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 75 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~2×10⁻¹¹ relative to hydrogen",
     "connections": [
       {
@@ -5221,7 +5221,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 76,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 76 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~3×10⁻¹¹ relative to hydrogen",
     "connections": [
       {
@@ -5246,7 +5246,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 77,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 77 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~2×10⁻¹¹ relative to hydrogen",
     "connections": [
       {
@@ -5271,7 +5271,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 78,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 78 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~5×10⁻¹¹ relative to hydrogen",
     "connections": [
       {
@@ -5313,7 +5313,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 79,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 79 - **Domain**: Cosmic Elements - **Origin Time**: Neutron star mergers - **Copy Number**: ~6×10⁻¹² relative to hydrogen",
     "connections": [
       {
@@ -5426,7 +5426,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 80,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 80 - **Domain**: Cosmic Elements - **Origin Time**: Stellar nucleosynthesis - **Copy Number**: ~3.4×10⁻¹¹ relative to hydrogen",
     "connections": [
       {
@@ -5451,7 +5451,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 81,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 81 - **Domain**: Cosmic Elements - **Origin Time**: Asymptotic giant branch stars - **Copy Number**: ~5×10⁻¹¹ relative to hydrogen",
     "connections": [
       {
@@ -5476,7 +5476,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 82,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 82 - **Domain**: Cosmic Elements - **Origin Time**: Multiple nucleosynthesis processes - **Copy Number**: ~1×10⁻¹⁰ relative to hydrogen",
     "connections": [
       {
@@ -5501,7 +5501,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 83,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 83 - **Domain**: Cosmic Elements - **Origin Time**: R-process nucleosynthesis - **Copy Number**: ~7×10⁻¹² relative to hydrogen",
     "connections": [
       {
@@ -5526,7 +5526,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 84,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 84 - **Domain**: Cosmic Elements - **Origin Time**: Radioactive decay chains - **Copy Number**: Trace amounts in uranium ores",
     "connections": [
       {
@@ -5572,7 +5572,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 85,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 85 - **Domain**: Cosmic Elements - **Origin Time**: Radioactive decay - **Copy Number**: Rarest naturally occurring element",
     "connections": [
       {
@@ -5618,7 +5618,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 86,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 86 - **Domain**: Cosmic Elements - **Origin Time**: Radioactive decay of radium - **Copy Number**: Trace atmospheric presence",
     "connections": [
       {
@@ -5664,7 +5664,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 87,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 87 - **Domain**: Cosmic Elements - **Origin Time**: Radioactive decay - **Copy Number**: ~20-30 grams on Earth at any time",
     "connections": [
       {
@@ -5689,7 +5689,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 88,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 88 - **Domain**: Cosmic Elements - **Origin Time**: Uranium/thorium decay - **Copy Number**: ~1 gram per 7 tons uranium ore",
     "connections": [
       {
@@ -5731,7 +5731,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 89,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 89 - **Domain**: Cosmic Elements - **Origin Time**: Radioactive decay - **Copy Number**: Trace in uranium ores",
     "connections": [
       {
@@ -5781,7 +5781,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 90,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 90 - **Domain**: Cosmic Elements - **Origin Time**: R-process nucleosynthesis - **Copy Number**: ~3×10⁻¹² relative to hydrogen",
     "connections": [
       {
@@ -5806,7 +5806,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 91,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 91 - **Domain**: Cosmic Elements - **Origin Time**: Radioactive decay - **Copy Number**: Trace in uranium ores",
     "connections": [
       {
@@ -5831,7 +5831,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 92,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 92 - **Domain**: Cosmic Elements - **Origin Time**: R-process nucleosynthesis - **Copy Number**: ~2×10⁻¹² relative to hydrogen",
     "connections": [
       {
@@ -5877,7 +5877,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 93,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 93 - **Domain**: Cosmic Elements - **Origin Time**: Artificial synthesis - **Copy Number**: First transuranic element",
     "connections": [
       {
@@ -5902,7 +5902,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 94,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 94 - **Domain**: Cosmic Elements - **Origin Time**: Artificial synthesis - **Copy Number**: Trace natural occurrence",
     "connections": [
       {
@@ -5956,7 +5956,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 95,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 95 - **Domain**: Cosmic Elements - **Origin Time**: Artificial synthesis - **Copy Number**: Synthetic element",
     "connections": [
       {
@@ -6002,7 +6002,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 96,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 96 - **Domain**: Cosmic Elements - **Origin Time**: Artificial synthesis - **Copy Number**: Synthetic element",
     "connections": [
       {
@@ -6027,7 +6027,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 97,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 97 - **Domain**: Cosmic Elements - **Origin Time**: Artificial synthesis - **Copy Number**: Synthetic element",
     "connections": [
       {
@@ -6052,7 +6052,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 98,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 98 - **Domain**: Cosmic Elements - **Origin Time**: Artificial synthesis - **Copy Number**: Synthetic element",
     "connections": [
       {
@@ -6098,7 +6098,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 99,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 99 - **Domain**: Cosmic Elements - **Origin Time**: Artificial synthesis - **Copy Number**: Synthetic element",
     "connections": [
       {
@@ -6351,7 +6351,7 @@ const assembliesData = [
     "domain": "cosmic",
     "category": "elements",
     "assemblyIndex": 100,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Assembly Index**: 100 - **Domain**: Cosmic Elements - **Origin Time**: Artificial synthesis - **Copy Number**: Synthetic element",
     "connections": [
       {
@@ -7692,7 +7692,7 @@ const assembliesData = [
     "domain": "technological",
     "category": "tools",
     "assemblyIndex": 120,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "13.8 byrs",
     "description": "- **Common Names**: Electric telegraph, electromagnetic telegraph, Morse telegraph - **Assembly Index**: 120-350 (from simple to complex systems) - **Time Period**: 1837 CE - ~1920 CE (peak usage) - **Primary Function**: Long-distance electrical communication via coded signals",
     "connections": [],
     "filePath": "domains/technological/tools/telegraph.md",
@@ -8154,7 +8154,7 @@ const assembliesData = [
     "domain": "technological",
     "category": "tools",
     "assemblyIndex": 180,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "100 years ago",
     "description": "- **Common Names**: Spinning jenny, jenny, multi-spindle spinning frame - **Assembly Index**: 180-250 (depending on spindle count) - **Time Period**: 1764 CE - ~1850 CE (peak usage) - **Primary Function**: Multiple simultaneous thread spinning from fiber rovings",
     "connections": [],
     "filePath": "domains/technological/tools/spinning_jenny.md",
@@ -8568,7 +8568,7 @@ const assembliesData = [
     "domain": "cognitive",
     "category": "collective_intelligence",
     "assemblyIndex": 300,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "50 years ago",
     "description": "- **Assembly Index**: 300 - **Domain**: Collective Intelligence - **Origin Time**: Universal in networks - **Copy Number**: Present in all network systems",
     "connections": [
       {
@@ -9187,7 +9187,7 @@ const assembliesData = [
     "domain": "cognitive",
     "category": "collective_intelligence",
     "assemblyIndex": 500,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "1000 years ago",
     "description": "- **Assembly Index**: 500 - **Domain**: Collective Intelligence - **Origin Time**: Universal phenomenon - **Copy Number**: Present at all complexity levels",
     "connections": [
       {
@@ -9669,7 +9669,7 @@ const assembliesData = [
     "domain": "cognitive",
     "category": "collective_intelligence",
     "assemblyIndex": 1000,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "100 years ago",
     "description": "- **Assembly Index**: 1000 - **Domain**: Collective Intelligence - **Origin Time**: Universal phenomenon - **Copy Number**: Found at all scales",
     "connections": [
       {
@@ -13755,7 +13755,7 @@ const assembliesData = [
     "domain": "earth",
     "category": "nuclear_fallout.md",
     "assemblyIndex": 100000,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "100 years ago",
     "description": "Nuclear Fallout represents an important concept in the study of assembly and complexity.",
     "connections": [],
     "filePath": "domains/earth/nuclear_fallout.md",
@@ -13767,7 +13767,7 @@ const assembliesData = [
     "domain": "earth",
     "category": "ocean_chemistry.md",
     "assemblyIndex": 100000,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "1000 years ago",
     "description": "Ocean Chemistry represents an important concept in the study of assembly and complexity.",
     "connections": [],
     "filePath": "domains/earth/ocean_chemistry.md",
@@ -13779,7 +13779,7 @@ const assembliesData = [
     "domain": "earth",
     "category": "radiometric_dating.md",
     "assemblyIndex": 100000,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "100 years ago",
     "description": "Radiometric Dating represents an important concept in the study of assembly and complexity.",
     "connections": [],
     "filePath": "domains/earth/radiometric_dating.md",
@@ -13791,7 +13791,7 @@ const assembliesData = [
     "domain": "geological",
     "category": "rocks",
     "assemblyIndex": 100000,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "100000 years ago",
     "description": "- **Name**: Granite - **Type**: Plutonic igneous rock - **Assembly Index**: ~100,000 - **Domain**: Geological (Rocks) - **Formation**: Slow cooling of felsic magma - **Age Range**: 4.4 Ga - Present",
     "connections": [
       {
@@ -13836,7 +13836,7 @@ const assembliesData = [
     "domain": "hybrid",
     "category": "biotechnology",
     "assemblyIndex": 100000,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "100 years ago",
     "description": "Synthetic Biology represents an important concept in the study of assembly and complexity.",
     "connections": [],
     "filePath": "domains/hybrid/biotechnology/synthetic_biology.md",
@@ -13848,7 +13848,7 @@ const assembliesData = [
     "domain": "hybrid",
     "category": "medical",
     "assemblyIndex": 100000,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "100 years ago",
     "description": "Gene Therapy represents an important concept in the study of assembly and complexity.",
     "connections": [],
     "filePath": "domains/hybrid/medical/gene_therapy.md",
@@ -13872,7 +13872,7 @@ const assembliesData = [
     "domain": "physics",
     "category": "superconductivity.md",
     "assemblyIndex": 100000,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "100 years ago",
     "description": "Superconductivity represents an important concept in the study of assembly and complexity.",
     "connections": [],
     "filePath": "domains/physics/superconductivity.md",
@@ -13944,7 +13944,7 @@ const assembliesData = [
     "domain": "technology",
     "category": "atomic_clocks.md",
     "assemblyIndex": 100000,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "50 years ago",
     "description": "Atomic Clocks represents an important concept in the study of assembly and complexity.",
     "connections": [],
     "filePath": "domains/technology/atomic_clocks.md",
@@ -13956,7 +13956,7 @@ const assembliesData = [
     "domain": "technology",
     "category": "electronic_materials.md",
     "assemblyIndex": 100000,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "100 years ago",
     "description": "Electronic Materials represents an important concept in the study of assembly and complexity.",
     "connections": [],
     "filePath": "domains/technology/electronic_materials.md",
@@ -13968,7 +13968,7 @@ const assembliesData = [
     "domain": "technology",
     "category": "nuclear_reactors.md",
     "assemblyIndex": 100000,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "100 years ago",
     "description": "Nuclear Reactors represents an important concept in the study of assembly and complexity.",
     "connections": [],
     "filePath": "domains/technology/nuclear_reactors.md",
@@ -13992,7 +13992,7 @@ const assembliesData = [
     "domain": "technology",
     "category": "semiconductors.md",
     "assemblyIndex": 100000,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "100 years ago",
     "description": "Semiconductors represents an important concept in the study of assembly and complexity.",
     "connections": [],
     "filePath": "domains/technology/semiconductors.md",
@@ -14004,7 +14004,7 @@ const assembliesData = [
     "domain": "technology",
     "category": "superconductors.md",
     "assemblyIndex": 100000,
-    "timeOrigin": "Unknown",
+    "timeOrigin": "100 years ago",
     "description": "Superconductors represents an important concept in the study of assembly and complexity.",
     "connections": [],
     "filePath": "domains/technology/superconductors.md",
