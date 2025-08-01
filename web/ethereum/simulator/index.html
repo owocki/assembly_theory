@@ -161,6 +161,27 @@
             background: rgba(0, 0, 0, 0.8);
             border-radius: 10px;
             border: 1px solid rgba(98, 126, 234, 0.3);
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        /* Custom scrollbar for assembly path */
+        .assembly-path::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .assembly-path::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+        }
+        
+        .assembly-path::-webkit-scrollbar-thumb {
+            background: rgba(98, 126, 234, 0.5);
+            border-radius: 4px;
+        }
+        
+        .assembly-path::-webkit-scrollbar-thumb:hover {
+            background: rgba(98, 126, 234, 0.7);
         }
         
         .path-step {
@@ -220,8 +241,41 @@
         .controls {
             display: flex;
             justify-content: center;
+            align-items: center;
             gap: 15px;
             margin: 30px 0;
+        }
+        
+        /* Progress bar */
+        .progress-container {
+            display: none;
+            width: 300px;
+            height: 30px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(98, 126, 234, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #627eea, #f0b90b, #00d4ff);
+            transition: width 0.5s ease;
+            position: relative;
+        }
+        
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+            z-index: 1;
         }
         
         .control-btn {
@@ -407,14 +461,18 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Ethereum Assembly Theory</h1>
-            <p>Understanding protocol evolution through the lens of combinatorial complexity</p>
+            <h1>Ethereum Assembly Simulator</h1>
+            <p>Understanding ecosystem evolution through the lens of combinatorial complexity</p>
         </div>
         
         <!-- Controls -->
         <div class="controls">
-            <button class="control-btn" onclick="runEvolutionSimulation()">Run Evolution Simulation</button>
+            <button class="control-btn" id="runSimBtn" onclick="runEvolutionSimulation()">Run Evolution Simulation</button>
             <button class="control-btn" onclick="resetAnalysis()">Reset</button>
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar" id="progressBar"></div>
+                <div class="progress-text" id="progressText">0%</div>
+            </div>
         </div>
         
         <!-- Main Grid -->
@@ -575,28 +633,6 @@
                 <div id="assemblyPath" class="assembly-path">
                     <p style="opacity: 0.7; text-align: center;">Select primitives to see assembly path</p>
                 </div>
-                
-                <h4 style="color: #f0b90b; margin-top: 30px;">Network Effects</h4>
-                <div class="metric-item">
-                    <span>Composability Score:</span>
-                    <span class="metric-value" id="composabilityScore">0</span>
-                </div>
-                <div class="metric-item">
-                    <span>Integration Points:</span>
-                    <span class="metric-value" id="integrationPoints">0</span>
-                </div>
-                <div class="metric-item">
-                    <span>TVL Correlation:</span>
-                    <span class="metric-value" id="tvlCorrelation">0</span>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Alpha Opportunities Section -->
-        <div class="alpha-opportunities">
-            <h3>Alpha Opportunities: Unexplored Assembly Spaces</h3>
-            <div id="alphaOpportunities">
-                <!-- Dynamically generated opportunity cards -->
             </div>
         </div>
         
@@ -610,6 +646,17 @@
         <div class="combination-matrix">
             <h3 style="color: #627eea;">Primitive Combination Matrix</h3>
             <div id="combinationMatrix"></div>
+        </div>
+        
+        <!-- Alpha Opportunities Section -->
+        <div class="alpha-opportunities">
+            <h3>Alpha Opportunities: Unexplored Assembly Spaces</h3>
+            <div id="alphaOpportunities">
+                <!-- Dynamically generated opportunity cards -->
+            </div>
+            <div id="predictedPrimitives" style="margin-top: 30px;">
+                <!-- Predicted primitives will be added here -->
+            </div>
         </div>
     </div>
     

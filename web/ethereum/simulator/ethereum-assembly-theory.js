@@ -50,12 +50,13 @@ const successfulCombinations = [
     { primitives: ["Flash Loan", "MEV Auction"], result: "MEV Bots", ai: 500, tvl: 100000000 }
 ];
 
-// Unexplored but promising combinations
+// Unexplored but promising combinations - these will appear in both timeline and alpha opportunities
 const alphaOpportunities = [
     {
         primitives: ["Intent System", "L2 Rollup", "AMM"],
         name: "Intent-based Cross-L2 Trading",
         ai: 810,
+        year: 2027,
         description: "Seamless trading across L2s using intent-based architecture",
         potential: "95%"
     },
@@ -63,6 +64,7 @@ const alphaOpportunities = [
         primitives: ["ERC-721", "Flash Loan", "Yield Farm"],
         name: "NFT Yield Optimization",
         ai: 240,
+        year: 2026,
         description: "Flash loan enabled NFT farming strategies",
         potential: "87%"
     },
@@ -70,6 +72,7 @@ const alphaOpportunities = [
         primitives: ["Oracle", "Intent System", "Cross-chain Bridge"],
         name: "Cross-chain Intent Resolution",
         ai: 830,
+        year: 2028,
         description: "Solve user intents across multiple chains automatically",
         potential: "92%"
     },
@@ -77,6 +80,7 @@ const alphaOpportunities = [
         primitives: ["MEV Auction", "Yield Farm", "L2 Rollup"],
         name: "L2 MEV Farming",
         ai: 770,
+        year: 2027,
         description: "Capture MEV opportunities in L2 yield farming",
         potential: "78%"
     },
@@ -84,6 +88,7 @@ const alphaOpportunities = [
         primitives: ["Multisig", "Intent System", "Oracle"],
         name: "Autonomous DAO Execution",
         ai: 555,
+        year: 2026,
         description: "DAOs that execute complex strategies autonomously",
         potential: "83%"
     }
@@ -295,9 +300,6 @@ function updateAnalysis() {
     
     // Update complexity bar
     document.getElementById('complexityBar').style.width = complexityScore + '%';
-    
-    // Update network metrics
-    updateNetworkMetrics();
 }
 
 // Calculate innovation potential
@@ -361,72 +363,6 @@ function updateAssemblyPath() {
     pathContainer.innerHTML = pathHTML;
 }
 
-// Update network metrics
-function updateNetworkMetrics() {
-    const composability = calculateComposability();
-    const integrationPoints = countIntegrationPoints();
-    const tvlCorrelation = calculateTVLCorrelation();
-    
-    document.getElementById('composabilityScore').textContent = composability.toFixed(1);
-    document.getElementById('integrationPoints').textContent = integrationPoints;
-    document.getElementById('tvlCorrelation').textContent = '$' + formatNumber(tvlCorrelation);
-}
-
-// Calculate composability score
-function calculateComposability() {
-    if (selectedPrimitives.size === 0) return 0;
-    
-    let score = 0;
-    selectedPrimitives.forEach(name => {
-        const primitive = primitiveData[name];
-        // Higher score for primitives with more dependencies (more composable)
-        score += primitive.dependencies.length * 10;
-        
-        // Bonus for selecting dependencies
-        primitive.dependencies.forEach(dep => {
-            if (selectedPrimitives.has(dep)) {
-                score += 15;
-            }
-        });
-    });
-    
-    return Math.min(100, score);
-}
-
-// Count integration points
-function countIntegrationPoints() {
-    let count = 0;
-    selectedPrimitives.forEach(name => {
-        const primitive = primitiveData[name];
-        primitive.dependencies.forEach(dep => {
-            if (selectedPrimitives.has(dep)) {
-                count++;
-            }
-        });
-    });
-    return count;
-}
-
-// Calculate TVL correlation
-function calculateTVLCorrelation() {
-    let tvl = 0;
-    
-    // Check if selection matches known successful combinations
-    successfulCombinations.forEach(combo => {
-        const hasAll = combo.primitives.every(p => selectedPrimitives.has(p));
-        if (hasAll) {
-            tvl = Math.max(tvl, combo.tvl);
-        }
-    });
-    
-    // Estimate TVL for novel combinations
-    if (tvl === 0 && selectedPrimitives.size > 0) {
-        const totalAI = Array.from(selectedPrimitives).reduce((sum, p) => sum + primitiveData[p].ai, 0);
-        tvl = totalAI * 1000000 * Math.random(); // Rough estimate
-    }
-    
-    return tvl;
-}
 
 // Display alpha opportunities
 function displayAlphaOpportunities() {
@@ -507,12 +443,13 @@ function createTimeline() {
         { year: 2025, name: "Account Abstraction", ai: 700, mined: true }
     ];
     
-    // Four different future timelines
+    // Four different future timelines with better Y-axis separation
     futureEventsTimelines = [
-        // Timeline 1: AI-Dominated Future
+        // Timeline 1: AI-Dominated Future (higher Y values)
         {
             name: "AI-Dominated",
             color: "#00d4ff",
+            yOffset: 2000, // Offset to prevent overlap
             events: [
                 { year: 2026, name: "AI Protocol Agents", ai: 900 },
                 { year: 2028, name: "Self-Optimizing Contracts", ai: 1400 },
@@ -523,10 +460,11 @@ function createTimeline() {
                 { year: 2040, name: "Post-Human Finance", ai: 12000 }
             ]
         },
-        // Timeline 2: Quantum Future
+        // Timeline 2: Quantum Future (moderate Y values)
         {
             name: "Quantum-Native",
             color: "#ff00ff",
+            yOffset: 1000,
             events: [
                 { year: 2026, name: "Quantum-Resistant Migration", ai: 800 },
                 { year: 2028, name: "Quantum Key Distribution", ai: 1200 },
@@ -537,10 +475,11 @@ function createTimeline() {
                 { year: 2040, name: "Multiverse Consensus", ai: 15000 }
             ]
         },
-        // Timeline 3: Cross-Chain Unification
+        // Timeline 3: Cross-Chain Unification (lower-moderate Y values)
         {
             name: "Unified Ecosystem",
             color: "#00ff00",
+            yOffset: -500,
             events: [
                 { year: 2026, name: "Universal Bridge Protocol", ai: 850 },
                 { year: 2028, name: "Chain Abstraction Layer", ai: 1300 },
@@ -551,10 +490,11 @@ function createTimeline() {
                 { year: 2040, name: "Cosmic Transaction Network", ai: 11000 }
             ]
         },
-        // Timeline 4: Social Coordination
+        // Timeline 4: Social Coordination (lower Y values)
         {
             name: "Human-Centric",
             color: "#ffaa00",
+            yOffset: -1500,
             events: [
                 { year: 2026, name: "DAO Coordination Protocols", ai: 750 },
                 { year: 2028, name: "Social Consensus Mechanisms", ai: 1100 },
@@ -564,6 +504,19 @@ function createTimeline() {
                 { year: 2039, name: "Post-Scarcity Protocols", ai: 7500 },
                 { year: 2040, name: "Abundance Distribution Net", ai: 10000 }
             ]
+        },
+        // Timeline 5: Alpha Opportunities (showing our identified opportunities)
+        {
+            name: "Alpha Opportunities",
+            color: "#f0b90b",
+            yOffset: 0,
+            events: alphaOpportunities.map(opp => ({
+                year: opp.year,
+                name: opp.name,
+                ai: opp.ai,
+                description: opp.description,
+                potential: opp.potential
+            }))
         }
     ];
     
@@ -575,11 +528,50 @@ function createTimeline() {
         .domain([0, 15000])
         .range([timelineHeight - 30, 30]);
     
-    // Draw axis
+    // Draw X axis
     timelineSvg.append('g')
         .attr('class', 'timeline-axis')
         .attr('transform', `translate(0, ${timelineHeight - 30})`)
-        .call(d3.axisBottom(xScale).tickFormat(d3.format('d')));
+        .call(d3.axisBottom(xScale).tickFormat(d3.format('d')))
+        .append('text')
+        .attr('x', timelineWidth / 2)
+        .attr('y', 40)
+        .attr('fill', 'white')
+        .attr('text-anchor', 'middle')
+        .style('font-size', '12px')
+        .text('Year');
+    
+    // Draw Y axis
+    timelineSvg.append('g')
+        .attr('class', 'timeline-axis')
+        .attr('transform', `translate(50, 0)`)
+        .call(d3.axisLeft(yScale).tickFormat(d => d >= 1000 ? `${d/1000}K` : d))
+        .append('text')
+        .attr('transform', 'rotate(-90)')
+        .attr('x', -timelineHeight / 2)
+        .attr('y', -35)
+        .attr('fill', 'white')
+        .attr('text-anchor', 'middle')
+        .style('font-size', '12px')
+        .text('Assembly Index');
+    
+    // Style the axis
+    timelineSvg.selectAll('.timeline-axis path, .timeline-axis line')
+        .style('stroke', 'rgba(255, 255, 255, 0.3)');
+    timelineSvg.selectAll('.timeline-axis text')
+        .style('fill', 'rgba(255, 255, 255, 0.8)');
+    
+    // Add horizontal grid lines
+    const yAxisGrid = d3.axisLeft(yScale)
+        .tickSize(-timelineWidth + 100)
+        .tickFormat('');
+    
+    timelineSvg.append('g')
+        .attr('class', 'grid')
+        .attr('transform', `translate(50, 0)`)
+        .call(yAxisGrid)
+        .style('stroke-dasharray', '3,3')
+        .style('opacity', 0.1);
     
     // Add timeline labels
     futureEventsTimelines.forEach((timeline, index) => {
@@ -632,7 +624,7 @@ function createTimeline() {
             .attr('x1', xScale(lastHistorical.year))
             .attr('y1', yScale(lastHistorical.ai))
             .attr('x2', xScale(timeline.events[0].year))
-            .attr('y2', yScale(timeline.events[0].ai))
+            .attr('y2', yScale(timeline.events[0].ai + (timeline.yOffset || 0)))
             .attr('stroke', timeline.color)
             .attr('stroke-width', 1)
             .attr('stroke-dasharray', '3,3')
@@ -652,16 +644,19 @@ function createTimeline() {
             group.append('circle')
                 .attr('class', `future-point timeline-${index}-year-${event.year}`)
                 .attr('cx', xScale(event.year))
-                .attr('cy', yScale(event.ai))
+                .attr('cy', yScale(event.ai + (timeline.yOffset || 0)))
                 .attr('r', 0)
                 .attr('fill', timeline.color)
                 .attr('opacity', 0)
                 .on('mouseover', function(e) {
+                    const d = e.target.__data__ || event;
                     showTooltip(e, {
                         name: event.name,
                         ai: event.ai,
                         year: event.year,
-                        status: timeline.name
+                        status: timeline.name,
+                        description: event.description,
+                        potential: event.potential
                     });
                 })
                 .on('mouseout', hideTooltip);
@@ -690,6 +685,25 @@ function createTimeline() {
 
 // Evolution simulation with timeline mining
 window.runEvolutionSimulation = function() {
+    // Show progress bar and hide run button
+    const runBtn = document.getElementById('runSimBtn');
+    const progressContainer = document.getElementById('progressContainer');
+    const progressBar = document.getElementById('progressBar');
+    const progressText = document.getElementById('progressText');
+    
+    runBtn.style.display = 'none';
+    progressContainer.style.display = 'block';
+    
+    let progress = 0;
+    const totalSteps = 100;
+    
+    // Update progress function
+    function updateProgress(value, text = null) {
+        progress = Math.min(value, 100);
+        progressBar.style.width = progress + '%';
+        progressText.textContent = text || progress + '%';
+    }
+    
     const particles = [];
     const numParticles = 50;
     
@@ -705,21 +719,40 @@ window.runEvolutionSimulation = function() {
         });
     }
     
+    updateProgress(10, 'Starting simulation...');
+    
     // Start mining future events
-    mineTimelineEvents();
+    setTimeout(() => {
+        updateProgress(20, 'Mining timeline events...');
+        mineTimelineEvents();
+    }, 500);
     
     // Start building combination matrix
-    buildCombinationMatrix();
+    setTimeout(() => {
+        updateProgress(40, 'Building combination matrix...');
+        buildCombinationMatrix();
+    }, 1500);
     
     // Auto-run optimal combinations search after delay
     setTimeout(() => {
+        updateProgress(60, 'Finding optimal combinations...');
         findOptimalCombinations();
     }, 3000);
     
     // Auto-run predictions after delay
     setTimeout(() => {
+        updateProgress(80, 'Predicting next primitives...');
         predictNextPrimitives();
     }, 6000);
+    
+    // Complete simulation
+    setTimeout(() => {
+        updateProgress(100, 'Simulation complete!');
+        setTimeout(() => {
+            progressContainer.style.display = 'none';
+            runBtn.style.display = 'block';
+        }, 1500);
+    }, 8000);
     
     // Animate particles
     const interval = setInterval(() => {
@@ -823,7 +856,7 @@ function mineTimelineEvents() {
                 // Add mining effect
                 const miningEffect = timelineSvg.append('circle')
                     .attr('cx', xScale(event.year))
-                    .attr('cy', yScale(event.ai))
+                    .attr('cy', yScale(event.ai + (timeline.yOffset || 0)))
                     .attr('r', 5)
                     .attr('fill', 'none')
                     .attr('stroke', timeline.color)
@@ -836,8 +869,11 @@ function mineTimelineEvents() {
                     .attr('opacity', 0)
                     .remove();
                 
-                // Update the path
-                const pathData = timeline.events.slice(0, eventIndex + 1);
+                // Update the path with offset
+                const pathData = timeline.events.slice(0, eventIndex + 1).map(e => ({
+                    ...e,
+                    ai: e.ai + (timeline.yOffset || 0)
+                }));
                 if (pathData.length > 1) {
                     group.select(`.future-path-${timelineIndex}`)
                         .datum(pathData)
@@ -848,10 +884,10 @@ function mineTimelineEvents() {
                 }
                 
                 // Add event label for key events
-                if (event.year % 4 === 0) {
+                if (event.year % 4 === 0 || timeline.name === 'Alpha Opportunities') {
                     const label = timelineSvg.append('text')
                         .attr('x', xScale(event.year))
-                        .attr('y', yScale(event.ai) - 15)
+                        .attr('y', yScale(event.ai + (timeline.yOffset || 0)) - 15)
                         .attr('text-anchor', 'middle')
                         .attr('fill', timeline.color)
                         .attr('font-size', '9px')
@@ -918,16 +954,20 @@ function buildCombinationMatrix() {
     const matrixContainer = document.getElementById('combinationMatrix');
     const primitiveNames = Object.keys(primitiveData);
     
+    // Create wrapper for scrolling
+    const wrapper = document.createElement('div');
+    wrapper.style.cssText = 'overflow-x: auto; overflow-y: auto; max-height: 600px; max-width: 100%;';
+    
     // Create matrix structure
     const table = document.createElement('table');
-    table.style.cssText = 'border-collapse: collapse; width: 100%; margin-top: 20px;';
+    table.style.cssText = 'border-collapse: collapse; margin-top: 20px; min-width: 100%;';
     
     // Header row
     const headerRow = document.createElement('tr');
-    headerRow.innerHTML = '<th style="border: 1px solid #627eea; padding: 5px;"></th>';
+    headerRow.innerHTML = '<th style="border: 1px solid #627eea; padding: 5px; position: sticky; left: 0; background: #0a0a0a; z-index: 1;"></th>';
     primitiveNames.forEach(name => {
         const th = document.createElement('th');
-        th.style.cssText = 'border: 1px solid #627eea; padding: 5px; font-size: 10px; transform: rotate(-45deg); white-space: nowrap;';
+        th.style.cssText = 'border: 1px solid #627eea; padding: 5px; font-size: 10px; transform: rotate(-45deg); white-space: nowrap; height: 100px; vertical-align: bottom;';
         th.textContent = name;
         headerRow.appendChild(th);
     });
@@ -937,7 +977,7 @@ function buildCombinationMatrix() {
     primitiveNames.forEach((rowName, rowIndex) => {
         const row = document.createElement('tr');
         const rowHeader = document.createElement('th');
-        rowHeader.style.cssText = 'border: 1px solid #627eea; padding: 5px; font-size: 10px; text-align: left;';
+        rowHeader.style.cssText = 'border: 1px solid #627eea; padding: 5px; font-size: 10px; text-align: left; position: sticky; left: 0; background: #0a0a0a; z-index: 1;';
         rowHeader.textContent = rowName;
         row.appendChild(rowHeader);
         
@@ -950,9 +990,9 @@ function buildCombinationMatrix() {
             
             if (rowIndex === colIndex) {
                 cell.style.background = 'rgba(98, 126, 234, 0.1)';
-                cell.textContent = '—';
+                cell.innerHTML = '<div class="cell-content">—</div>';
             } else {
-                cell.innerHTML = '<div class="cell-content" style="opacity: 0;">?</div>';
+                cell.innerHTML = '<div class="cell-content" style="opacity: 0; font-size: 14px;">?</div>';
             }
             
             row.appendChild(cell);
@@ -961,67 +1001,77 @@ function buildCombinationMatrix() {
         table.appendChild(row);
     });
     
-    matrixContainer.appendChild(table);
+    wrapper.appendChild(table);
+    matrixContainer.appendChild(wrapper);
     
-    // Progressively reveal combinations
+    // Progressively reveal ALL combinations
     let cellIndex = 0;
     const totalCells = primitiveNames.length * primitiveNames.length;
+    const revealBatchSize = 5; // Reveal 5 cells at a time for faster coverage
     
     const revealInterval = setInterval(() => {
         if (cellIndex >= totalCells) {
             clearInterval(revealInterval);
+            // Add completion indicator
+            const completeMsg = document.createElement('div');
+            completeMsg.style.cssText = 'text-align: center; margin-top: 10px; color: #00d4ff; font-size: 14px;';
+            completeMsg.textContent = 'Full design space explored: ' + totalCells + ' combinations analyzed';
+            matrixContainer.appendChild(completeMsg);
             return;
         }
         
-        const row = Math.floor(cellIndex / primitiveNames.length);
-        const col = cellIndex % primitiveNames.length;
-        
-        if (row !== col) {
-            const cell = document.querySelector(`.cell-${row}-${col}`);
-            const rowName = primitiveNames[row];
-            const colName = primitiveNames[col];
+        // Reveal multiple cells at once
+        for (let i = 0; i < revealBatchSize && cellIndex < totalCells; i++) {
+            const row = Math.floor(cellIndex / primitiveNames.length);
+            const col = cellIndex % primitiveNames.length;
             
-            // Calculate combination viability
-            const viability = calculateCombinationViability(rowName, colName);
-            const content = cell.querySelector('.cell-content');
-            
-            if (viability > 0.7) {
-                cell.style.background = 'rgba(0, 255, 0, 0.3)';
-                content.textContent = '✓';
-                content.style.color = '#00ff00';
-            } else if (viability > 0.4) {
-                cell.style.background = 'rgba(255, 255, 0, 0.2)';
-                content.textContent = '~';
-                content.style.color = '#ffff00';
-            } else {
-                cell.style.background = 'rgba(255, 0, 0, 0.1)';
-                content.textContent = '✗';
-                content.style.color = '#ff0000';
+            if (row !== col) {
+                const cell = document.querySelector(`.cell-${row}-${col}`);
+                const rowName = primitiveNames[row];
+                const colName = primitiveNames[col];
+                
+                // Calculate combination viability
+                const viability = calculateCombinationViability(rowName, colName);
+                const content = cell.querySelector('.cell-content');
+                
+                if (viability > 0.7) {
+                    cell.style.background = 'rgba(0, 255, 0, 0.3)';
+                    content.textContent = '✓';
+                    content.style.color = '#00ff00';
+                } else if (viability > 0.4) {
+                    cell.style.background = 'rgba(255, 255, 0, 0.2)';
+                    content.textContent = '~';
+                    content.style.color = '#ffff00';
+                } else {
+                    cell.style.background = 'rgba(255, 0, 0, 0.1)';
+                    content.textContent = '✗';
+                    content.style.color = '#ff0000';
+                }
+                
+                content.style.transition = 'opacity 0.3s';
+                content.style.opacity = '1';
+                
+                // Add hover effect
+                cell.addEventListener('mouseenter', function() {
+                    const tooltip = document.getElementById('tooltip');
+                    tooltip.style.display = 'block';
+                    tooltip.style.left = this.getBoundingClientRect().left + 'px';
+                    tooltip.style.top = (this.getBoundingClientRect().top - 60) + 'px';
+                    tooltip.innerHTML = `
+                        <strong>${rowName} + ${colName}</strong><br>
+                        Combined AI: ${primitiveData[rowName].ai + primitiveData[colName].ai}<br>
+                        Viability: ${(viability * 100).toFixed(0)}%
+                    `;
+                });
+                
+                cell.addEventListener('mouseleave', function() {
+                    document.getElementById('tooltip').style.display = 'none';
+                });
             }
-            
-            content.style.transition = 'opacity 0.3s';
-            content.style.opacity = '1';
-            
-            // Add hover effect
-            cell.addEventListener('mouseenter', function() {
-                const tooltip = document.getElementById('tooltip');
-                tooltip.style.display = 'block';
-                tooltip.style.left = this.getBoundingClientRect().left + 'px';
-                tooltip.style.top = (this.getBoundingClientRect().top - 60) + 'px';
-                tooltip.innerHTML = `
-                    <strong>${rowName} + ${colName}</strong><br>
-                    Combined AI: ${primitiveData[rowName].ai + primitiveData[colName].ai}<br>
-                    Viability: ${(viability * 100).toFixed(0)}%
-                `;
-            });
-            
-            cell.addEventListener('mouseleave', function() {
-                document.getElementById('tooltip').style.display = 'none';
-            });
-        }
         
-        cellIndex++;
-    }, 50); // Reveal one cell every 50ms
+            cellIndex++;
+        }
+    }, 20); // Faster reveal with batch processing
 }
 
 // Calculate combination viability
@@ -1124,51 +1174,39 @@ window.predictNextPrimitives = function() {
         { name: "ZK Coprocessors", ai: 450, probability: 0.5 }
     ];
     
-    // Show predictions
-    const modal = document.createElement('div');
-    modal.style.cssText = `
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: rgba(0, 0, 0, 0.95);
-        border: 2px solid #627eea;
-        border-radius: 15px;
-        padding: 30px;
-        z-index: 1000;
-        max-width: 500px;
-    `;
+    // Add predictions to alpha opportunities section
+    const predictedContainer = document.getElementById('predictedPrimitives');
     
-    modal.innerHTML = `
-        <h3 style="color: #627eea; margin-top: 0;">Predicted Next Primitives</h3>
+    predictedContainer.innerHTML = `
+        <h4 style="color: #00d4ff; margin-bottom: 20px;">Predicted Next Primitives</h4>
         ${predictions.map(p => `
-            <div style="margin: 15px 0; padding: 15px; background: rgba(98, 126, 234, 0.1); border-radius: 8px;">
-                <div style="display: flex; justify-content: space-between;">
+            <div class="opportunity-card" style="border-color: rgba(0, 212, 255, 0.5);">
+                <div class="opportunity-title" style="color: #00d4ff;">${p.name}</div>
+                <div style="margin: 10px 0; font-size: 14px; opacity: 0.8;">Next-generation primitive with emerging adoption patterns</div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
                     <div>
-                        <div style="font-weight: bold;">${p.name}</div>
-                        <div style="font-size: 12px; opacity: 0.7;">Assembly Index: ${p.ai}</div>
+                        <div style="font-size: 12px; opacity: 0.7;">Predicted AI</div>
+                        <div class="opportunity-ai">${p.ai}</div>
                     </div>
                     <div style="text-align: right;">
-                        <div style="font-size: 24px; color: ${p.probability > 0.7 ? '#00ff00' : '#f0b90b'};">
+                        <div style="font-size: 12px; opacity: 0.7;">Emergence Probability</div>
+                        <div style="font-size: 20px; color: ${p.probability > 0.7 ? '#00ff00' : '#f0b90b'};">
                             ${(p.probability * 100).toFixed(0)}%
                         </div>
-                        <div style="font-size: 10px;">probability</div>
                     </div>
                 </div>
             </div>
         `).join('')}
-        <button onclick="this.parentElement.remove()" style="
-            margin-top: 20px;
-            padding: 10px 20px;
-            background: #627eea;
-            border: none;
-            border-radius: 20px;
-            color: white;
-            cursor: pointer;
-        ">Close</button>
     `;
     
-    document.body.appendChild(modal);
+    // Animate the appearance
+    predictedContainer.style.opacity = '0';
+    predictedContainer.style.transform = 'translateY(20px)';
+    setTimeout(() => {
+        predictedContainer.style.transition = 'all 0.5s ease';
+        predictedContainer.style.opacity = '1';
+        predictedContainer.style.transform = 'translateY(0)';
+    }, 100);
 };
 
 // Reset analysis
@@ -1216,7 +1254,9 @@ function showTooltip(event, d) {
             <h4 style="margin: 0 0 10px 0; color: #627eea;">${d.name}</h4>
             <p style="margin: 5px 0;">Year: ${d.year}</p>
             <p style="margin: 5px 0;">Assembly Index: ${d.ai}</p>
-            ${d.status ? `<p style="margin: 5px 0;">Status: ${d.status}</p>` : ''}
+            ${d.status ? `<p style="margin: 5px 0;">Timeline: ${d.status}</p>` : ''}
+            ${d.description ? `<p style="margin: 5px 0;">${d.description}</p>` : ''}
+            ${d.potential ? `<p style="margin: 5px 0;">Success Potential: ${d.potential}</p>` : ''}
         `;
     } else {
         const primitive = primitiveData[d.name];
