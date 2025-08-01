@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethereum Assembly Theory: Understanding Protocol Evolution</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⟠</text></svg>">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin: 0;
+            background: linear-gradient(45deg, #627eea, #f0b90b, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header p {
+            font-size: 1.3em;
+            margin: 10px 0;
+            opacity: 0.9;
+        }
+        
+        /* Main Grid Layout */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        /* Left Panel: Assembly Components */
+        .assembly-components {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(98, 126, 234, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+        }
+        
+        .assembly-components h3 {
+            color: #627eea;
+            margin-top: 0;
+            border-bottom: 1px solid rgba(98, 126, 234, 0.3);
+            padding-bottom: 10px;
+        }
+        
+        .primitive-category {
+            margin: 20px 0;
+        }
+        
+        .primitive-category h4 {
+            color: #f0b90b;
+            margin: 10px 0;
+        }
+        
+        .primitive-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 10px 0;
+        }
+        
+        .primitive-node {
+            background: rgba(98, 126, 234, 0.1);
+            border: 1px solid rgba(98, 126, 234, 0.3);
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 12px;
+        }
+        
+        .primitive-node:hover {
+            background: rgba(98, 126, 234, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(98, 126, 234, 0.5);
+        }
+        
+        .primitive-node.selected {
+            background: rgba(98, 126, 234, 0.4);
+            border-color: #627eea;
+            box-shadow: 0 0 10px rgba(98, 126, 234, 0.7);
+        }
+        
+        .assembly-index {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(240, 185, 11, 0.8);
+            color: black;
+            border-radius: 10px;
+            padding: 2px 6px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+        
+        /* Center: Evolution Visualization */
+        #evolutionVisualization {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            border: 1px solid rgba(98, 126, 234, 0.3);
+            min-height: 800px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Right Panel: Analysis & Insights */
+        .analysis-panel {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(98, 126, 234, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+        }
+        
+        .analysis-panel h3 {
+            color: #627eea;
+            margin-top: 0;
+            border-bottom: 1px solid rgba(98, 126, 234, 0.3);
+            padding-bottom: 10px;
+        }
+        
+        .metric-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .metric-value {
+            color: #f0b90b;
+            font-weight: bold;
+        }
+        
+        /* Assembly Path Visualization */
+        .assembly-path {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            border: 1px solid rgba(98, 126, 234, 0.3);
+        }
+        
+        .path-step {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        
+        .path-arrow {
+            color: #627eea;
+            margin: 0 10px;
+        }
+        
+        /* Alpha Opportunities */
+        .alpha-opportunities {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(240, 185, 11, 0.5);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+        
+        .alpha-opportunities h3 {
+            color: #f0b90b;
+            margin-top: 0;
+        }
+        
+        .opportunity-card {
+            background: rgba(240, 185, 11, 0.1);
+            border: 1px solid rgba(240, 185, 11, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .opportunity-card:hover {
+            background: rgba(240, 185, 11, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(240, 185, 11, 0.4);
+        }
+        
+        .opportunity-title {
+            font-weight: bold;
+            color: #f0b90b;
+            margin-bottom: 5px;
+        }
+        
+        .opportunity-ai {
+            font-size: 24px;
+            color: #00d4ff;
+            font-weight: bold;
+        }
+        
+        /* Controls */
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .control-btn {
+            padding: 12px 25px;
+            background: rgba(98, 126, 234, 0.2);
+            border: 1px solid #627eea;
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 16px;
+        }
+        
+        .control-btn:hover, .control-btn.active {
+            background: rgba(98, 126, 234, 0.5);
+            box-shadow: 0 0 20px rgba(98, 126, 234, 0.7);
+            transform: translateY(-2px);
+        }
+        
+        /* Assembly Timeline */
+        .timeline-container {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(98, 126, 234, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+        
+        .timeline-container h3 {
+            color: #627eea;
+            margin-top: 0;
+        }
+        
+        /* Legend */
+        .legend {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(98, 126, 234, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            font-size: 12px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        /* Tooltip */
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.95);
+            border: 1px solid #627eea;
+            border-radius: 8px;
+            padding: 12px;
+            pointer-events: none;
+            font-size: 14px;
+            max-width: 300px;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Assembly equation display */
+        .assembly-equation {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(98, 126, 234, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+        }
+        
+        .equation {
+            font-size: 18px;
+            color: #00d4ff;
+            margin: 10px 0;
+        }
+        
+        /* Network effect visualization */
+        .network-node {
+            cursor: pointer;
+        }
+        
+        .network-link {
+            stroke: rgba(98, 126, 234, 0.3);
+            stroke-width: 1;
+            fill: none;
+        }
+        
+        .network-link.active {
+            stroke: #627eea;
+            stroke-width: 2;
+        }
+        
+        /* Complexity meter */
+        .complexity-meter {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .complexity-bar {
+            background: rgba(98, 126, 234, 0.2);
+            border-radius: 20px;
+            height: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .complexity-fill {
+            background: linear-gradient(90deg, #627eea, #f0b90b, #00d4ff);
+            height: 100%;
+            width: 0%;
+            transition: width 1s ease;
+            position: relative;
+        }
+        
+        .complexity-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s linear infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        /* Primitive combination matrix */
+        .combination-matrix {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+        
+        .matrix-cell {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(98, 126, 234, 0.2);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .matrix-cell.viable {
+            background: rgba(0, 255, 0, 0.2);
+            border-color: rgba(0, 255, 0, 0.5);
+        }
+        
+        .matrix-cell.explored {
+            background: rgba(98, 126, 234, 0.3);
+            border-color: #627eea;
+        }
+        
+        .matrix-cell:hover {
+            transform: scale(1.2);
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Ethereum Assembly Theory</h1>
+            <p>Understanding protocol evolution through the lens of combinatorial complexity</p>
+        </div>
+        
+        <!-- Controls -->
+        <div class="controls">
+            <button class="control-btn" onclick="runEvolutionSimulation()">Run Evolution Simulation</button>
+            <button class="control-btn" onclick="findOptimalCombinations()">Find Optimal Combinations</button>
+            <button class="control-btn" onclick="predictNextPrimitives()">Predict Next Primitives</button>
+            <button class="control-btn" onclick="resetAnalysis()">Reset</button>
+        </div>
+        
+        <!-- Main Grid -->
+        <div class="main-grid">
+            <!-- Left Panel: Assembly Components -->
+            <div class="assembly-components">
+                <h3>Ethereum Primitives</h3>
+                
+                <div class="primitive-category">
+                    <h4>Base Layer (AI: 1-10)</h4>
+                    <div class="primitive-grid">
+                        <div class="primitive-node" data-ai="1" data-name="Account">
+                            Account
+                            <span class="assembly-index">1</span>
+                        </div>
+                        <div class="primitive-node" data-ai="2" data-name="Transaction">
+                            Transaction
+                            <span class="assembly-index">2</span>
+                        </div>
+                        <div class="primitive-node" data-ai="3" data-name="Block">
+                            Block
+                            <span class="assembly-index">3</span>
+                        </div>
+                        <div class="primitive-node" data-ai="5" data-name="Smart Contract">
+                            Smart Contract
+                            <span class="assembly-index">5</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="primitive-category">
+                    <h4>Protocol Layer (AI: 10-50)</h4>
+                    <div class="primitive-grid">
+                        <div class="primitive-node" data-ai="15" data-name="ERC-20">
+                            ERC-20
+                            <span class="assembly-index">15</span>
+                        </div>
+                        <div class="primitive-node" data-ai="20" data-name="ERC-721">
+                            ERC-721 (NFT)
+                            <span class="assembly-index">20</span>
+                        </div>
+                        <div class="primitive-node" data-ai="25" data-name="Multisig">
+                            Multisig
+                            <span class="assembly-index">25</span>
+                        </div>
+                        <div class="primitive-node" data-ai="30" data-name="Oracle">
+                            Oracle
+                            <span class="assembly-index">30</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="primitive-category">
+                    <h4>DeFi Primitives (AI: 50-200)</h4>
+                    <div class="primitive-grid">
+                        <div class="primitive-node" data-ai="60" data-name="AMM">
+                            AMM Pool
+                            <span class="assembly-index">60</span>
+                        </div>
+                        <div class="primitive-node" data-ai="80" data-name="Lending Pool">
+                            Lending Pool
+                            <span class="assembly-index">80</span>
+                        </div>
+                        <div class="primitive-node" data-ai="100" data-name="Flash Loan">
+                            Flash Loan
+                            <span class="assembly-index">100</span>
+                        </div>
+                        <div class="primitive-node" data-ai="120" data-name="Yield Farm">
+                            Yield Farm
+                            <span class="assembly-index">120</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="primitive-category">
+                    <h4>Advanced Systems (AI: 200+)</h4>
+                    <div class="primitive-grid">
+                        <div class="primitive-node" data-ai="250" data-name="L2 Rollup">
+                            L2 Rollup
+                            <span class="assembly-index">250</span>
+                        </div>
+                        <div class="primitive-node" data-ai="300" data-name="Cross-chain Bridge">
+                            Bridge
+                            <span class="assembly-index">300</span>
+                        </div>
+                        <div class="primitive-node" data-ai="400" data-name="MEV Auction">
+                            MEV Auction
+                            <span class="assembly-index">400</span>
+                        </div>
+                        <div class="primitive-node" data-ai="500" data-name="Intent System">
+                            Intent System
+                            <span class="assembly-index">500</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="assembly-equation">
+                    <div class="equation">AI(DeFi Protocol) = Σ AI(primitives) - shared_components</div>
+                    <div style="font-size: 12px; opacity: 0.8; margin-top: 10px;">
+                        Higher assembly index = More complex integration
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Center: Evolution Visualization -->
+            <div id="evolutionVisualization">
+                <svg id="mainViz" style="width: 100%; height: 800px;"></svg>
+                
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #627eea;"></div>
+                        <span>Core Primitives</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #f0b90b;"></div>
+                        <span>DeFi Innovations</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #00d4ff;"></div>
+                        <span>Emerging Patterns</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #ff006e;"></div>
+                        <span>Failed Experiments</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Panel: Analysis & Insights -->
+            <div class="analysis-panel">
+                <h3>Protocol Analysis</h3>
+                
+                <div class="metric-item">
+                    <span>Total Assembly Index:</span>
+                    <span class="metric-value" id="totalAI">0</span>
+                </div>
+                <div class="metric-item">
+                    <span>Selected Primitives:</span>
+                    <span class="metric-value" id="selectedCount">0</span>
+                </div>
+                <div class="metric-item">
+                    <span>Complexity Score:</span>
+                    <span class="metric-value" id="complexityScore">0</span>
+                </div>
+                <div class="metric-item">
+                    <span>Innovation Potential:</span>
+                    <span class="metric-value" id="innovationPotential">0%</span>
+                </div>
+                
+                <div class="complexity-meter">
+                    <h4 style="color: #f0b90b; margin: 0 0 10px 0;">System Complexity</h4>
+                    <div class="complexity-bar">
+                        <div class="complexity-fill" id="complexityBar"></div>
+                    </div>
+                </div>
+                
+                <h4 style="color: #f0b90b; margin-top: 30px;">Assembly Path</h4>
+                <div id="assemblyPath" class="assembly-path">
+                    <p style="opacity: 0.7; text-align: center;">Select primitives to see assembly path</p>
+                </div>
+                
+                <h4 style="color: #f0b90b; margin-top: 30px;">Network Effects</h4>
+                <div class="metric-item">
+                    <span>Composability Score:</span>
+                    <span class="metric-value" id="composabilityScore">0</span>
+                </div>
+                <div class="metric-item">
+                    <span>Integration Points:</span>
+                    <span class="metric-value" id="integrationPoints">0</span>
+                </div>
+                <div class="metric-item">
+                    <span>TVL Correlation:</span>
+                    <span class="metric-value" id="tvlCorrelation">0</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Alpha Opportunities Section -->
+        <div class="alpha-opportunities">
+            <h3>Alpha Opportunities: Unexplored Assembly Spaces</h3>
+            <div id="alphaOpportunities">
+                <!-- Dynamically generated opportunity cards -->
+            </div>
+        </div>
+        
+        <!-- Timeline Container -->
+        <div class="timeline-container">
+            <h3>Ethereum Assembly Evolution Timeline</h3>
+            <svg id="timeline" style="width: 100%; height: 200px;"></svg>
+        </div>
+        
+        <!-- Combination Matrix -->
+        <div class="combination-matrix">
+            <h3 style="color: #627eea;">Primitive Combination Matrix</h3>
+            <div id="combinationMatrix"></div>
+        </div>
+    </div>
+    
+    <div class="tooltip" id="tooltip" style="display: none;"></div>
+    
+    <script src="ethereum-assembly-theory.js"></script>
+</body>
+</html>
