@@ -952,126 +952,213 @@ function showMiningComplete() {
 // Build combination matrix progressively
 function buildCombinationMatrix() {
     const matrixContainer = document.getElementById('combinationMatrix');
+    matrixContainer.innerHTML = ''; // Clear existing content
+    
     const primitiveNames = Object.keys(primitiveData);
+    const numPrimitives = primitiveNames.length; // Should be 16
     
-    // Create wrapper for scrolling
+    // Create progress indicator
+    const progressDiv = document.createElement('div');
+    progressDiv.style.cssText = 'text-align: center; margin-bottom: 10px; color: #f0b90b;';
+    progressDiv.innerHTML = '<span id="matrixProgress">Mining combinations: 0%</span>';
+    matrixContainer.appendChild(progressDiv);
+    
+    // Create wrapper for the matrix
     const wrapper = document.createElement('div');
-    wrapper.style.cssText = 'overflow-x: auto; overflow-y: auto; max-height: 600px; max-width: 100%;';
+    wrapper.style.cssText = 'overflow: auto; max-height: 500px; border: 1px solid rgba(98, 126, 234, 0.3); border-radius: 10px; padding: 10px;';
     
-    // Create matrix structure
-    const table = document.createElement('table');
-    table.style.cssText = 'border-collapse: collapse; margin-top: 20px; min-width: 100%;';
+    // Create the matrix grid
+    const grid = document.createElement('div');
+    grid.style.cssText = `
+        display: grid;
+        grid-template-columns: 100px repeat(${numPrimitives}, 40px);
+        grid-template-rows: 80px repeat(${numPrimitives}, 40px);
+        gap: 1px;
+        background: rgba(98, 126, 234, 0.1);
+        padding: 1px;
+    `;
     
-    // Header row
-    const headerRow = document.createElement('tr');
-    headerRow.innerHTML = '<th style="border: 1px solid #627eea; padding: 5px; position: sticky; left: 0; background: #0a0a0a; z-index: 1;"></th>';
-    primitiveNames.forEach(name => {
-        const th = document.createElement('th');
-        th.style.cssText = 'border: 1px solid #627eea; padding: 5px; font-size: 10px; transform: rotate(-45deg); white-space: nowrap; height: 100px; vertical-align: bottom;';
-        th.textContent = name;
-        headerRow.appendChild(th);
+    // Add empty corner cell
+    const cornerCell = document.createElement('div');
+    cornerCell.style.cssText = 'background: #0a0a0a;';
+    grid.appendChild(cornerCell);
+    
+    // Add column headers
+    primitiveNames.forEach((name, index) => {
+        const header = document.createElement('div');
+        header.style.cssText = `
+            background: #0a0a0a;
+            color: #627eea;
+            font-size: 9px;
+            display: flex;
+            align-items: end;
+            justify-content: center;
+            padding: 5px 2px;
+            text-align: center;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        `;
+        header.textContent = name;
+        grid.appendChild(header);
     });
-    table.appendChild(headerRow);
     
-    // Create rows
+    // Add rows with headers and cells
     primitiveNames.forEach((rowName, rowIndex) => {
-        const row = document.createElement('tr');
-        const rowHeader = document.createElement('th');
-        rowHeader.style.cssText = 'border: 1px solid #627eea; padding: 5px; font-size: 10px; text-align: left; position: sticky; left: 0; background: #0a0a0a; z-index: 1;';
+        // Row header
+        const rowHeader = document.createElement('div');
+        rowHeader.style.cssText = `
+            background: #0a0a0a;
+            color: #627eea;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            padding: 0 5px;
+            text-align: right;
+        `;
         rowHeader.textContent = rowName;
-        row.appendChild(rowHeader);
+        grid.appendChild(rowHeader);
         
+        // Row cells
         primitiveNames.forEach((colName, colIndex) => {
-            const cell = document.createElement('td');
-            cell.style.cssText = 'border: 1px solid rgba(98, 126, 234, 0.2); width: 40px; height: 40px; text-align: center; position: relative; cursor: pointer;';
+            const cell = document.createElement('div');
             cell.className = `matrix-cell cell-${rowIndex}-${colIndex}`;
             cell.dataset.row = rowName;
             cell.dataset.col = colName;
+            cell.dataset.rowIndex = rowIndex;
+            cell.dataset.colIndex = colIndex;
+            
+            cell.style.cssText = `
+                background: rgba(0, 0, 0, 0.5);
+                border: 1px solid rgba(98, 126, 234, 0.2);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                position: relative;
+                overflow: hidden;
+            `;
+            
+            // Cell content
+            const content = document.createElement('div');
+            content.className = 'cell-content';
+            content.style.cssText = 'font-size: 16px; font-weight: bold; opacity: 0; transition: opacity 0.3s;';
             
             if (rowIndex === colIndex) {
-                cell.style.background = 'rgba(98, 126, 234, 0.1)';
-                cell.innerHTML = '<div class="cell-content">—</div>';
+                cell.style.background = 'rgba(98, 126, 234, 0.2)';
+                content.textContent = '—';
+                content.style.opacity = '1';
             } else {
-                cell.innerHTML = '<div class="cell-content" style="opacity: 0; font-size: 14px;">?</div>';
+                content.textContent = '?';
             }
             
-            row.appendChild(cell);
+            cell.appendChild(content);
+            grid.appendChild(cell);
         });
-        
-        table.appendChild(row);
     });
     
-    wrapper.appendChild(table);
+    wrapper.appendChild(grid);
     matrixContainer.appendChild(wrapper);
     
-    // Progressively reveal ALL combinations
-    let cellIndex = 0;
-    const totalCells = primitiveNames.length * primitiveNames.length;
-    const revealBatchSize = 5; // Reveal 5 cells at a time for faster coverage
+    // Mining animation
+    let currentCell = 0;
+    const totalCells = numPrimitives * numPrimitives;
+    const miningSpeed = 15; // milliseconds per cell
     
-    const revealInterval = setInterval(() => {
-        if (cellIndex >= totalCells) {
-            clearInterval(revealInterval);
-            // Add completion indicator
-            const completeMsg = document.createElement('div');
-            completeMsg.style.cssText = 'text-align: center; margin-top: 10px; color: #00d4ff; font-size: 14px;';
-            completeMsg.textContent = 'Full design space explored: ' + totalCells + ' combinations analyzed';
-            matrixContainer.appendChild(completeMsg);
-            return;
+    // Create mining effect
+    function mineCell(rowIndex, colIndex) {
+        if (rowIndex === colIndex) return; // Skip diagonal
+        
+        const cell = document.querySelector(`.cell-${rowIndex}-${colIndex}`);
+        if (!cell) return;
+        
+        const rowName = primitiveNames[rowIndex];
+        const colName = primitiveNames[colIndex];
+        const content = cell.querySelector('.cell-content');
+        
+        // Add mining pulse effect
+        const pulse = document.createElement('div');
+        pulse.style.cssText = `
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, rgba(240, 185, 11, 0.8), transparent);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse 0.5s ease-out;
+        `;
+        cell.appendChild(pulse);
+        
+        setTimeout(() => pulse.remove(), 500);
+        
+        // Calculate viability
+        const viability = calculateCombinationViability(rowName, colName);
+        
+        // Update cell based on viability
+        if (viability > 0.7) {
+            cell.style.background = 'rgba(0, 255, 0, 0.3)';
+            content.textContent = '✓';
+            content.style.color = '#00ff00';
+        } else if (viability > 0.4) {
+            cell.style.background = 'rgba(255, 255, 0, 0.2)';
+            content.textContent = '~';
+            content.style.color = '#ffff00';
+        } else {
+            cell.style.background = 'rgba(255, 0, 0, 0.1)';
+            content.textContent = '✗';
+            content.style.color = '#ff0000';
         }
         
-        // Reveal multiple cells at once
-        for (let i = 0; i < revealBatchSize && cellIndex < totalCells; i++) {
-            const row = Math.floor(cellIndex / primitiveNames.length);
-            const col = cellIndex % primitiveNames.length;
-            
-            if (row !== col) {
-                const cell = document.querySelector(`.cell-${row}-${col}`);
-                const rowName = primitiveNames[row];
-                const colName = primitiveNames[col];
-                
-                // Calculate combination viability
-                const viability = calculateCombinationViability(rowName, colName);
-                const content = cell.querySelector('.cell-content');
-                
-                if (viability > 0.7) {
-                    cell.style.background = 'rgba(0, 255, 0, 0.3)';
-                    content.textContent = '✓';
-                    content.style.color = '#00ff00';
-                } else if (viability > 0.4) {
-                    cell.style.background = 'rgba(255, 255, 0, 0.2)';
-                    content.textContent = '~';
-                    content.style.color = '#ffff00';
-                } else {
-                    cell.style.background = 'rgba(255, 0, 0, 0.1)';
-                    content.textContent = '✗';
-                    content.style.color = '#ff0000';
-                }
-                
-                content.style.transition = 'opacity 0.3s';
-                content.style.opacity = '1';
-                
-                // Add hover effect
-                cell.addEventListener('mouseenter', function() {
-                    const tooltip = document.getElementById('tooltip');
-                    tooltip.style.display = 'block';
-                    tooltip.style.left = this.getBoundingClientRect().left + 'px';
-                    tooltip.style.top = (this.getBoundingClientRect().top - 60) + 'px';
-                    tooltip.innerHTML = `
-                        <strong>${rowName} + ${colName}</strong><br>
-                        Combined AI: ${primitiveData[rowName].ai + primitiveData[colName].ai}<br>
-                        Viability: ${(viability * 100).toFixed(0)}%
-                    `;
-                });
-                
-                cell.addEventListener('mouseleave', function() {
-                    document.getElementById('tooltip').style.display = 'none';
-                });
-            }
+        content.style.opacity = '1';
         
-            cellIndex++;
+        // Add hover effect
+        cell.onmouseenter = function(e) {
+            const tooltip = document.getElementById('tooltip');
+            tooltip.style.display = 'block';
+            tooltip.style.left = e.pageX + 10 + 'px';
+            tooltip.style.top = e.pageY - 60 + 'px';
+            tooltip.innerHTML = `
+                <strong>${rowName} + ${colName}</strong><br>
+                Combined AI: ${primitiveData[rowName].ai + primitiveData[colName].ai}<br>
+                Viability: ${(viability * 100).toFixed(0)}%<br>
+                ${viability > 0.7 ? 'High potential combination!' : 
+                  viability > 0.4 ? 'Moderate potential' : 'Low compatibility'}
+            `;
+        };
+        
+        cell.onmouseleave = function() {
+            document.getElementById('tooltip').style.display = 'none';
+        };
+    }
+    
+    // Start mining
+    const miningInterval = setInterval(() => {
+        const row = Math.floor(currentCell / numPrimitives);
+        const col = currentCell % numPrimitives;
+        
+        mineCell(row, col);
+        
+        currentCell++;
+        const progress = Math.floor((currentCell / totalCells) * 100);
+        document.getElementById('matrixProgress').textContent = `Mining combinations: ${progress}%`;
+        
+        if (currentCell >= totalCells) {
+            clearInterval(miningInterval);
+            document.getElementById('matrixProgress').textContent = `Mining complete: ${totalCells} combinations analyzed`;
+            document.getElementById('matrixProgress').style.color = '#00d4ff';
         }
-    }, 20); // Faster reveal with batch processing
+    }, miningSpeed);
+    
+    // Add CSS animation
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(3); opacity: 0; }
+        }
+    `;
+    document.head.appendChild(style);
 }
 
 // Calculate combination viability
