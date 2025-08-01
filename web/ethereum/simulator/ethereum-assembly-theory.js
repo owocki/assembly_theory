@@ -481,14 +481,15 @@ window.selectOpportunity = function(primitives) {
 };
 
 // Store future events globally for mining animation
-let futureEvents = [];
+let futureEventsTimelines = [];
 let minedEvents = [];
+let combinationMatrix = new Map();
 
-// Create timeline visualization
+// Create timeline visualization with multiple possibilities
 function createTimeline() {
     const timelineSvg = d3.select('#timeline');
     const timelineWidth = 1200;
-    const timelineHeight = 200;
+    const timelineHeight = 600;
     
     timelineSvg.attr('viewBox', `0 0 ${timelineWidth} ${timelineHeight}`);
     
@@ -506,28 +507,72 @@ function createTimeline() {
         { year: 2025, name: "Account Abstraction", ai: 700, mined: true }
     ];
     
-    // Future events to be "mined"
-    futureEvents = [
-        { year: 2026, name: "Quantum-Resistant Ethereum", ai: 900, mined: false },
-        { year: 2027, name: "AI-Driven Protocol Optimization", ai: 1100, mined: false },
-        { year: 2028, name: "Decentralized AGI Coordination", ai: 1400, mined: false },
-        { year: 2029, name: "Multi-Chain State Synthesis", ai: 1800, mined: false },
-        { year: 2030, name: "Universal DeFi Liquidity Layer", ai: 2300, mined: false },
-        { year: 2032, name: "Autonomous Economic Zones", ai: 3000, mined: false },
-        { year: 2034, name: "Planetary Consensus Protocol", ai: 4000, mined: false },
-        { year: 2036, name: "Time-Dilated Smart Contracts", ai: 5500, mined: false },
-        { year: 2038, name: "Quantum Entangled Transactions", ai: 7500, mined: false },
-        { year: 2040, name: "Singularity Integration Layer", ai: 10000, mined: false }
+    // Four different future timelines
+    futureEventsTimelines = [
+        // Timeline 1: AI-Dominated Future
+        {
+            name: "AI-Dominated",
+            color: "#00d4ff",
+            events: [
+                { year: 2026, name: "AI Protocol Agents", ai: 900 },
+                { year: 2028, name: "Self-Optimizing Contracts", ai: 1400 },
+                { year: 2030, name: "AGI Trading Systems", ai: 2300 },
+                { year: 2032, name: "Autonomous DeFi Networks", ai: 3500 },
+                { year: 2035, name: "Sentient Economic Zones", ai: 5000 },
+                { year: 2038, name: "AI Governance Singularity", ai: 8000 },
+                { year: 2040, name: "Post-Human Finance", ai: 12000 }
+            ]
+        },
+        // Timeline 2: Quantum Future
+        {
+            name: "Quantum-Native",
+            color: "#ff00ff",
+            events: [
+                { year: 2026, name: "Quantum-Resistant Migration", ai: 800 },
+                { year: 2028, name: "Quantum Key Distribution", ai: 1200 },
+                { year: 2030, name: "Superposition Transactions", ai: 2000 },
+                { year: 2033, name: "Quantum Oracle Networks", ai: 3800 },
+                { year: 2036, name: "Entangled State Channels", ai: 6000 },
+                { year: 2039, name: "Quantum DeFi Supremacy", ai: 9000 },
+                { year: 2040, name: "Multiverse Consensus", ai: 15000 }
+            ]
+        },
+        // Timeline 3: Cross-Chain Unification
+        {
+            name: "Unified Ecosystem",
+            color: "#00ff00",
+            events: [
+                { year: 2026, name: "Universal Bridge Protocol", ai: 850 },
+                { year: 2028, name: "Chain Abstraction Layer", ai: 1300 },
+                { year: 2030, name: "Omnichain Liquidity", ai: 2100 },
+                { year: 2032, name: "Seamless State Migration", ai: 3200 },
+                { year: 2035, name: "Unified Global Ledger", ai: 5500 },
+                { year: 2037, name: "Planetary Payment Rails", ai: 7000 },
+                { year: 2040, name: "Cosmic Transaction Network", ai: 11000 }
+            ]
+        },
+        // Timeline 4: Social Coordination
+        {
+            name: "Human-Centric",
+            color: "#ffaa00",
+            events: [
+                { year: 2026, name: "DAO Coordination Protocols", ai: 750 },
+                { year: 2028, name: "Social Consensus Mechanisms", ai: 1100 },
+                { year: 2030, name: "Global UBI Infrastructure", ai: 1800 },
+                { year: 2033, name: "Reputation-Based Economy", ai: 3000 },
+                { year: 2036, name: "Collective Intelligence DAOs", ai: 4500 },
+                { year: 2039, name: "Post-Scarcity Protocols", ai: 7500 },
+                { year: 2040, name: "Abundance Distribution Net", ai: 10000 }
+            ]
+        }
     ];
-    
-    const allEvents = [...historicalEvents, ...futureEvents];
     
     const xScale = d3.scaleLinear()
         .domain([2015, 2040])
         .range([50, timelineWidth - 50]);
     
     const yScale = d3.scaleLinear()
-        .domain([0, 10000])
+        .domain([0, 15000])
         .range([timelineHeight - 30, 30]);
     
     // Draw axis
@@ -536,6 +581,19 @@ function createTimeline() {
         .attr('transform', `translate(0, ${timelineHeight - 30})`)
         .call(d3.axisBottom(xScale).tickFormat(d3.format('d')));
     
+    // Add timeline labels
+    futureEventsTimelines.forEach((timeline, index) => {
+        timelineSvg.append('text')
+            .attr('x', xScale(2033))
+            .attr('y', 50 + index * 120)
+            .attr('text-anchor', 'middle')
+            .attr('fill', timeline.color)
+            .attr('font-size', '12px')
+            .attr('font-weight', 'bold')
+            .attr('opacity', 0.8)
+            .text(timeline.name);
+    });
+    
     // Add future zone background
     const futureZone = timelineSvg.append('rect')
         .attr('class', 'future-zone')
@@ -543,20 +601,9 @@ function createTimeline() {
         .attr('y', 0)
         .attr('width', xScale(2040) - xScale(2026))
         .attr('height', timelineHeight - 30)
-        .attr('fill', 'rgba(98, 126, 234, 0.1)')
+        .attr('fill', 'rgba(98, 126, 234, 0.05)')
         .attr('stroke', 'rgba(98, 126, 234, 0.3)')
         .attr('stroke-dasharray', '5,5');
-    
-    // Add "Unmined Future" label
-    timelineSvg.append('text')
-        .attr('class', 'future-label')
-        .attr('x', (xScale(2026) + xScale(2040)) / 2)
-        .attr('y', 20)
-        .attr('text-anchor', 'middle')
-        .attr('fill', '#627eea')
-        .attr('font-size', '14px')
-        .attr('opacity', 0.7)
-        .text('Unmined Future');
     
     // Draw historical line
     const line = d3.line()
@@ -569,17 +616,57 @@ function createTimeline() {
         .attr('class', 'historical-line')
         .attr('fill', 'none')
         .attr('stroke', '#627eea')
-        .attr('stroke-width', 2)
+        .attr('stroke-width', 3)
         .attr('d', line);
     
-    // Container for mined line (will be updated as events are mined)
-    const minedPath = timelineSvg.append('path')
-        .attr('class', 'mined-line')
-        .attr('fill', 'none')
-        .attr('stroke', '#00d4ff')
-        .attr('stroke-width', 3)
-        .attr('stroke-dasharray', '10,5')
-        .attr('opacity', 0);
+    // Create groups for each timeline
+    futureEventsTimelines.forEach((timeline, index) => {
+        const group = timelineSvg.append('g')
+            .attr('class', `timeline-group timeline-${index}`)
+            .attr('opacity', 0.3);
+        
+        // Add connecting line from last historical point
+        const lastHistorical = historicalEvents[historicalEvents.length - 1];
+        const connectionLine = group.append('line')
+            .attr('class', 'connection-line')
+            .attr('x1', xScale(lastHistorical.year))
+            .attr('y1', yScale(lastHistorical.ai))
+            .attr('x2', xScale(timeline.events[0].year))
+            .attr('y2', yScale(timeline.events[0].ai))
+            .attr('stroke', timeline.color)
+            .attr('stroke-width', 1)
+            .attr('stroke-dasharray', '3,3')
+            .attr('opacity', 0);
+        
+        // Future path for this timeline
+        const futurePath = group.append('path')
+            .attr('class', `future-path future-path-${index}`)
+            .attr('fill', 'none')
+            .attr('stroke', timeline.color)
+            .attr('stroke-width', 2)
+            .attr('stroke-dasharray', '5,5')
+            .attr('opacity', 0);
+        
+        // Future points
+        timeline.events.forEach(event => {
+            group.append('circle')
+                .attr('class', `future-point timeline-${index}-year-${event.year}`)
+                .attr('cx', xScale(event.year))
+                .attr('cy', yScale(event.ai))
+                .attr('r', 0)
+                .attr('fill', timeline.color)
+                .attr('opacity', 0)
+                .on('mouseover', function(e) {
+                    showTooltip(e, {
+                        name: event.name,
+                        ai: event.ai,
+                        year: event.year,
+                        status: timeline.name
+                    });
+                })
+                .on('mouseout', hideTooltip);
+        });
+    });
     
     // Draw historical points
     timelineSvg.selectAll('.historical-point')
@@ -588,7 +675,7 @@ function createTimeline() {
         .attr('class', 'historical-point')
         .attr('cx', d => xScale(d.year))
         .attr('cy', d => yScale(d.ai))
-        .attr('r', 5)
+        .attr('r', 6)
         .attr('fill', '#f0b90b')
         .on('mouseover', function(event, d) {
             showTooltip(event, {
@@ -599,20 +686,6 @@ function createTimeline() {
             });
         })
         .on('mouseout', hideTooltip);
-    
-    // Container for future points (initially hidden)
-    const futurePointsGroup = timelineSvg.append('g')
-        .attr('class', 'future-points');
-    
-    futurePointsGroup.selectAll('.future-point')
-        .data(futureEvents)
-        .enter().append('circle')
-        .attr('class', d => `future-point future-${d.year}`)
-        .attr('cx', d => xScale(d.year))
-        .attr('cy', d => yScale(d.ai))
-        .attr('r', 0)
-        .attr('fill', '#00d4ff')
-        .attr('opacity', 0);
 }
 
 // Evolution simulation with timeline mining
@@ -634,6 +707,19 @@ window.runEvolutionSimulation = function() {
     
     // Start mining future events
     mineTimelineEvents();
+    
+    // Start building combination matrix
+    buildCombinationMatrix();
+    
+    // Auto-run optimal combinations search after delay
+    setTimeout(() => {
+        findOptimalCombinations();
+    }, 3000);
+    
+    // Auto-run predictions after delay
+    setTimeout(() => {
+        predictNextPrimitives();
+    }, 6000);
     
     // Animate particles
     const interval = setInterval(() => {
@@ -677,127 +763,144 @@ window.runEvolutionSimulation = function() {
     }, 50);
 };
 
-// Mine timeline events animation
+// Mine timeline events animation with multiple timelines
 function mineTimelineEvents() {
     const timelineSvg = d3.select('#timeline');
     const timelineWidth = 1200;
-    const timelineHeight = 200;
+    const timelineHeight = 600;
     
     const xScale = d3.scaleLinear()
         .domain([2015, 2040])
         .range([50, timelineWidth - 50]);
     
     const yScale = d3.scaleLinear()
-        .domain([0, 10000])
+        .domain([0, 15000])
         .range([timelineHeight - 30, 30]);
     
+    const line = d3.line()
+        .x(d => xScale(d.year))
+        .y(d => yScale(d.ai))
+        .curve(d3.curveMonotoneX);
+    
     let eventIndex = 0;
+    const maxEvents = Math.max(...futureEventsTimelines.map(t => t.events.length));
     
     // Mining animation interval
     const miningInterval = setInterval(() => {
-        if (eventIndex >= futureEvents.length) {
+        if (eventIndex >= maxEvents) {
             clearInterval(miningInterval);
-            // Show completion effect
             showMiningComplete();
             return;
         }
         
-        const event = futureEvents[eventIndex];
-        event.mined = true;
-        minedEvents.push(event);
-        
-        // Animate the point appearing
-        const futurePoint = timelineSvg.select(`.future-${event.year}`)
-            .transition()
-            .duration(500)
-            .attr('r', 8)
-            .attr('opacity', 1)
-            .transition()
-            .duration(300)
-            .attr('r', 5);
-        
-        // Add mining effect
-        const miningEffect = timelineSvg.append('circle')
-            .attr('cx', xScale(event.year))
-            .attr('cy', yScale(event.ai))
-            .attr('r', 5)
-            .attr('fill', 'none')
-            .attr('stroke', '#00d4ff')
-            .attr('stroke-width', 2)
-            .attr('opacity', 1);
-        
-        miningEffect.transition()
-            .duration(1000)
-            .attr('r', 30)
-            .attr('opacity', 0)
-            .remove();
-        
-        // Update the mined line
-        if (minedEvents.length > 1) {
-            const line = d3.line()
-                .x(d => xScale(d.year))
-                .y(d => yScale(d.ai))
-                .curve(d3.curveMonotoneX);
-            
-            const lastHistorical = { year: 2025, name: "Account Abstraction", ai: 700 };
-            const lineData = [lastHistorical, ...minedEvents];
-            
-            timelineSvg.select('.mined-line')
-                .datum(lineData)
-                .attr('opacity', 1)
-                .transition()
-                .duration(500)
-                .attr('d', line);
-        }
-        
-        // Add event label
-        const label = timelineSvg.append('text')
-            .attr('x', xScale(event.year))
-            .attr('y', yScale(event.ai) - 15)
-            .attr('text-anchor', 'middle')
-            .attr('fill', '#00d4ff')
-            .attr('font-size', '10px')
-            .attr('opacity', 0)
-            .text(event.name);
-        
-        label.transition()
-            .duration(500)
-            .attr('opacity', 1)
-            .transition()
-            .delay(2000)
-            .duration(500)
-            .attr('opacity', 0.3);
+        // Mine events from all timelines at this index
+        futureEventsTimelines.forEach((timeline, timelineIndex) => {
+            if (eventIndex < timeline.events.length) {
+                const event = timeline.events[eventIndex];
+                const group = timelineSvg.select(`.timeline-${timelineIndex}`);
+                
+                // Animate timeline becoming more visible
+                group.transition()
+                    .duration(500)
+                    .attr('opacity', 0.8);
+                
+                // Show connection line
+                group.select('.connection-line')
+                    .transition()
+                    .duration(500)
+                    .attr('opacity', 1);
+                
+                // Animate the point appearing
+                const futurePoint = group.select(`.timeline-${timelineIndex}-year-${event.year}`)
+                    .transition()
+                    .duration(500)
+                    .attr('r', 8)
+                    .attr('opacity', 1)
+                    .transition()
+                    .duration(300)
+                    .attr('r', 5);
+                
+                // Add mining effect
+                const miningEffect = timelineSvg.append('circle')
+                    .attr('cx', xScale(event.year))
+                    .attr('cy', yScale(event.ai))
+                    .attr('r', 5)
+                    .attr('fill', 'none')
+                    .attr('stroke', timeline.color)
+                    .attr('stroke-width', 2)
+                    .attr('opacity', 1);
+                
+                miningEffect.transition()
+                    .duration(1000)
+                    .attr('r', 30)
+                    .attr('opacity', 0)
+                    .remove();
+                
+                // Update the path
+                const pathData = timeline.events.slice(0, eventIndex + 1);
+                if (pathData.length > 1) {
+                    group.select(`.future-path-${timelineIndex}`)
+                        .datum(pathData)
+                        .attr('opacity', 1)
+                        .transition()
+                        .duration(500)
+                        .attr('d', line);
+                }
+                
+                // Add event label for key events
+                if (event.year % 4 === 0) {
+                    const label = timelineSvg.append('text')
+                        .attr('x', xScale(event.year))
+                        .attr('y', yScale(event.ai) - 15)
+                        .attr('text-anchor', 'middle')
+                        .attr('fill', timeline.color)
+                        .attr('font-size', '9px')
+                        .attr('opacity', 0)
+                        .text(event.name);
+                    
+                    label.transition()
+                        .duration(500)
+                        .attr('opacity', 0.8)
+                        .transition()
+                        .delay(3000)
+                        .duration(500)
+                        .attr('opacity', 0.3);
+                }
+            }
+        });
         
         // Update future zone
-        timelineSvg.select('.future-zone')
-            .transition()
-            .duration(500)
-            .attr('x', xScale(event.year + 1));
+        const nextYear = 2026 + (eventIndex + 1) * 2;
+        if (nextYear <= 2040) {
+            timelineSvg.select('.future-zone')
+                .transition()
+                .duration(500)
+                .attr('x', xScale(nextYear));
+        }
         
         eventIndex++;
-    }, 1500); // Mine one event every 1.5 seconds
+    }, 1200); // Mine events every 1.2 seconds
 }
 
 // Show mining completion effect
 function showMiningComplete() {
     const timelineSvg = d3.select('#timeline');
     
-    // Update label
-    timelineSvg.select('.future-label')
+    // Remove future zone
+    timelineSvg.select('.future-zone')
         .transition()
         .duration(1000)
-        .text('Future Mined!')
-        .attr('fill', '#00d4ff')
-        .attr('font-size', '18px')
-        .attr('font-weight', 'bold');
+        .attr('opacity', 0)
+        .remove();
     
     // Add completion pulse
     const timelineWidth = 1200;
+    const timelineHeight = 600;
     const pulse = timelineSvg.append('rect')
         .attr('x', 0)
         .attr('y', 0)
         .attr('width', timelineWidth)
-        .attr('height', 200)
+        .attr('height', timelineHeight)
         .attr('fill', '#00d4ff')
         .attr('opacity', 0);
     
@@ -808,6 +911,152 @@ function showMiningComplete() {
         .duration(500)
         .attr('opacity', 0)
         .remove();
+}
+
+// Build combination matrix progressively
+function buildCombinationMatrix() {
+    const matrixContainer = document.getElementById('combinationMatrix');
+    const primitiveNames = Object.keys(primitiveData);
+    
+    // Create matrix structure
+    const table = document.createElement('table');
+    table.style.cssText = 'border-collapse: collapse; width: 100%; margin-top: 20px;';
+    
+    // Header row
+    const headerRow = document.createElement('tr');
+    headerRow.innerHTML = '<th style="border: 1px solid #627eea; padding: 5px;"></th>';
+    primitiveNames.forEach(name => {
+        const th = document.createElement('th');
+        th.style.cssText = 'border: 1px solid #627eea; padding: 5px; font-size: 10px; transform: rotate(-45deg); white-space: nowrap;';
+        th.textContent = name;
+        headerRow.appendChild(th);
+    });
+    table.appendChild(headerRow);
+    
+    // Create rows
+    primitiveNames.forEach((rowName, rowIndex) => {
+        const row = document.createElement('tr');
+        const rowHeader = document.createElement('th');
+        rowHeader.style.cssText = 'border: 1px solid #627eea; padding: 5px; font-size: 10px; text-align: left;';
+        rowHeader.textContent = rowName;
+        row.appendChild(rowHeader);
+        
+        primitiveNames.forEach((colName, colIndex) => {
+            const cell = document.createElement('td');
+            cell.style.cssText = 'border: 1px solid rgba(98, 126, 234, 0.2); width: 40px; height: 40px; text-align: center; position: relative; cursor: pointer;';
+            cell.className = `matrix-cell cell-${rowIndex}-${colIndex}`;
+            cell.dataset.row = rowName;
+            cell.dataset.col = colName;
+            
+            if (rowIndex === colIndex) {
+                cell.style.background = 'rgba(98, 126, 234, 0.1)';
+                cell.textContent = '—';
+            } else {
+                cell.innerHTML = '<div class="cell-content" style="opacity: 0;">?</div>';
+            }
+            
+            row.appendChild(cell);
+        });
+        
+        table.appendChild(row);
+    });
+    
+    matrixContainer.appendChild(table);
+    
+    // Progressively reveal combinations
+    let cellIndex = 0;
+    const totalCells = primitiveNames.length * primitiveNames.length;
+    
+    const revealInterval = setInterval(() => {
+        if (cellIndex >= totalCells) {
+            clearInterval(revealInterval);
+            return;
+        }
+        
+        const row = Math.floor(cellIndex / primitiveNames.length);
+        const col = cellIndex % primitiveNames.length;
+        
+        if (row !== col) {
+            const cell = document.querySelector(`.cell-${row}-${col}`);
+            const rowName = primitiveNames[row];
+            const colName = primitiveNames[col];
+            
+            // Calculate combination viability
+            const viability = calculateCombinationViability(rowName, colName);
+            const content = cell.querySelector('.cell-content');
+            
+            if (viability > 0.7) {
+                cell.style.background = 'rgba(0, 255, 0, 0.3)';
+                content.textContent = '✓';
+                content.style.color = '#00ff00';
+            } else if (viability > 0.4) {
+                cell.style.background = 'rgba(255, 255, 0, 0.2)';
+                content.textContent = '~';
+                content.style.color = '#ffff00';
+            } else {
+                cell.style.background = 'rgba(255, 0, 0, 0.1)';
+                content.textContent = '✗';
+                content.style.color = '#ff0000';
+            }
+            
+            content.style.transition = 'opacity 0.3s';
+            content.style.opacity = '1';
+            
+            // Add hover effect
+            cell.addEventListener('mouseenter', function() {
+                const tooltip = document.getElementById('tooltip');
+                tooltip.style.display = 'block';
+                tooltip.style.left = this.getBoundingClientRect().left + 'px';
+                tooltip.style.top = (this.getBoundingClientRect().top - 60) + 'px';
+                tooltip.innerHTML = `
+                    <strong>${rowName} + ${colName}</strong><br>
+                    Combined AI: ${primitiveData[rowName].ai + primitiveData[colName].ai}<br>
+                    Viability: ${(viability * 100).toFixed(0)}%
+                `;
+            });
+            
+            cell.addEventListener('mouseleave', function() {
+                document.getElementById('tooltip').style.display = 'none';
+            });
+        }
+        
+        cellIndex++;
+    }, 50); // Reveal one cell every 50ms
+}
+
+// Calculate combination viability
+function calculateCombinationViability(primitive1, primitive2) {
+    const p1 = primitiveData[primitive1];
+    const p2 = primitiveData[primitive2];
+    
+    // Check for known successful combinations
+    const isKnownSuccess = successfulCombinations.some(combo => 
+        combo.primitives.includes(primitive1) && combo.primitives.includes(primitive2)
+    );
+    
+    if (isKnownSuccess) return 0.9;
+    
+    // Check for dependency relationships
+    if (p1.dependencies.includes(primitive2) || p2.dependencies.includes(primitive1)) {
+        return 0.8;
+    }
+    
+    // Check category compatibility
+    const categoryScores = {
+        'base-base': 0.5,
+        'base-protocol': 0.7,
+        'base-defi': 0.6,
+        'base-advanced': 0.4,
+        'protocol-protocol': 0.6,
+        'protocol-defi': 0.8,
+        'protocol-advanced': 0.7,
+        'defi-defi': 0.7,
+        'defi-advanced': 0.8,
+        'advanced-advanced': 0.6
+    };
+    
+    const key = [p1.category, p2.category].sort().join('-');
+    return categoryScores[key] || 0.3;
 }
 
 // Find optimal combinations
@@ -924,10 +1173,33 @@ window.predictNextPrimitives = function() {
 
 // Reset analysis
 window.resetAnalysis = function() {
+    // Clear selections
     selectedPrimitives.clear();
     document.querySelectorAll('.primitive-node').forEach(node => {
         node.classList.remove('selected');
     });
+    
+    // Re-select all primitives
+    Object.keys(primitiveData).forEach(name => {
+        selectedPrimitives.add(name);
+    });
+    document.querySelectorAll('.primitive-node').forEach(node => {
+        node.classList.add('selected');
+    });
+    
+    // Clear combination matrix
+    const matrixContainer = document.getElementById('combinationMatrix');
+    matrixContainer.innerHTML = '';
+    
+    // Clear mined events
+    minedEvents = [];
+    
+    // Reset timeline
+    const timelineSvg = d3.select('#timeline');
+    timelineSvg.selectAll('*').remove();
+    createTimeline();
+    
+    // Update analysis
     updateAnalysis();
     updateAssemblyPath();
 };

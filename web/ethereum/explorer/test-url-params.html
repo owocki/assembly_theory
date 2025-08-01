@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test URL Parameters</title>
+</head>
+<body>
+    <h1>Test URL Parameters</h1>
+    <p>Click the links below to test different URL parameter combinations:</p>
+    
+    <h2>Basic Tests</h2>
+    <ul>
+        <li><a href="index.html">Default (no parameters)</a></li>
+        <li><a href="index.html?aiMin=3&aiMax=6">AI Range: Tier 3-6</a></li>
+        <li><a href="index.html?domains=cosmic,biological">Only Cosmic and Biological domains</a></li>
+        <li><a href="index.html?search=hydrogen">Search for "hydrogen"</a></li>
+        <li><a href="index.html?linkStrategy=hierarchical">Hierarchical link strategy</a></li>
+        <li><a href="index.html?layout=hierarchical">Hierarchical layout</a></li>
+    </ul>
+    
+    <h2>Combined Tests</h2>
+    <ul>
+        <li><a href="index.html?aiMin=2&aiMax=5&domains=biological,cognitive&search=cell">Complex filter combination</a></li>
+        <li><a href="index.html?linkStrategy=proximity&layout=timeline&domains=cosmic">Link strategy + layout + domain</a></li>
+        <li><a href="index.html?aiMin=1&aiMax=8&linkStrategy=domain_clusters&layout=hierarchical">All parameters</a></li>
+    </ul>
+    
+    <h2>Edge Cases</h2>
+    <ul>
+        <li><a href="index.html?aiMin=9&aiMax=10">Invalid AI range (should be clamped)</a></li>
+        <li><a href="index.html?domains=invalid,cosmic">Invalid domain (should be filtered)</a></li>
+        <li><a href="index.html?linkStrategy=invalid">Invalid link strategy (should use default)</a></li>
+    </ul>
+</body>
+</html>

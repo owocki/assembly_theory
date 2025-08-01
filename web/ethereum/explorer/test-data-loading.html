@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Data Loading</title>
+</head>
+<body>
+    <h1>Testing Assembly Data Loading</h1>
+    <pre id="output"></pre>
+    
+    <script src="all-assemblies-data.js"></script>
+    <script>
+        const output = document.getElementById('output');
+        
+        if (typeof nodes !== 'undefined' && nodes) {
+            output.textContent = `Successfully loaded ${nodes.length} nodes!\n\n`;
+            
+            // Show domain distribution
+            const domainCounts = {};
+            nodes.forEach(node => {
+                domainCounts[node.domain] = (domainCounts[node.domain] || 0) + 1;
+            });
+            
+            output.textContent += 'Domain distribution:\n';
+            Object.entries(domainCounts).forEach(([domain, count]) => {
+                output.textContent += `  ${domain}: ${count} nodes\n`;
+            });
+            
+            // Show some sample nodes
+            output.textContent += '\nSample nodes:\n';
+            nodes.slice(0, 5).forEach(node => {
+                output.textContent += `  - ${node.name} (AI: ${node.assembly_index}, Domain: ${node.domain})\n`;
+            });
+            
+            // Show assembly index range
+            const minAI = Math.min(...nodes.map(n => n.assembly_index));
+            const maxAI = Math.max(...nodes.map(n => n.assembly_index));
+            output.textContent += `\nAssembly Index Range: ${minAI} to ${maxAI.toExponential(2)}\n`;
+            
+        } else {
+            output.textContent = 'ERROR: nodes variable not found!';
+        }
+    </script>
+</body>
+</html>
