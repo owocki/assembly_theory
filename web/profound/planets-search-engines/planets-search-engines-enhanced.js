@@ -402,8 +402,8 @@ function startSystematicSearch() {
                 // Always count the experiment
                 searchStats.totalExperiments++;
                 
-                // Only create visible particle 1 in 100 times
-                if (Math.random() < 0.01) {
+                // Only create visible particle 10 in 100 times (10% probability)
+                if (Math.random() < 0.1) {
                     const particle = new SearchParticle(planet, targetX, targetY);
                     searchParticles.push(particle);
                 }
