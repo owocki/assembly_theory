@@ -461,100 +461,92 @@
         <div class="main-grid">
             <!-- Left Panel: Assembly Components -->
             <div class="assembly-components">
-                <h3>Ethereum Primitives</h3>
+                <h3>Ethereum Domains & Primitives</h3>
+                <div style="max-height: 700px; overflow-y: auto; padding-right: 10px;">
                 
                 <div class="primitive-category">
-                    <h4>Base Layer (AI: 1-10)</h4>
-                    <div class="primitive-grid">
-                        <div class="primitive-node" data-ai="1" data-name="Account">
-                            Account
-                            <span class="assembly-index">1</span>
-                        </div>
-                        <div class="primitive-node" data-ai="2" data-name="Transaction">
-                            Transaction
-                            <span class="assembly-index">2</span>
-                        </div>
-                        <div class="primitive-node" data-ai="3" data-name="Block">
-                            Block
-                            <span class="assembly-index">3</span>
-                        </div>
-                        <div class="primitive-node" data-ai="5" data-name="Smart Contract">
-                            Smart Contract
-                            <span class="assembly-index">5</span>
-                        </div>
+                    <h4>Base & Core (AI: 1-2000)</h4>
+                    <div class="primitive-grid" id="base-primitives">
+                        <!-- Generated dynamically -->
                     </div>
                 </div>
                 
                 <div class="primitive-category">
-                    <h4>Protocol Layer (AI: 10-50)</h4>
-                    <div class="primitive-grid">
-                        <div class="primitive-node" data-ai="15" data-name="ERC-20">
-                            ERC-20
-                            <span class="assembly-index">15</span>
-                        </div>
-                        <div class="primitive-node" data-ai="20" data-name="ERC-721">
-                            ERC-721 (NFT)
-                            <span class="assembly-index">20</span>
-                        </div>
-                        <div class="primitive-node" data-ai="25" data-name="Multisig">
-                            Multisig
-                            <span class="assembly-index">25</span>
-                        </div>
-                        <div class="primitive-node" data-ai="30" data-name="Oracle">
-                            Oracle
-                            <span class="assembly-index">30</span>
-                        </div>
+                    <h4>Token Standards (AI: 2.5-15)</h4>
+                    <div class="primitive-grid" id="tokens-primitives">
+                        <!-- Generated dynamically -->
                     </div>
                 </div>
                 
                 <div class="primitive-category">
-                    <h4>DeFi Primitives (AI: 50-200)</h4>
-                    <div class="primitive-grid">
-                        <div class="primitive-node" data-ai="60" data-name="AMM">
-                            AMM Pool
-                            <span class="assembly-index">60</span>
-                        </div>
-                        <div class="primitive-node" data-ai="80" data-name="Lending Pool">
-                            Lending Pool
-                            <span class="assembly-index">80</span>
-                        </div>
-                        <div class="primitive-node" data-ai="100" data-name="Flash Loan">
-                            Flash Loan
-                            <span class="assembly-index">100</span>
-                        </div>
-                        <div class="primitive-node" data-ai="120" data-name="Yield Farm">
-                            Yield Farm
-                            <span class="assembly-index">120</span>
-                        </div>
+                    <h4>Security (AI: 3-35)</h4>
+                    <div class="primitive-grid" id="security-primitives">
+                        <!-- Generated dynamically -->
                     </div>
                 </div>
                 
                 <div class="primitive-category">
-                    <h4>Advanced Systems (AI: 200+)</h4>
-                    <div class="primitive-grid">
-                        <div class="primitive-node" data-ai="250" data-name="L2 Rollup">
-                            L2 Rollup
-                            <span class="assembly-index">250</span>
-                        </div>
-                        <div class="primitive-node" data-ai="300" data-name="Cross-chain Bridge">
-                            Bridge
-                            <span class="assembly-index">300</span>
-                        </div>
-                        <div class="primitive-node" data-ai="400" data-name="MEV Auction">
-                            MEV Auction
-                            <span class="assembly-index">400</span>
-                        </div>
-                        <div class="primitive-node" data-ai="500" data-name="Intent System">
-                            Intent System
-                            <span class="assembly-index">500</span>
-                        </div>
+                    <h4>Infrastructure (AI: 50-400)</h4>
+                    <div class="primitive-grid" id="infrastructure-primitives">
+                        <!-- Generated dynamically -->
                     </div>
+                </div>
+                
+                <div class="primitive-category">
+                    <h4>DeFi Protocols (AI: 75-250)</h4>
+                    <div class="primitive-grid" id="defi-primitives">
+                        <!-- Generated dynamically -->
+                    </div>
+                </div>
+                
+                <div class="primitive-category">
+                    <h4>Layer 2 (AI: 200-500)</h4>
+                    <div class="primitive-grid" id="layer2-primitives">
+                        <!-- Generated dynamically -->
+                    </div>
+                </div>
+                
+                <div class="primitive-category">
+                    <h4>NFT Ecosystem (AI: 70-150)</h4>
+                    <div class="primitive-grid" id="nft-primitives">
+                        <!-- Generated dynamically -->
+                    </div>
+                </div>
+                
+                <div class="primitive-category">
+                    <h4>Social & Governance (AI: 80-220)</h4>
+                    <div class="primitive-grid" id="social-primitives">
+                        <!-- Generated dynamically -->
+                    </div>
+                </div>
+                
+                <div class="primitive-category">
+                    <h4>Gaming & Metaverse (AI: 150-300)</h4>
+                    <div class="primitive-grid" id="gaming-primitives">
+                        <!-- Generated dynamically -->
+                    </div>
+                </div>
+                
+                <div class="primitive-category">
+                    <h4>Emerging Trends (AI: 150-400)</h4>
+                    <div class="primitive-grid" id="emerging-primitives">
+                        <!-- Generated dynamically -->
+                    </div>
+                </div>
+                
+                <div class="primitive-category">
+                    <h4>Core Primitives (AI: 20-500)</h4>
+                    <div class="primitive-grid" id="primitive-primitives">
+                        <!-- Generated dynamically -->
+                    </div>
+                </div>
+                
                 </div>
                 
                 <div class="assembly-equation">
-                    <div class="equation">AI(DeFi Protocol) = Σ AI(primitives) - shared_components</div>
+                    <div class="equation">AI(Protocol) = Σ AI(components) - shared_dependencies</div>
                     <div style="font-size: 12px; opacity: 0.8; margin-top: 10px;">
-                        Higher assembly index = More complex integration
+                        69 domains + 30 primitives = Complete Ethereum ecosystem
                     </div>
                 </div>
             </div>

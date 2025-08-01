@@ -12,42 +12,153 @@ let assemblyGraph = {
     links: []
 };
 
-// Assembly Index calculations
+// Assembly Index calculations - comprehensive domain list from domains/ethereum
 const primitiveData = {
-    // Base layer
+    // Base layer & Core
     "Account": { ai: 1, category: "base", dependencies: [] },
     "Transaction": { ai: 2, category: "base", dependencies: ["Account"] },
     "Block": { ai: 3, category: "base", dependencies: ["Transaction"] },
     "Smart Contract": { ai: 5, category: "base", dependencies: ["Account", "Transaction"] },
+    "The Merge": { ai: 2000, category: "core", dependencies: ["Block", "Smart Contract"] },
     
-    // Protocol layer
-    "ERC-20": { ai: 15, category: "protocol", dependencies: ["Smart Contract"] },
-    "ERC-721": { ai: 20, category: "protocol", dependencies: ["Smart Contract"] },
-    "Multisig": { ai: 25, category: "protocol", dependencies: ["Smart Contract", "Transaction"] },
-    "Oracle": { ai: 30, category: "protocol", dependencies: ["Smart Contract"] },
+    // Token Standards
+    "ERC-20": { ai: 2.5, category: "tokens", dependencies: ["Smart Contract"] },
+    "ERC-721": { ai: 8.5, category: "tokens", dependencies: ["Smart Contract"] },
+    "ERC-1155": { ai: 15, category: "tokens", dependencies: ["ERC-20", "ERC-721"] },
+    "ERC-4626": { ai: 12, category: "tokens", dependencies: ["ERC-20"] },
     
-    // DeFi primitives
-    "AMM": { ai: 60, category: "defi", dependencies: ["ERC-20", "Smart Contract"] },
-    "Lending Pool": { ai: 80, category: "defi", dependencies: ["ERC-20", "Oracle", "Smart Contract"] },
-    "Flash Loan": { ai: 100, category: "defi", dependencies: ["Lending Pool", "Transaction"] },
-    "Yield Farm": { ai: 120, category: "defi", dependencies: ["AMM", "ERC-20"] },
+    // Security & Standards
+    "EIP-155": { ai: 3.5, category: "security", dependencies: ["Transaction"] },
+    "EIP-712": { ai: 8.5, category: "security", dependencies: ["Smart Contract"] },
+    "EIP-1967": { ai: 3, category: "security", dependencies: ["Smart Contract"] },
+    "EIP-2535": { ai: 35, category: "security", dependencies: ["Smart Contract", "EIP-1967"] },
     
-    // Advanced systems
-    "L2 Rollup": { ai: 250, category: "advanced", dependencies: ["Block", "Smart Contract", "Transaction"] },
-    "Cross-chain Bridge": { ai: 300, category: "advanced", dependencies: ["Oracle", "Multisig", "Smart Contract"] },
-    "MEV Auction": { ai: 400, category: "advanced", dependencies: ["Block", "Transaction", "Flash Loan"] },
-    "Intent System": { ai: 500, category: "advanced", dependencies: ["Oracle", "Smart Contract", "MEV Auction"] }
+    // Infrastructure
+    "EIP-1559": { ai: 50, category: "infrastructure", dependencies: ["Transaction", "Block"] },
+    "EIP-4844": { ai: 200, category: "infrastructure", dependencies: ["Block", "Transaction"] },
+    "Chainlink": { ai: 350, category: "infrastructure", dependencies: ["Smart Contract", "Oracle"] },
+    "The Graph": { ai: 280, category: "infrastructure", dependencies: ["Smart Contract", "IPFS"] },
+    "IPFS": { ai: 400, category: "infrastructure", dependencies: [] },
+    "Alchemy": { ai: 300, category: "infrastructure", dependencies: ["Smart Contract"] },
+    "Hardhat": { ai: 150, category: "infrastructure", dependencies: ["Smart Contract"] },
+    
+    // DeFi Protocols
+    "Compound": { ai: 75, category: "defi", dependencies: ["ERC-20", "Oracle"] },
+    "Aave": { ai: 125, category: "defi", dependencies: ["ERC-20", "Oracle", "Flash Loan"] },
+    "MakerDAO": { ai: 200, category: "defi", dependencies: ["ERC-20", "Oracle", "Smart Contract"] },
+    "Uniswap": { ai: 180, category: "defi", dependencies: ["ERC-20", "AMM"] },
+    "Curve": { ai: 150, category: "defi", dependencies: ["ERC-20", "AMM"] },
+    "Balancer": { ai: 175, category: "defi", dependencies: ["ERC-20", "AMM"] },
+    "Synthetix": { ai: 250, category: "defi", dependencies: ["ERC-20", "Oracle"] },
+    "Yearn": { ai: 180, category: "defi", dependencies: ["ERC-20", "Yield Farm"] },
+    "Lido": { ai: 85, category: "defi", dependencies: ["ERC-20", "Staking"] },
+    "Rocket Pool": { ai: 140, category: "defi", dependencies: ["ERC-20", "Staking"] },
+    "Frax": { ai: 220, category: "defi", dependencies: ["ERC-20", "AMM", "Oracle"] },
+    "GMX": { ai: 120, category: "defi", dependencies: ["ERC-20", "Oracle", "Perpetuals"] },
+    "dYdX": { ai: 200, category: "defi", dependencies: ["ERC-20", "Oracle", "Perpetuals"] },
+    "Pendle": { ai: 180, category: "defi", dependencies: ["ERC-20", "Yield Trading"] },
+    "Convex": { ai: 100, category: "defi", dependencies: ["Curve", "ERC-20"] },
+    "1inch": { ai: 95, category: "defi", dependencies: ["AMM", "Aggregator"] },
+    "SushiSwap": { ai: 150, category: "defi", dependencies: ["ERC-20", "AMM"] },
+    "EtherFi": { ai: 120, category: "defi", dependencies: ["ERC-20", "Staking"] },
+    
+    // Layer 2 Solutions
+    "Arbitrum": { ai: 350, category: "layer2", dependencies: ["Rollup", "Smart Contract"] },
+    "Optimism": { ai: 320, category: "layer2", dependencies: ["Rollup", "Smart Contract"] },
+    "Polygon zkEVM": { ai: 400, category: "layer2", dependencies: ["ZK Rollup", "Smart Contract"] },
+    "zkSync": { ai: 450, category: "layer2", dependencies: ["ZK Rollup", "Smart Contract"] },
+    "StarkNet": { ai: 500, category: "layer2", dependencies: ["ZK Rollup", "Smart Contract"] },
+    "Base": { ai: 200, category: "layer2", dependencies: ["Optimism", "Smart Contract"] },
+    
+    // NFT Ecosystem
+    "OpenSea": { ai: 150, category: "nft", dependencies: ["ERC-721", "ERC-1155"] },
+    "Blur": { ai: 95, category: "nft", dependencies: ["ERC-721", "Aggregator"] },
+    "Rarible": { ai: 110, category: "nft", dependencies: ["ERC-721", "ERC-1155"] },
+    "Foundation": { ai: 70, category: "nft", dependencies: ["ERC-721"] },
+    "SuperRare": { ai: 90, category: "nft", dependencies: ["ERC-721"] },
+    "Zora": { ai: 130, category: "nft", dependencies: ["ERC-721", "Protocol"] },
+    "Manifold": { ai: 100, category: "nft", dependencies: ["ERC-721", "Creator Tools"] },
+    
+    // Social & Governance
+    "ENS": { ai: 120, category: "social", dependencies: ["Smart Contract", "NFT"] },
+    "Lens Protocol": { ai: 200, category: "social", dependencies: ["ERC-721", "Social Graph"] },
+    "Farcaster": { ai: 180, category: "social", dependencies: ["Smart Contract", "Social Protocol"] },
+    "Snapshot": { ai: 80, category: "social", dependencies: ["Governance", "IPFS"] },
+    "Aragon": { ai: 220, category: "social", dependencies: ["DAO", "Smart Contract"] },
+    "Gitcoin Grants": { ai: 175, category: "social", dependencies: ["Quadratic Funding", "Smart Contract"] },
+    "Gitcoin Passport": { ai: 85, category: "social", dependencies: ["Identity", "Smart Contract"] },
+    "Allo Protocol": { ai: 120, category: "social", dependencies: ["Funding", "Smart Contract"] },
+    
+    // Gaming & Metaverse
+    "Axie Infinity": { ai: 200, category: "gaming", dependencies: ["ERC-721", "Game"] },
+    "The Sandbox": { ai: 250, category: "gaming", dependencies: ["ERC-721", "Metaverse"] },
+    "Decentraland": { ai: 280, category: "gaming", dependencies: ["ERC-721", "Metaverse"] },
+    "Gods Unchained": { ai: 150, category: "gaming", dependencies: ["ERC-721", "TCG"] },
+    "Illuvium": { ai: 300, category: "gaming", dependencies: ["ERC-721", "RPG"] },
+    
+    // Emerging Trends
+    "EigenLayer": { ai: 300, category: "emerging", dependencies: ["Restaking", "Smart Contract"] },
+    "Safe": { ai: 250, category: "emerging", dependencies: ["Multisig", "Smart Contract"] },
+    "Worldcoin": { ai: 400, category: "emerging", dependencies: ["Identity", "ZK Proofs"] },
+    "Ondo Finance": { ai: 180, category: "emerging", dependencies: ["RWA", "ERC-20"] },
+    
+    // Account Abstraction
+    "EIP-4337": { ai: 150, category: "account", dependencies: ["Account", "Smart Contract"] },
+    
+    // Core primitives (updated with dependencies)
+    "Oracle": { ai: 30, category: "primitive", dependencies: ["Smart Contract"] },
+    "AMM": { ai: 60, category: "primitive", dependencies: ["ERC-20", "Smart Contract"] },
+    "Lending Pool": { ai: 80, category: "primitive", dependencies: ["ERC-20", "Oracle"] },
+    "Flash Loan": { ai: 100, category: "primitive", dependencies: ["Lending Pool"] },
+    "Yield Farm": { ai: 120, category: "primitive", dependencies: ["AMM", "ERC-20"] },
+    "Rollup": { ai: 250, category: "primitive", dependencies: ["Block", "Smart Contract"] },
+    "ZK Rollup": { ai: 350, category: "primitive", dependencies: ["Rollup", "ZK Proofs"] },
+    "Bridge": { ai: 300, category: "primitive", dependencies: ["Oracle", "Multisig"] },
+    "MEV": { ai: 400, category: "primitive", dependencies: ["Block", "Transaction"] },
+    "Intent": { ai: 500, category: "primitive", dependencies: ["Oracle", "Smart Contract"] },
+    
+    // Additional primitives
+    "Multisig": { ai: 25, category: "primitive", dependencies: ["Smart Contract"] },
+    "DAO": { ai: 150, category: "primitive", dependencies: ["Governance", "Smart Contract"] },
+    "Staking": { ai: 50, category: "primitive", dependencies: ["ERC-20"] },
+    "Perpetuals": { ai: 150, category: "primitive", dependencies: ["Oracle", "Margin"] },
+    "Aggregator": { ai: 80, category: "primitive", dependencies: ["Smart Contract"] },
+    "NFT": { ai: 20, category: "primitive", dependencies: ["ERC-721"] },
+    "Protocol": { ai: 100, category: "primitive", dependencies: ["Smart Contract"] },
+    "Social Graph": { ai: 120, category: "primitive", dependencies: ["Smart Contract"] },
+    "Identity": { ai: 80, category: "primitive", dependencies: ["Smart Contract"] },
+    "Governance": { ai: 60, category: "primitive", dependencies: ["Smart Contract"] },
+    "Quadratic Funding": { ai: 100, category: "primitive", dependencies: ["Smart Contract"] },
+    "Game": { ai: 150, category: "primitive", dependencies: ["Smart Contract"] },
+    "Metaverse": { ai: 200, category: "primitive", dependencies: ["NFT", "Game"] },
+    "TCG": { ai: 100, category: "primitive", dependencies: ["Game", "NFT"] },
+    "RPG": { ai: 120, category: "primitive", dependencies: ["Game", "NFT"] },
+    "Restaking": { ai: 180, category: "primitive", dependencies: ["Staking"] },
+    "RWA": { ai: 150, category: "primitive", dependencies: ["ERC-20", "Oracle"] },
+    "ZK Proofs": { ai: 300, category: "primitive", dependencies: ["Cryptography"] },
+    "Cryptography": { ai: 200, category: "primitive", dependencies: [] },
+    "Creator Tools": { ai: 80, category: "primitive", dependencies: ["Smart Contract"] },
+    "Social Protocol": { ai: 150, category: "primitive", dependencies: ["Smart Contract"] },
+    "Funding": { ai: 80, category: "primitive", dependencies: ["Smart Contract"] },
+    "Yield Trading": { ai: 120, category: "primitive", dependencies: ["ERC-20", "Yield Farm"] },
+    "Margin": { ai: 100, category: "primitive", dependencies: ["ERC-20", "Oracle"] },
+    "Marketplace": { ai: 90, category: "primitive", dependencies: ["Smart Contract"] }
 };
 
 // Known successful combinations
 const successfulCombinations = [
-    { primitives: ["AMM", "ERC-20"], result: "Uniswap", ai: 75, tvl: 5000000000 },
-    { primitives: ["Lending Pool", "Flash Loan"], result: "Aave", ai: 180, tvl: 4000000000 },
-    { primitives: ["AMM", "Yield Farm", "ERC-20"], result: "Curve", ai: 200, tvl: 3000000000 },
-    { primitives: ["L2 Rollup", "AMM"], result: "Arbitrum DEXs", ai: 310, tvl: 2000000000 },
-    { primitives: ["Oracle", "Lending Pool"], result: "Compound", ai: 110, tvl: 1500000000 },
-    { primitives: ["ERC-721", "AMM"], result: "NFT Marketplaces", ai: 80, tvl: 500000000 },
-    { primitives: ["Flash Loan", "MEV Auction"], result: "MEV Bots", ai: 500, tvl: 100000000 }
+    { primitives: ["AMM", "ERC-20"], result: "Uniswap", ai: 180, tvl: 5000000000 },
+    { primitives: ["Lending Pool", "Flash Loan", "Oracle"], result: "Aave", ai: 125, tvl: 4000000000 },
+    { primitives: ["AMM", "Yield Farm", "ERC-20"], result: "Curve", ai: 150, tvl: 3000000000 },
+    { primitives: ["Rollup", "AMM"], result: "Arbitrum DEXs", ai: 350, tvl: 2000000000 },
+    { primitives: ["Oracle", "Lending Pool"], result: "Compound", ai: 75, tvl: 1500000000 },
+    { primitives: ["ERC-721", "Marketplace"], result: "OpenSea", ai: 150, tvl: 500000000 },
+    { primitives: ["Flash Loan", "MEV"], result: "MEV Bots", ai: 400, tvl: 100000000 },
+    { primitives: ["Staking", "ERC-20"], result: "Lido", ai: 85, tvl: 30000000000 },
+    { primitives: ["Identity", "ZK Proofs"], result: "Worldcoin", ai: 400, tvl: 50000000 },
+    { primitives: ["Social Graph", "NFT"], result: "Lens Protocol", ai: 200, tvl: 100000000 },
+    { primitives: ["Restaking", "Smart Contract"], result: "EigenLayer", ai: 300, tvl: 10000000000 },
+    { primitives: ["Game", "NFT", "ERC-721"], result: "Axie Infinity", ai: 200, tvl: 2000000000 }
 ];
 
 // Unexplored but promising combinations - these will appear in both timeline and alpha opportunities
@@ -110,11 +221,79 @@ function initializeVisualization() {
     nodesGroup = svg.append('g').attr('class', 'nodes');
     particlesGroup = svg.append('g').attr('class', 'particles');
     
+    // Populate primitive categories
+    populatePrimitiveCategories();
+    
     // Initialize assembly graph
     createAssemblyGraph();
     
     // Draw initial state
     updateVisualization();
+}
+
+// Populate primitive categories in the left panel
+function populatePrimitiveCategories() {
+    const categories = {
+        'base': 'base-primitives',
+        'core': 'base-primitives',
+        'tokens': 'tokens-primitives',
+        'security': 'security-primitives',
+        'infrastructure': 'infrastructure-primitives',
+        'defi': 'defi-primitives',
+        'layer2': 'layer2-primitives',
+        'nft': 'nft-primitives',
+        'social': 'social-primitives',
+        'gaming': 'gaming-primitives',
+        'emerging': 'emerging-primitives',
+        'account': 'emerging-primitives',
+        'primitive': 'primitive-primitives'
+    };
+    
+    // Clear existing content
+    Object.values(categories).forEach(id => {
+        const element = document.getElementById(id);
+        if (element) element.innerHTML = '';
+    });
+    
+    // Populate each category
+    Object.entries(primitiveData).forEach(([name, data]) => {
+        const categoryId = categories[data.category];
+        if (!categoryId) return;
+        
+        const container = document.getElementById(categoryId);
+        if (!container) return;
+        
+        const node = document.createElement('div');
+        node.className = 'primitive-node';
+        node.setAttribute('data-ai', data.ai);
+        node.setAttribute('data-name', name);
+        
+        // Truncate long names
+        const displayName = name.length > 12 ? name.substring(0, 11) + '...' : name;
+        
+        node.innerHTML = `
+            ${displayName}
+            <span class="assembly-index">${data.ai >= 1000 ? (data.ai/1000).toFixed(1) + 'K' : data.ai}</span>
+        `;
+        
+        // Add click handler
+        node.addEventListener('click', function() {
+            const primitiveId = this.getAttribute('data-name');
+            
+            if (selectedPrimitives.has(primitiveId)) {
+                selectedPrimitives.delete(primitiveId);
+                this.classList.remove('selected');
+            } else {
+                selectedPrimitives.add(primitiveId);
+                this.classList.add('selected');
+            }
+            
+            updateAnalysis();
+            updateAssemblyPath();
+        });
+        
+        container.appendChild(node);
+    });
 }
 
 // Create assembly graph from primitives
@@ -172,13 +351,22 @@ function updateVisualization() {
     
     // Node circles
     nodes.append('circle')
-        .attr('r', d => Math.sqrt(d.ai) * 2)
+        .attr('r', d => Math.min(20, Math.sqrt(d.ai) * 2))
         .attr('fill', d => {
             switch(d.category) {
                 case 'base': return '#627eea';
-                case 'protocol': return '#8b9dc3';
+                case 'core': return '#ff006e';
+                case 'tokens': return '#8b9dc3';
+                case 'security': return '#ff4444';
+                case 'infrastructure': return '#00d4ff';
                 case 'defi': return '#f0b90b';
-                case 'advanced': return '#00d4ff';
+                case 'layer2': return '#00ff88';
+                case 'nft': return '#ff00ff';
+                case 'social': return '#ffaa00';
+                case 'gaming': return '#aa00ff';
+                case 'emerging': return '#00ffff';
+                case 'account': return '#ff8800';
+                case 'primitive': return '#888888';
                 default: return '#627eea';
             }
         })
@@ -1304,14 +1492,6 @@ window.resetAnalysis = function() {
         node.classList.remove('selected');
     });
     
-    // Re-select all primitives
-    Object.keys(primitiveData).forEach(name => {
-        selectedPrimitives.add(name);
-    });
-    document.querySelectorAll('.primitive-node').forEach(node => {
-        node.classList.add('selected');
-    });
-    
     // Clear combination matrix
     const matrixContainer = document.getElementById('combinationMatrix');
     matrixContainer.innerHTML = '';
@@ -1373,35 +1553,26 @@ function formatNumber(num) {
 document.addEventListener('DOMContentLoaded', function() {
     initializeVisualization();
     
-    // Select all primitives by default
-    Object.keys(primitiveData).forEach(name => {
-        selectedPrimitives.add(name);
+    // Select a few key primitives to start
+    const defaultPrimitives = ['Smart Contract', 'ERC-20', 'AMM', 'Uniswap', 'Aave', 'Arbitrum'];
+    defaultPrimitives.forEach(name => {
+        if (primitiveData[name]) {
+            selectedPrimitives.add(name);
+        }
     });
     
-    // Mark all primitive nodes as selected
-    document.querySelectorAll('.primitive-node').forEach(node => {
-        node.classList.add('selected');
-    });
-    
-    // Set up primitive node click handlers
-    document.querySelectorAll('.primitive-node').forEach(node => {
-        node.addEventListener('click', function() {
-            const name = this.getAttribute('data-name');
-            
-            if (selectedPrimitives.has(name)) {
-                selectedPrimitives.delete(name);
-                this.classList.remove('selected');
-            } else {
-                selectedPrimitives.add(name);
-                this.classList.add('selected');
-            }
-            
-            updateAnalysis();
-            updateAssemblyPath();
+    // Mark default primitive nodes as selected
+    setTimeout(() => {
+        defaultPrimitives.forEach(name => {
+            document.querySelectorAll('.primitive-node').forEach(node => {
+                if (node.getAttribute('data-name') === name) {
+                    node.classList.add('selected');
+                }
+            });
         });
-    });
-    
-    // Initial analysis with all primitives selected
-    updateAnalysis();
-    updateAssemblyPath();
+        
+        // Initial analysis
+        updateAnalysis();
+        updateAssemblyPath();
+    }, 100);
 });
