@@ -164,7 +164,7 @@ const successfulCombinations = [
 // Unexplored but promising combinations - these will appear in both timeline and alpha opportunities
 const alphaOpportunities = [
     {
-        primitives: ["Intent System", "L2 Rollup", "AMM"],
+        primitives: ["Intent", "Rollup", "AMM"],
         name: "Intent-based Cross-L2 Trading",
         ai: 810,
         year: 2027,
@@ -180,7 +180,7 @@ const alphaOpportunities = [
         potential: "87%"
     },
     {
-        primitives: ["Oracle", "Intent System", "Cross-chain Bridge"],
+        primitives: ["Oracle", "Intent", "Bridge"],
         name: "Cross-chain Intent Resolution",
         ai: 830,
         year: 2028,
@@ -188,7 +188,7 @@ const alphaOpportunities = [
         potential: "92%"
     },
     {
-        primitives: ["MEV Auction", "Yield Farm", "L2 Rollup"],
+        primitives: ["MEV", "Yield Farm", "Rollup"],
         name: "L2 MEV Farming",
         ai: 770,
         year: 2027,
@@ -196,12 +196,92 @@ const alphaOpportunities = [
         potential: "78%"
     },
     {
-        primitives: ["Multisig", "Intent System", "Oracle"],
+        primitives: ["Multisig", "Intent", "Oracle"],
         name: "Autonomous DAO Execution",
         ai: 555,
         year: 2026,
         description: "DAOs that execute complex strategies autonomously",
         potential: "83%"
+    },
+    {
+        primitives: ["ZK Proofs", "Social Graph", "Identity"],
+        name: "Privacy-Preserving Social Networks",
+        ai: 580,
+        year: 2026,
+        description: "Decentralized social with selective privacy controls",
+        potential: "91%"
+    },
+    {
+        primitives: ["RWA", "Lending Pool", "Oracle"],
+        name: "Real-World Asset Lending",
+        ai: 330,
+        year: 2026,
+        description: "Collateralized lending against tokenized real assets",
+        potential: "85%"
+    },
+    {
+        primitives: ["ERC-4626", "Yield Trading", "AMM"],
+        name: "Yield Derivatives Market",
+        ai: 252,
+        year: 2027,
+        description: "Trade future yield as tokenized derivatives",
+        potential: "88%"
+    },
+    {
+        primitives: ["Restaking", "MEV", "Oracle"],
+        name: "MEV-Aware Restaking",
+        ai: 680,
+        year: 2027,
+        description: "Optimize restaking returns through MEV capture",
+        potential: "82%"
+    },
+    {
+        primitives: ["Game", "DAO", "Quadratic Funding"],
+        name: "GameFi Governance Guilds",
+        ai: 400,
+        year: 2026,
+        description: "Player-owned guilds with quadratic voting",
+        potential: "79%"
+    },
+    {
+        primitives: ["Identity", "EIP-4337", "Safe"],
+        name: "Self-Sovereign Account Recovery",
+        ai: 480,
+        year: 2026,
+        description: "Social recovery without centralized authorities",
+        potential: "86%"
+    },
+    {
+        primitives: ["ZK Rollup", "Game", "NFT"],
+        name: "Scalable On-chain Gaming",
+        ai: 670,
+        year: 2028,
+        description: "Full game logic on ZK rollups with NFT assets",
+        potential: "90%"
+    },
+    {
+        primitives: ["Perpetuals", "RWA", "Oracle"],
+        name: "Commodity Perpetual Markets",
+        ai: 400,
+        year: 2027,
+        description: "Trade real-world commodities as perpetuals",
+        potential: "84%"
+    },
+    {
+        primitives: ["Social Protocol", "Funding", "Creator Tools"],
+        name: "Creator Economy Infrastructure",
+        ai: 310,
+        year: 2026,
+        description: "Full-stack creator monetization platform",
+        potential: "89%"
+    },
+    {
+        primitives: ["Bridge", "Aggregator", "Intent"],
+        name: "Universal Bridge Aggregator",
+        ai: 480,
+        year: 2027,
+        description: "One-click cross-chain transfers via best route",
+        potential: "93%"
     }
 ];
 
@@ -556,12 +636,15 @@ function updateAssemblyPath() {
 function displayAlphaOpportunities() {
     const container = document.getElementById('alphaOpportunities');
     
-    let html = '';
+    let html = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 15px;">';
     alphaOpportunities.forEach(opp => {
+        const potentialValue = parseInt(opp.potential);
+        const potentialColor = potentialValue > 90 ? '#00ff00' : potentialValue > 80 ? '#f0b90b' : '#ff8800';
+        
         html += `
-            <div class="opportunity-card" onclick="selectOpportunity(${JSON.stringify(opp.primitives)})">
+            <div class="opportunity-card" onclick="selectOpportunity(${JSON.stringify(opp.primitives)})" style="cursor: pointer;">
                 <div class="opportunity-title">${opp.name}</div>
-                <div style="margin: 10px 0;">${opp.description}</div>
+                <div style="margin: 10px 0; font-size: 14px; opacity: 0.9;">${opp.description}</div>
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <div>
                         <div style="font-size: 12px; opacity: 0.7;">Combined AI</div>
@@ -569,15 +652,19 @@ function displayAlphaOpportunities() {
                     </div>
                     <div style="text-align: right;">
                         <div style="font-size: 12px; opacity: 0.7;">Success Potential</div>
-                        <div style="font-size: 20px; color: #00ff00;">${opp.potential}</div>
+                        <div style="font-size: 20px; color: ${potentialColor};">${opp.potential}</div>
                     </div>
                 </div>
-                <div style="margin-top: 10px; font-size: 12px; opacity: 0.7;">
-                    Primitives: ${opp.primitives.join(' + ')}
+                <div style="margin-top: 10px; font-size: 11px; opacity: 0.6; border-top: 1px solid rgba(240, 185, 11, 0.2); padding-top: 8px;">
+                    <strong>Components:</strong> ${opp.primitives.join(' + ')}
+                </div>
+                <div style="margin-top: 5px; font-size: 11px; opacity: 0.6;">
+                    <strong>Target Year:</strong> ${opp.year}
                 </div>
             </div>
         `;
     });
+    html += '</div>';
     
     container.innerHTML = html;
 }
@@ -1442,11 +1529,18 @@ window.findOptimalCombinations = function() {
 // Predict next primitives
 window.predictNextPrimitives = function() {
     const predictions = [
-        { name: "Account Abstraction", ai: 150, probability: 0.9 },
-        { name: "Native Staking Derivatives", ai: 180, probability: 0.85 },
-        { name: "Decentralized Sequencers", ai: 350, probability: 0.7 },
-        { name: "Atomic Cross-chain Swaps", ai: 400, probability: 0.6 },
-        { name: "ZK Coprocessors", ai: 450, probability: 0.5 }
+        { name: "Account Abstraction Extensions", ai: 150, probability: 0.9, description: "Advanced smart wallet features with social recovery" },
+        { name: "Native Staking Derivatives", ai: 180, probability: 0.85, description: "Liquid staking tokens with composable yield" },
+        { name: "Decentralized Sequencers", ai: 350, probability: 0.7, description: "Distributed sequencer networks for L2s" },
+        { name: "Atomic Cross-chain Swaps", ai: 400, probability: 0.6, description: "Trustless cross-chain token exchanges" },
+        { name: "ZK Coprocessors", ai: 450, probability: 0.5, description: "Off-chain computation with on-chain verification" },
+        { name: "AI Oracle Networks", ai: 380, probability: 0.75, description: "Machine learning models as oracle services" },
+        { name: "Dynamic NFT Standards", ai: 220, probability: 0.82, description: "NFTs that evolve based on on-chain events" },
+        { name: "Modular Data Availability", ai: 320, probability: 0.68, description: "Pluggable DA layers for rollups" },
+        { name: "Intent Solver Networks", ai: 280, probability: 0.77, description: "Competitive markets for intent execution" },
+        { name: "Recursive ZK Proofs", ai: 520, probability: 0.45, description: "Proof aggregation for unlimited scaling" },
+        { name: "Homomorphic Encryption", ai: 600, probability: 0.35, description: "Compute on encrypted data" },
+        { name: "Quantum-Resistant Signatures", ai: 400, probability: 0.55, description: "Post-quantum cryptography for Ethereum" }
     ];
     
     // Add predictions to alpha opportunities section
@@ -1454,10 +1548,11 @@ window.predictNextPrimitives = function() {
     
     predictedContainer.innerHTML = `
         <h4 style="color: #00d4ff; margin-bottom: 20px;">Predicted Next Primitives</h4>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 15px;">
         ${predictions.map(p => `
             <div class="opportunity-card" style="border-color: rgba(0, 212, 255, 0.5);">
                 <div class="opportunity-title" style="color: #00d4ff;">${p.name}</div>
-                <div style="margin: 10px 0; font-size: 14px; opacity: 0.8;">Next-generation primitive with emerging adoption patterns</div>
+                <div style="margin: 10px 0; font-size: 14px; opacity: 0.8;">${p.description}</div>
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <div>
                         <div style="font-size: 12px; opacity: 0.7;">Predicted AI</div>
@@ -1465,13 +1560,14 @@ window.predictNextPrimitives = function() {
                     </div>
                     <div style="text-align: right;">
                         <div style="font-size: 12px; opacity: 0.7;">Emergence Probability</div>
-                        <div style="font-size: 20px; color: ${p.probability > 0.7 ? '#00ff00' : '#f0b90b'};">
+                        <div style="font-size: 20px; color: ${p.probability > 0.7 ? '#00ff00' : p.probability > 0.5 ? '#f0b90b' : '#ff8800'};">
                             ${(p.probability * 100).toFixed(0)}%
                         </div>
                     </div>
                 </div>
             </div>
         `).join('')}
+        </div>
     `;
     
     // Animate the appearance
